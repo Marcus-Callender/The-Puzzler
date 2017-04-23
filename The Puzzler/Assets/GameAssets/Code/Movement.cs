@@ -15,9 +15,12 @@ public class Movement : MonoBehaviour
 	{
 		if (Input.GetAxis("Horizontal") > 0.5f)
 		{
+            // gets a refrence to the position
 			Vector3 pos = gameObject.transform.position;
-			pos.x += m_speed * Time.deltaTime;
-			gameObject.transform.position = pos;
+            // adds to the position
+            pos.x += m_speed * Time.deltaTime;
+            // applies the new position
+            gameObject.transform.position = pos;
 		}
 		else if (Input.GetAxis("Horizontal") < -0.5f)
 		{

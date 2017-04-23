@@ -1,3 +1,3 @@
 # The-Puzzler
 A puzzle platformer
-its lit 
+its lit fully rate it :) 

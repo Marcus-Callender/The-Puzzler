@@ -1,0 +1,19 @@
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.HoloLens.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.VR.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.xml
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.VR.xml
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_obj\Debug\The Puzzler.csprojResolveAssemblyReference.cache
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
+C:\Users\zooks\Documents\GitHub\new\The-Puzzler\The Puzzler\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb

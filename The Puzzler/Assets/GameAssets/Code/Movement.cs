@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    // how fast the charater moves left to right
+	float m_speed = 5.0f;
+=======
 	float m_speed = 10.0f;
+>>>>>>> 7430715e068e35036461327a7883aa27fe560c69
 
 	void Start()
 	{

@@ -10,15 +10,14 @@ public class Floor : MonoBehaviour
     {
         m_material = gameObject.GetComponent<Renderer>();
         m_material.material.color = Color.blue;
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        public static string materialcolour;
 
 
-}
+    }
 }

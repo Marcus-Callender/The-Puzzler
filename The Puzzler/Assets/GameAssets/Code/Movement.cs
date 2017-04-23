@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
+
 {
+    Renderer m_material;
     // how fast the charater moves left to right
     float m_speed = 10.0f;
     //float m_jump = 5.0f;
@@ -50,5 +52,8 @@ public class Movement : MonoBehaviour
             pos.y += m_verticalSpeed;
             gameObject.transform.position = pos;
         }
+        m_material = gameObject.GetComponent<Renderer>();
+        m_material.material.color = Color.green;
+
     }
 }

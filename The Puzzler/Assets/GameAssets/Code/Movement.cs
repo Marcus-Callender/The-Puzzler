@@ -9,8 +9,8 @@ public class Movement : MonoBehaviour
     //float m_jump = 5.0f;
     bool m_jumping = false;
     float m_verticalSpeed = 0.0f;
-    float m_jumpForce = .100f;
-    float m_gravity = .0981f;
+    float m_jumpForce = .50f;
+    float m_gravity = 2.5f;
 
     void Start()
     {

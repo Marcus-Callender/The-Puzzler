@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Horizontal") > 0.5f)
+        if (Input.GetAxisRaw("Horizontal") > 0.5f)
         {
             // gets a refrence to the position
             Vector3 pos = gameObject.transform.position;
@@ -28,13 +28,13 @@ public class Movement : MonoBehaviour
             // applies the new position
             gameObject.transform.position = pos;
         }
-        else if (Input.GetAxis("Horizontal") < -0.5f)
+        else if (Input.GetAxisRaw("Horizontal") < -0.5f)
         {
             Vector3 pos = gameObject.transform.position;
             pos.x -= m_speed * Time.deltaTime;
             gameObject.transform.position = pos;
         }
-        if (Input.GetAxis("Vertical") > 0.5f)
+        if (Input.GetAxisRaw("Vertical") > 0.5f)
         {
             if (!m_jumping)
             {

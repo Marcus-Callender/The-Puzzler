@@ -51,9 +51,10 @@ public class Movement : MonoBehaviour
             m_verticalSpeed -= m_gravity * Time.deltaTime;
             pos.y += m_verticalSpeed;
             gameObject.transform.position = pos;
+            m_material = gameObject.GetComponent<Renderer>();
+            m_material.material.color = Color.green;
         }
-        m_material = gameObject.GetComponent<Renderer>();
-        m_material.material.color = Color.green;
+
 
     }
 }

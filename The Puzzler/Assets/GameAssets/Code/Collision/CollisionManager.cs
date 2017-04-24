@@ -113,7 +113,7 @@ public class CollisionManager : MonoBehaviour
                     Debug.Log("Top");
                 }
 
-                if (FindNewTop(x) > FindNewBottom(z))
+                if (FindNewTop(x) > FindNewBottom(z) && FindNewTop(z) > FindNewBottom(x))
                 {
                     if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
                     {

@@ -53,9 +53,21 @@ public class CollisionBox : MonoBehaviour
             gameObject.transform.position = pos;
         }
 
+        //if (!m_data.m_colidedHorizontal)
+        {
+            m_data.m_posX = m_data.m_newPosX;
+
+            Vector3 pos = gameObject.transform.position;
+            pos.x = m_data.m_posX;
+            gameObject.transform.position = pos;
+        }
+
+        //m_data.m_posX = m_data.m_newPosX;
+        //m_data.m_posY = m_data.m_newPosY;
+
         m_data.m_newPosX = m_data.m_posX;
         m_data.m_newPosY = m_data.m_posY;
-
+        
         m_colidedHorizontal = m_data.m_colidedHorizontal;
         m_colidedVertical = m_data.m_colidedVertical;
 
@@ -66,8 +78,11 @@ public class CollisionBox : MonoBehaviour
     // moves the object this many units
     public void Move(float x, float y)
     {
-        m_data.m_newPosX = m_data.m_posX + x;
-        m_data.m_newPosY = m_data.m_posY + y;
+        if (x != 0.0f)
+           m_data.m_newPosX = m_data.m_posX + x;
+        
+        if (y != 0.0f)
+            m_data.m_newPosY = m_data.m_posY + y;
     }
 
     // moves the object to this position

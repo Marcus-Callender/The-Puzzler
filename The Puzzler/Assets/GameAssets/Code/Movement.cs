@@ -26,19 +26,24 @@ public class Movement : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") > 0.5f)
         {
             // gets a refrence to the position
-            Vector3 pos = gameObject.transform.position;
+            //Vector3 pos = gameObject.transform.position;
 
             // adds to the position
-            pos.x += m_speed * Time.deltaTime;
+            //pos.x += m_speed * Time.deltaTime;
 
             // applies the new position
-            gameObject.transform.position = pos;
+            //gameObject.transform.position = pos;
+
+            m_coll.Move(m_speed * Time.deltaTime, 0.0f);
         }
         else if (Input.GetAxisRaw("Horizontal") < -0.5f)
         {
-            Vector3 pos = gameObject.transform.position;
-            pos.x -= m_speed * Time.deltaTime;
-            gameObject.transform.position = pos;
+            //Vector3 pos = gameObject.transform.position;
+            //pos.x -= m_speed * Time.deltaTime;
+            //gameObject.transform.position = pos;
+
+            m_coll.Move(-m_speed * Time.deltaTime, 0.0f);
+
         }
         if (Input.GetAxisRaw("Vertical") > 0.5f)
         {
@@ -71,3 +76,4 @@ public class Movement : MonoBehaviour
         
     }
 }
+

@@ -7,7 +7,7 @@ public class CollisionManager : MonoBehaviour
     static CollisionManager m_instance;
     const int m_cs_dataArrayLength = 10;
     CollisionData[] m_dataArray = new CollisionData[m_cs_dataArrayLength];
-    
+
     void Awake()
     {
         m_instance = this;
@@ -52,7 +52,7 @@ public class CollisionManager : MonoBehaviour
     {
         return m_dataArray[z].m_newPosY - (m_dataArray[z].m_heght * 0.5f);
     }
-    
+
     void Update()
     {
         for (int z = 0; z < m_cs_dataArrayLength; z++)
@@ -61,15 +61,18 @@ public class CollisionManager : MonoBehaviour
             {
                 if (m_dataArray[z] != null && m_dataArray[x] != null)
                 {
-                    if (FindNewBottom(z) < FindNewTop(x))
+                    if (FindLeft(z) < FindRight(x) || FindLeft(x) < FindRight(z))
                     {
-                        m_dataArray[z].m_colidedVertical = true;
-                        m_dataArray[x].m_colidedVertical = true;
+                        if (FindNewBottom(z) < FindNewTop(x))
+                        {
+                            m_dataArray[z].m_colidedVertical = true;
+                            m_dataArray[x].m_colidedVertical = true;
 
-                        float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
+                            float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
 
-                        m_dataArray[z].m_colisionPosY = colisionPoint;
-                        m_dataArray[x].m_colisionPosY = colisionPoint;
+                            m_dataArray[z].m_colisionPosY = colisionPoint;
+                            m_dataArray[x].m_colisionPosY = colisionPoint;
+                        }
                     }
                 }
             }

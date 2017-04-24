@@ -29,3 +29,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 The Puzzler/Temp/UnityLockfile
+*.txt

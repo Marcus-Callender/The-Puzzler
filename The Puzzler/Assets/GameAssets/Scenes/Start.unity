@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87acf37e413f44b47ad30cf99c582324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_colidedHorizontal: 0
+  m_colidedVertical: 0
 --- !u!1 &325428376
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +424,7 @@ GameObject:
   - component: {fileID: 1368078106}
   - component: {fileID: 1368078107}
   m_Layer: 0
-  m_Name: floor
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -503,6 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87acf37e413f44b47ad30cf99c582324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_colidedHorizontal: 0
+  m_colidedVertical: 0
 --- !u!114 &1368078107
 MonoBehaviour:
   m_ObjectHideFlags: 0

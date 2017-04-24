@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     Renderer m_material;
     // how fast the charater moves left to right
     float m_speed = 10.0f;
-    //float m_jump = 5.0f;
+
     bool m_jumping = false;
     float m_verticalSpeed = 0.0f;
     float m_jumpForce = .50f;
@@ -27,8 +27,10 @@ public class Movement : MonoBehaviour
         {
             // gets a refrence to the position
             Vector3 pos = gameObject.transform.position;
+
             // adds to the position
             pos.x += m_speed * Time.deltaTime;
+
             // applies the new position
             gameObject.transform.position = pos;
         }
@@ -45,23 +47,27 @@ public class Movement : MonoBehaviour
                 m_jumping = true;
                 m_verticalSpeed = m_jumpForce;
             }
-        }
 
-        if (m_jumping)
-        {
-            //Vector3 pos = gameObject.transform.position;
-            if (!m_coll.m_colidedVertical)
+            if (m_coll.m_colidedVertical)
             {
-                m_verticalSpeed -= m_gravity * Time.deltaTime;
+                m_verticalSpeed = m_jumpForce;
             }
-            //pos.y += m_verticalSpeed;
-            //gameObject.transform.position = pos;
-            m_coll.Move(0.0f, m_verticalSpeed);
-
-            m_material = gameObject.GetComponent<Renderer>();
-            m_material.material.color = Color.green;
         }
 
+        if (!m_coll.m_colidedVertical)
+        {
+            m_verticalSpeed -= m_gravity * Time.deltaTime;
+        }
+        else if (m_verticalSpeed < 0.0f)
+        {
+            m_verticalSpeed = -0.005f;
+            m_coll.MoveTo(m_coll.GetCollData().m_newPosX, m_coll.GetCollData().m_colisionPosY);
+        }
 
+        m_coll.Move(0.0f, m_verticalSpeed);
+
+        m_material = gameObject.GetComponent<Renderer>();
+        m_material.material.color = Color.green;
+        
     }
 }

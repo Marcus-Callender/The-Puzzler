@@ -21,30 +21,16 @@ public class CollisionManager : MonoBehaviour
             {
                 if (m_dataArray[z] != null && m_dataArray[x] != null)
                 {
-                    //if (m_dataArray[z].m_newPosY + (m_dataArray[z].m_heght * 0.5f) > m_dataArray[x].m_newPosY - (m_dataArray[x].m_heght * 0.5f))
-                    //{
-                    //    Debug.Log("Flag 1");
-                    //    m_dataArray[z].m_colidedVertical = true;
-                    //    m_dataArray[x].m_colidedVertical = true;
-                    //}
                     if (m_dataArray[z].m_newPosY - (m_dataArray[z].m_heght * 0.5f) < m_dataArray[x].m_newPosY + (m_dataArray[x].m_heght * 0.5f))
                     {
-                        Debug.Log("Flag 2");
                         m_dataArray[z].m_colidedVertical = true;
                         m_dataArray[x].m_colidedVertical = true;
+
+                        float colisionPoint = ((m_dataArray[z].m_newPosY - (m_dataArray[z].m_heght * 0.5f)) + (m_dataArray[x].m_newPosY + (m_dataArray[x].m_heght * 0.5f))) * 0.5f;
+
+                        m_dataArray[z].m_colisionPosY = colisionPoint;
+                        m_dataArray[x].m_colisionPosY = colisionPoint;
                     }
-                    if (m_dataArray[z].m_newPosY + (m_dataArray[z].m_heght * 0.5f) < m_dataArray[x].m_newPosY - (m_dataArray[x].m_heght * 0.5f))
-                    {
-                        Debug.Log("Flag 3");
-                        m_dataArray[z].m_colidedVertical = true;
-                        m_dataArray[x].m_colidedVertical = true;
-                    }
-                    //if (m_dataArray[z].m_newPosY - (m_dataArray[z].m_heght * 0.5f) > m_dataArray[x].m_newPosY + (m_dataArray[x].m_heght * 0.5f))
-                    //{
-                    //    Debug.Log("Flag 4");
-                    //    m_dataArray[z].m_colidedVertical = true;
-                    //    m_dataArray[x].m_colidedVertical = true;
-                    //}
                 }
             }
         }

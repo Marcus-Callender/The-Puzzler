@@ -16,7 +16,7 @@ public class CollisionBox : MonoBehaviour
 
     void Start()
     {
-        m_data = new CollisionData(); //gameObject.GetComponent<CollisionData>();
+        m_data = new CollisionData();
 
         m_id = m_s_instances;
         m_s_instances++;
@@ -63,10 +63,23 @@ public class CollisionBox : MonoBehaviour
         m_data.m_colidedVertical = false;
     }
 
+    // moves the object this many units
     public void Move(float x, float y)
     {
         m_data.m_newPosX = m_data.m_posX + x;
         m_data.m_newPosY = m_data.m_posY + y;
+    }
+
+    // moves the object to this position
+    public void MoveTo(float x, float y)
+    {
+        m_data.m_newPosX = x;
+        m_data.m_newPosY = y;
+    }
+
+    public CollisionData GetCollData()
+    {
+        return m_data;
     }
 }
 

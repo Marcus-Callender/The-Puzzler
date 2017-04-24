@@ -14,6 +14,5 @@ C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\Un
 C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEngine.VR.xml
 C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler\Temp\UnityVS_bin\Debug\UnityEditor.xml
-C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler\Temp\UnityVS_obj\Debug\The Puzzler.csprojResolveAssemblyReference.cache
 C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
 C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb

@@ -87,10 +87,10 @@
 -define:UNITY_TEAM_LICENSE
 -define:ENABLE_VSTU
 -define:CROSS_PLATFORM_INPUT
-Assets/Floor.cs
-Assets/GameAssets/Code/ColisionData.cs
-Assets/GameAssets/Code/ColisionManager.cs
-Assets/GameAssets/Code/CollisionBox.cs
+Assets/GameAssets/Code/Collision/CollisionBox.cs
+Assets/GameAssets/Code/Collision/CollisionData.cs
+Assets/GameAssets/Code/Collision/CollisionManager.cs
+Assets/GameAssets/Code/Floor.cs
 Assets/GameAssets/Code/Movement.cs
 -r:"C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"

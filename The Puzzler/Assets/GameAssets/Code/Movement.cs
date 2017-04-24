@@ -14,9 +14,11 @@ public class Movement : MonoBehaviour
     float m_jumpForce = .50f;
     float m_gravity = 2.5f;
 
+    CollisionBox m_coll;
+
     void Start()
     {
-
+        m_coll = GetComponent<CollisionBox>();
     }
 
     void Update()
@@ -47,10 +49,15 @@ public class Movement : MonoBehaviour
 
         if (m_jumping)
         {
-            Vector3 pos = gameObject.transform.position;
-            m_verticalSpeed -= m_gravity * Time.deltaTime;
-            pos.y += m_verticalSpeed;
-            gameObject.transform.position = pos;
+            //Vector3 pos = gameObject.transform.position;
+            if (!m_coll.m_colidedVertical)
+            {
+                m_verticalSpeed -= m_gravity * Time.deltaTime;
+            }
+            //pos.y += m_verticalSpeed;
+            //gameObject.transform.position = pos;
+            m_coll.Move(0.0f, m_verticalSpeed);
+
             m_material = gameObject.GetComponent<Renderer>();
             m_material.material.color = Color.green;
         }

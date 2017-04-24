@@ -12,6 +12,46 @@ public class CollisionManager : MonoBehaviour
     {
         m_instance = this;
     }
+
+    private float FindRight(int z)
+    {
+        return m_dataArray[z].m_posX + (m_dataArray[z].m_width * 0.5f);
+    }
+
+    private float FindLeft(int z)
+    {
+        return m_dataArray[z].m_posX - (m_dataArray[z].m_width * 0.5f);
+    }
+
+    private float FindTop(int z)
+    {
+        return m_dataArray[z].m_posY + (m_dataArray[z].m_heght * 0.5f);
+    }
+
+    private float FindBottom(int z)
+    {
+        return m_dataArray[z].m_posY - (m_dataArray[z].m_heght * 0.5f);
+    }
+
+    private float FindNewRight(int z)
+    {
+        return m_dataArray[z].m_newPosX + (m_dataArray[z].m_width * 0.5f);
+    }
+
+    private float FindNewLeft(int z)
+    {
+        return m_dataArray[z].m_newPosX - (m_dataArray[z].m_width * 0.5f);
+    }
+
+    private float FindNewTop(int z)
+    {
+        return m_dataArray[z].m_newPosY + (m_dataArray[z].m_heght * 0.5f);
+    }
+
+    private float FindNewBottom(int z)
+    {
+        return m_dataArray[z].m_newPosY - (m_dataArray[z].m_heght * 0.5f);
+    }
     
     void Update()
     {
@@ -21,12 +61,12 @@ public class CollisionManager : MonoBehaviour
             {
                 if (m_dataArray[z] != null && m_dataArray[x] != null)
                 {
-                    if (m_dataArray[z].m_newPosY - (m_dataArray[z].m_heght * 0.5f) < m_dataArray[x].m_newPosY + (m_dataArray[x].m_heght * 0.5f))
+                    if (FindNewBottom(z) < FindNewTop(x))
                     {
                         m_dataArray[z].m_colidedVertical = true;
                         m_dataArray[x].m_colidedVertical = true;
 
-                        float colisionPoint = ((m_dataArray[z].m_newPosY - (m_dataArray[z].m_heght * 0.5f)) + (m_dataArray[x].m_newPosY + (m_dataArray[x].m_heght * 0.5f))) * 0.5f;
+                        float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
 
                         m_dataArray[z].m_colisionPosY = colisionPoint;
                         m_dataArray[x].m_colisionPosY = colisionPoint;

@@ -16,6 +16,8 @@ public class CollisionData
     public float m_newPosX;
     public float m_newPosY;
 
+    public bool m_collisionTop;
+
     public float m_colisionPosX;
     public float m_colisionPosY;
 

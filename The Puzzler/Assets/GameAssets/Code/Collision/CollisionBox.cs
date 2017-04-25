@@ -53,7 +53,7 @@ public class CollisionBox : MonoBehaviour
             gameObject.transform.position = pos;
         }
 
-        if (!m_data.m_colidedHorizontal)
+        //if (!m_data.m_colidedHorizontal)
         {
             m_data.m_posX = m_data.m_newPosX;
 

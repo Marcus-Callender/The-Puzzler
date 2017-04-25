@@ -118,7 +118,7 @@ public class CollisionManager : MonoBehaviour
                     if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
                     {
                         colBottom = true;
-                        Debug.Log("Bottom Collision");
+                        Debug.Log("Bottom");
 
                         m_dataArray[z].m_colidedVertical = true;
                         m_dataArray[x].m_colidedVertical = true;
@@ -131,28 +131,7 @@ public class CollisionManager : MonoBehaviour
                     }
                 }
 
-                float LeftZ = FindNewLeft(z);
-                float LeftX = FindNewLeft(x);
-                float RightZ = FindNewRight(z);
-                float RightX = FindNewRight(x);
 
-                if (FindBottom(x) < FindTop(z) && FindTop(x) > FindBottom(z))
-                {
-                    if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
-                    {
-                        //colBottom = true;
-                        Debug.Log("Horizontal collision");
-
-                        m_dataArray[z].m_colidedHorizontal = true;
-                        m_dataArray[x].m_colidedHorizontal = true;
-
-                        float colisionPoint = (FindNewLeft(z) + FindNewRight(x)) * 0.5f;
-
-                        m_dataArray[z].m_colisionPosX = colisionPoint;
-                        m_dataArray[x].m_colisionPosX = colisionPoint;
-
-                    }
-                }
             }
         }
     }

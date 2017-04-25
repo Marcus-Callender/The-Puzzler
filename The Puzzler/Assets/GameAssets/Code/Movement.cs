@@ -45,8 +45,6 @@ public class Movement : MonoBehaviour
 
         if (Input.GetAxisRaw("Vertical") > 0.5f)
         {
-            Debug.Log(m_verticalSpeed);
-
             if (m_coll.m_colidedVertical && !stuckUnderPlatform/*m_verticalSpeed == -0.005f!m_coll.GetCollData().m_collisionTop && */)
             {
                 m_verticalSpeed = m_jumpForce;

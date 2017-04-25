@@ -63,6 +63,10 @@ public class Movement : MonoBehaviour
         {
             m_verticalSpeed -= m_gravity * Time.deltaTime;
         }
+        //else if (m_coll.m_colidedVertical && m_jumpForce > 0.0f)
+        //{
+        //    m_verticalSpeed = 0.0f;
+        //}
         else if (m_verticalSpeed < 0.0f)
         {
             m_verticalSpeed = -0.005f;

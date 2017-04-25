@@ -117,6 +117,15 @@ public class CollisionManager : MonoBehaviour
                 {
                     if (FindLeft(x) < FindRight(z) && FindLeft(z) < FindRight(x))
                     {
+                        if (m_dataArray[z].m_posY > m_dataArray[x].m_posY)
+                        {
+                            m_dataArray[x].m_collisionTop = true;
+                        }
+                        else
+                        {
+                            m_dataArray[z].m_collisionTop = true;
+                        }
+
                         colBottom = true;
                         Debug.Log("Bottom Collision");
 
@@ -140,15 +149,6 @@ public class CollisionManager : MonoBehaviour
                 {
                     if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
                     {
-                        if (m_dataArray[z].m_posY > m_dataArray[x].m_posY)
-                        {
-                            m_dataArray[x].m_collisionTop = true;
-                        }
-                        else
-                        {
-                            m_dataArray[z].m_collisionTop = true;
-                        }
-
                         //colBottom = true;
                         Debug.Log("Horizontal collision");
 

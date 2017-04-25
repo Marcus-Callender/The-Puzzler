@@ -65,6 +65,8 @@ public class CollisionBox : MonoBehaviour
         //m_data.m_posX = m_data.m_newPosX;
         //m_data.m_posY = m_data.m_newPosY;
 
+        m_data.m_collisionTop = false;
+
         m_data.m_newPosX = m_data.m_posX;
         m_data.m_newPosY = m_data.m_posY;
         

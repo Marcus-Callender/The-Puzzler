@@ -5,12 +5,14 @@ using UnityEngine;
 public class CollisionManager : MonoBehaviour
 {
     static CollisionManager m_instance;
-    const int m_cs_dataArrayLength = 10;
-    CollisionData[] m_dataArray = new CollisionData[m_cs_dataArrayLength];
+    //const int m_cs_dataArrayLength = 10;
+    //CollisionData[] m_dataArray = new CollisionData[m_cs_dataArrayLength];
+    ColliderRegister m_register;
 
     void Awake()
     {
         m_instance = this;
+        m_register = new ColliderRegister();
     }
 
     private float FindRight(int z)
@@ -59,46 +61,50 @@ public class CollisionManager : MonoBehaviour
         {
             for (int x = z + 1; x < m_cs_dataArrayLength; x++)
             {
-                if (FindNewTop(x) > FindNewBottom(z) && FindNewTop(z) > FindNewBottom(x))
+                // if boath coliders are enviromental skip there colision
+                if (!(m_dataArray[z].m_type == ColiderType.ENVIROMENT && m_dataArray[x].m_type == ColiderType.ENVIROMENT))
                 {
-                    if (FindLeft(x) < FindRight(z) && FindLeft(z) < FindRight(x))
+                    if (FindNewTop(x) > FindNewBottom(z) && FindNewTop(z) > FindNewBottom(x))
                     {
-                        if (m_dataArray[z].m_posY > m_dataArray[x].m_posY)
+                        if (FindLeft(x) < FindRight(z) && FindLeft(z) < FindRight(x))
                         {
-                            m_dataArray[x].m_collisionTop = true;
+                            if (m_dataArray[z].m_posY > m_dataArray[x].m_posY)
+                            {
+                                m_dataArray[x].m_collisionTop = true;
+                            }
+                            else
+                            {
+                                m_dataArray[z].m_collisionTop = true;
+                            }
+
+                            Debug.Log("Vertical Collision");
+
+                            m_dataArray[z].m_colidedVertical = true;
+                            m_dataArray[x].m_colidedVertical = true;
+
+                            float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
+
+                            m_dataArray[z].m_colisionPosY = colisionPoint;
+                            m_dataArray[x].m_colisionPosY = colisionPoint;
+
                         }
-                        else
-                        {
-                            m_dataArray[z].m_collisionTop = true;
-                        }
-                        
-                        Debug.Log("Vertical Collision");
-
-                        m_dataArray[z].m_colidedVertical = true;
-                        m_dataArray[x].m_colidedVertical = true;
-
-                        float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
-
-                        m_dataArray[z].m_colisionPosY = colisionPoint;
-                        m_dataArray[x].m_colisionPosY = colisionPoint;
-
                     }
-                }
 
-                if (FindBottom(x) < FindTop(z) && FindTop(x) > FindBottom(z))
-                {
-                    if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
+                    if (FindBottom(x) < FindTop(z) && FindTop(x) > FindBottom(z))
                     {
-                        Debug.Log("Horizontal collision");
+                        if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
+                        {
+                            Debug.Log("Horizontal collision");
 
-                        m_dataArray[z].m_colidedHorizontal = true;
-                        m_dataArray[x].m_colidedHorizontal = true;
+                            m_dataArray[z].m_colidedHorizontal = true;
+                            m_dataArray[x].m_colidedHorizontal = true;
 
-                        float colisionPoint = (FindNewLeft(z) + FindNewRight(x)) * 0.5f;
+                            float colisionPoint = (FindNewLeft(z) + FindNewRight(x)) * 0.5f;
 
-                        m_dataArray[z].m_colisionPosX = colisionPoint;
-                        m_dataArray[x].m_colisionPosX = colisionPoint;
+                            m_dataArray[z].m_colisionPosX = colisionPoint;
+                            m_dataArray[x].m_colisionPosX = colisionPoint;
 
+                        }
                     }
                 }
             }
@@ -110,38 +116,38 @@ public class CollisionManager : MonoBehaviour
         return m_instance;
     }
 
-    public void RegisterData(CollisionData data)
-    {
-        int lowestFreeSpace = -1;
-
-        for (int z = 0; z < m_cs_dataArrayLength; z++)
-        {
-            if (m_dataArray[z] == null && lowestFreeSpace == -1)
-            {
-                lowestFreeSpace = z;
-            }
-            else if (m_dataArray[z] != null)
-            {
-                if (m_dataArray[z].m_id == data.m_id)
-                {
-                    return;
-                }
-            }
-        }
-
-        m_dataArray[lowestFreeSpace] = data;
-    }
-
-    public void UnRegisterData(CollisionData data)
-    {
-        for (int z = 0; z < m_cs_dataArrayLength; z++)
-        {
-            if (m_dataArray[z] == data)
-            {
-                m_dataArray[z] = null;
-                break;
-            }
-        }
-    }
+    //public void RegisterData(CollisionData data)
+    //{
+    //    int lowestFreeSpace = -1;
+    //
+    //    for (int z = 0; z < m_cs_dataArrayLength; z++)
+    //    {
+    //        if (m_dataArray[z] == null && lowestFreeSpace == -1)
+    //        {
+    //            lowestFreeSpace = z;
+    //        }
+    //        else if (m_dataArray[z] != null)
+    //        {
+    //            if (m_dataArray[z].m_id == data.m_id)
+    //            {
+    //                return;
+    //            }
+    //        }
+    //    }
+    //
+    //    m_dataArray[lowestFreeSpace] = data;
+    //}
+    //
+    //public void UnRegisterData(CollisionData data)
+    //{
+    //    for (int z = 0; z < m_cs_dataArrayLength; z++)
+    //    {
+    //        if (m_dataArray[z] == data)
+    //        {
+    //            m_dataArray[z] = null;
+    //            break;
+    //        }
+    //    }
+    //}
 }
 

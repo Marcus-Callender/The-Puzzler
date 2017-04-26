@@ -36,7 +36,7 @@ public class CollisionBox : MonoBehaviour
         m_data.m_newPosY = m_data.m_posY;
 
         m_manager = CollisionManager.GetInstance();
-        m_manager.AddCollider(m_data);
+        m_manager.RegisterData(m_data);
     }
 
     void Update()
@@ -82,15 +82,11 @@ public class CollisionBox : MonoBehaviour
     // moves the object this many units
     public void Move(float x, float y)
     {
-        //if (x != 0.0f)
-        //   m_data.m_newPosX = m_data.m_posX + x;
-        //
-        //if (y != 0.0f)
-        //    m_data.m_newPosY = m_data.m_posY + y;
+        if (x != 0.0f)
+           m_data.m_newPosX = m_data.m_posX + x;
         
-        m_data.m_newPosX += x;
-
-        m_data.m_newPosY += y;
+        if (y != 0.0f)
+            m_data.m_newPosY = m_data.m_posY + y;
     }
 
     // moves the object to this position

@@ -5,12 +5,14 @@ using UnityEngine;
 public class CollisionManager : MonoBehaviour
 {
     static CollisionManager m_instance;
-    const int m_cs_dataArrayLength = 10;
-    CollisionData[] m_dataArray = new CollisionData[m_cs_dataArrayLength];
+    //const int m_cs_dataArrayLength = 10;
+    //CollisionData[] m_dataArray = new CollisionData[m_cs_dataArrayLength];
+    ColliderRegister m_register;
 
     void Awake()
     {
         m_instance = this;
+        m_register = new ColliderRegister();
     }
 
     private float FindRight(int z)
@@ -114,38 +116,38 @@ public class CollisionManager : MonoBehaviour
         return m_instance;
     }
 
-    public void AddCollider(CollisionData data)
-    {
-        int lowestFreeSpace = -1;
-    
-        for (int z = 0; z < m_cs_dataArrayLength; z++)
-        {
-            if (m_dataArray[z] == null && lowestFreeSpace == -1)
-            {
-                lowestFreeSpace = z;
-            }
-            else if (m_dataArray[z] != null)
-            {
-                if (m_dataArray[z].m_id == data.m_id)
-                {
-                    return;
-                }
-            }
-        }
-    
-        m_dataArray[lowestFreeSpace] = data;
-    }
-    
-    public void RemoveCollider(CollisionData data)
-    {
-        for (int z = 0; z < m_cs_dataArrayLength; z++)
-        {
-            if (m_dataArray[z] == data)
-            {
-                m_dataArray[z] = null;
-                break;
-            }
-        }
-    }
+    //public void RegisterData(CollisionData data)
+    //{
+    //    int lowestFreeSpace = -1;
+    //
+    //    for (int z = 0; z < m_cs_dataArrayLength; z++)
+    //    {
+    //        if (m_dataArray[z] == null && lowestFreeSpace == -1)
+    //        {
+    //            lowestFreeSpace = z;
+    //        }
+    //        else if (m_dataArray[z] != null)
+    //        {
+    //            if (m_dataArray[z].m_id == data.m_id)
+    //            {
+    //                return;
+    //            }
+    //        }
+    //    }
+    //
+    //    m_dataArray[lowestFreeSpace] = data;
+    //}
+    //
+    //public void UnRegisterData(CollisionData data)
+    //{
+    //    for (int z = 0; z < m_cs_dataArrayLength; z++)
+    //    {
+    //        if (m_dataArray[z] == data)
+    //        {
+    //            m_dataArray[z] = null;
+    //            break;
+    //        }
+    //    }
+    //}
 }
 

@@ -59,46 +59,50 @@ public class CollisionManager : MonoBehaviour
         {
             for (int x = z + 1; x < m_cs_dataArrayLength; x++)
             {
-                if (FindNewTop(x) > FindNewBottom(z) && FindNewTop(z) > FindNewBottom(x))
+                if (m_dataArray[z] != null && m_dataArray[x] != null)
                 {
-                    if (FindLeft(x) < FindRight(z) && FindLeft(z) < FindRight(x))
+                    if (FindNewTop(x) > FindNewBottom(z) && FindNewTop(z) > FindNewBottom(x))
                     {
-                        if (m_dataArray[z].m_posY > m_dataArray[x].m_posY)
+                        if (FindLeft(x) < FindRight(z) && FindLeft(z) < FindRight(x))
                         {
-                            m_dataArray[x].m_collisionTop = true;
+                            if (m_dataArray[z].m_posY > m_dataArray[x].m_posY)
+                            {
+                                m_dataArray[x].m_collisionTop = true;
+                            }
+                            else
+                            {
+                                m_dataArray[z].m_collisionTop = true;
+                            }
+
+                            Debug.Log("Vertical Collision" + z + ": " + x);
+
+                            m_dataArray[z].m_colidedVertical = true;
+                            m_dataArray[x].m_colidedVertical = true;
+
+                            float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
+
+                            m_dataArray[z].m_colisionPosY = colisionPoint;
+                            m_dataArray[x].m_colisionPosY = colisionPoint;
+
                         }
-                        else
-                        {
-                            m_dataArray[z].m_collisionTop = true;
-                        }
-                        
-                        Debug.Log("Vertical Collision");
-
-                        m_dataArray[z].m_colidedVertical = true;
-                        m_dataArray[x].m_colidedVertical = true;
-
-                        float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
-
-                        m_dataArray[z].m_colisionPosY = colisionPoint;
-                        m_dataArray[x].m_colisionPosY = colisionPoint;
 
                     }
-                }
 
-                if (FindBottom(x) < FindTop(z) && FindTop(x) > FindBottom(z))
-                {
-                    if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
+                    if (FindBottom(x) < FindTop(z) && FindTop(x) > FindBottom(z))
                     {
-                        Debug.Log("Horizontal collision");
+                        if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
+                        {
+                            Debug.Log("Horizontal collision");
 
-                        m_dataArray[z].m_colidedHorizontal = true;
-                        m_dataArray[x].m_colidedHorizontal = true;
+                            m_dataArray[z].m_colidedHorizontal = true;
+                            m_dataArray[x].m_colidedHorizontal = true;
 
-                        float colisionPoint = (FindNewLeft(z) + FindNewRight(x)) * 0.5f;
+                            float colisionPoint = (FindNewLeft(z) + FindNewRight(x)) * 0.5f;
 
-                        m_dataArray[z].m_colisionPosX = colisionPoint;
-                        m_dataArray[x].m_colisionPosX = colisionPoint;
+                            m_dataArray[z].m_colisionPosX = colisionPoint;
+                            m_dataArray[x].m_colisionPosX = colisionPoint;
 
+                        }
                     }
                 }
             }

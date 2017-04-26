@@ -87,6 +87,7 @@
 -define:UNITY_TEAM_LICENSE
 -define:ENABLE_VSTU
 -define:CROSS_PLATFORM_INPUT
+Assets/GameAssets/Code/BoxMove.cs
 Assets/GameAssets/Code/Collision/CollisionBox.cs
 Assets/GameAssets/Code/Collision/CollisionManager.cs
 Assets/GameAssets/Code/Floor.cs

@@ -168,7 +168,7 @@ BoxCollider:
   m_GameObject: {fileID: 85585910}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -214,8 +214,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87acf37e413f44b47ad30cf99c582324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_type: 1
+  m_id: 0
   m_colidedHorizontal: 0
   m_colidedVertical: 0
+  m_PrevColidedHorizontal: 0
+  m_PrevColidedVertical: 0
+  m_posX: 0
+  m_posY: 0
+  m_width: 0
+  m_heght: 0
+  m_newPosX: 0
+  m_newPosY: 0
+  m_collisionTop: 0
+  m_colisionPosX: 0
+  m_colisionPosY: 0
 --- !u!1 &325428376
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +280,7 @@ GameObject:
   - component: {fileID: 375239129}
   - component: {fileID: 375239128}
   - component: {fileID: 375239127}
+  - component: {fileID: 375239131}
   - component: {fileID: 375239126}
   m_Layer: 0
   m_Name: Box
@@ -286,8 +300,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87acf37e413f44b47ad30cf99c582324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_type: 3
+  m_id: 0
   m_colidedHorizontal: 0
   m_colidedVertical: 0
+  m_PrevColidedHorizontal: 0
+  m_PrevColidedVertical: 0
+  m_posX: 0
+  m_posY: 0
+  m_width: 0
+  m_heght: 0
+  m_newPosX: 0
+  m_newPosY: 0
+  m_collisionTop: 0
+  m_colisionPosX: 0
+  m_colisionPosY: 0
 --- !u!23 &375239127
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -328,7 +355,7 @@ BoxCollider:
   m_GameObject: {fileID: 375239125}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -347,11 +374,22 @@ Transform:
   m_GameObject: {fileID: 375239125}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.55, y: 0.14, z: 0}
-  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &375239131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375239125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00971a83751728541a7d2f48501b24e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &874541666
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,8 +432,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87acf37e413f44b47ad30cf99c582324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_type: 0
+  m_id: 0
   m_colidedHorizontal: 0
   m_colidedVertical: 0
+  m_PrevColidedHorizontal: 0
+  m_PrevColidedVertical: 0
+  m_posX: 0
+  m_posY: 0
+  m_width: 0
+  m_heght: 0
+  m_newPosX: 0
+  m_newPosY: 0
+  m_collisionTop: 0
+  m_colisionPosX: 0
+  m_colisionPosY: 0
 --- !u!23 &874541669
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -436,7 +487,7 @@ BoxCollider:
   m_GameObject: {fileID: 874541666}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -502,8 +553,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87acf37e413f44b47ad30cf99c582324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_type: 0
+  m_id: 0
   m_colidedHorizontal: 0
   m_colidedVertical: 0
+  m_PrevColidedHorizontal: 0
+  m_PrevColidedVertical: 0
+  m_posX: 0
+  m_posY: 0
+  m_width: 0
+  m_heght: 0
+  m_newPosX: 0
+  m_newPosY: 0
+  m_collisionTop: 0
+  m_colisionPosX: 0
+  m_colisionPosY: 0
 --- !u!23 &945423111
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -544,7 +608,7 @@ BoxCollider:
   m_GameObject: {fileID: 945423108}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -782,7 +846,7 @@ BoxCollider:
   m_GameObject: {fileID: 1368078101}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -817,8 +881,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87acf37e413f44b47ad30cf99c582324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_type: 0
+  m_id: 0
   m_colidedHorizontal: 0
   m_colidedVertical: 0
+  m_PrevColidedHorizontal: 0
+  m_PrevColidedVertical: 0
+  m_posX: 0
+  m_posY: 0
+  m_width: 0
+  m_heght: 0
+  m_newPosX: 0
+  m_newPosY: 0
+  m_collisionTop: 0
+  m_colisionPosX: 0
+  m_colisionPosY: 0
 --- !u!114 &1368078107
 MonoBehaviour:
   m_ObjectHideFlags: 0

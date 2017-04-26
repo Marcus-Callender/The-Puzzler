@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ColliderType
+{
+    ENVIROMENT,
+    PLAYER,
+    TRIGGER,
+    PROP
+}
+
 public class CollisionBox : MonoBehaviour
 {
     CollisionManager m_manager;
-    //CollisionData m_data;
+
+    public ColliderType m_type;
 
     static int m_s_instances = 0;
     public int m_id = 0;
@@ -96,8 +105,8 @@ public class CollisionBox : MonoBehaviour
     public void Move(float x, float y)
     {
         if (x != 0.0f)
-           m_newPosX = m_posX + x;
-        
+            m_newPosX = m_posX + x;
+
         if (y != 0.0f)
             m_newPosY = m_posY + y;
     }
@@ -108,10 +117,5 @@ public class CollisionBox : MonoBehaviour
         m_newPosX = x;
         m_newPosY = y;
     }
-
-    /*public CollisionData GetCollData()
-    {
-        return m_data;
-    }*/
 }
 

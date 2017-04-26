@@ -7,8 +7,6 @@ public class CollisionBox : MonoBehaviour
     CollisionManager m_manager;
     CollisionData m_data;
 
-    public ColiderType m_type;
-
     static int m_s_instances = 0;
     int m_id = 0;
 

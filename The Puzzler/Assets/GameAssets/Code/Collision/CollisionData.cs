@@ -2,20 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ColiderType
-{
-    PLAYER,
-    ENVIROMENT,
-    PROP,
-    TRIGGER
-}
-
 // this is a class a struct is not nullable
 // http://answers.unity3d.com/questions/362799/nullable-struct.html
 public class CollisionData
 {
     public int m_id;
-    public ColiderType m_type;
 
     public float m_posX;
     public float m_posY;

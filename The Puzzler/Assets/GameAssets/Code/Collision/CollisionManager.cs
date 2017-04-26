@@ -59,78 +59,83 @@ public class CollisionManager : MonoBehaviour
         {
             for (int x = z + 1; x < m_cs_dataArrayLength; x++)
             {
-                //if (m_dataArray[z] != null && m_dataArray[x] != null)
-                //{
-                //    if (FindLeft(z) < FindRight(x) || FindLeft(x) > FindRight(z))
-                //    {
-                //        if (FindNewBottom(z) < FindNewTop(x))
-                //        {
-                //            m_dataArray[z].m_colidedVertical = true;
-                //            m_dataArray[x].m_colidedVertical = true;
-                //
-                //            float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
-                //
-                //            m_dataArray[z].m_colisionPosY = colisionPoint;
-                //            m_dataArray[x].m_colisionPosY = colisionPoint;
-                //        }
-                //    }
-                //
-                //    //else if (FindLeft(x) < FindRight(z))  //(FindLeft(x) < FindRight(z))
-                //    //{
-                //    //    if (FindNewBottom(z) < FindNewTop(x))
-                //    //    {
-                //    //        m_dataArray[z].m_colidedVertical = true;
-                //    //        m_dataArray[x].m_colidedVertical = true;
-                //    //
-                //    //        float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
-                //    //
-                //    //        m_dataArray[z].m_colisionPosY = colisionPoint;
-                //    //        m_dataArray[x].m_colisionPosY = colisionPoint;
-                //    //    }
-                //    //}
-                //}
 
-                bool colLeft = false;
-                bool colRight = false;
-                bool colTop = false;
-                bool colBottom = false;
-
-                if (FindNewLeft(z) > FindNewRight(x))
+                if (m_dataArray[z] != null && m_dataArray[x] != null)
                 {
-                    colLeft = true;
-                    Debug.Log("Left");
-                }
 
-                if (FindNewLeft(x) > FindNewRight(z))
-                {
-                    colRight = true;
-                    Debug.Log("Right");
-                }
+                    //if (m_dataArray[z] != null && m_dataArray[x] != null)
+                    //{
+                    //    if (FindLeft(z) < FindRight(x) || FindLeft(x) > FindRight(z))
+                    //    {
+                    //        if (FindNewBottom(z) < FindNewTop(x))
+                    //        {
+                    //            m_dataArray[z].m_colidedVertical = true;
+                    //            m_dataArray[x].m_colidedVertical = true;
+                    //
+                    //            float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
+                    //
+                    //            m_dataArray[z].m_colisionPosY = colisionPoint;
+                    //            m_dataArray[x].m_colisionPosY = colisionPoint;
+                    //        }
+                    //    }
+                    //
+                    //    //else if (FindLeft(x) < FindRight(z))  //(FindLeft(x) < FindRight(z))
+                    //    //{
+                    //    //    if (FindNewBottom(z) < FindNewTop(x))
+                    //    //    {
+                    //    //        m_dataArray[z].m_colidedVertical = true;
+                    //    //        m_dataArray[x].m_colidedVertical = true;
+                    //    //
+                    //    //        float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
+                    //    //
+                    //    //        m_dataArray[z].m_colisionPosY = colisionPoint;
+                    //    //        m_dataArray[x].m_colisionPosY = colisionPoint;
+                    //    //    }
+                    //    //}
+                    //}
 
-                if (FindNewTop(z) < FindNewBottom(x))
-                {
-                    colTop = true;
-                    Debug.Log("Top");
-                }
+                    bool colLeft = false;
+                    bool colRight = false;
+                    bool colTop = false;
+                    bool colBottom = false;
 
-                if (FindNewTop(x) > FindNewBottom(z) && FindNewTop(z) > FindNewBottom(x))
-                {
-                    if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
+                    if (FindNewLeft(z) > FindNewRight(x))
                     {
-                        colBottom = true;
-                        Debug.Log("Bottom");
-
-                        m_dataArray[z].m_colidedVertical = true;
-                        m_dataArray[x].m_colidedVertical = true;
-
-                        float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
-
-                        m_dataArray[z].m_colisionPosY = colisionPoint;
-                        m_dataArray[x].m_colisionPosY = colisionPoint;
-
+                        colLeft = true;
+                        Debug.Log("Left");
                     }
-                }
 
+                    if (FindNewLeft(x) > FindNewRight(z))
+                    {
+                        colRight = true;
+                        Debug.Log("Right");
+                    }
+
+                    if (FindNewTop(z) < FindNewBottom(x))
+                    {
+                        colTop = true;
+                        Debug.Log("Top");
+                    }
+
+                    if (FindNewTop(x) > FindNewBottom(z) && FindNewTop(z) > FindNewBottom(x))
+                    {
+                        if (FindNewLeft(x) < FindNewRight(z) && FindNewLeft(z) < FindNewRight(x))
+                        {
+                            colBottom = true;
+                            Debug.Log("Bottom");
+
+                            m_dataArray[z].m_colidedVertical = true;
+                            m_dataArray[x].m_colidedVertical = true;
+
+                            float colisionPoint = (FindNewBottom(z) + FindNewTop(x)) * 0.5f;
+
+                            m_dataArray[z].m_colisionPosY = colisionPoint;
+                            m_dataArray[x].m_colisionPosY = colisionPoint;
+
+                        }
+                    }
+
+                }
 
             }
         }

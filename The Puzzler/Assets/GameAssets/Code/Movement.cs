@@ -8,72 +8,58 @@ public class Movement : MonoBehaviour
     Renderer m_material;
     // how fast the charater moves left to right
     float m_speed = 10.0f;
-
-    bool m_jumping = false;
+    
     float m_verticalSpeed = 0.0f;
     float m_jumpForce = .50f;
     float m_gravity = 2.5f;
-
-    CollisionBox m_coll;
+    
+    Rigidbody m_rigb;
+    BoxCollider m_colider;
 
     void Start()
     {
-        m_coll = GetComponent<CollisionBox>();
+        //m_coll = GetComponent<CollisionBox>();
+        m_rigb = GetComponent<Rigidbody>();
+        m_colider = GetComponent<BoxCollider>();
+
+        m_material = gameObject.GetComponent<Renderer>();
+        m_material.material.color = Color.green;
     }
 
     void Update()
     {
+        Vector3 vel = new Vector3(0.0f, 0.0f, 0.0f);
+        bool onGround = Physics.Raycast(transform.position, -transform.up, 0.2f);
+        Debug.Log(onGround);
+
         if (Input.GetAxisRaw("Horizontal") > 0.5f)
         {
-            // gets a refrence to the position
-            //Vector3 pos = gameObject.transform.position;
-
-            // adds to the position
-            //pos.x += m_speed * Time.deltaTime;
-
-            // applies the new position
-            //gameObject.transform.position = pos;
-
-            m_coll.Move(m_speed * Time.deltaTime, 0.0f);
+            vel.x += m_speed * Time.deltaTime;
+            
         }
         else if (Input.GetAxisRaw("Horizontal") < -0.5f)
         {
-            //Vector3 pos = gameObject.transform.position;
-            //pos.x -= m_speed * Time.deltaTime;
-            //gameObject.transform.position = pos;
 
-            m_coll.Move(-m_speed * Time.deltaTime, 0.0f);
+            vel.x -= m_speed * Time.deltaTime;
 
         }
+
         if (Input.GetAxisRaw("Vertical") > 0.5f)
         {
-            if (!m_jumping)
-            {
-                m_jumping = true;
-                m_verticalSpeed = m_jumpForce;
-            }
-
-            if (m_coll.m_colidedVertical)
+            if (Physics.Raycast(transform.position, -transform.up, 0.2f))
             {
                 m_verticalSpeed = m_jumpForce;
             }
+            
         }
 
-        if (!m_coll.m_colidedVertical)
+        if (!Physics.Raycast(transform.position, -transform.up, 0.2f))
         {
             m_verticalSpeed -= m_gravity * Time.deltaTime;
         }
-        else if (m_verticalSpeed < 0.0f)
-        {
-            m_verticalSpeed = -0.005f;
-            m_coll.MoveTo(m_coll.GetCollData().m_newPosX, m_coll.GetCollData().m_colisionPosY);
-        }
 
-        m_coll.Move(0.0f, m_verticalSpeed);
-
-        m_material = gameObject.GetComponent<Renderer>();
-        m_material.material.color = Color.green;
-        
+        vel.y += m_verticalSpeed;
+        m_rigb.velocity = vel;
     }
 }
 

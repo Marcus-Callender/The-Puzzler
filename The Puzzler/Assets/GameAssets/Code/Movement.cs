@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
     {
         bool stuckUnderPlatform = false;
 
-        if (m_coll.m_colidedVertical && m_verticalSpeed > 0.0f)
+        if (m_coll.m_PrevColidedVertical && m_verticalSpeed > 0.0f)
         {
             m_verticalSpeed = -0.001f;
             stuckUnderPlatform = true;
@@ -45,20 +45,20 @@ public class Movement : MonoBehaviour
 
         if (Input.GetAxisRaw("Vertical") > 0.5f)
         {
-            if (m_coll.m_colidedVertical && !stuckUnderPlatform/*m_verticalSpeed == -0.005f!m_coll.GetCollData().m_collisionTop && */)
+            if (m_coll.m_PrevColidedVertical && !stuckUnderPlatform/*m_verticalSpeed == -0.005f!m_coll.GetCollData().m_collisionTop && */)
             {
                 m_verticalSpeed = m_jumpForce;
             }
         }
 
-        if (!m_coll.m_colidedVertical)
+        if (!m_coll.m_PrevColidedVertical)
         {
             m_verticalSpeed -= m_gravity * Time.deltaTime;
         }
         else if (m_verticalSpeed < 0.0f)
         {
             m_verticalSpeed = -0.005f;
-            m_coll.MoveTo(m_coll.GetCollData().m_newPosX, m_coll.GetCollData().m_colisionPosY);
+            m_coll.MoveTo(m_coll.m_newPosX, m_coll.m_colisionPosY);
         }
 
         m_coll.Move(0.0f, m_verticalSpeed);

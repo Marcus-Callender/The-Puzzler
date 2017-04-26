@@ -6,7 +6,7 @@ public class CollisionManager : MonoBehaviour
 {
     static CollisionManager m_instance;
     const int m_cs_dataArrayLength = 10;
-    CollisionData[] m_dataArray = new CollisionData[m_cs_dataArrayLength];
+    CollisionBox[] m_dataArray = new CollisionBox[m_cs_dataArrayLength];
 
     void Awake()
     {
@@ -110,7 +110,7 @@ public class CollisionManager : MonoBehaviour
         return m_instance;
     }
 
-    public void RegisterData(CollisionData data)
+    public void RegisterData(CollisionBox data)
     {
         int lowestFreeSpace = -1;
 
@@ -132,7 +132,7 @@ public class CollisionManager : MonoBehaviour
         m_dataArray[lowestFreeSpace] = data;
     }
 
-    public void UnRegisterData(CollisionData data)
+    public void UnRegisterData(CollisionBox data)
     {
         for (int z = 0; z < m_cs_dataArrayLength; z++)
         {

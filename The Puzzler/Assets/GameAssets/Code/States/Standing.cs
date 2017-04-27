@@ -17,18 +17,25 @@ public class Standing : BaseCharicterState
     public override CHARICTER_STATES GetInput()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
+        Debug.Log("Axis: " + horizontal);
 
         if (horizontal > 0.5f || horizontal < -0.5f)
         {
             return CHARICTER_STATES.WALK;
         }
-        
+
+        if (Input.GetAxisRaw("Vectical") > 0.5f)
+        {
+            return CHARICTER_STATES.JUMP;
+        }
+
         return CHARICTER_STATES.STAND;
     }
 
     public override CHARICTER_STATES Cycle()
     {
-        m_me.m_rigb.velocity = new Vector3(0.0f, 0.1f);
+        m_me.m_xVelocity = 0.0f;
+        m_me.m_yVelocity = 0.0f;
 
         return CHARICTER_STATES.STAND;
     }

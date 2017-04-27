@@ -15,14 +15,16 @@ public enum CHARICTER_STATES
 public class CharicterData : MonoBehaviour
 {
     public Rigidbody m_rigb;
+    public float m_xVelocity = 0.0f;
+    public float m_yVelocity = 0.0f;
 
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-
+        m_rigb.velocity = new Vector3(m_xVelocity, m_yVelocity);
     }
 }

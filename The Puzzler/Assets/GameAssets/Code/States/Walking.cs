@@ -17,8 +17,9 @@ public class Walking : BaseCharicterState
     public override CHARICTER_STATES GetInput()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
+        Debug.Log("Axis: " + horizontal);
 
-        if (horizontal < 0.5f || horizontal > -0.5f)
+        if (horizontal < 0.5f && horizontal > -0.5f)
         {
             return CHARICTER_STATES.STAND;
         }
@@ -26,14 +27,18 @@ public class Walking : BaseCharicterState
         {
             if (horizontal > 0.0f)
             {
-                m_me.m_rigb.velocity = new Vector3(3.0f, 0.1f);
+                m_me.m_xVelocity = 3.0f;
             }
             else
             {
-                m_me.m_rigb.velocity = new Vector3(-3.0f, 0.1f);
-
+                m_me.m_xVelocity = -3.0f;
             }
 
+        }
+
+        if (Input.GetAxisRaw("Vertical") > 0.5f)
+        {
+            return CHARICTER_STATES.JUMP;
         }
         
         return CHARICTER_STATES.WALK;
@@ -46,16 +51,16 @@ public class Walking : BaseCharicterState
 
     public override CHARICTER_STATES Collision(DIRECTIONS direction, string tag)
     {
-        if (direction == DIRECTIONS.DOWN)
-        {
-            return CHARICTER_STATES.JUMP;
-        }
-
         return CHARICTER_STATES.WALK;
     }
 
     public override CHARICTER_STATES NotCollided(DIRECTIONS direction)
     {
+        if (direction == DIRECTIONS.DOWN)
+        {
+            return CHARICTER_STATES.JUMP;
+        }
+
         return CHARICTER_STATES.WALK;
     }
 }

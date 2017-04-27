@@ -40,6 +40,8 @@ public class CharicterStateMachine : MonoBehaviour
 
     void Update()
     {
+        CheckCollision();
+
         for (int z = 0; z < (int)DIRECTIONS.NUMBER_OF_DIRECTIONS; z++)
         {
             if (m_collisions[z] == "")
@@ -54,51 +56,54 @@ public class CharicterStateMachine : MonoBehaviour
             }
         }
 
-        m_states[(int)m_currentState].GetInput();
+        m_newState = m_states[(int)m_currentState].GetInput();
         CheckState();
 
-        m_states[(int)m_currentState].Cycle();
+        m_newState = m_states[(int)m_currentState].Cycle();
         CheckState();
     }
 
-    private void FixedUpdate()
+    void CheckCollision()
     {
         for (int z = 0; z < (int)DIRECTIONS.NUMBER_OF_DIRECTIONS; z++)
         {
             m_collisions[z] = "";
         }
-    }
+        
+        RaycastHit hit;
 
-    private void OnCollisionStay(Collision collision)
-    {
-        DIRECTIONS collisionDir = DIRECTIONS.NULL;
+        var up = transform.TransformDirection(Vector3.up);
+        var left = transform.TransformDirection(Vector3.left);
 
-        if (Mathf.Abs(collision.contacts[0].point.x) > Mathf.Abs(collision.contacts[0].point.y))
+        Debug.DrawRay(transform.position, -up * 0.5f, Color.green);
+        Debug.DrawRay(transform.position, up * 0.5f, Color.green);
+        Debug.DrawRay(transform.position, left * 0.5f, Color.green);
+        Debug.DrawRay(transform.position, -left * 0.5f, Color.green);
+
+        if (Physics.Raycast(transform.position, -up, out hit, 0.5f))
         {
-            if (collision.contacts[0].point.x > 0.0f)
-            {
-                collisionDir = DIRECTIONS.RIGHT;
-            }
-            else
-            {
-                collisionDir = DIRECTIONS.LEFT;
-            }
-        }
-        else
-        {
-            if (collision.contacts[0].point.y > 0.0f)
-            {
-                collisionDir = DIRECTIONS.UP;
-            }
-            else
-            {
-                collisionDir = DIRECTIONS.DOWN;
-            }
+            m_collisions[(int)DIRECTIONS.DOWN] = hit.collider.gameObject.name;
+            Debug.Log("Hit Down");
         }
 
-        Debug.Log("Colision: " + collisionDir);
+        if (Physics.Raycast(transform.position, up, out hit, 0.5f))
+        {
+            m_collisions[(int)DIRECTIONS.UP] = hit.collider.gameObject.name;
+            Debug.Log("Hit Up");
+        }
 
-        m_collisions[(int)collisionDir] = collision.gameObject.tag;
+        if (Physics.Raycast(transform.position, left, out hit, 0.5f))
+        {
+            m_collisions[(int)DIRECTIONS.LEFT] = hit.collider.gameObject.name;
+            Debug.Log("Hit Left");
+        }
+
+        if (Physics.Raycast(transform.position, -left, out hit, 0.5f))
+        {
+            m_collisions[(int)DIRECTIONS.RIGHT] = hit.collider.gameObject.name;
+            Debug.Log("Hit Right");
+        }
+
     }
 
     private void CheckState()

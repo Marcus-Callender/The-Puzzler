@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Jumping : BaseCharicterState
 {
+    float m_verticalVelocity = 0.0f;
+    float m_gravity = -15.0f;
+
     public override void Enter()
     {
-
+        m_verticalVelocity = 4.0f;
     }
 
     public override void Exit()
@@ -21,6 +24,9 @@ public class Jumping : BaseCharicterState
 
     public override CHARICTER_STATES Cycle()
     {
+        m_verticalVelocity += m_gravity * Time.deltaTime;
+        m_me.m_yVelocity = m_verticalVelocity;
+
         return CHARICTER_STATES.JUMP;
     }
 

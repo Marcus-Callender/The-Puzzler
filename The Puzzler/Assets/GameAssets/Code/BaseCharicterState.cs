@@ -4,33 +4,39 @@ using UnityEngine;
 
 public class BaseCharicterState : MonoBehaviour
 {
+    protected CharicterData m_me;
 
-    public void Enter()
+    public void Initialize(CharicterData me)
+    {
+        m_me = me;
+    }
+
+    public virtual void Enter()
     {
 
     }
 
-    public void Exit()
+    public virtual void Exit()
     {
 
     }
 
-    public CHARICTER_STATES Input()
-    {
-        return CHARICTER_STATES.STAND;
-    }
-
-    public CHARICTER_STATES Cycle()
-    {
-        return CHARICTER_STATES.STAND;
-    }
-
-    public CHARICTER_STATES Collision(DIRECTIONS direction, string tag)
+    public virtual CHARICTER_STATES GetInput()
     {
         return CHARICTER_STATES.STAND;
     }
 
-    public CHARICTER_STATES NotCollided(DIRECTIONS direction)
+    public virtual CHARICTER_STATES Cycle()
+    {
+        return CHARICTER_STATES.STAND;
+    }
+
+    public virtual CHARICTER_STATES Collision(DIRECTIONS direction, string tag)
+    {
+        return CHARICTER_STATES.STAND;
+    }
+
+    public virtual CHARICTER_STATES NotCollided(DIRECTIONS direction)
     {
         return CHARICTER_STATES.STAND;
     }

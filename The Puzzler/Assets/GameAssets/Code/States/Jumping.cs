@@ -2,15 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jumping : MonoBehaviour {
+public class Jumping : BaseCharicterState
+{
+    public override void Enter()
+    {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    public override void Exit()
+    {
+
+    }
+
+    public override CHARICTER_STATES GetInput()
+    {
+        return CHARICTER_STATES.JUMP;
+    }
+
+    public override CHARICTER_STATES Cycle()
+    {
+        return CHARICTER_STATES.JUMP;
+    }
+
+    public override CHARICTER_STATES Collision(DIRECTIONS direction, string tag)
+    {
+        if (direction == DIRECTIONS.DOWN)
+        {
+            return CHARICTER_STATES.STAND;
+        }
+
+        return CHARICTER_STATES.JUMP;
+    }
+
+    public override CHARICTER_STATES NotCollided(DIRECTIONS direction)
+    {
+        return CHARICTER_STATES.JUMP;
+    }
 }

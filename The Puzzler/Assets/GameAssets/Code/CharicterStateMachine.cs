@@ -15,15 +15,27 @@ public enum DIRECTIONS
 
 public class CharicterStateMachine : MonoBehaviour
 {
+    CharicterData m_me;
     CHARICTER_STATES m_currentState;
     CHARICTER_STATES m_newState;
-    BaseCharicterState[] m_states = new BaseCharicterState[(int) CHARICTER_STATES.NUMBER_OF_STATES];
+    BaseCharicterState[] m_states = new BaseCharicterState[(int)CHARICTER_STATES.NUMBER_OF_STATES];
     string[] m_collisions = new string[(int)DIRECTIONS.NUMBER_OF_DIRECTIONS];
 
     void Start()
     {
+        m_me = GetComponent<CharicterData>();
+
         m_currentState = CHARICTER_STATES.STAND;
         m_newState = CHARICTER_STATES.STAND;
+
+        m_states[(int)CHARICTER_STATES.STAND] = gameObject.AddComponent<Standing>();
+        m_states[(int)CHARICTER_STATES.WALK] = gameObject.AddComponent<Walking>();
+        m_states[(int)CHARICTER_STATES.JUMP] = gameObject.AddComponent<Jumping>();
+
+        for (int z = 0; z < (int)CHARICTER_STATES.NUMBER_OF_STATES; z++)
+        {
+            m_states[z].Initialize(m_me);
+        }
     }
 
     void Update()
@@ -42,7 +54,7 @@ public class CharicterStateMachine : MonoBehaviour
             }
         }
 
-        m_states[(int)m_currentState].Input();
+        m_states[(int)m_currentState].GetInput();
         CheckState();
 
         m_states[(int)m_currentState].Cycle();
@@ -57,7 +69,7 @@ public class CharicterStateMachine : MonoBehaviour
         }
     }
 
-    private void OnCollision(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         DIRECTIONS collisionDir = DIRECTIONS.NULL;
 
@@ -84,6 +96,8 @@ public class CharicterStateMachine : MonoBehaviour
             }
         }
 
+        Debug.Log("Colision: " + collisionDir);
+
         m_collisions[(int)collisionDir] = collision.gameObject.tag;
     }
 
@@ -91,6 +105,7 @@ public class CharicterStateMachine : MonoBehaviour
     {
         if (m_newState != m_currentState)
         {
+            Debug.Log(m_currentState + " -> " + m_newState);
             m_states[(int)m_currentState].Exit();
             m_states[(int)m_newState].Enter();
             m_currentState = m_newState;

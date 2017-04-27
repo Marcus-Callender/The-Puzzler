@@ -12,13 +12,13 @@ public enum CHARICTER_STATES
     NULL
 }
 
-public class CharicterData
+public class CharicterData : MonoBehaviour
 {
-    
+    public Rigidbody m_rigb;
 
     void Start()
     {
-
+        m_rigb = GetComponent<Rigidbody>();
     }
 
     void Update()

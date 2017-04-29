@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
+    PlayerData m_data;
+
     float jumpSpeed = 8.5f;
     float speed = 6.5f;
     float direction;
@@ -18,32 +20,35 @@ public class BasicMovement : MonoBehaviour
     float m_wallGravity = 3.5f;
     public bool m_useWallGravity = false;
 
-    public bool m_moveingBox = false;
-    public bool m_closeToBox = false;
-
     Rigidbody m_rigb;
     
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
+        m_data = GetComponent<PlayerData>();
     }
 
     void Update()
     {
         direction = Input.GetAxisRaw("Horizontal");
 
+        m_data.m_velocityX = direction * speed;
+
         if (m_useWallGravity)
         {
-            m_rigb.velocity = new Vector3(direction * speed, m_rigb.velocity.y - (m_wallGravity * Time.deltaTime));
+            //m_rigb.velocity = new Vector3(direction * speed, m_rigb.velocity.y - (m_wallGravity * Time.deltaTime));
+            m_data.m_velocityY -= (m_wallGravity * Time.deltaTime);
         }
         else
         {
-            m_rigb.velocity = new Vector3(direction * speed, m_rigb.velocity.y - (m_gravity * Time.deltaTime));
+            //m_rigb.velocity = new Vector3(direction * speed, m_rigb.velocity.y - (m_gravity * Time.deltaTime));
+            m_data.m_velocityY -= (m_gravity * Time.deltaTime);
         }
 
         if (Input.GetButtonDown("Jump") && DoubleJump)
         {
-            m_rigb.velocity = new Vector3(m_rigb.velocity.x, jumpSpeed);
+            //m_rigb.velocity = new Vector3(m_rigb.velocity.x, jumpSpeed);
+            m_data.m_velocityY = jumpSpeed;
 
             if (!grounded)
             {
@@ -52,7 +57,8 @@ public class BasicMovement : MonoBehaviour
         }
         else if (Input.GetButtonUp("Jump") & m_rigb.velocity.y > 0f)
         {
-            m_rigb.velocity = new Vector3(m_rigb.velocity.x, 0f);
+            //m_rigb.velocity = new Vector3(m_rigb.velocity.x, 0f);
+            m_data.m_velocityY = 0.0f;
         }
 
         if (slideRight & direction <= 0)
@@ -66,11 +72,11 @@ public class BasicMovement : MonoBehaviour
             slideLeft = false;
         }
 
-        m_moveingBox = false;
+        m_data.m_moveingBox = false;
 
-        if (grounded && Input.GetButton("MoveBox") && m_closeToBox)
+        if (grounded && Input.GetButton("MoveBox") && m_data.m_closeToBox)
         {
-            m_moveingBox = true;
+            m_data.m_moveingBox = true;
         }
     }
 
@@ -99,6 +105,26 @@ public class BasicMovement : MonoBehaviour
                     slideLeft = true;
                 }
             }
+        }
+
+        if (Mathf.Approximately(angle, 0.0f))
+        {
+            Debug.Log("Up");
+        }
+        else if (Mathf.Approximately(angle, 90.0f))
+        {
+            Debug.Log("Left");
+
+        }
+        else if (Mathf.Approximately(angle, 180.0f))
+        {
+            Debug.Log("Down");
+
+        }
+        else if (Mathf.Approximately(angle, 270.0f))
+        {
+            Debug.Log("Right");
+
         }
     }
 

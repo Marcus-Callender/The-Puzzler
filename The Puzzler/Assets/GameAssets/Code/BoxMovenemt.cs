@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxMovenemt : MonoBehaviour
 {
     Rigidbody m_rigb;
-    BasicMovement m_player;
+    PlayerData m_player;
     Rigidbody m_playerRigb;
 
     float m_playerInteractDistance = 1.2f;//0.8f;
@@ -13,7 +13,7 @@ public class BoxMovenemt : MonoBehaviour
     void Start()
     {
         m_rigb = gameObject.GetComponent<Rigidbody>();
-        m_player = FindObjectOfType<BasicMovement>();
+        m_player = FindObjectOfType<PlayerData>();
 
         m_playerRigb = m_player.gameObject.GetComponent<Rigidbody>();
 

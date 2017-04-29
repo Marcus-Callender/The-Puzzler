@@ -62,6 +62,10 @@ public class MoveBetweenPoints : ButtonInteraction
                 }
             }
         }
+        else
+        {
+            m_rigb.velocity = Vector3.zero;
+        }
     }
 
     public override void OnInteract()

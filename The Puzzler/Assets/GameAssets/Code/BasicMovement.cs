@@ -122,26 +122,6 @@ public class BasicMovement : MonoBehaviour
                 }
             }
         }
-
-        if (Mathf.Approximately(angle, 0.0f))
-        {
-            Debug.Log("Up");
-        }
-        else if (Mathf.Approximately(angle, 90.0f))
-        {
-            Debug.Log("Left");
-
-        }
-        else if (Mathf.Approximately(angle, 180.0f))
-        {
-            Debug.Log("Down");
-
-        }
-        else if (Mathf.Approximately(angle, 270.0f))
-        {
-            Debug.Log("Right");
-
-        }
     }
 
     void OnCollisionExit(Collision Other)

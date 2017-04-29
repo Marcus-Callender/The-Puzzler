@@ -19,6 +19,7 @@ public class BasicMovement : MonoBehaviour
     public bool m_useWallGravity = false;
 
     public bool m_moveingBox = false;
+    public bool m_closeToBox = false;
 
     Rigidbody m_rigb;
     
@@ -67,7 +68,7 @@ public class BasicMovement : MonoBehaviour
 
         m_moveingBox = false;
 
-        if (grounded && Input.GetButton("MoveBox"))
+        if (grounded && Input.GetButton("MoveBox") && m_closeToBox)
         {
             m_moveingBox = true;
         }

@@ -31,6 +31,8 @@ public class BoxMovenemt : MonoBehaviour
 
         if (Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x) <= m_playerInteractDistance)
         {
+            m_player.m_closeToBox = true;
+
             if (m_player.m_moveingBox)
             {
                 m_rigb.velocity = new Vector3(m_playerRigb.velocity.x, m_rigb.velocity.y);

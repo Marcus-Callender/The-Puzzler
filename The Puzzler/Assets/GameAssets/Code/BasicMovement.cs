@@ -19,6 +19,7 @@ public class BasicMovement : MonoBehaviour
     float m_gravity = 23.0f;
     float m_wallGravity = 3.5f;
     public bool m_useWallGravity = false;
+    float m_boxMovingSpeed = 1.5f;
 
     Rigidbody m_rigb;
     
@@ -32,7 +33,16 @@ public class BasicMovement : MonoBehaviour
     {
         direction = Input.GetAxisRaw("Horizontal");
 
-        m_data.m_velocityX = direction * speed;
+        if (m_data.m_moveingBox)
+        {
+            m_data.m_velocityX = direction * m_boxMovingSpeed;
+
+        }
+        else
+        {
+            m_data.m_velocityX = direction * speed;
+
+        }
 
         if (m_useWallGravity)
         {

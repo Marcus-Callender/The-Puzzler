@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 1992665774}
   m_Layer: 0
   m_Name: Charicter (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -692,6 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a79b6ea011c84d84395d71f4f483c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grounded: 1
   m_useWallGravity: 0
 --- !u!54 &1992665775
 Rigidbody:

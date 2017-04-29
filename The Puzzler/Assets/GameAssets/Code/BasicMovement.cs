@@ -18,6 +18,8 @@ public class BasicMovement : MonoBehaviour
     float m_wallGravity = 3.5f;
     public bool m_useWallGravity = false;
 
+    public bool m_moveingBox = false;
+
     Rigidbody m_rigb;
     
     void Start()
@@ -63,6 +65,12 @@ public class BasicMovement : MonoBehaviour
             slideLeft = false;
         }
 
+        m_moveingBox = false;
+
+        if (grounded && Input.GetButton("MoveBox"))
+        {
+            m_moveingBox = true;
+        }
     }
 
     void OnCollisionStay(Collision Other)

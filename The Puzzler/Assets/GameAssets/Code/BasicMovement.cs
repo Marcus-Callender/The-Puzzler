@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
-    public float jumpSpeed = 10;
-    public float speed = 5;
+    float jumpSpeed = 8.5f;
+    float speed = 6.5f;
     float direction;
     float angle;
     bool grounded = true;
@@ -14,9 +14,9 @@ public class BasicMovement : MonoBehaviour
     bool slideRight = false;
     
     float m_verticalVelocity = 0.0f;
-    float m_gravity = 9.81f;
+    float m_gravity = 23.0f;
     float m_wallGravity = 3.5f;
-    bool m_useWallGravity = false;
+    public bool m_useWallGravity = false;
 
     Rigidbody m_rigb;
     

@@ -8,7 +8,7 @@ public class BoxMovenemt : MonoBehaviour
     PlayerData m_player;
     Rigidbody m_playerRigb;
 
-    float m_playerInteractDistance = 1.2f;//0.8f;
+    float m_playerInteractDistance = 0.8f;
 
     void Start()
     {

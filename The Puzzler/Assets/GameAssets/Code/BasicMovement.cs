@@ -15,7 +15,6 @@ public class BasicMovement : MonoBehaviour
     bool slideLeft = false;
     bool slideRight = false;
     
-    float m_verticalVelocity = 0.0f;
     float m_gravity = 23.0f;
     float m_wallGravity = 3.5f;
     public bool m_useWallGravity = false;
@@ -87,6 +86,13 @@ public class BasicMovement : MonoBehaviour
         if (grounded && Input.GetButton("MoveBox") && m_data.m_closeToBox)
         {
             m_data.m_moveingBox = true;
+        }
+
+        m_data.m_pressingButton = false;
+
+        if (Input.GetButtonDown("PressButton"))
+        {
+            m_data.m_pressingButton = true;
         }
     }
 

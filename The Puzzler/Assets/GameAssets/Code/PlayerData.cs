@@ -10,6 +10,8 @@ public class PlayerData : MonoBehaviour
     public bool m_moveingBox = false;
     public bool m_closeToBox = false;
 
+    public bool m_pressingButton = false;
+
     private Rigidbody m_rigb;
 
     void Start()

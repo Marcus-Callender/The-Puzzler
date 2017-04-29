@@ -8,7 +8,7 @@ public class BasicMovement : MonoBehaviour
     float speed = 6.5f;
     float direction;
     float angle;
-    bool grounded = true;
+    public bool grounded = true;
     bool DoubleJump = true;
     bool slideLeft = false;
     bool slideRight = false;
@@ -63,11 +63,6 @@ public class BasicMovement : MonoBehaviour
             slideLeft = false;
         }
 
-    }
-
-    void OnCollisionEnter(Collision Other)
-    {
-        grounded = true;
     }
 
     void OnCollisionStay(Collision Other)

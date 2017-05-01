@@ -12,11 +12,22 @@ public class PlayerData : MonoBehaviour
 
     public bool m_pressingButton = false;
 
+    public bool m_playerDoubleJump = false;
+    public bool m_playerWallSlide = false;
+
     private Rigidbody m_rigb;
 
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
+
+        PersistantData data = PersistantData.m_instance;
+
+        if (data)
+        {
+            m_playerDoubleJump = data.m_playerDoubleJump;
+            m_playerWallSlide = data.m_playerWallSlide;
+        }
     }
     
     void Update()

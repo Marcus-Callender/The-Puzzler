@@ -45,19 +45,21 @@ public class BasicMovement : MonoBehaviour
 
         if (m_useWallGravity)
         {
-            //m_rigb.velocity = new Vector3(direction * speed, m_rigb.velocity.y - (m_wallGravity * Time.deltaTime));
             m_data.m_velocityY -= (m_wallGravity * Time.deltaTime);
         }
         else
         {
-            //m_rigb.velocity = new Vector3(direction * speed, m_rigb.velocity.y - (m_gravity * Time.deltaTime));
             m_data.m_velocityY -= (m_gravity * Time.deltaTime);
         }
 
         if (Input.GetButtonDown("Jump") && DoubleJump)
         {
-            //m_rigb.velocity = new Vector3(m_rigb.velocity.x, jumpSpeed);
             m_data.m_velocityY = jumpSpeed;
+
+            if (!m_data.m_playerDoubleJump)
+            {
+                DoubleJump = false;
+            }
 
             if (!grounded)
             {
@@ -66,7 +68,6 @@ public class BasicMovement : MonoBehaviour
         }
         else if (Input.GetButtonUp("Jump") & m_rigb.velocity.y > 0f)
         {
-            //m_rigb.velocity = new Vector3(m_rigb.velocity.x, 0f);
             m_data.m_velocityY = 0.0f;
         }
 
@@ -127,6 +128,13 @@ public class BasicMovement : MonoBehaviour
     void OnCollisionExit(Collision Other)
     {
         grounded = false;
+
+        // this is needed for disabling the double jump as OnCollisionStay will set doubleJump to true 
+        // after the player has jumped as they are still making contact with the ground
+        if (!m_data.m_playerDoubleJump)
+        {
+            DoubleJump = false;
+        }
 
         if (Mathf.Approximately(angle, 90f))
         {

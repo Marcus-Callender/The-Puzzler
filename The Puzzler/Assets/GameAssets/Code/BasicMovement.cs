@@ -103,13 +103,6 @@ public class BasicMovement : MonoBehaviour
         {
             grounded = true;
             DoubleJump = true;
-
-            Debug.Log("Bottom");
-        }
-
-        if (Mathf.Approximately(angle, 180.0f))
-        {
-            Debug.Log("Top");
         }
 
         if (m_data.m_playerWallSlide)

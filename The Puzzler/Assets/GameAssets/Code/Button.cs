@@ -21,21 +21,14 @@ public class Button : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("coliding");
-
         if (other.tag == "Player")
         {
-            Debug.Log("found player");
-
             PlayerData player = other.GetComponent<PlayerData>();
 
             if (player)
             {
-                Debug.Log("got data");
-
                 if (player.m_pressingButton)
                 {
-                    Debug.Log("pressed button");
                     m_activated = !m_activated;
 
                     if (m_activated)

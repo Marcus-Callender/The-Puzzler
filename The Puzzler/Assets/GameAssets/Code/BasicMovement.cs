@@ -6,7 +6,7 @@ public class BasicMovement : MonoBehaviour
 {
     PlayerData m_data;
 
-    float jumpSpeed = 8.5f;
+    float jumpSpeed = 9.5f;
     float speed = 6.5f;
     float direction;
     float angle;
@@ -14,14 +14,14 @@ public class BasicMovement : MonoBehaviour
     bool DoubleJump = true;
     bool slideLeft = false;
     bool slideRight = false;
-    
+
     float m_gravity = 23.0f;
     float m_wallGravity = 3.5f;
     public bool m_useWallGravity = false;
     float m_boxMovingSpeed = 1.5f;
 
     Rigidbody m_rigb;
-    
+
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
@@ -35,12 +35,10 @@ public class BasicMovement : MonoBehaviour
         if (m_data.m_moveingBox)
         {
             m_data.m_velocityX = direction * m_boxMovingSpeed;
-
         }
         else
         {
             m_data.m_velocityX = direction * speed;
-
         }
 
         if (m_useWallGravity)
@@ -99,27 +97,43 @@ public class BasicMovement : MonoBehaviour
 
     void OnCollisionStay(Collision Other)
     {
-        grounded = true;
-        DoubleJump = true;
-
         angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
 
-        if (Mathf.Approximately(angle, 90f))
+        if (Mathf.Approximately(angle, 0.0f))
         {
-            if (Other.transform.position.x > m_rigb.position.x)
+            grounded = true;
+            DoubleJump = true;
+
+            Debug.Log("Bottom");
+        }
+
+        if (Mathf.Approximately(angle, 180.0f))
+        {
+            Debug.Log("Top");
+        }
+
+        if (m_data.m_playerWallSlide)
+        {
+            if (Mathf.Approximately(angle, 90f))
             {
-                if (direction > 0)
+                grounded = true;
+                DoubleJump = true;
+
+                if (Other.transform.position.x > m_rigb.position.x)
                 {
-                    m_useWallGravity = true;
-                    slideRight = true;
+                    if (direction > 0)
+                    {
+                        m_useWallGravity = true;
+                        slideRight = true;
+                    }
                 }
-            }
-            else
-            {
-                if (direction < 0)
+                else
                 {
-                    m_useWallGravity = true;
-                    slideLeft = true;
+                    if (direction < 0)
+                    {
+                        m_useWallGravity = true;
+                        slideLeft = true;
+                    }
                 }
             }
         }

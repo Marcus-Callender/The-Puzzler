@@ -318,8 +318,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.2, z: 1}
-  m_Center: {x: 0, y: -0.41, z: 0}
+  m_Size: {x: 0.3, y: 0.20000002, z: 3.4207213}
+  m_Center: {x: 0, y: -0.40999997, z: -1.2103606}
 --- !u!33 &717759212
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e5b83adb141a408e126566d46630a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_point2: {x: 6.96, y: 1.19, z: 1}
+  m_point2: {x: 6.96, y: 1.19, z: 1.1}
   m_speed: 1
 --- !u!23 &1297611226
 MeshRenderer:

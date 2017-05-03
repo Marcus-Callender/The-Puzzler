@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class BasicMovement : MonoBehaviour
 {
     PlayerData m_data;
@@ -92,6 +94,12 @@ public class BasicMovement : MonoBehaviour
         if (Input.GetButtonDown("PressButton"))
         {
             m_data.m_pressingButton = true;
+        }
+
+        if (transform.position.y < -10.0f)
+        {
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
     }
 

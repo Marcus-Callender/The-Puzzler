@@ -15,10 +15,13 @@ public class PersistantData : MonoBehaviour
     {
         if (m_instance == null)
         {
+            DontDestroyOnLoad(this);
             m_instance = this;
         }
-
-        DontDestroyOnLoad(this);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     
     void Update()

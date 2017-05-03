@@ -8,7 +8,8 @@ public class BoxMovenemt : MonoBehaviour
     PlayerData m_player;
     Rigidbody m_playerRigb;
 
-    float m_playerInteractDistance = 0.8f;
+    float m_playerInteractDistance = 0.5f;
+    float m_playerBoxMinDistance = 0.0f;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class BoxMovenemt : MonoBehaviour
 
         m_playerRigb = m_player.gameObject.GetComponent<Rigidbody>();
 
-        m_playerInteractDistance += gameObject.transform.localScale.x * 0.5f;
+        m_playerBoxMinDistance = (gameObject.transform.localScale.x + m_player.gameObject.transform.localScale.x) * 0.5f;
     }
 
     void LateUpdate()
@@ -29,15 +30,17 @@ public class BoxMovenemt : MonoBehaviour
     {
         m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
 
-        if (Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x) <= m_playerInteractDistance)
+        float distance = Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x);
+
+        if (distance > m_playerBoxMinDistance && distance < m_playerBoxMinDistance + m_playerInteractDistance)
         {
             m_player.m_closeToBox = true;
+
+            Debug.Log("Player Close");
 
             if (m_player.m_moveingBox)
             {
                 m_rigb.velocity = new Vector3(m_playerRigb.velocity.x, m_rigb.velocity.y);
-
-                Debug.Log("Player Close");
             }
         }
 

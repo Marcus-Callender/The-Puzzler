@@ -101,6 +101,8 @@ public class BasicMovement : MonoBehaviour
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
+
+        m_data.m_closeToBox = false;
     }
 
     void OnCollisionStay(Collision Other)

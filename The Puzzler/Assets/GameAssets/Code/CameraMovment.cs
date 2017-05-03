@@ -33,12 +33,12 @@ public class CameraMovment : MonoBehaviour
         if (playerPos.x > gameObject.transform.position.x + 1.0f)
         {
             //gameObject.transform.position = new Vector3(gameObject.transform.position.x + m_cameraSpeed * Time.deltaTime, yPosLerp, -10.0f);
-            m_rigb.velocity = new Vector3(m_cameraSpeed, 0.0f);
+            m_rigb.velocity = new Vector3(m_player.m_velocityX, 0.0f);
         }
         else if (playerPos.x < gameObject.transform.position.x - 1.0f)
         {
             //gameObject.transform.position = new Vector3(gameObject.transform.position.x - m_cameraSpeed * Time.deltaTime, yPosLerp, -10.0f);
-            m_rigb.velocity = new Vector3(-m_cameraSpeed, 0.0f);
+            m_rigb.velocity = new Vector3(m_player.m_velocityX, 0.0f);
         }
 
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, yPosLerp, -10.0f);

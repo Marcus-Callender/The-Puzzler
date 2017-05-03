@@ -24,11 +24,6 @@ public class BoxMovenemt : MonoBehaviour
     void LateUpdate()
     {
         m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
-    }
-
-    private void FixedUpdate()
-    {
-        m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
 
         float distance = Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x);
 
@@ -43,6 +38,5 @@ public class BoxMovenemt : MonoBehaviour
                 m_rigb.velocity = new Vector3(m_playerRigb.velocity.x, m_rigb.velocity.y);
             }
         }
-
     }
 }

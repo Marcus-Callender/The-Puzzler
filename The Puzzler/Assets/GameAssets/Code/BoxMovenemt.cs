@@ -27,7 +27,7 @@ public class BoxMovenemt : MonoBehaviour
 
         float distance = Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x);
 
-        if (/*distance > m_playerBoxMinDistance &&*/ distance < m_playerBoxMinDistance + m_playerInteractDistance)
+        if (distance < m_playerBoxMinDistance + m_playerInteractDistance)
         {
             float top = m_rigb.transform.position.y + (m_rigb.transform.localScale.y * 0.5f);
             float bottom = m_rigb.transform.position.y - (m_rigb.transform.localScale.y * 0.5f);

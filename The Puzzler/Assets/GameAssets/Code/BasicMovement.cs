@@ -52,7 +52,7 @@ public class BasicMovement : MonoBehaviour
             m_data.m_velocityY -= (m_gravity * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown("Jump") && DoubleJump)
+        if (Input.GetButtonDown("Jump") && DoubleJump && !m_data.m_moveingBox)
         {
             m_data.m_velocityY = jumpSpeed;
 

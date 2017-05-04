@@ -24,6 +24,9 @@ public class BasicMovement : MonoBehaviour
 
     Rigidbody m_rigb;
 
+    // 0 = top, 1 = right, 2 = bottom, 3 = left
+    private bool[] m_contacts = new bool[4];
+
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
@@ -105,6 +108,14 @@ public class BasicMovement : MonoBehaviour
         m_data.m_closeToBox = false;
     }
 
+    void FixedUpdate()
+    {
+        for (int z = 0; z < 4; z++)
+        {
+            m_contacts[z] = false;
+        }
+    }
+
     void OnCollisionStay(Collision Other)
     {
         angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
@@ -113,6 +124,43 @@ public class BasicMovement : MonoBehaviour
         {
             grounded = true;
             DoubleJump = true;
+
+            m_contacts[2] = true;
+
+            if (m_contacts[0])
+            {
+                Debug.Log("Squished!");
+            }
+        }
+        else if (Mathf.Approximately(angle, 180.0f))
+        {
+            m_contacts[0] = true;
+
+            if (m_contacts[2])
+            {
+                Debug.Log("Squished!");
+            }
+        }
+        else if (Mathf.Approximately(angle, 90.0f))
+        {
+            if (Other.transform.position.x > m_rigb.position.x)
+            {
+                m_contacts[1] = true;
+
+                if (m_contacts[3])
+                {
+                    Debug.Log("Squished!");
+                }
+            }
+            else
+            {
+                m_contacts[3] = true;
+
+                if (m_contacts[1])
+                {
+                    Debug.Log("Squished!");
+                }
+            }
         }
 
         if (m_data.m_playerWallSlide)

@@ -15,7 +15,7 @@ public class MoveBetweenPoints : ButtonInteraction
 
     // when true this is moving from point 1 to point 2 and vice versa when false
     private bool m_goToPoint2 = false;
-    private bool m_moveing = false;
+    public bool m_moveing = false;
 
     private Vector3 m_speedSegments;
 

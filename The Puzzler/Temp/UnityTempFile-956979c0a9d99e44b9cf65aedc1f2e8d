@@ -91,6 +91,8 @@ Assets/GameAssets/Code/BasicMovement.cs
 Assets/GameAssets/Code/BoxMovenemt.cs
 Assets/GameAssets/Code/Button.cs
 Assets/GameAssets/Code/ButtonInteraction.cs
+Assets/GameAssets/Code/ButtonInteractions/MoveBetweenPoints.cs
+Assets/GameAssets/Code/ButtonInteractions/PauseMovement.cs
 Assets/GameAssets/Code/CameraMovment.cs
 Assets/GameAssets/Code/Legacy/BaseCharicterState.cs
 Assets/GameAssets/Code/Legacy/CharicterData.cs
@@ -98,8 +100,6 @@ Assets/GameAssets/Code/Legacy/CharicterStateMachine.cs
 Assets/GameAssets/Code/Legacy/States/Jumping.cs
 Assets/GameAssets/Code/Legacy/States/Standing.cs
 Assets/GameAssets/Code/Legacy/States/Walking.cs
-Assets/GameAssets/Code/MoveBetweenPoints.cs
-Assets/GameAssets/Code/PauseMovement.cs
 Assets/GameAssets/Code/PersistantData.cs
 Assets/GameAssets/Code/PlayerData.cs
 Assets/GameAssets/Code/ZoneTransition.cs

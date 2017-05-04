@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class ZoneTransition : MonoBehaviour
 {
     // 0 = red, 1 = green, 2 = blue
@@ -15,6 +17,8 @@ public class ZoneTransition : MonoBehaviour
     int m_transitionStage = 0;
 
     Material m_mat;
+
+    public string m_sceneToLoad;
 
     void Start()
     {
@@ -73,5 +77,13 @@ public class ZoneTransition : MonoBehaviour
         }
 
         m_mat.color = new Color(m_colours[0], m_colours[1], m_colours[2], 1.0f);
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            SceneManager.LoadScene(m_sceneToLoad, LoadSceneMode.Single);
+        }
     }
 }

@@ -94,7 +94,6 @@ Assets/GameAssets/Code/ButtonInteraction.cs
 Assets/GameAssets/Code/ButtonInteractions/MoveBetweenPoints.cs
 Assets/GameAssets/Code/ButtonInteractions/PauseMovement.cs
 Assets/GameAssets/Code/CameraMovment.cs
-Assets/GameAssets/Code/CrushBlock.cs
 Assets/GameAssets/Code/Legacy/BaseCharicterState.cs
 Assets/GameAssets/Code/Legacy/CharicterData.cs
 Assets/GameAssets/Code/Legacy/CharicterStateMachine.cs

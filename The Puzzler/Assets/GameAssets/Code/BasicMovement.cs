@@ -22,6 +22,8 @@ public class BasicMovement : MonoBehaviour
     public bool m_useWallGravity = false;
     float m_boxMovingSpeed = 1.5f;
 
+    private bool m_squished = false;
+
     Rigidbody m_rigb;
 
     // 0 = top, 1 = right, 2 = bottom, 3 = left
@@ -35,77 +37,84 @@ public class BasicMovement : MonoBehaviour
 
     void Update()
     {
-        direction = Input.GetAxisRaw("Horizontal");
-
-        if (m_data.m_moveingBox)
+        if (!m_squished)
         {
-            m_data.m_velocityX = direction * m_boxMovingSpeed;
+            direction = Input.GetAxisRaw("Horizontal");
+
+            if (m_data.m_moveingBox)
+            {
+                m_data.m_velocityX = direction * m_boxMovingSpeed;
+            }
+            else
+            {
+                m_data.m_velocityX = direction * speed;
+            }
+
+            if (m_useWallGravity)
+            {
+                m_data.m_velocityY -= (m_wallGravity * Time.deltaTime);
+            }
+            else
+            {
+                m_data.m_velocityY -= (m_gravity * Time.deltaTime);
+            }
+
+            if (Input.GetButtonDown("Jump") && DoubleJump && !m_data.m_moveingBox)
+            {
+                m_data.m_velocityY = jumpSpeed;
+
+                if (!m_data.m_playerDoubleJump)
+                {
+                    DoubleJump = false;
+                }
+
+                if (!grounded)
+                {
+                    DoubleJump = false;
+                }
+            }
+            else if (Input.GetButtonUp("Jump") & m_rigb.velocity.y > 0f)
+            {
+                m_data.m_velocityY = 0.0f;
+            }
+
+            if (slideRight & direction <= 0)
+            {
+                m_useWallGravity = false;
+                slideRight = false;
+            }
+            else if (slideLeft & direction >= 0)
+            {
+                m_useWallGravity = false;
+                slideLeft = false;
+            }
+
+            m_data.m_moveingBox = false;
+
+            if (grounded && Input.GetButton("MoveBox") && m_data.m_closeToBox)
+            {
+                m_data.m_moveingBox = true;
+            }
+
+            m_data.m_pressingButton = false;
+
+            if (Input.GetButtonDown("PressButton"))
+            {
+                m_data.m_pressingButton = true;
+            }
+
+            if (transform.position.y < -10.0f)
+            {
+                int scene = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            }
+
+            m_data.m_closeToBox = false;
         }
         else
         {
-            m_data.m_velocityX = direction * speed;
+            m_rigb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
         }
-
-        if (m_useWallGravity)
-        {
-            m_data.m_velocityY -= (m_wallGravity * Time.deltaTime);
-        }
-        else
-        {
-            m_data.m_velocityY -= (m_gravity * Time.deltaTime);
-        }
-
-        if (Input.GetButtonDown("Jump") && DoubleJump && !m_data.m_moveingBox)
-        {
-            m_data.m_velocityY = jumpSpeed;
-
-            if (!m_data.m_playerDoubleJump)
-            {
-                DoubleJump = false;
-            }
-
-            if (!grounded)
-            {
-                DoubleJump = false;
-            }
-        }
-        else if (Input.GetButtonUp("Jump") & m_rigb.velocity.y > 0f)
-        {
-            m_data.m_velocityY = 0.0f;
-        }
-
-        if (slideRight & direction <= 0)
-        {
-            m_useWallGravity = false;
-            slideRight = false;
-        }
-        else if (slideLeft & direction >= 0)
-        {
-            m_useWallGravity = false;
-            slideLeft = false;
-        }
-
-        m_data.m_moveingBox = false;
-
-        if (grounded && Input.GetButton("MoveBox") && m_data.m_closeToBox)
-        {
-            m_data.m_moveingBox = true;
-        }
-
-        m_data.m_pressingButton = false;
-
-        if (Input.GetButtonDown("PressButton"))
-        {
-            m_data.m_pressingButton = true;
-        }
-
-        if (transform.position.y < -10.0f)
-        {
-            int scene = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        }
-
-        m_data.m_closeToBox = false;
     }
 
     void FixedUpdate()
@@ -129,6 +138,7 @@ public class BasicMovement : MonoBehaviour
 
             if (m_contacts[0])
             {
+                m_squished = true;
                 Debug.Log("Squished!");
             }
         }
@@ -138,6 +148,7 @@ public class BasicMovement : MonoBehaviour
 
             if (m_contacts[2])
             {
+                m_squished = true;
                 Debug.Log("Squished!");
             }
         }
@@ -149,6 +160,7 @@ public class BasicMovement : MonoBehaviour
 
                 if (m_contacts[3])
                 {
+                    m_squished = true;
                     Debug.Log("Squished!");
                 }
             }
@@ -158,6 +170,7 @@ public class BasicMovement : MonoBehaviour
 
                 if (m_contacts[1])
                 {
+                    m_squished = true;
                     Debug.Log("Squished!");
                 }
             }

@@ -40,7 +40,7 @@ public class BoxMovenemt : MonoBehaviour
 
                 if (m_player.m_moveingBox)
                 {
-                    m_rigb.velocity = new Vector3(m_playerRigb.velocity.x, m_rigb.velocity.y);
+                    m_rigb.velocity = new Vector3(m_player.m_velocityX, m_rigb.velocity.y);
                 }
 
             }

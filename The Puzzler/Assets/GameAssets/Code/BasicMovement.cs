@@ -22,6 +22,8 @@ public class BasicMovement : MonoBehaviour
     public bool m_useWallGravity = false;
     float m_boxMovingSpeed = 1.5f;
 
+    float m_ladderClimbSpeed = 4.0f;
+
     Rigidbody m_rigb;
 
     // 0 = top, 1 = right, 2 = bottom, 3 = left
@@ -49,6 +51,10 @@ public class BasicMovement : MonoBehaviour
         if (m_useWallGravity)
         {
             m_data.m_velocityY -= (m_wallGravity * Time.deltaTime);
+        }
+        if (m_data.m_onLadder)
+        {
+            m_data.m_velocityY = m_ladderClimbSpeed * Input.GetAxisRaw("Vertical");
         }
         else
         {
@@ -110,6 +116,8 @@ public class BasicMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        m_data.m_onLadder = false;
+
         for (int z = 0; z < 4; z++)
         {
             m_contacts[z] = false;
@@ -217,6 +225,14 @@ public class BasicMovement : MonoBehaviour
                 m_useWallGravity = false;
                 slideLeft = false;
             }
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Ladder")
+        {
+            m_data.m_onLadder = true;
         }
     }
 }

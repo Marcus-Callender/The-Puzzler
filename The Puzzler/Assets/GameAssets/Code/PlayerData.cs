@@ -16,6 +16,7 @@ public class PlayerData : MonoBehaviour
     public bool m_playerWallSlide = false;
 
     public bool m_squished = false;
+    public bool m_onLadder = false;
 
     private Rigidbody m_rigb;
 

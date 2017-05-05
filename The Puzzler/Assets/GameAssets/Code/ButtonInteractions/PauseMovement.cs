@@ -10,6 +10,7 @@ public class PauseMovement : ButtonInteraction
     public Vector3 m_point2;
 
     public float m_speed = 1.0f;
+    public float m_speedReverse = 1.0f;
     private float m_distance = 0.0f;
     private float m_traveledDistance = 0.0f;
 
@@ -52,9 +53,9 @@ public class PauseMovement : ButtonInteraction
             }
             else
             {
-                m_rigb.velocity = m_speedSegments * -m_speed;
+                m_rigb.velocity = m_speedSegments * -m_speedReverse;
 
-                m_traveledDistance -= m_speed * Time.deltaTime;
+                m_traveledDistance -= m_speedReverse * Time.deltaTime;
 
                 if (m_traveledDistance <= 0.0f)
                 {

@@ -15,6 +15,8 @@ public class PlayerData : MonoBehaviour
     public bool m_playerDoubleJump = false;
     public bool m_playerWallSlide = false;
 
+    public bool m_squished = false;
+
     private Rigidbody m_rigb;
 
     void Start()
@@ -37,6 +39,13 @@ public class PlayerData : MonoBehaviour
 
     void FixedUpdate()
     {
-        m_rigb.velocity = new Vector3(m_velocityX, m_velocityY);
+        if (!m_squished)
+        {
+            m_rigb.velocity = new Vector3(m_velocityX, m_velocityY);
+        }
+        else
+        {
+            m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
+        }
     }
 }

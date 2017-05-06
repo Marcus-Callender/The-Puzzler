@@ -4,16 +4,15 @@ using UnityEngine;
 
 using UnityEngine.SceneManagement;
 
-public class BasicMovement : MonoBehaviour
+public class BasicState : MonoBehaviour
 {
-    PlayerData m_data;
+    protected PlayerData m_data;
+    protected Rigidbody m_rigb;
 
     float jumpSpeed = 9.5f;
     float speed = 6.5f;
     float direction;
     float angle;
-    public bool grounded = true;
-    bool DoubleJump = true;
     bool slideLeft = false;
     bool slideRight = false;
 
@@ -24,29 +23,54 @@ public class BasicMovement : MonoBehaviour
 
     float m_ladderClimbSpeed = 4.0f;
 
-    Rigidbody m_rigb;
 
-    // 0 = top, 1 = right, 2 = bottom, 3 = left
-    private bool[] m_contacts = new bool[4];
-
-    void Start()
+    public void Initialize(Rigidbody rigb, PlayerData data)
     {
-        m_rigb = GetComponent<Rigidbody>();
-        m_data = GetComponent<PlayerData>();
+        m_rigb = rigb;
+        m_data = data;
+    }
+
+    public virtual E_PLAYER_STATES Cycle()
+    {
+        ApplyGravity(m_gravity);
+
+        return E_PLAYER_STATES.NULL;
+    }
+
+    public virtual E_PLAYER_STATES NoGround()
+    {
+        return E_PLAYER_STATES.NULL;
+    }
+
+    public virtual E_PLAYER_STATES Colide(E_DIRECTIONS _dir, string _tag)
+    {
+        return E_PLAYER_STATES.NULL;
+    }
+
+    protected void MoveHorzontal(float _speed)
+    {
+        direction = Input.GetAxisRaw("Horizontal");
+
+        m_data.m_velocityX = direction * _speed;
+    }
+
+    protected void ApplyGravity(float _force)
+    {
+        m_data.m_velocityY -= (_force * Time.deltaTime);
     }
 
     void Update()
     {
-        direction = Input.GetAxisRaw("Horizontal");
+        //direction = Input.GetAxisRaw("Horizontal");
 
-        if (m_data.m_moveingBox)
-        {
-            m_data.m_velocityX = direction * m_boxMovingSpeed;
-        }
-        else
-        {
-            m_data.m_velocityX = direction * speed;
-        }
+        //if (m_data.m_moveingBox)
+        //{
+        //    MoveHorzontal(m_boxMovingSpeed);
+        //}
+        //else
+        //{
+        //    MoveHorzontal(speed);
+        //}
 
         if (m_useWallGravity)
         {
@@ -60,25 +84,7 @@ public class BasicMovement : MonoBehaviour
         {
             m_data.m_velocityY -= (m_gravity * Time.deltaTime);
         }
-
-        if (Input.GetButtonDown("Jump") && DoubleJump && !m_data.m_moveingBox)
-        {
-            m_data.m_velocityY = jumpSpeed;
-
-            if (!m_data.m_playerDoubleJump)
-            {
-                DoubleJump = false;
-            }
-
-            if (!grounded)
-            {
-                DoubleJump = false;
-            }
-        }
-        else if (Input.GetButtonUp("Jump") & m_rigb.velocity.y > 0f)
-        {
-            m_data.m_velocityY = 0.0f;
-        }
+        
 
         if (slideRight & direction <= 0)
         {
@@ -93,10 +99,10 @@ public class BasicMovement : MonoBehaviour
 
         m_data.m_moveingBox = false;
 
-        if (grounded && Input.GetButton("MoveBox") && m_data.m_closeToBox)
-        {
-            m_data.m_moveingBox = true;
-        }
+        //if (grounded && Input.GetButton("MoveBox") && m_data.m_closeToBox)
+        //{
+        //    m_data.m_moveingBox = true;
+        //}
 
         m_data.m_pressingButton = false;
 
@@ -114,30 +120,18 @@ public class BasicMovement : MonoBehaviour
         m_data.m_closeToBox = false;
     }
 
-    void FixedUpdate()
-    {
-        m_data.m_onLadder = false;
-
-        for (int z = 0; z < 4; z++)
-        {
-            m_contacts[z] = false;
-        }
-    }
-
     void OnCollisionStay(Collision Other)
     {
         angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
 
         if (Mathf.Approximately(angle, 0.0f))
         {
-            grounded = true;
-            DoubleJump = true;
+            //grounded = true;
+            //DoubleJump = true;
 
-            m_contacts[2] = true;
+            m_data.m_contacts[2] = true;
 
-            Debug.Log("Bottom");
-
-            if (m_contacts[0])
+            if (m_data.m_contacts[0])
             {
                 m_data.m_squished = true;
                 Debug.Log("Squished!");
@@ -145,11 +139,9 @@ public class BasicMovement : MonoBehaviour
         }
         else if (Mathf.Approximately(angle, 180.0f))
         {
-            m_contacts[0] = true;
+            m_data.m_contacts[0] = true;
 
-            Debug.Log("Top");
-
-            if (m_contacts[2])
+            if (m_data.m_contacts[2])
             {
                 m_data.m_squished = true;
                 Debug.Log("Squished!");
@@ -159,9 +151,9 @@ public class BasicMovement : MonoBehaviour
         {
             if (Other.transform.position.x > m_rigb.position.x)
             {
-                m_contacts[1] = true;
+                m_data.m_contacts[1] = true;
 
-                if (m_contacts[3])
+                if (m_data.m_contacts[3])
                 {
                     m_data.m_squished = true;
                     Debug.Log("Squished!");
@@ -169,9 +161,9 @@ public class BasicMovement : MonoBehaviour
             }
             else
             {
-                m_contacts[3] = true;
+                m_data.m_contacts[3] = true;
 
-                if (m_contacts[1])
+                if (m_data.m_contacts[1])
                 {
                     m_data.m_squished = true;
                     Debug.Log("Squished!");
@@ -183,8 +175,8 @@ public class BasicMovement : MonoBehaviour
         {
             if (Mathf.Approximately(angle, 90f))
             {
-                grounded = true;
-                DoubleJump = true;
+                //grounded = true;
+                //DoubleJump = true;
 
                 if (Other.transform.position.x > m_rigb.position.x)
                 {
@@ -205,39 +197,4 @@ public class BasicMovement : MonoBehaviour
             }
         }
     }
-
-    void OnCollisionExit(Collision Other)
-    {
-        grounded = false;
-
-        // this is needed for disabling the double jump as OnCollisionStay will set doubleJump to true 
-        // after the player has jumped as they are still making contact with the ground
-        if (!m_data.m_playerDoubleJump)
-        {
-            DoubleJump = false;
-        }
-
-        if (Mathf.Approximately(angle, 90f))
-        {
-            if (slideRight & Other.transform.position.x > m_rigb.position.x)
-            {
-                m_useWallGravity = false;
-                slideRight = false;
-            }
-            else if (slideLeft & Other.transform.position.x < m_rigb.position.x)
-            {
-                m_useWallGravity = false;
-                slideLeft = false;
-            }
-        }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Ladder")
-        {
-            m_data.m_onLadder = true;
-        }
-    }
 }
-

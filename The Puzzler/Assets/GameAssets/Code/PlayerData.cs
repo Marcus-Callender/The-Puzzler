@@ -18,6 +18,9 @@ public class PlayerData : MonoBehaviour
     public bool m_squished = false;
     public bool m_onLadder = false;
 
+    // 0 = top, 1 = right, 2 = bottom, 3 = left
+    public bool[] m_contacts = new bool[4];
+
     private Rigidbody m_rigb;
 
     void Start()

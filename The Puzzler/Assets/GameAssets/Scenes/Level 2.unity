@@ -702,7 +702,7 @@ Prefab:
     - target: {fileID: 114939473411163802, guid: 5baf780fcb33e7b46908e731a29fa1bb,
         type: 2}
       propertyPath: m_sceneToLoad
-      value: Start
+      value: Level 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5baf780fcb33e7b46908e731a29fa1bb, type: 2}

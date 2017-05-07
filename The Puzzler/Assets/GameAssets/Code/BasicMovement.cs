@@ -52,11 +52,11 @@ public class BasicMovement : MonoBehaviour
         {
             m_data.m_velocityY -= (m_wallGravity * Time.deltaTime);
         }
-        if (m_data.m_onLadder)
+        else if (m_data.m_onLadder)
         {
             m_data.m_velocityY = m_ladderClimbSpeed * Input.GetAxisRaw("Vertical");
         }
-        else
+        else if (!grounded)
         {
             m_data.m_velocityY -= (m_gravity * Time.deltaTime);
         }

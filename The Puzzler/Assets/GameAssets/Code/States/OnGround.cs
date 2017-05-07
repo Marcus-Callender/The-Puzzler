@@ -5,7 +5,7 @@ using UnityEngine;
 public class OnGround : BasicState
 {
     private float m_speed = 6.5f;
-    private float m_jumpSpeed = 9.5f;
+    private float m_jumpSpeed = 17.5f;
 
     void Start()
     {

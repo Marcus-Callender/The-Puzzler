@@ -30,6 +30,16 @@ public class BasicState : MonoBehaviour
         m_data = data;
     }
 
+    public virtual void Enter()
+    {
+
+    }
+
+    public virtual void Exit()
+    {
+
+    }
+
     public virtual E_PLAYER_STATES Cycle()
     {
         ApplyGravity(m_gravity);
@@ -56,7 +66,11 @@ public class BasicState : MonoBehaviour
 
     protected void ApplyGravity(float _force)
     {
+        float previous = m_data.m_velocityY;
+
         m_data.m_velocityY -= (_force * Time.deltaTime);
+
+        Debug.Log("Gravity: " + previous + " -> " + m_data.m_velocityY);
     }
 
     void Update()

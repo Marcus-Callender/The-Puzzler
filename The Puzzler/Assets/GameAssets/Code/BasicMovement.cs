@@ -133,6 +133,11 @@ public class BasicMovement : MonoBehaviour
             grounded = true;
             DoubleJump = true;
 
+            /*if (Other.gameObject.tag != "Box")
+            {
+                m_contacts[2] = true;
+            }*/
+
             m_contacts[2] = true;
 
             if (m_contacts[0])
@@ -143,6 +148,11 @@ public class BasicMovement : MonoBehaviour
         }
         else if (Mathf.Approximately(angle, 180.0f))
         {
+            /*if (Other.gameObject.tag != "Box")
+            {
+                m_contacts[0] = true;
+            }*/
+
             m_contacts[0] = true;
 
             if (m_contacts[2])
@@ -153,8 +163,16 @@ public class BasicMovement : MonoBehaviour
         }
         else if (Mathf.Approximately(angle, 90.0f))
         {
-            if (Other.transform.position.x > m_rigb.position.x)
+            angle = Vector2.Angle(Other.contacts[0].normal, Vector2.left);
+
+            // colision from right side
+            if (Mathf.Approximately(angle, 0.0f))
             {
+                /*if (Other.gameObject.tag != "Box")
+                {
+                    m_contacts[1] = true;
+                }*/
+
                 m_contacts[1] = true;
 
                 if (m_contacts[3])
@@ -163,8 +181,14 @@ public class BasicMovement : MonoBehaviour
                     Debug.Log("Squished!");
                 }
             }
-            else
+            // collision from left side
+            else if (Mathf.Approximately(angle, 80.0f))
             {
+                /*if (Other.gameObject.tag != "Box")
+                {
+                    m_contacts[3] = true;
+                }*/
+
                 m_contacts[3] = true;
 
                 if (m_contacts[1])

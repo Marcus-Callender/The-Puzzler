@@ -47,10 +47,10 @@ public class MoveBetweenPoints : ButtonInteraction
 
                 m_traveledDistance += m_speed * Time.deltaTime;
 
-                if (m_traveledDistance >= m_distance)
+                /*if (m_traveledDistance >= m_distance)
                 {
                     m_moveing = false;
-                }
+                }*/
             }
             else
             {
@@ -58,10 +58,15 @@ public class MoveBetweenPoints : ButtonInteraction
 
                 m_traveledDistance -= m_speed * Time.deltaTime;
 
-                if (m_traveledDistance <= 0.0f)
+                /*if (m_traveledDistance <= 0.0f)
                 {
                     m_moveing = false;
-                }
+                }*/
+            }
+
+            if (HasRechedDestination())
+            {
+                m_moveing = false;
             }
         }
         else

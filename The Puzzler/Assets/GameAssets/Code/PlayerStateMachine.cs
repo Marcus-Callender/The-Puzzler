@@ -51,13 +51,17 @@ public class PlayerStateMachine : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log("Update");
         m_newState = m_states[(int)m_currentState].Cycle();
         CheckState();
     }
 
     void FixedUpdate()
     {
+        m_newState = m_states[(int)m_currentState].PhysCycle();
+        CheckState();
 
+        //Debug.Log("Physics");
 
         m_data.m_onLadder = false;
 
@@ -90,6 +94,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     void OnCollisionStay(Collision Other)
     {
+        //Debug.Log("Collision");
+
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
 
         E_DIRECTIONS dir = E_DIRECTIONS.TOP;
@@ -162,8 +168,8 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState)
         {
-            m_states[(int) m_currentState].Exit();
-            m_states[(int) m_newState].Enter();
+            m_states[(int)m_currentState].Exit();
+            m_states[(int)m_newState].Enter();
 
             Debug.Log(m_currentState + " -> " + m_newState);
 

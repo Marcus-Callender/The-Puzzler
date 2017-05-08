@@ -42,8 +42,11 @@ public class BasicState : MonoBehaviour
 
     public virtual E_PLAYER_STATES Cycle()
     {
-        ApplyGravity(m_gravity);
+        return E_PLAYER_STATES.NULL;
+    }
 
+    public virtual E_PLAYER_STATES PhysCycle()
+    {
         return E_PLAYER_STATES.NULL;
     }
 
@@ -70,7 +73,7 @@ public class BasicState : MonoBehaviour
 
         m_data.m_velocityY -= (_force * Time.deltaTime);
 
-        Debug.Log("Gravity: " + previous + " -> " + m_data.m_velocityY);
+        //Debug.Log("Gravity: " + previous + " -> " + m_data.m_velocityY);
     }
 
     void Update()
@@ -86,7 +89,7 @@ public class BasicState : MonoBehaviour
         //    MoveHorzontal(speed);
         //}
 
-        if (m_useWallGravity)
+        /*if (m_useWallGravity)
         {
             m_data.m_velocityY -= (m_wallGravity * Time.deltaTime);
         }
@@ -97,10 +100,10 @@ public class BasicState : MonoBehaviour
         else
         {
             m_data.m_velocityY -= (m_gravity * Time.deltaTime);
-        }
+        }*/
         
 
-        if (slideRight & direction <= 0)
+        /*if (slideRight & direction <= 0)
         {
             m_useWallGravity = false;
             slideRight = false;
@@ -109,9 +112,9 @@ public class BasicState : MonoBehaviour
         {
             m_useWallGravity = false;
             slideLeft = false;
-        }
+        }*/
 
-        m_data.m_moveingBox = false;
+        /*m_data.m_moveingBox = false;*/
 
         //if (grounded && Input.GetButton("MoveBox") && m_data.m_closeToBox)
         //{
@@ -131,7 +134,7 @@ public class BasicState : MonoBehaviour
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
 
-        m_data.m_closeToBox = false;
+        /*m_data.m_closeToBox = false;*/
     }
 
     void OnCollisionStay(Collision Other)
@@ -185,7 +188,7 @@ public class BasicState : MonoBehaviour
             }
         }
 
-        if (m_data.m_playerWallSlide)
+        /*if (m_data.m_playerWallSlide)
         {
             if (Mathf.Approximately(angle, 90f))
             {
@@ -209,6 +212,6 @@ public class BasicState : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 }

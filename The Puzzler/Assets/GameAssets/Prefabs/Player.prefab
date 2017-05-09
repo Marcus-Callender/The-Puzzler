@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9a53be1b04ab5b34492dd1f4c7566b18, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a79b6ea011c84d84395d71f4f483c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grounded: 1
+  grounded: 0
   m_useWallGravity: 0
 --- !u!114 &114193062352114762
 MonoBehaviour:
@@ -142,3 +142,5 @@ MonoBehaviour:
   m_pressingButton: 0
   m_playerDoubleJump: 0
   m_playerWallSlide: 0
+  m_squished: 0
+  m_onLadder: 0

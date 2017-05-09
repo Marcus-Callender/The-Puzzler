@@ -39,16 +39,18 @@ public class MoveBetweenPoints : ButtonInteraction
     {
         if (m_moveing)
         {
+            m_rigb.isKinematic = false;
+
             if (m_goToPoint2)
             {
                 m_rigb.velocity = m_speedSegments * m_speed;
 
                 m_traveledDistance += m_speed * Time.deltaTime;
 
-                if (m_traveledDistance >= m_distance)
+                /*if (m_traveledDistance >= m_distance)
                 {
                     m_moveing = false;
-                }
+                }*/
             }
             else
             {
@@ -56,15 +58,21 @@ public class MoveBetweenPoints : ButtonInteraction
 
                 m_traveledDistance -= m_speed * Time.deltaTime;
 
-                if (m_traveledDistance <= 0.0f)
+                /*if (m_traveledDistance <= 0.0f)
                 {
                     m_moveing = false;
-                }
+                }*/
+            }
+
+            if (HasRechedDestination())
+            {
+                m_moveing = false;
             }
         }
         else
         {
             m_rigb.velocity = Vector3.zero;
+            m_rigb.isKinematic = true;
         }
     }
 
@@ -74,5 +82,30 @@ public class MoveBetweenPoints : ButtonInteraction
 
         m_goToPoint2 = !m_goToPoint2;
         m_moveing = true;
+    }
+
+    private bool HasRechedDestination()
+    {
+        if (m_goToPoint2)
+        {
+            if (GetDistanceBetweenPoints(gameObject.transform.position, m_point1) >= GetDistanceBetweenPoints(m_point1, m_point2))
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (GetDistanceBetweenPoints(gameObject.transform.position, m_point2) >= GetDistanceBetweenPoints(m_point1, m_point2))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private float GetDistanceBetweenPoints(Vector3 point1, Vector3 point2)
+    {
+        return Mathf.Abs(point1.x - point2.x) + Mathf.Abs(point1.y - point2.y) + Mathf.Abs(point1.z - point2.z);
     }
 }

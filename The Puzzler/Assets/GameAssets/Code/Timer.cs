@@ -6,14 +6,14 @@ public class Timer
 {
     public bool m_completed = false;
     private bool m_reversed = false;
-    private bool m_playing = false;
+    public bool m_playing = false;
 
     public float m_time = 0.0f;
     private float m_timeCount = 0.0f;
     
     void Update()
     {
-        if (!m_completed)
+        if (!m_completed && m_playing)
         {
             if (!m_reversed)
             {

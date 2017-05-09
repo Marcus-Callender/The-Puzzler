@@ -27,4 +27,16 @@ public class OnGround : BasicState
 
         return E_PLAYER_STATES.ON_GROUND;
     }
+
+    public override E_PLAYER_STATES LeaveColision(string _tag)
+    {
+        //if (_dir == E_DIRECTIONS.BOTTOM)
+        //{
+        //    return E_PLAYER_STATES.IN_AIR;
+        //}
+        //
+        //return E_PLAYER_STATES.ON_GROUND;
+
+        return E_PLAYER_STATES.IN_AIR;
+    }
 }

@@ -2,26 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.SceneManagement;
-
 public class BasicState : MonoBehaviour
 {
     protected PlayerData m_data;
     protected Rigidbody m_rigb;
-
-    float jumpSpeed = 9.5f;
-    float speed = 6.5f;
+    
     float direction;
     float angle;
-    bool slideLeft = false;
-    bool slideRight = false;
-
-    float m_gravity = 23.0f;
-    float m_wallGravity = 3.5f;
     public bool m_useWallGravity = false;
-    float m_boxMovingSpeed = 1.5f;
-
-    float m_ladderClimbSpeed = 4.0f;
 
 
     public void Initialize(Rigidbody rigb, PlayerData data)
@@ -32,7 +20,7 @@ public class BasicState : MonoBehaviour
 
     public virtual void Enter()
     {
-
+        
     }
 
     public virtual void Exit()
@@ -60,6 +48,11 @@ public class BasicState : MonoBehaviour
         return E_PLAYER_STATES.NULL;
     }
 
+    public virtual E_PLAYER_STATES LeaveColision(string _tag)
+    {
+        return E_PLAYER_STATES.NULL;
+    }
+
     protected void MoveHorzontal(float _speed)
     {
         direction = Input.GetAxisRaw("Horizontal");
@@ -69,57 +62,11 @@ public class BasicState : MonoBehaviour
 
     protected void ApplyGravity(float _force)
     {
-        float previous = m_data.m_velocityY;
-
         m_data.m_velocityY -= (_force * Time.deltaTime);
-
-        //Debug.Log("Gravity: " + previous + " -> " + m_data.m_velocityY);
     }
 
     void Update()
     {
-        //direction = Input.GetAxisRaw("Horizontal");
-
-        //if (m_data.m_moveingBox)
-        //{
-        //    MoveHorzontal(m_boxMovingSpeed);
-        //}
-        //else
-        //{
-        //    MoveHorzontal(speed);
-        //}
-
-        /*if (m_useWallGravity)
-        {
-            m_data.m_velocityY -= (m_wallGravity * Time.deltaTime);
-        }
-        if (m_data.m_onLadder)
-        {
-            m_data.m_velocityY = m_ladderClimbSpeed * Input.GetAxisRaw("Vertical");
-        }
-        else
-        {
-            m_data.m_velocityY -= (m_gravity * Time.deltaTime);
-        }*/
-        
-
-        /*if (slideRight & direction <= 0)
-        {
-            m_useWallGravity = false;
-            slideRight = false;
-        }
-        else if (slideLeft & direction >= 0)
-        {
-            m_useWallGravity = false;
-            slideLeft = false;
-        }*/
-
-        /*m_data.m_moveingBox = false;*/
-
-        //if (grounded && Input.GetButton("MoveBox") && m_data.m_closeToBox)
-        //{
-        //    m_data.m_moveingBox = true;
-        //}
 
         m_data.m_pressingButton = false;
 
@@ -127,14 +74,7 @@ public class BasicState : MonoBehaviour
         {
             m_data.m_pressingButton = true;
         }
-
-        if (transform.position.y < -10.0f)
-        {
-            int scene = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        }
-
-        /*m_data.m_closeToBox = false;*/
+        
     }
 
     void OnCollisionStay(Collision Other)
@@ -143,9 +83,6 @@ public class BasicState : MonoBehaviour
 
         if (Mathf.Approximately(angle, 0.0f))
         {
-            //grounded = true;
-            //DoubleJump = true;
-
             m_data.m_contacts[2] = true;
 
             if (m_data.m_contacts[0])
@@ -187,31 +124,5 @@ public class BasicState : MonoBehaviour
                 }
             }
         }
-
-        /*if (m_data.m_playerWallSlide)
-        {
-            if (Mathf.Approximately(angle, 90f))
-            {
-                //grounded = true;
-                //DoubleJump = true;
-
-                if (Other.transform.position.x > m_rigb.position.x)
-                {
-                    if (direction > 0)
-                    {
-                        m_useWallGravity = true;
-                        slideRight = true;
-                    }
-                }
-                else
-                {
-                    if (direction < 0)
-                    {
-                        m_useWallGravity = true;
-                        slideLeft = true;
-                    }
-                }
-            }
-        }*/
     }
 }

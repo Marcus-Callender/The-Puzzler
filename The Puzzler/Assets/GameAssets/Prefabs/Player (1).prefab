@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114797739213057702}
   - component: {fileID: 114691278494419066}
   m_Layer: 0
-  m_Name: Player (FSM)
+  m_Name: Player (1)
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public enum E_PLAYER_STATES
 {
     ON_GROUND,
@@ -36,7 +38,7 @@ public class PlayerStateMachine : MonoBehaviour
     E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
     public bool grounded = true;
-    bool DoubleJump = true;
+    //bool DoubleJump = true;
 
     void Start()
     {
@@ -51,9 +53,16 @@ public class PlayerStateMachine : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log("Update");
+        if (transform.position.y < -10.0f)
+        {
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        }
+        
         m_newState = m_states[(int)m_currentState].Cycle();
         CheckState();
+
+        m_data.m_closeToBox = false;
     }
 
     void FixedUpdate()
@@ -74,9 +83,9 @@ public class PlayerStateMachine : MonoBehaviour
     private void CheckGroundColl()
     {
         var up = transform.TransformDirection(Vector3.up);
-        //note the use of var as the type. This is because in c# you 
+        // note: the use of var as the type. This is because in c# you 
         // can have lamda functions which open up the use of untyped variables
-        //these variables can only live INSIDE a function. 
+        // these variables can only live INSIDE a function. 
         RaycastHit hit;
         Debug.DrawRay(transform.position, -up * 2, Color.green);
 
@@ -127,6 +136,38 @@ public class PlayerStateMachine : MonoBehaviour
         }
 
         m_newState = m_states[(int)m_currentState].Colide(dir, Other.gameObject.tag);
+        CheckState();
+    }
+
+    void OnCollisionExit(Collision Other)
+    {
+        /*float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
+
+        E_DIRECTIONS dir = E_DIRECTIONS.TOP;
+
+        if (Mathf.Approximately(angle, 0.0f))
+        {
+            dir = E_DIRECTIONS.BOTTOM;
+        }
+        else if (Mathf.Approximately(angle, 180.0f))
+        {
+            dir = E_DIRECTIONS.TOP;
+        }
+        else if (Mathf.Approximately(angle, 90.0f))
+        {
+            angle = Vector2.Angle(Other.contacts[0].normal, Vector2.left);
+
+            if (Mathf.Approximately(angle, 0.0f))
+            {
+                dir = E_DIRECTIONS.RIGHT;
+            }
+            else if (Mathf.Approximately(angle, 180.0f))
+            {
+                dir = E_DIRECTIONS.LEFT;
+            }
+        }*/
+
+        m_newState = m_states[(int)m_currentState].LeaveColision(Other.gameObject.tag);
         CheckState();
     }
 

@@ -6,29 +6,29 @@ public class Timer
 {
     public bool m_completed = false;
     private bool m_reversed = false;
-    private bool m_playing = false;
+    public bool m_playing = false;
 
     public float m_time = 0.0f;
     private float m_timeCount = 0.0f;
     
-    void Update()
+    public void Cycle()
     {
-        if (!m_completed)
+        if (!m_completed && m_playing)
         {
             if (!m_reversed)
             {
-                m_time += Time.deltaTime;
+                m_timeCount += Time.deltaTime;
 
-                if (m_time >= m_timeCount)
+                if (m_time <= m_timeCount)
                 {
                     m_completed = true;
                 }
             }
             if (m_reversed)
             {
-                m_time -= Time.deltaTime;
+                m_timeCount -= Time.deltaTime;
 
-                if (m_time <= 0.0f)
+                if (m_timeCount <= 0.0f)
                 {
                     m_completed = true;
                 }

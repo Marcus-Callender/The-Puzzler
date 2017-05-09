@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CameraMovment : MonoBehaviour
 {
-    private Rigidbody m_rigb;
+    //private Rigidbody m_rigb;
 
     // I am using the player data as this will be useful for when I implement zooming the camera out as a button
     private PlayerData m_player;
 
-    float m_cameraSpeed = 6.5f;
+    //float m_cameraSpeed = 6.5f;
 
     void Start()
     {
-        m_rigb = GetComponent<Rigidbody>();
+        //m_rigb = GetComponent<Rigidbody>();
 
         m_player = FindObjectOfType<PlayerData>();
 

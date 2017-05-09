@@ -140,6 +140,8 @@ public class BasicMovement : MonoBehaviour
 
             m_contacts[2] = true;
 
+            Debug.Log("Bottom");
+
             if (m_contacts[0])
             {
                 m_data.m_squished = true;
@@ -154,6 +156,8 @@ public class BasicMovement : MonoBehaviour
             }*/
 
             m_contacts[0] = true;
+
+            Debug.Log("Top");
 
             if (m_contacts[2])
             {

@@ -18,7 +18,13 @@ public class OnGround : BasicState
 
         m_data.m_velocityY = -9.81f;
 
-        if (Input.GetButtonDown("Jump"))
+        if (m_data.m_closeToBox && Input.GetButton("MoveBox"))
+        {
+            m_data.m_moveingBox = true;
+            return E_PLAYER_STATES.MOVEING_BLOCK;
+        }
+
+        if (Input.GetButtonDown("Jump") && !m_data.m_moveingBox)
         {
             m_data.m_velocityY = m_jumpSpeed;
 
@@ -30,13 +36,6 @@ public class OnGround : BasicState
 
     public override E_PLAYER_STATES LeaveColision(string _tag)
     {
-        //if (_dir == E_DIRECTIONS.BOTTOM)
-        //{
-        //    return E_PLAYER_STATES.IN_AIR;
-        //}
-        //
-        //return E_PLAYER_STATES.ON_GROUND;
-
         return E_PLAYER_STATES.IN_AIR;
     }
 }

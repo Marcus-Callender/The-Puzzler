@@ -30,7 +30,7 @@ public enum E_DIRECTIONS
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    BasicState[] m_states = new BasicState[2];
+    BasicState[] m_states = new BasicState[3];
     PlayerData m_data;
     Rigidbody m_rigb;
 
@@ -44,11 +44,14 @@ public class PlayerStateMachine : MonoBehaviour
     {
         m_states[0] = gameObject.AddComponent<OnGround>();
         m_states[1] = gameObject.AddComponent<InAIr>();
+        m_states[2] = gameObject.AddComponent<MoveingBox>();
+
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
 
         m_states[0].Initialize(m_rigb, m_data);
         m_states[1].Initialize(m_rigb, m_data);
+        m_states[2].Initialize(m_rigb, m_data);
     }
 
     void Update()
@@ -58,7 +61,9 @@ public class PlayerStateMachine : MonoBehaviour
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
-        
+
+        m_data.m_pressingButton = Input.GetButtonDown("PressButton");
+
         m_newState = m_states[(int)m_currentState].Cycle();
         CheckState();
 
@@ -69,9 +74,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         m_newState = m_states[(int)m_currentState].PhysCycle();
         CheckState();
-
-        //Debug.Log("Physics");
-
+        
         m_data.m_onLadder = false;
 
         for (int z = 0; z < 4; z++)
@@ -103,8 +106,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     void OnCollisionStay(Collision Other)
     {
-        //Debug.Log("Collision");
-
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
 
         E_DIRECTIONS dir = E_DIRECTIONS.TOP;
@@ -113,11 +114,23 @@ public class PlayerStateMachine : MonoBehaviour
         {
             m_data.m_contacts[2] = true;
             dir = E_DIRECTIONS.BOTTOM;
+
+            if (m_data.m_contacts[0])
+            {
+                m_data.m_squished = true;
+                Debug.Log("Squished!");
+            }
         }
         else if (Mathf.Approximately(angle, 180.0f))
         {
             m_data.m_contacts[0] = true;
             dir = E_DIRECTIONS.TOP;
+
+            if (m_data.m_contacts[2])
+            {
+                m_data.m_squished = true;
+                Debug.Log("Squished!");
+            }
         }
         else if (Mathf.Approximately(angle, 90.0f))
         {
@@ -127,11 +140,23 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 m_data.m_contacts[1] = true;
                 dir = E_DIRECTIONS.RIGHT;
+
+                if (m_data.m_contacts[3])
+                {
+                    m_data.m_squished = true;
+                    Debug.Log("Squished!");
+                }
             }
             else if (Mathf.Approximately(angle, 180.0f))
             {
                 m_data.m_contacts[3] = true;
                 dir = E_DIRECTIONS.LEFT;
+
+                if (m_data.m_contacts[1])
+                {
+                    m_data.m_squished = true;
+                    Debug.Log("Squished!");
+                }
             }
         }
 
@@ -141,32 +166,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     void OnCollisionExit(Collision Other)
     {
-        /*float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
-
-        E_DIRECTIONS dir = E_DIRECTIONS.TOP;
-
-        if (Mathf.Approximately(angle, 0.0f))
-        {
-            dir = E_DIRECTIONS.BOTTOM;
-        }
-        else if (Mathf.Approximately(angle, 180.0f))
-        {
-            dir = E_DIRECTIONS.TOP;
-        }
-        else if (Mathf.Approximately(angle, 90.0f))
-        {
-            angle = Vector2.Angle(Other.contacts[0].normal, Vector2.left);
-
-            if (Mathf.Approximately(angle, 0.0f))
-            {
-                dir = E_DIRECTIONS.RIGHT;
-            }
-            else if (Mathf.Approximately(angle, 180.0f))
-            {
-                dir = E_DIRECTIONS.LEFT;
-            }
-        }*/
-
         m_newState = m_states[(int)m_currentState].LeaveColision(Other.gameObject.tag);
         CheckState();
     }

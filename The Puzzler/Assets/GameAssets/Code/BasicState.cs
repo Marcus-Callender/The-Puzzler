@@ -53,6 +53,16 @@ public class BasicState : MonoBehaviour
         return E_PLAYER_STATES.NULL;
     }
 
+    public virtual E_PLAYER_STATES InTrigger(string _tag)
+    {
+        return E_PLAYER_STATES.NULL;
+    }
+
+    public virtual E_PLAYER_STATES LeaveTrigger(string _tag)
+    {
+        return E_PLAYER_STATES.NULL;
+    }
+
     protected void MoveHorzontal(float _speed)
     {
         direction = Input.GetAxisRaw("Horizontal");

@@ -38,4 +38,14 @@ public class OnGround : BasicState
     {
         return E_PLAYER_STATES.IN_AIR;
     }
+
+    public override E_PLAYER_STATES InTrigger(string _tag)
+    {
+        if (_tag == "Ladder")
+        {
+            return E_PLAYER_STATES.USEING_LADDER;
+        }
+
+        return E_PLAYER_STATES.ON_GROUND;
+    }
 }

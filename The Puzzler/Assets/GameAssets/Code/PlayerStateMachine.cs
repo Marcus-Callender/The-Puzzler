@@ -30,7 +30,7 @@ public enum E_DIRECTIONS
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    BasicState[] m_states = new BasicState[3];
+    BasicState[] m_states = new BasicState[4];
     PlayerData m_data;
     Rigidbody m_rigb;
 
@@ -45,6 +45,7 @@ public class PlayerStateMachine : MonoBehaviour
         m_states[0] = gameObject.AddComponent<OnGround>();
         m_states[1] = gameObject.AddComponent<InAIr>();
         m_states[2] = gameObject.AddComponent<MoveingBox>();
+        m_states[3] = gameObject.AddComponent<ClimbingLadder>();
 
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
@@ -52,6 +53,7 @@ public class PlayerStateMachine : MonoBehaviour
         m_states[0].Initialize(m_rigb, m_data);
         m_states[1].Initialize(m_rigb, m_data);
         m_states[2].Initialize(m_rigb, m_data);
+        m_states[3].Initialize(m_rigb, m_data);
     }
 
     void Update()
@@ -202,6 +204,15 @@ public class PlayerStateMachine : MonoBehaviour
         {
             m_data.m_onLadder = true;
         }
+
+        m_newState = m_states[(int)m_currentState].InTrigger(other.gameObject.tag);
+        CheckState();
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        m_newState = m_states[(int)m_currentState].LeaveTrigger(other.gameObject.tag);
+        CheckState();
     }
 
     void CheckState()

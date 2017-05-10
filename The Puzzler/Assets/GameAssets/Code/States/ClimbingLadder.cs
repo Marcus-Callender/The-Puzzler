@@ -16,7 +16,7 @@ public class ClimbingLadder : BasicState
     public override E_PLAYER_STATES Cycle()
     {
         MoveHorzontal(m_speed);
-
+        
         m_data.m_velocityY = Input.GetAxisRaw("Vertical") * m_climbSpeed;
 
         if (Input.GetButtonDown("Jump"))

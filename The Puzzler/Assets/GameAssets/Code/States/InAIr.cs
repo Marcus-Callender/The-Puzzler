@@ -68,7 +68,7 @@ public class InAIr : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
-        if (_tag == "Ladder")
+        if (_tag == "Ladder" && !Input.GetButton("Jump"))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

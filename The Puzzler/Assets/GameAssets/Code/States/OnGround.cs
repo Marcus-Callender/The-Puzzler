@@ -41,7 +41,7 @@ public class OnGround : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
-        if (_tag == "Ladder")
+        if (_tag == "Ladder" && Input.GetAxisRaw("Vertical") > 0.5f)
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

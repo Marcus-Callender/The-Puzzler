@@ -5,7 +5,7 @@ using UnityEngine;
 public class Timer
 {
     public bool m_completed = false;
-    private bool m_reversed = false;
+    public bool m_reversed = false;
     public bool m_playing = false;
 
     public float m_time = 0.0f;

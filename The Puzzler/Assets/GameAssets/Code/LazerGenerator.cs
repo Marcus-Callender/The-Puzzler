@@ -27,6 +27,12 @@ public class LazerGenerator : MonoBehaviour
         m_line = GetComponent<LineRenderer>();
         m_line.material = new Material(Shader.Find("Sprites/Default"));
 
+        if (hit.collider.gameObject.tag == "Player")
+        {
+            PlayerData data = hit.collider.gameObject.GetComponent<PlayerData>();
+            data.m_squished = true;
+        }
+
         Vector3[] positions = new Vector3[2];
         positions[0] = gameObject.transform.position;
         positions[1] = gameObject.transform.position;
@@ -40,7 +46,8 @@ public class LazerGenerator : MonoBehaviour
         float alpha = 1.0f;
         Gradient gradient = new Gradient();
 
-        Color col = new Color(0.5f + (m_timer.GetLerp() * 0.5f), 0.0f, 0.0f);
+        //Color col = new Color(0.5f + (m_timer.GetLerp() * 0.5f), 0.0f, 0.0f);
+        Color col = new Color(1.0f, m_timer.GetLerp(), m_timer.GetLerp());
 
         gradient.SetKeys(
             new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) },

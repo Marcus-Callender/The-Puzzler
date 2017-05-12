@@ -76,7 +76,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         m_newState = m_states[(int)m_currentState].PhysCycle();
         CheckState();
-        
+
         m_data.m_onLadder = false;
 
         for (int z = 0; z < 4; z++)
@@ -114,24 +114,32 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (Mathf.Approximately(angle, 0.0f))
         {
-            m_data.m_contacts[2] = true;
             dir = E_DIRECTIONS.BOTTOM;
 
-            if (m_data.m_contacts[0])
+            if (Other.gameObject.tag != "Box")
             {
-                m_data.m_squished = true;
-                Debug.Log("Squished!");
+                m_data.m_contacts[2] = true;
+
+                if (m_data.m_contacts[0])
+                {
+                    m_data.m_squished = true;
+                    Debug.Log("Squished!");
+                }
             }
         }
         else if (Mathf.Approximately(angle, 180.0f))
         {
-            m_data.m_contacts[0] = true;
             dir = E_DIRECTIONS.TOP;
 
-            if (m_data.m_contacts[2])
+            if (Other.gameObject.tag != "Box")
             {
-                m_data.m_squished = true;
-                Debug.Log("Squished!");
+                m_data.m_contacts[0] = true;
+
+                if (m_data.m_contacts[2])
+                {
+                    m_data.m_squished = true;
+                    Debug.Log("Squished!");
+                }
             }
         }
         else if (Mathf.Approximately(angle, 90.0f))
@@ -140,24 +148,51 @@ public class PlayerStateMachine : MonoBehaviour
 
             if (Mathf.Approximately(angle, 0.0f))
             {
-                m_data.m_contacts[1] = true;
                 dir = E_DIRECTIONS.RIGHT;
 
-                if (m_data.m_contacts[3])
+                if (Other.gameObject.tag != "Box")
                 {
-                    m_data.m_squished = true;
-                    Debug.Log("Squished!");
+                    m_data.m_contacts[1] = true;
+
+                    if (m_data.m_contacts[3])
+                    {
+                        m_data.m_squished = true;
+                        Debug.Log("Squished!");
+                    }
+                }
+                else
+                {
+                    if (m_data.m_contacts[3])
+                    {
+                        Other.gameObject.GetComponent<BoxMovenemt>().m_requestStop = true;
+
+                        Debug.Log("Stop Requested");
+                    }
                 }
             }
             else if (Mathf.Approximately(angle, 180.0f))
             {
-                m_data.m_contacts[3] = true;
                 dir = E_DIRECTIONS.LEFT;
 
-                if (m_data.m_contacts[1])
+                if (Other.gameObject.tag != "Box")
                 {
-                    m_data.m_squished = true;
-                    Debug.Log("Squished!");
+                    m_data.m_contacts[3] = true;
+
+                    if (m_data.m_contacts[1])
+                    {
+                        m_data.m_squished = true;
+                        Debug.Log("Squished!");
+                    }
+                }
+                else
+                {
+                    if (m_data.m_contacts[1])
+                    {
+                        Other.gameObject.GetComponent<BoxMovenemt>().m_requestStop = true;
+
+                        Debug.Log("Stop Requested");
+                    }
+
                 }
             }
         }

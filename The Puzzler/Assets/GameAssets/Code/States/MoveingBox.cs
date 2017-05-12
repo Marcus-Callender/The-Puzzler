@@ -9,8 +9,6 @@ public class MoveingBox : BasicState
 
     private float m_dragSpeed = 3.5f;
 
-    bool m_debug = false;
-
     public override void Enter()
     {
         m_pauseTimer = new Timer();
@@ -22,8 +20,6 @@ public class MoveingBox : BasicState
         m_pauseTimer.Play();
 
         m_data.m_velocityX = 0.0f;
-
-        m_debug = false;
     }
 
     public override void Exit()
@@ -46,44 +42,21 @@ public class MoveingBox : BasicState
 
         if (!m_pauseTimer.m_completed)
         {
-            if (m_debug)
-            {
-                Debug.Log("Flag 1");
-            }
-
             m_pauseTimer.Cycle();
         }
         else if (!m_dragingTimer.m_playing)
         {
-            if (m_debug)
-            {
-                Debug.Log("Flag 2");
-            }
-
             m_dragingTimer.Play();
         }
         else if (!m_dragingTimer.m_completed)
         {
-            if (m_debug)
-            {
-                Debug.Log("Flag 3");
-            }
-
             m_dragingTimer.Cycle();
             MoveHorzontal(m_dragSpeed);
-            Debug.Log("Dragging speed: " + m_data.m_velocityX);
         }
         else
         {
-            if (m_debug)
-            {
-                Debug.Log("Flag 4");
-            }
-
             m_data.m_velocityX = 0.0f;
             m_pauseTimer.Play();
-
-            m_debug = true;
 
             m_dragingTimer.m_playing = false;
         }

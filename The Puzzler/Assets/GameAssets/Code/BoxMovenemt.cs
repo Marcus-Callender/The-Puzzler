@@ -11,6 +11,8 @@ public class BoxMovenemt : MonoBehaviour
     float m_playerInteractDistance = 0.5f;
     float m_playerBoxMinDistance = 0.0f;
 
+    public bool m_requestStop = false;
+
     void Start()
     {
         m_rigb = gameObject.GetComponent<Rigidbody>();
@@ -27,7 +29,12 @@ public class BoxMovenemt : MonoBehaviour
 
         float distance = Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x);
 
-        if (distance < m_playerBoxMinDistance + m_playerInteractDistance)
+        if (m_requestStop)
+        {
+            Debug.Log("STOP");
+        }
+
+        if (distance < m_playerBoxMinDistance + m_playerInteractDistance && !m_requestStop)
         {
             float top = m_rigb.transform.position.y + (m_rigb.transform.localScale.y * 0.5f);
             float bottom = m_rigb.transform.position.y - (m_rigb.transform.localScale.y * 0.5f);
@@ -45,5 +52,7 @@ public class BoxMovenemt : MonoBehaviour
 
             }
         }
+
+        m_requestStop = false;
     }
 }

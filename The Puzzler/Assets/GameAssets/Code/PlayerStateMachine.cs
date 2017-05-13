@@ -197,6 +197,11 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
 
+        if (Mathf.Approximately(Vector2.Angle(Other.contacts[0].normal, Vector2.left), 90.0f) && Mathf.Approximately(Vector2.Angle(Other.contacts[0].normal, Vector2.up), 90.0f))
+        {
+            m_data.m_squished = true;
+        }
+
         m_newState = m_states[(int)m_currentState].Colide(dir, Other.gameObject.tag);
         CheckState();
     }

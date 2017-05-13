@@ -49,7 +49,7 @@ public class LazerGenerator : ButtonInteraction
             Gradient gradient = new Gradient();
 
             //Color col = new Color(0.5f + (m_timer.GetLerp() * 0.5f), 0.0f, 0.0f);
-            Color col = new Color(1.0f, m_timer.GetLerp(), m_timer.GetLerp());
+            Color col = new Color(1.0f, m_timer.GetLerp(), m_timer.GetLerp(), 0.5f);
 
             gradient.SetKeys(
                 new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) },
@@ -64,6 +64,20 @@ public class LazerGenerator : ButtonInteraction
             {
                 m_timer.Play(!m_timer.m_reversed);
             }
+        }
+        else
+        {
+            Gradient gradient = new Gradient();
+
+            //Color col = new Color(0.5f + (m_timer.GetLerp() * 0.5f), 0.0f, 0.0f);
+            Color col = new Color(1.0f, m_timer.GetLerp(), m_timer.GetLerp(), 0.0f);
+
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(0.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) }
+                );
+
+            m_line.colorGradient = gradient;
         }
     }
 }

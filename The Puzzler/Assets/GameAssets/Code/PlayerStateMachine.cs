@@ -187,7 +187,7 @@ public class PlayerStateMachine : MonoBehaviour
                         Debug.Log("Squished!");
                     }
 
-                    if (m_data.m_InteractableContacts[1])
+                    if (m_data.m_InteractableContacts[3])
                     {
                         m_linkedBox.m_requestStop = true;
                         Debug.Log("Stop Requested");
@@ -221,7 +221,7 @@ public class PlayerStateMachine : MonoBehaviour
                         Debug.Log("Squished!");
                     }
 
-                    if (m_data.m_InteractableContacts[3])
+                    if (m_data.m_InteractableContacts[1])
                     {
                         m_linkedBox.m_requestStop = true;
                         Debug.Log("Stop Requested");

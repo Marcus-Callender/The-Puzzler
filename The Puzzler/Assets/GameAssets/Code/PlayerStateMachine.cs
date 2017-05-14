@@ -84,6 +84,7 @@ public class PlayerStateMachine : MonoBehaviour
         for (int z = 0; z < 4; z++)
         {
             m_data.m_contacts[z] = false;
+            m_data.m_InteractableContacts[z] = false;
         }
     }
 
@@ -185,12 +186,22 @@ public class PlayerStateMachine : MonoBehaviour
                         m_data.m_squished = true;
                         Debug.Log("Squished!");
                     }
+
+                    if (m_data.m_InteractableContacts[1])
+                    {
+                        m_linkedBox.m_requestStop = true;
+                        Debug.Log("Stop Requested");
+                    }
                 }
                 else
                 {
+                    m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
+
+                    m_data.m_InteractableContacts[1] = true;
+
                     if (m_data.m_contacts[3])
                     {
-                        Other.gameObject.GetComponent<BoxMovenemt>().m_requestStop = true;
+                        m_linkedBox.m_requestStop = true;
 
                         Debug.Log("Stop Requested");
                     }
@@ -209,12 +220,22 @@ public class PlayerStateMachine : MonoBehaviour
                         m_data.m_squished = true;
                         Debug.Log("Squished!");
                     }
+
+                    if (m_data.m_InteractableContacts[3])
+                    {
+                        m_linkedBox.m_requestStop = true;
+                        Debug.Log("Stop Requested");
+                    }
                 }
                 else
                 {
+                    m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
+
+                    m_data.m_InteractableContacts[3] = true;
+
                     if (m_data.m_contacts[1])
                     {
-                        Other.gameObject.GetComponent<BoxMovenemt>().m_requestStop = true;
+                        m_linkedBox.m_requestStop = true;
 
                         Debug.Log("Stop Requested");
                     }

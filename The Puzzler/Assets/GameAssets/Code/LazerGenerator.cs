@@ -54,6 +54,7 @@ public class LazerGenerator : ButtonInteraction
             gradient.SetKeys(
                 new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) },
                 new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+                //new GradientAlphaKey[] { new GradientAlphaKey(0.5f, 0.5f), new GradientAlphaKey(0.5f, 0.5f) }
                 );
 
             m_line.colorGradient = gradient;

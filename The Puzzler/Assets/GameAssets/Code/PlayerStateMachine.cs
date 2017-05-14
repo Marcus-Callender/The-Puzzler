@@ -108,6 +108,25 @@ public class PlayerStateMachine : MonoBehaviour
 
     void OnCollisionStay(Collision Other)
     {
+        /*Debug.Log("Up: " + Vector3.Angle(Other.contacts[0].normal, Vector3.up));
+        Debug.Log("Left: " + Vector3.Angle(Other.contacts[0].normal, Vector3.left));
+        Debug.Log("Forward: " + Vector3.Angle(Other.contacts[0].normal, Vector3.forward));
+
+        Debug.Log("Contacts: " + Other.contacts.Length);
+
+        for (int z = 0; z < Other.contacts.Length; z++)
+        {
+            Debug.DrawRay(Other.contacts[z].point, Other.contacts[z].normal, Color.white);
+
+            if (z < Other.contacts.Length - 1)
+            {
+                if (Other.contacts[z].normal != Other.contacts[z + 1].normal)
+                {
+                    Debug.Log("DIFF IN NORMALS");
+                }
+            }
+        }*/
+
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
 
         E_DIRECTIONS dir = E_DIRECTIONS.TOP;

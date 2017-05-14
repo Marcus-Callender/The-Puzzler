@@ -53,6 +53,29 @@ public class BoxMovenemt : MonoBehaviour
             }
         }
 
+        if (m_player.m_moveingBox && Mathf.Abs(gameObject.transform.position.x - m_player.transform.position.x) < ((gameObject.transform.localScale.x + m_player.transform.localScale.x) * 0.5f))
+        {
+            Debug.Log("Overlapping");
+
+            if (gameObject.transform.position.x > m_rigb.transform.position.x && m_player.m_velocityX > 0.0f)
+            {
+                Vector3 newPos = gameObject.transform.position;
+
+                newPos.x = m_player.transform.position.x - ((gameObject.transform.localScale.x + m_player.transform.localScale.x) * 0.5f);
+
+                gameObject.transform.position = newPos;
+            }
+            else if (gameObject.transform.position.x < m_rigb.transform.position.x && m_player.m_velocityX < 0.0f)
+            {
+                Vector3 newPos = gameObject.transform.position;
+
+                newPos.x = m_player.transform.position.x + ((gameObject.transform.localScale.x + m_player.transform.localScale.x) * 0.5f);
+
+                gameObject.transform.position = newPos;
+            }
+        }
+
+
         m_requestStop = false;
     }
 }

@@ -20,6 +20,10 @@ public class PlayerData : MonoBehaviour
 
     // 0 = top, 1 = right, 2 = bottom, 3 = left
     public bool[] m_contacts = new bool[4];
+    public bool[] m_InteractableContacts = new bool[4];
+
+    // left = false, right = true
+    public bool m_left_right = true;
 
     private Rigidbody m_rigb;
 

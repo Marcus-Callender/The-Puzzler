@@ -37,7 +37,9 @@ public class PlayerStateMachine : MonoBehaviour
     E_PLAYER_STATES m_currentState = E_PLAYER_STATES.IN_AIR;
     E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
-    public bool grounded = true;
+    public BoxMovenemt m_linkedBox = null;
+
+    //public bool grounded = true;
     //bool DoubleJump = true;
 
     void Start()
@@ -135,6 +137,11 @@ public class PlayerStateMachine : MonoBehaviour
         {
             dir = E_DIRECTIONS.BOTTOM;
 
+            if (Other.gameObject.GetComponent<Rigidbody>())
+            {
+                m_data.m_velocityX += Other.gameObject.GetComponent<Rigidbody>().velocity.x;
+            }
+
             if (Other.gameObject.tag != "Box")
             {
                 m_data.m_contacts[2] = true;
@@ -211,7 +218,6 @@ public class PlayerStateMachine : MonoBehaviour
 
                         Debug.Log("Stop Requested");
                     }
-
                 }
             }
         }

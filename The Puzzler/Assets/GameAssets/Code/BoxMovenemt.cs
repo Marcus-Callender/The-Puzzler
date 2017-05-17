@@ -57,7 +57,7 @@ public class BoxMovenemt : MonoBehaviour
         {
             Debug.Log("Overlapping");
 
-            if (gameObject.transform.position.x > m_rigb.transform.position.x && m_player.m_velocityX > 0.0f)
+            if (gameObject.transform.position.x > m_rigb.transform.position.x /*&& m_player.m_velocityX > 0.0f*/)
             {
                 Vector3 newPos = gameObject.transform.position;
 
@@ -65,7 +65,7 @@ public class BoxMovenemt : MonoBehaviour
 
                 gameObject.transform.position = newPos;
             }
-            else if (gameObject.transform.position.x < m_rigb.transform.position.x && m_player.m_velocityX < 0.0f)
+            else if (gameObject.transform.position.x < m_rigb.transform.position.x /*&& m_player.m_velocityX < 0.0f*/)
             {
                 Vector3 newPos = gameObject.transform.position;
 

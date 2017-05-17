@@ -27,11 +27,15 @@ public class PlayerData : MonoBehaviour
 
     private Rigidbody m_rigb;
 
+    public Animator m_anim;
+
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
 
         PersistantData data = PersistantData.m_instance;
+
+        m_anim = GetComponent<Animator>();
 
         if (data)
         {
@@ -42,23 +46,27 @@ public class PlayerData : MonoBehaviour
     
     void Update()
     {
-        if (m_left_right && m_velocityX > 0.0f)
+        if (m_left_right && m_velocityX < 0.0f)
         {
-            Vector3 newScale = gameObject.transform.localScale;
+            //Vector3 newScale = gameObject.transform.localScale;
+            //
+            //newScale.z = 1.0f;
+            //
+            //gameObject.transform.localScale = newScale;
 
-            newScale.z = 1.0f;
-
-            gameObject.transform.localScale = newScale;
+            gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
 
             m_left_right = false;
         }
-        else if (!m_left_right && m_velocityX < 0.0f)
+        else if (!m_left_right && m_velocityX > 0.0f)
         {
-            Vector3 newScale = gameObject.transform.localScale;
+            //Vector3 newScale = gameObject.transform.localScale;
+            //
+            //newScale.z = -1.0f;
+            //
+            //gameObject.transform.localScale = newScale;
 
-            newScale.z = -1.0f;
-
-            gameObject.transform.localScale = newScale;
+            gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
 
             m_left_right = true;
         }

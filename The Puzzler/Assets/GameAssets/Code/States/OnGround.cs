@@ -16,6 +16,15 @@ public class OnGround : BasicState
     {
         MoveHorzontal(m_speed);
 
+        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.0f)
+        {
+            m_data.m_anim.SetBool("Walking", true);
+        }
+        else
+        {
+            m_data.m_anim.SetBool("Walking", false);
+        }
+
         m_data.m_velocityY = -9.81f;
 
         if (m_data.m_closeToBox && Input.GetButton("MoveBox"))

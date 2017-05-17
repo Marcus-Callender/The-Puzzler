@@ -42,7 +42,26 @@ public class PlayerData : MonoBehaviour
     
     void Update()
     {
+        if (m_left_right && m_velocityX > 0.0f)
+        {
+            Vector3 newScale = gameObject.transform.localScale;
 
+            newScale.z = 1.0f;
+
+            gameObject.transform.localScale = newScale;
+
+            m_left_right = false;
+        }
+        else if (!m_left_right && m_velocityX < 0.0f)
+        {
+            Vector3 newScale = gameObject.transform.localScale;
+
+            newScale.z = -1.0f;
+
+            gameObject.transform.localScale = newScale;
+
+            m_left_right = true;
+        }
     }
 
     void FixedUpdate()

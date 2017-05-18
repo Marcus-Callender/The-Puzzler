@@ -17,7 +17,7 @@
 -define:UNITY_5_4_OR_NEWER
 -define:UNITY_5_5_OR_NEWER
 -define:UNITY_5_6_OR_NEWER
--define:UNITY_5_6_0
+-define:UNITY_5_6_1
 -define:UNITY_5_6
 -define:UNITY_5
 -define:UNITY_ANALYTICS
@@ -95,6 +95,7 @@ Assets/GameAssets/Code/ButtonInteractions/MoveBetweenPoints.cs
 Assets/GameAssets/Code/ButtonInteractions/PauseMovement.cs
 Assets/GameAssets/Code/ButtonTimed.cs
 Assets/GameAssets/Code/CameraMovment.cs
+Assets/GameAssets/Code/GhostData.cs
 Assets/GameAssets/Code/LazerGenerator.cs
 Assets/GameAssets/Code/Legacy/BaseCharicterState.cs
 Assets/GameAssets/Code/Legacy/BasicMovement.cs

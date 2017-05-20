@@ -9,14 +9,15 @@ public class OnGround : BasicState
 
     void Start()
     {
-
+        
     }
 
     public override E_PLAYER_STATES Cycle()
     {
         MoveHorzontal(m_speed);
 
-        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.0f)
+        //if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.0f)
+        if (m_inputs.GetInput(E_INPUTS.LEFT) || m_inputs.GetInput(E_INPUTS.RIGHT))
         {
             m_data.m_anim.SetBool("Walking", true);
         }
@@ -27,13 +28,15 @@ public class OnGround : BasicState
 
         m_data.m_velocityY = -9.81f;
 
-        if (m_data.m_closeToBox && Input.GetButton("MoveBox"))
+        //if (m_data.m_closeToBox && Input.GetButton("MoveBox"))
+        if (m_data.m_closeToBox && m_inputs.GetInput(E_INPUTS.MOVE_BOX))
         {
             m_data.m_moveingBox = true;
             return E_PLAYER_STATES.MOVEING_BLOCK;
         }
 
-        if (Input.GetButtonDown("Jump") && !m_data.m_moveingBox)
+        //if (Input.GetButtonDown("Jump") && !m_data.m_moveingBox)
+        if (m_inputs.GetInput(E_INPUTS.JUMP) && !m_data.m_moveingBox)
         {
             m_data.m_velocityY = m_jumpSpeed;
 
@@ -50,7 +53,8 @@ public class OnGround : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
-        if (_tag == "Ladder" && Input.GetAxisRaw("Vertical") > 0.5f)
+        //if (_tag == "Ladder" && Input.GetAxisRaw("Vertical") > 0.5f)
+        if (_tag == "Ladder" && m_inputs.GetInput(E_INPUTS.UP))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

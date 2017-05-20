@@ -2,41 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum E_INPUTS
-{
-    LEFT,
-    RIGHT,
-    JUMP,
-    //MOVE_BOX,
-    //PRESS_BUTTON,
-
-    NULL
-}
-
 public class GhostData : MonoBehaviour
 {
     private char[] m_recordedInputs = new char[60 * 3];
+    private int m_inputCount = 0;
+    private Vector3 m_startPoint;
+    private bool m_recording = false;
 
-    void Start()
+    public void StartRecording()
+    {
+        if (!m_recording)
+        {
+            m_startPoint = gameObject.transform.position;
+        }
+
+        m_recording = true;
+    }
+
+    void PlayRecording()
     {
 
     }
-    
+
     void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") > 0.0f)
+        if (m_recording)
         {
+            m_recordedInputs[m_inputCount] = (char)0;
 
-        }
+            if (Input.GetAxisRaw("Horizontal") > 0.0f)
+            {
+                m_recordedInputs[m_inputCount] = (char)((int)m_recordedInputs[m_inputCount] | InputToBit(E_INPUTS.LEFT));
+            }
 
-        if (Input.GetAxisRaw("Horizontal") < 0.0f)
-        {
+            if (Input.GetAxisRaw("Horizontal") < 0.0f)
+            {
+                m_recordedInputs[m_inputCount] = (char)((int)m_recordedInputs[m_inputCount] | InputToBit(E_INPUTS.RIGHT));
+            }
 
-        }
+            if (Input.GetButton("Jump"))
+            {
+                m_recordedInputs[m_inputCount] = (char)((int)m_recordedInputs[m_inputCount] | InputToBit(E_INPUTS.JUMP));
+            }
 
-        if (Input.GetButton("Jump"))
-        {
+            m_inputCount++;
 
+            if (m_inputCount == (60 * 3) - 1)
+            {
+                m_recording = false;
+            }
         }
     }
 

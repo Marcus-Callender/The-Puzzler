@@ -1443,6 +1443,7 @@ MonoBehaviour:
   m_contacts: 00000000
   m_InteractableContacts: 00000000
   m_left_right: 1
+  m_anim: {fileID: 0}
 --- !u!65 &1908815291
 BoxCollider:
   m_ObjectHideFlags: 0

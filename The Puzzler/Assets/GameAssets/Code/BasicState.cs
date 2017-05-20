@@ -6,21 +6,22 @@ public class BasicState : MonoBehaviour
 {
     protected PlayerData m_data;
     protected Rigidbody m_rigb;
-    
+    protected PlayerInputs m_inputs;
+
     float direction;
-    float angle;
     public bool m_useWallGravity = false;
 
 
-    public void Initialize(Rigidbody rigb, PlayerData data)
+    public virtual void Initialize(Rigidbody rigb, PlayerData data, PlayerInputs inputs)
     {
         m_rigb = rigb;
         m_data = data;
+        m_inputs = inputs;
     }
 
     public virtual void Enter()
     {
-        
+
     }
 
     public virtual void Exit()
@@ -65,9 +66,17 @@ public class BasicState : MonoBehaviour
 
     protected void MoveHorzontal(float _speed)
     {
-        direction = Input.GetAxisRaw("Horizontal");
+        //direction = Input.GetAxisRaw("Horizontal");
+        //
+        //m_data.m_velocityX = direction * _speed;
 
-        m_data.m_velocityX = direction * _speed;
+        m_data.m_velocityX = 0.0f;
+
+        if (m_inputs.GetInput(E_INPUTS.LEFT))
+            m_data.m_velocityX = _speed;
+
+        if (m_inputs.GetInput(E_INPUTS.RIGHT))
+            m_data.m_velocityX = -_speed;
     }
 
     protected void ApplyGravity(float _force)

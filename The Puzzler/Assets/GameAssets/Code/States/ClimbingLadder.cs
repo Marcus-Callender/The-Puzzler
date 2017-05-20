@@ -20,9 +20,16 @@ public class ClimbingLadder : BasicState
     {
         MoveHorzontal(m_speed);
         
-        m_data.m_velocityY = Input.GetAxisRaw("Vertical") * m_climbSpeed;
+        //m_data.m_velocityY = Input.GetAxisRaw("Vertical") * m_climbSpeed;
 
-        if (Input.GetButtonDown("Jump"))
+        if (m_inputs.GetInput(E_INPUTS.DOWN))
+            m_data.m_velocityY = -m_climbSpeed;
+
+        if (m_inputs.GetInput(E_INPUTS.UP))
+            m_data.m_velocityY = m_climbSpeed;
+
+        //if (Input.GetButtonDown("Jump"))
+        if (m_inputs.GetInput(E_INPUTS.JUMP))
         {
             m_data.m_velocityY = m_jumpSpeed;
 

@@ -13,6 +13,8 @@ public enum E_PLAYER_STATES
     USEING_LADDER,
     SQUISHED,
 
+    CONTROLING_GHOST,
+
     DOUBLE_JUMPING,
     WALL_SLIDEING,
 
@@ -42,31 +44,40 @@ public class PlayerStateMachine : MonoBehaviour
     //public bool grounded = true;
     //bool DoubleJump = true;
 
+    public PlayerInputs m_inputs;
+
     void Start()
     {
+        m_inputs = gameObject.AddComponent<PlayerInputs>();
+
         m_states[0] = gameObject.AddComponent<OnGround>();
         m_states[1] = gameObject.AddComponent<InAIr>();
         m_states[2] = gameObject.AddComponent<MoveingBox>();
         m_states[3] = gameObject.AddComponent<ClimbingLadder>();
+        //m_states[5] = gameObject.AddComponent<ControlingGhost>();
 
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
 
-        m_states[0].Initialize(m_rigb, m_data);
-        m_states[1].Initialize(m_rigb, m_data);
-        m_states[2].Initialize(m_rigb, m_data);
-        m_states[3].Initialize(m_rigb, m_data);
+        m_states[0].Initialize(m_rigb, m_data, m_inputs);
+        m_states[1].Initialize(m_rigb, m_data, m_inputs);
+        m_states[2].Initialize(m_rigb, m_data, m_inputs);
+        m_states[3].Initialize(m_rigb, m_data, m_inputs);
+        //m_states[5].Initialize(m_rigb, m_data, m_inputs);
     }
 
     void Update()
     {
+        m_inputs.Cycle();
+
         if (transform.position.y < -10.0f)
         {
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
 
-        m_data.m_pressingButton = Input.GetButtonDown("PressButton");
+        //m_data.m_pressingButton = Input.GetButtonDown("PressButton");
+        m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
 
         m_newState = m_states[(int)m_currentState].Cycle();
         CheckState();
@@ -111,25 +122,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     void OnCollisionStay(Collision Other)
     {
-        /*Debug.Log("Up: " + Vector3.Angle(Other.contacts[0].normal, Vector3.up));
-        Debug.Log("Left: " + Vector3.Angle(Other.contacts[0].normal, Vector3.left));
-        Debug.Log("Forward: " + Vector3.Angle(Other.contacts[0].normal, Vector3.forward));
-
-        Debug.Log("Contacts: " + Other.contacts.Length);
-
-        for (int z = 0; z < Other.contacts.Length; z++)
-        {
-            Debug.DrawRay(Other.contacts[z].point, Other.contacts[z].normal, Color.white);
-
-            if (z < Other.contacts.Length - 1)
-            {
-                if (Other.contacts[z].normal != Other.contacts[z + 1].normal)
-                {
-                    Debug.Log("DIFF IN NORMALS");
-                }
-            }
-        }*/
-
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
 
         E_DIRECTIONS dir = E_DIRECTIONS.TOP;

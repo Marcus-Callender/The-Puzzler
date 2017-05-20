@@ -32,7 +32,7 @@ public class InAIr : BasicState
 
         MoveHorzontal(m_speed);
 
-        if (Input.GetButtonUp("Jump") & m_data.m_velocityY > 0.0f)
+        if (!m_inputs.GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)
         {
             Debug.Log("Short Jump");
             m_data.m_velocityY = 0.0f;
@@ -68,7 +68,7 @@ public class InAIr : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
-        if (_tag == "Ladder" && !Input.GetButton("Jump"))
+        if (_tag == "Ladder" && !m_inputs.GetInput(E_INPUTS.JUMP))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

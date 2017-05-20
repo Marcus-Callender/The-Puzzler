@@ -37,7 +37,7 @@ public class MoveingBox : BasicState
 
     public override E_PLAYER_STATES Cycle()
     {
-        bool getInput = Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5f;
+        bool getInput = m_inputs.GetInput(E_INPUTS.LEFT) || m_inputs.GetInput(E_INPUTS.RIGHT);
 
         if (getInput && !m_moveInput)
         {
@@ -79,7 +79,8 @@ public class MoveingBox : BasicState
 
         }
 
-        if (!Input.GetButton("MoveBox"))
+        //if (!Input.GetButton("MoveBox"))
+        if (!m_inputs.GetInput(E_INPUTS.MOVE_BOX))
         {
             return E_PLAYER_STATES.ON_GROUND;
         }

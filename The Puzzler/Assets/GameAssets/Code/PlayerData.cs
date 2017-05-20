@@ -29,6 +29,8 @@ public class PlayerData : MonoBehaviour
 
     public Animator m_anim;
 
+    public GameObject m_ghost;
+
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();

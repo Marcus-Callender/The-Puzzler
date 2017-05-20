@@ -20,12 +20,8 @@ public enum E_INPUTS
 public class PlayerInputs : MonoBehaviour
 {
     private char m_Inputs;
-
-    public void Start()
-    {
-    }
     
-    public void Cycle()
+    public virtual void Cycle()
     {
         m_Inputs = (char)0;
         
@@ -65,12 +61,12 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
-    public bool GetInput(E_INPUTS input)
+    public virtual bool GetInput(E_INPUTS input)
     {
         return (m_Inputs & (char)InputToBit(input)) > 0;
     }
 
-    int InputToBit(E_INPUTS input)
+    protected virtual int InputToBit(E_INPUTS input)
     {
         int bit = 1;
 

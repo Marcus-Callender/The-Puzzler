@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class GhostStateMachine : MonoBehaviour
 {
     BasicState[] m_states = new BasicState[4];
@@ -12,9 +14,13 @@ public class GhostStateMachine : MonoBehaviour
     E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
     public BoxMovenemt m_linkedBox = null;
+
+    public GhostInputs m_inputs = null;
     
     void Start()
     {
+        m_inputs = gameObject.AddComponent<GhostInputs>();
+
         m_states[0] = gameObject.AddComponent<OnGround>();
         m_states[1] = gameObject.AddComponent<InAIr>();
         m_states[2] = gameObject.AddComponent<MoveingBox>();
@@ -23,19 +29,19 @@ public class GhostStateMachine : MonoBehaviour
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
 
-        //m_states[0].Initialize(m_rigb, m_data);
-        //m_states[1].Initialize(m_rigb, m_data);
-        //m_states[2].Initialize(m_rigb, m_data);
-        //m_states[3].Initialize(m_rigb, m_data);
+        m_states[0].Initialize(m_rigb, m_data, m_inputs);
+        m_states[1].Initialize(m_rigb, m_data, m_inputs);
+        m_states[2].Initialize(m_rigb, m_data, m_inputs);
+        m_states[3].Initialize(m_rigb, m_data, m_inputs);
     }
 
     void Update()
     {
-        //if (transform.position.y < -10.0f)
-        //{
-        //    int scene = SceneManager.GetActiveScene().buildIndex;
-        //    SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        //}
+        if (transform.position.y < -10.0f)
+        {
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        }
 
         m_data.m_pressingButton = Input.GetButtonDown("PressButton");
 

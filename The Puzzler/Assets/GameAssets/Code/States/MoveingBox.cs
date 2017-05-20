@@ -78,8 +78,7 @@ public class MoveingBox : BasicState
             }
 
         }
-
-        //if (!Input.GetButton("MoveBox"))
+        
         if (!m_inputs.GetInput(E_INPUTS.MOVE_BOX))
         {
             return E_PLAYER_STATES.ON_GROUND;

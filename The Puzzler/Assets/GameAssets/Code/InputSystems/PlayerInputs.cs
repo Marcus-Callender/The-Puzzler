@@ -20,6 +20,10 @@ public enum E_INPUTS
 public class PlayerInputs : MonoBehaviour
 {
     private char m_Inputs;
+
+    public void Start()
+    {
+    }
     
     public void Cycle()
     {
@@ -55,7 +59,7 @@ public class PlayerInputs : MonoBehaviour
             m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX);
         }
         
-        if (Input.GetButton("PressButton"))
+        if (Input.GetButtonDown("PressButton"))
         {
             m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
         }

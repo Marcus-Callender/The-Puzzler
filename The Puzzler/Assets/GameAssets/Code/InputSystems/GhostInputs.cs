@@ -15,16 +15,18 @@ public class GhostInputs : PlayerInputs
 
     public Vector3 m_startingPosition;
 
-    private void Update()
+    public override void Cycle()
     {
         if (m_recording)
         {
             if (m_arrayPosition < m_recordingSize)
             {
+                // resets the input
                 m_Inputs = (char)0;
 
                 if (m_arrayPosition == 0)
                 {
+                    // if the recording has just started mark the current position
                     m_startingPosition = gameObject.transform.position;
                 }
 
@@ -90,6 +92,7 @@ public class GhostInputs : PlayerInputs
         }
         else
         {
+            // stops inputs from carrying over from when the ghost was moving
             m_Inputs = (char)0;
         }
     }
@@ -108,11 +111,17 @@ public class GhostInputs : PlayerInputs
 
     public override bool GetInput(E_INPUTS input)
     {
+        // chacks if the inputs varible inclues the specified bit
         return (m_Inputs & (char)InputToBit(input)) > 0;
     }
 
     protected override int InputToBit(E_INPUTS input)
     {
+        // function return examples
+        // 0 => 1
+        // 3 => 8
+        // 7 => 128
+
         int bit = 1;
 
         for (int z = 0; z < (int)input; z++)

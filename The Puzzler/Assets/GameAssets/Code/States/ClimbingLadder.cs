@@ -60,6 +60,7 @@ public class ClimbingLadder : BasicState
     {
         if (_tag == "Ladder")
         {
+            // if the player left an area marked as "Ladder"
             return E_PLAYER_STATES.IN_AIR;
         }
 

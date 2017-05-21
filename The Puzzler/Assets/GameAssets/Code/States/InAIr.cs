@@ -9,12 +9,7 @@ public class InAIr : BasicState
 
     private int m_enableGroundCollisionFrames = 2;
     private int m_enableGroundCollisionCount = 2;
-
-    void Start()
-    {
-
-    }
-
+    
     public override void Enter()
     {
         Vector3 pos = gameObject.transform.position;

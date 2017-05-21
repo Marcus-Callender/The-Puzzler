@@ -32,7 +32,7 @@ public enum E_DIRECTIONS
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    BasicState[] m_states = new BasicState[4];
+    BasicState[] m_states = new BasicState[6];
     PlayerData m_data;
     Rigidbody m_rigb;
 
@@ -54,7 +54,7 @@ public class PlayerStateMachine : MonoBehaviour
         m_states[1] = gameObject.AddComponent<InAIr>();
         m_states[2] = gameObject.AddComponent<MoveingBox>();
         m_states[3] = gameObject.AddComponent<ClimbingLadder>();
-        //m_states[5] = gameObject.AddComponent<ControlingGhost>();
+        m_states[5] = gameObject.AddComponent<ControlingGhost>();
 
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
@@ -63,7 +63,7 @@ public class PlayerStateMachine : MonoBehaviour
         m_states[1].Initialize(m_rigb, m_data, m_inputs);
         m_states[2].Initialize(m_rigb, m_data, m_inputs);
         m_states[3].Initialize(m_rigb, m_data, m_inputs);
-        //m_states[5].Initialize(m_rigb, m_data, m_inputs);
+        m_states[5].Initialize(m_rigb, m_data, m_inputs);
     }
 
     void Update()
@@ -78,6 +78,12 @@ public class PlayerStateMachine : MonoBehaviour
 
         //m_data.m_pressingButton = Input.GetButtonDown("PressButton");
         m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
+
+        if (m_inputs.GetInput(E_INPUTS.START_GHOST))
+        {
+            m_newState = E_PLAYER_STATES.CONTROLING_GHOST;
+            CheckState();
+        }
 
         m_newState = m_states[(int)m_currentState].Cycle();
         CheckState();

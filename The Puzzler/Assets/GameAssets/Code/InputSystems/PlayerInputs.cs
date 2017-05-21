@@ -11,6 +11,7 @@ public enum E_INPUTS
     JUMP,
     MOVE_BOX,
     PRESS_BUTTON,
+    START_GHOST,
 
     END,
 
@@ -20,44 +21,53 @@ public enum E_INPUTS
 public class PlayerInputs : MonoBehaviour
 {
     private char m_Inputs;
-    
+    public bool m_pauseInputs = false;
+
     public virtual void Cycle()
     {
         m_Inputs = (char)0;
-        
-        if (Input.GetAxisRaw("Horizontal") > 0.0f)
-        {
-            m_Inputs |= (char)InputToBit(E_INPUTS.LEFT);
-        }
 
-        if (Input.GetAxisRaw("Horizontal") < 0.0f)
+        if (!m_pauseInputs)
         {
-            m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT);
-        }
+            if (Input.GetAxisRaw("Horizontal") > 0.0f)
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.LEFT);
+            }
 
-        if (Input.GetAxisRaw("Vertical") > 0.0f)
-        {
-            m_Inputs |= (char)InputToBit(E_INPUTS.UP);
-        }
+            if (Input.GetAxisRaw("Horizontal") < 0.0f)
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT);
+            }
 
-        if (Input.GetAxisRaw("Vertical") < 0.0f)
-        {
-            m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
-        }
+            if (Input.GetAxisRaw("Vertical") > 0.0f)
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.UP);
+            }
 
-        if (Input.GetButton("Jump"))
-        {
-            m_Inputs |= (char)InputToBit(E_INPUTS.JUMP);
-        }
+            if (Input.GetAxisRaw("Vertical") < 0.0f)
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
+            }
 
-        if (Input.GetButton("MoveBox"))
-        {
-            m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX);
-        }
-        
-        if (Input.GetButtonDown("PressButton"))
-        {
-            m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
+            if (Input.GetButton("Jump"))
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.JUMP);
+            }
+
+            if (Input.GetButton("MoveBox"))
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX);
+            }
+
+            if (Input.GetButtonDown("PressButton"))
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
+            }
+
+            if (Input.GetButtonDown("StartGhost"))
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.START_GHOST);
+            }
         }
     }
 

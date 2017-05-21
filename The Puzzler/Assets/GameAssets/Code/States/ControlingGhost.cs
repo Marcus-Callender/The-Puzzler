@@ -4,55 +4,49 @@ using UnityEngine;
 
 public class ControlingGhost : BasicState
 {
-    private bool m_ghostRecorded = false;
-    private GameObject m_ghost = null;
-    private GhostData m_ghostData = null;
-
     public GameObject m_GhostObject;
-
-    void Start()
-    {
-        //m_ghost = Instantiate(gameObject);
-        //m_ghostData = m_ghost.AddComponent<GhostData>();
-
-
-    }
+    public GhostStateMachine m_ghostStateMachine;
+    public GhostInputs m_ghostInputs;
 
     public override void Initialize(Rigidbody rigb, PlayerData data, PlayerInputs inputs)
     {
         m_rigb = rigb;
         m_data = data;
+        m_inputs = inputs;
 
-        m_GhostObject = m_data.m_ghost;
+        m_GhostObject = Instantiate(m_data.m_ghost);
+        m_GhostObject.SetActive(true);
+        m_ghostStateMachine = m_GhostObject.GetComponent<GhostStateMachine>();
+        m_ghostInputs = m_GhostObject.GetComponent<GhostInputs>();
     }
 
     public override void Enter()
     {
-        if (!m_ghostRecorded)
+        if (m_ghostInputs == null)
         {
-
+            m_ghostInputs = m_GhostObject.GetComponent<GhostInputs>();
         }
 
-
+        if (m_ghostInputs.m_recorded)
+        {
+            m_inputs.m_pauseInputs = false;
+            m_ghostStateMachine.Activate();
+        }
+        else
+        {
+            m_inputs.m_pauseInputs = true;
+            m_ghostStateMachine.Activate();
+        }
     }
 
     public override E_PLAYER_STATES Cycle()
     {
-        if (!m_ghostRecorded)
+        if (m_ghostInputs.m_recorded)
         {
-            m_ghostData.StartRecording();
-
-            //if (Input.GetButtonUp("GhostControl"))
-            {
-                m_ghostRecorded = true;
-                return E_PLAYER_STATES.IN_AIR;
-            }
+            m_inputs.m_pauseInputs = false;
+            return E_PLAYER_STATES.IN_AIR;
         }
-        else
-        {
-
-        }
-
+        
         return E_PLAYER_STATES.CONTROLING_GHOST;
     }
 }

@@ -16,6 +16,23 @@ public class GhostStateMachine : MonoBehaviour
     public BoxMovenemt m_linkedBox = null;
 
     public GhostInputs m_inputs = null;
+
+    public void Activate()
+    {
+        m_data.m_anim.SetBool("Stopped", false);
+
+        if (m_inputs.m_recorded)
+        {
+            m_inputs.m_arrayPosition = 0;
+            //m_inputs.Play();
+            m_inputs.m_playing = true;
+        }
+        else
+        {
+            m_inputs.m_arrayPosition = 0;
+            m_inputs.m_recording = true;
+        }
+    }
     
     void Start()
     {
@@ -33,17 +50,24 @@ public class GhostStateMachine : MonoBehaviour
         m_states[1].Initialize(m_rigb, m_data, m_inputs);
         m_states[2].Initialize(m_rigb, m_data, m_inputs);
         m_states[3].Initialize(m_rigb, m_data, m_inputs);
+
+        m_data.m_anim.SetBool("Stopped", true);
     }
 
     void Update()
     {
+        if (m_inputs.m_recorded && m_inputs.m_arrayPosition == GhostInputs.m_recordingSize)
+        {
+            m_inputs.m_pauseInputs = true;
+        }
+
         if (transform.position.y < -10.0f)
         {
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
 
-        m_data.m_pressingButton = Input.GetButtonDown("PressButton");
+        m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
 
         m_newState = m_states[(int)m_currentState].Cycle();
         CheckState();

@@ -30,12 +30,12 @@ public class ControlingGhost : BasicState
         if (m_ghostInputs.m_recorded)
         {
             m_inputs.m_pauseInputs = false;
-            m_ghostStateMachine.Activate();
+            m_ghostStateMachine.Activate(gameObject.transform.position);
         }
         else
         {
             m_inputs.m_pauseInputs = true;
-            m_ghostStateMachine.Activate();
+            m_ghostStateMachine.Activate(gameObject.transform.position);
         }
     }
 

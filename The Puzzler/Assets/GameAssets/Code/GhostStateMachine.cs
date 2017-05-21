@@ -17,7 +17,7 @@ public class GhostStateMachine : MonoBehaviour
 
     public GhostInputs m_inputs = null;
 
-    public void Activate()
+    public void Activate(Vector3 pos)
     {
         m_data.m_anim.SetBool("Stopped", false);
 
@@ -30,6 +30,7 @@ public class GhostStateMachine : MonoBehaviour
         }
         else
         {
+            gameObject.transform.position = pos;
             m_inputs.m_arrayPosition = 0;
             m_inputs.m_recording = true;
         }
@@ -59,6 +60,7 @@ public class GhostStateMachine : MonoBehaviour
     {
         if (m_inputs.m_recorded && m_inputs.m_arrayPosition == GhostInputs.m_recordingSize)
         {
+            m_data.m_anim.SetBool("Stopped", true);
             m_inputs.m_pauseInputs = true;
         }
 
@@ -101,7 +103,6 @@ public class GhostStateMachine : MonoBehaviour
 
         if (Physics.Raycast(transform.position, -up, out hit, 2))
         {
-
             Debug.Log("HIT");
 
             if (hit.collider.gameObject.name == "floor")
@@ -265,7 +266,7 @@ public class GhostStateMachine : MonoBehaviour
             m_states[(int)m_currentState].Exit();
             m_states[(int)m_newState].Enter();
 
-            Debug.Log(m_currentState + " -> " + m_newState);
+            Debug.Log("Ghost: " + m_currentState + " -> " + m_newState);
 
             m_currentState = m_newState;
         }

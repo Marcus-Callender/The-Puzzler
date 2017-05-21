@@ -24,7 +24,8 @@ public class GhostStateMachine : MonoBehaviour
         if (m_inputs.m_recorded)
         {
             m_inputs.m_arrayPosition = 0;
-            //m_inputs.Play();
+            //IEnumerator couroutine = m_inputs.Play();
+            //StartCoroutine(couroutine);
             m_inputs.m_playing = true;
         }
         else

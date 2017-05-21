@@ -65,7 +65,7 @@ public class GhostInputs : PlayerInputs
                 m_recording = false;
             }
         }
-        if (m_playing)
+        else if (m_playing)
         {
             if (m_arrayPosition < m_recordingSize)
             {
@@ -77,15 +77,22 @@ public class GhostInputs : PlayerInputs
                 m_playing = false;
             }
         }
+        else
+        {
+            m_Inputs = (char)0;
+        }
     }
 
-    public void Play()
+    public IEnumerator Play()
     {
         if (m_arrayPosition > m_recordingSize)
         {
             m_Inputs = m_recordedInputs[m_arrayPosition];
             m_arrayPosition++;
+            yield return new WaitForSeconds(0.016f);
         }
+        
+        yield return new WaitForSeconds(0.016f);
     }
 
     public override bool GetInput(E_INPUTS input)

@@ -13,6 +13,8 @@ public class GhostInputs : PlayerInputs
     public bool m_recording = false;
     public bool m_playing = false;
 
+    public Vector3 m_startingPosition;
+
     private void Update()
     {
         if (m_recording)
@@ -20,6 +22,11 @@ public class GhostInputs : PlayerInputs
             if (m_arrayPosition < m_recordingSize)
             {
                 m_Inputs = (char)0;
+
+                if (m_arrayPosition == 0)
+                {
+                    m_startingPosition = gameObject.transform.position;
+                }
 
                 if (Input.GetAxisRaw("Horizontal") > 0.0f)
                 {
@@ -63,6 +70,8 @@ public class GhostInputs : PlayerInputs
             {
                 m_recorded = true;
                 m_recording = false;
+
+                gameObject.transform.position = m_startingPosition;
             }
         }
         else if (m_playing)
@@ -75,6 +84,8 @@ public class GhostInputs : PlayerInputs
             else
             {
                 m_playing = false;
+
+                gameObject.transform.position = m_startingPosition;
             }
         }
         else

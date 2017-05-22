@@ -30,6 +30,13 @@ public class GhostStateMachine : BaseStateMachine
     
     void Start()
     {
+        Renderer[] _matirials = gameObject.GetComponentsInChildren<Renderer>();
+
+        for (int z = 0; z < _matirials.Length; z++)
+        {
+            _matirials[z].material.color= new Color(0.1f, 1.0f, 1.0f, 1.0f);
+        }
+
         m_inputs = gameObject.AddComponent<GhostInputs>();
 
         m_states[0] = gameObject.AddComponent<OnGround>();

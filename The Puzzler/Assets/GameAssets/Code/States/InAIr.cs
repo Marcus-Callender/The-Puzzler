@@ -19,6 +19,14 @@ public class InAIr : BasicState
         gameObject.transform.position = pos;
 
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
+        
+        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
+        m_data.m_anim.SetBool("Airborn", true);
+    }
+
+    public override void Exit()
+    {
+        m_data.m_anim.SetBool("Airborn", false);
     }
 
     public override E_PLAYER_STATES Cycle()
@@ -32,6 +40,8 @@ public class InAIr : BasicState
             Debug.Log("Short Jump");
             m_data.m_velocityY = 0.0f;
         }
+
+        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
 
         return E_PLAYER_STATES.IN_AIR;
     }

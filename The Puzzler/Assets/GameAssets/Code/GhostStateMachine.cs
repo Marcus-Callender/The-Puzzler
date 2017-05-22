@@ -50,9 +50,11 @@ public class GhostStateMachine : BaseStateMachine
 
     public override void Update()
     {
+        m_inputs.Cycle();
+
         base.Update();
 
-        if (m_inputs.m_recorded && m_inputs.m_arrayPosition == GhostInputs.m_recordingSize)
+        if (m_inputs.m_recorded && m_inputs.m_arrayPosition == GhostInputs.m_recordingSize - 1)
         {
             // runs if the recording has finished and the ghost is not playing
             m_data.m_anim.SetBool("Stopped", true);

@@ -59,6 +59,13 @@ public class PlayerStateMachine : BaseStateMachine
         
         m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
 
+        m_data.m_moveingBox = false;
+
+        if (m_inputs.GetInput(E_INPUTS.MOVE_BOX))
+        {
+            m_data.m_moveingBox = true;
+        }
+
         base.Update();
 
         if (m_inputs.GetInput(E_INPUTS.START_GHOST))

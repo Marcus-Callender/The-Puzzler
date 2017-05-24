@@ -16,7 +16,8 @@ public class BoxMovenemt : MonoBehaviour
     void Start()
     {
         m_rigb = gameObject.GetComponent<Rigidbody>();
-        m_player = FindObjectOfType<PlayerData>();
+        //m_player = FindObjectOfType<PlayerData>();
+        m_player = GameObject.Find("Player").GetComponent<PlayerData>();
 
         m_playerRigb = m_player.gameObject.GetComponent<Rigidbody>();
 
@@ -25,7 +26,7 @@ public class BoxMovenemt : MonoBehaviour
 
     void Update()
     {
-        m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
+        //m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
 
         float distance = Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x);
         
@@ -45,14 +46,13 @@ public class BoxMovenemt : MonoBehaviour
                 {
                     m_player.m_linkedBox = this;
                 }
-
             }
         }
     }
 
     void LateUpdate()
     {
-        m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
+        //m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
 
         float distance = Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x);
 
@@ -74,7 +74,7 @@ public class BoxMovenemt : MonoBehaviour
 
                 if (m_player.m_moveingBox)
                 {
-                    m_rigb.velocity = new Vector3(m_player.m_velocityX, m_rigb.velocity.y);
+                    //m_rigb.velocity = new Vector3(m_player.m_velocityX, m_rigb.velocity.y);
                 }
 
             }
@@ -104,6 +104,11 @@ public class BoxMovenemt : MonoBehaviour
 
 
         m_requestStop = false;
+    }
+
+    void FixedUpdate()
+    {
+        //m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
     }
 
     public void Move(float xVelocity)

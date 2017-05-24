@@ -9,8 +9,7 @@ public class PersistantData : MonoBehaviour
     public bool m_playerWallSlide = false;
 
     public static PersistantData m_instance;
-
-
+    
     void Awake()
     {
         if (m_instance == null)

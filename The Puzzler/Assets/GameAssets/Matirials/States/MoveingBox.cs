@@ -26,6 +26,10 @@ public class MoveingBox : BasicState
 
     public override void Exit()
     {
+        // stops the box from continuasly moving then un-links it
+        m_data.m_linkedBox.Move(0.0f);
+        m_data.m_linkedBox = null;
+
         m_pauseTimer.Play();
         m_pauseTimer.m_playing = false;
 

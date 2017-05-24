@@ -15,11 +15,11 @@ public class CameraMovment : MonoBehaviour
     {
         //m_rigb = GetComponent<Rigidbody>();
 
-        m_player = FindObjectOfType<PlayerData>();
+        m_player = GameObject.Find("Player").GetComponent<PlayerData>();
 
         Vector3 playerPos = m_player.gameObject.transform.position;
 
-        gameObject.transform.position = new Vector3(playerPos.x, playerPos.y + 3.0f, -10.0f);
+        gameObject.transform.position = new Vector3(playerPos.x, playerPos.y + 3.0f, -8.0f);
     }
     
     void LateUpdate()
@@ -28,7 +28,7 @@ public class CameraMovment : MonoBehaviour
 
         float yPosLerp = Mathf.Lerp(gameObject.transform.position.y, playerPos.y + 3.0f, Time.deltaTime * 3.0f);
 
-        Vector3 pos = new Vector3(transform.position.x, yPosLerp, -10.0f);
+        Vector3 pos = new Vector3(transform.position.x, yPosLerp, -8.0f);
 
         if (playerPos.x > gameObject.transform.position.x + 1.0f)
         {

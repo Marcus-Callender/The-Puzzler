@@ -26,10 +26,10 @@ public class PlayerData : MonoBehaviour
     public bool m_left_right = true;
 
     private Rigidbody m_rigb;
-
     public Animator m_anim;
 
     public GameObject m_ghost;
+    public BoxMovenemt m_linkedBox;
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class PlayerData : MonoBehaviour
         PersistantData data = PersistantData.m_instance;
 
         m_anim = GetComponent<Animator>();
-
+        
         if (data)
         {
             m_playerDoubleJump = data.m_playerDoubleJump;

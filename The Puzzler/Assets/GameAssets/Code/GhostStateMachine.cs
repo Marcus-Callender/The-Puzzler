@@ -7,9 +7,15 @@ using UnityEngine.SceneManagement;
 public class GhostStateMachine : BaseStateMachine
 {
     public GhostInputs m_inputs = null;
+    private Renderer[] m_matirialRenderers;
 
     public void Activate(Vector3 pos)
     {
+        for (int z = 0; z < m_matirialRenderers.Length; z++)
+        {
+            m_matirialRenderers[z].material.color = new Color(0.1f, 1.0f, 1.0f, 1.0f);
+        }
+
         // alows the ghost to animate again
         m_data.m_anim.SetBool("Stopped", false);
 
@@ -28,13 +34,15 @@ public class GhostStateMachine : BaseStateMachine
         }
     }
     
-    void Start()
+    public override void Start()
     {
-        Renderer[] _matirials = gameObject.GetComponentsInChildren<Renderer>();
+        base.Start();
 
-        for (int z = 0; z < _matirials.Length; z++)
+        m_matirialRenderers = gameObject.GetComponentsInChildren<Renderer>();
+
+        for (int z = 0; z < m_matirialRenderers.Length; z++)
         {
-            _matirials[z].material.color= new Color(0.1f, 1.0f, 1.0f, 1.0f);
+            m_matirialRenderers[z].material.color = new Color(0.5f, 0.2f, 0.2f, 1.0f);
         }
 
         m_inputs = gameObject.AddComponent<GhostInputs>();
@@ -43,9 +51,6 @@ public class GhostStateMachine : BaseStateMachine
         m_states[1] = gameObject.AddComponent<InAIr>();
         m_states[2] = gameObject.AddComponent<MoveingBox>();
         m_states[3] = gameObject.AddComponent<ClimbingLadder>();
-
-        m_data = GetComponent<PlayerData>();
-        m_rigb = GetComponent<Rigidbody>();
 
         m_states[0].Initialize(m_rigb, m_data, m_inputs);
         m_states[1].Initialize(m_rigb, m_data, m_inputs);

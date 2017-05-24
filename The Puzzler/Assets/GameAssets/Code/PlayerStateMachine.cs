@@ -34,8 +34,10 @@ public class PlayerStateMachine : BaseStateMachine
 {
     public PlayerInputs m_inputs;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         m_inputs = gameObject.AddComponent<PlayerInputs>();
 
         m_states[0] = gameObject.AddComponent<OnGround>();
@@ -43,9 +45,6 @@ public class PlayerStateMachine : BaseStateMachine
         m_states[2] = gameObject.AddComponent<MoveingBox>();
         m_states[3] = gameObject.AddComponent<ClimbingLadder>();
         m_states[5] = gameObject.AddComponent<ControlingGhost>();
-
-        m_data = GetComponent<PlayerData>();
-        m_rigb = GetComponent<Rigidbody>();
 
         m_states[0].Initialize(m_rigb, m_data, m_inputs);
         m_states[1].Initialize(m_rigb, m_data, m_inputs);

@@ -15,7 +15,13 @@ public class BaseStateMachine : MonoBehaviour
 
     public BoxMovenemt m_linkedBox = null;
 
-    //public PlayerInputs m_inputs;
+    public virtual void Start()
+    {
+        m_data = GetComponent<PlayerData>();
+        m_rigb = GetComponent<Rigidbody>();
+
+        StartCoroutine(MoveBox());
+    }
 
     public virtual void Update()
     {
@@ -33,6 +39,8 @@ public class BaseStateMachine : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log("Physics");
+
         m_newState = m_states[(int)m_currentState].PhysCycle();
         CheckState();
 
@@ -42,6 +50,21 @@ public class BaseStateMachine : MonoBehaviour
         {
             m_data.m_contacts[z] = false;
             m_data.m_InteractableContacts[z] = false;
+        }
+    }
+
+    IEnumerator MoveBox()
+    {
+        while (true)
+        {
+            Debug.Log("MoveBox");
+
+            if (m_data.m_linkedBox != null)
+            {
+                m_linkedBox.Move(m_data.m_velocityX);
+            }
+
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -69,6 +92,8 @@ public class BaseStateMachine : MonoBehaviour
     void OnCollisionStay(Collision Other)
     {
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
+
+        Debug.Log("Collision");
 
         E_DIRECTIONS dir = E_DIRECTIONS.TOP;
 

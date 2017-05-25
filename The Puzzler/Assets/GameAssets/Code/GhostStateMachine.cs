@@ -66,6 +66,8 @@ public class GhostStateMachine : BaseStateMachine
     {
         m_inputs.Cycle();
 
+        m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
+
         base.Update();
 
         if (m_inputs.m_recorded && m_inputs.m_arrayPosition == GhostInputs.m_recordingSize)

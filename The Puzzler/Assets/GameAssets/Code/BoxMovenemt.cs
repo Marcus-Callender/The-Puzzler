@@ -5,8 +5,7 @@ using UnityEngine;
 public class BoxMovenemt : MonoBehaviour
 {
     Rigidbody m_rigb;
-    PlayerData m_player;
-    Rigidbody m_playerRigb;
+    PlayerData[] m_playerRefs;
 
     float m_playerInteractDistance = 0.5f;
     float m_playerBoxMinDistance = 0.0f;
@@ -17,100 +16,96 @@ public class BoxMovenemt : MonoBehaviour
     {
         m_rigb = gameObject.GetComponent<Rigidbody>();
         //m_player = FindObjectOfType<PlayerData>();
-        m_player = GameObject.Find("Player").GetComponent<PlayerData>();
+        m_playerRefs = FindObjectsOfType<PlayerData>();
 
-        m_playerRigb = m_player.gameObject.GetComponent<Rigidbody>();
-
-        m_playerBoxMinDistance = (gameObject.transform.localScale.x + m_player.gameObject.transform.localScale.x) * 0.5f;
+        m_playerBoxMinDistance = (gameObject.transform.localScale.x + m_playerRefs[0].gameObject.transform.localScale.x) * 0.5f;
     }
 
     void Update()
     {
-        //m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
-
-        float distance = Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x);
-        
-
-        if (distance < m_playerBoxMinDistance + m_playerInteractDistance)
+        for (int z = 0; z < m_playerRefs.Length; z++)
         {
-            float top = m_rigb.transform.position.y + (m_rigb.transform.localScale.y * 0.5f);
-            float bottom = m_rigb.transform.position.y - (m_rigb.transform.localScale.y * 0.5f);
+            float distance = Mathf.Abs(gameObject.transform.position.x - m_playerRefs[z].gameObject.transform.position.x);
 
-            if (m_playerRigb.transform.position.y > bottom && m_playerRigb.transform.position.y < top)
+
+            if (distance < m_playerBoxMinDistance + m_playerInteractDistance)
             {
-                m_player.m_closeToBox = true;
+                float top = m_rigb.transform.position.y + (m_rigb.transform.localScale.y * 0.5f);
+                float bottom = m_rigb.transform.position.y - (m_rigb.transform.localScale.y * 0.5f);
 
-                Debug.Log("Player Close");
-
-                if (m_player.m_moveingBox && m_player.m_linkedBox == null)
+                if (m_playerRefs[z].transform.position.y > bottom && m_playerRefs[z].transform.position.y < top)
                 {
-                    m_player.m_linkedBox = this;
+                    m_playerRefs[z].m_closeToBox = true;
+
+                    Debug.Log("Player Close");
+
+                    if (m_playerRefs[z].m_moveingBox && m_playerRefs[z].m_linkedBox == null)
+                    {
+                        m_playerRefs[z].m_linkedBox = this;
+                    }
                 }
             }
+
         }
+
     }
 
     void LateUpdate()
     {
-        //m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
-
-        float distance = Mathf.Abs(gameObject.transform.position.x - m_player.gameObject.transform.position.x);
-
-        if (m_requestStop)
+        for (int z = 0; z < m_playerRefs.Length; z++)
         {
-            Debug.Log("STOP");
-        }
+            float distance = Mathf.Abs(gameObject.transform.position.x - m_playerRefs[z].gameObject.transform.position.x);
 
-        if (distance < m_playerBoxMinDistance + m_playerInteractDistance && !m_requestStop)
-        {
-            float top = m_rigb.transform.position.y + (m_rigb.transform.localScale.y * 0.5f);
-            float bottom = m_rigb.transform.position.y - (m_rigb.transform.localScale.y * 0.5f);
-
-            if (m_playerRigb.transform.position.y > bottom && m_playerRigb.transform.position.y < top)
+            if (m_requestStop)
             {
-                m_player.m_closeToBox = true;
+                Debug.Log("STOP");
+            }
 
-                Debug.Log("Player Close");
+            if (distance < m_playerBoxMinDistance + m_playerInteractDistance && !m_requestStop)
+            {
+                float top = m_rigb.transform.position.y + (m_rigb.transform.localScale.y * 0.5f);
+                float bottom = m_rigb.transform.position.y - (m_rigb.transform.localScale.y * 0.5f);
 
-                if (m_player.m_moveingBox)
+                if (m_playerRefs[z].transform.position.y > bottom && m_playerRefs[z].transform.position.y < top)
                 {
-                    //m_rigb.velocity = new Vector3(m_player.m_velocityX, m_rigb.velocity.y);
+                    m_playerRefs[z].m_closeToBox = true;
+
+                    Debug.Log("Player Close");
+
+                    if (m_playerRefs[z].m_moveingBox)
+                    {
+                        //m_rigb.velocity = new Vector3(m_player.m_velocityX, m_rigb.velocity.y);
+                    }
+
                 }
+            }
 
+            if (m_playerRefs[z].m_moveingBox && Mathf.Abs(gameObject.transform.position.x - m_playerRefs[z].transform.position.x) < ((gameObject.transform.localScale.x + m_playerRefs[z].transform.localScale.x) * 0.5f))
+            {
+                Debug.Log("Overlapping");
+
+                if (gameObject.transform.position.x > m_rigb.transform.position.x /*&& m_player.m_velocityX > 0.0f*/)
+                {
+                    Vector3 newPos = gameObject.transform.position;
+
+                    newPos.x = m_playerRefs[z].transform.position.x - ((gameObject.transform.localScale.x + m_playerRefs[z].transform.localScale.x) * 0.5f);
+
+                    gameObject.transform.position = newPos;
+                }
+                else if (gameObject.transform.position.x < m_rigb.transform.position.x /*&& m_player.m_velocityX < 0.0f*/)
+                {
+                    Vector3 newPos = gameObject.transform.position;
+
+                    newPos.x = m_playerRefs[z].transform.position.x + ((gameObject.transform.localScale.x + m_playerRefs[z].transform.localScale.x) * 0.5f);
+
+                    gameObject.transform.position = newPos;
+                }
             }
         }
-
-        if (m_player.m_moveingBox && Mathf.Abs(gameObject.transform.position.x - m_player.transform.position.x) < ((gameObject.transform.localScale.x + m_player.transform.localScale.x) * 0.5f))
-        {
-            Debug.Log("Overlapping");
-
-            if (gameObject.transform.position.x > m_rigb.transform.position.x /*&& m_player.m_velocityX > 0.0f*/)
-            {
-                Vector3 newPos = gameObject.transform.position;
-
-                newPos.x = m_player.transform.position.x - ((gameObject.transform.localScale.x + m_player.transform.localScale.x) * 0.5f);
-
-                gameObject.transform.position = newPos;
-            }
-            else if (gameObject.transform.position.x < m_rigb.transform.position.x /*&& m_player.m_velocityX < 0.0f*/)
-            {
-                Vector3 newPos = gameObject.transform.position;
-
-                newPos.x = m_player.transform.position.x + ((gameObject.transform.localScale.x + m_player.transform.localScale.x) * 0.5f);
-
-                gameObject.transform.position = newPos;
-            }
-        }
-
-
+            
         m_requestStop = false;
     }
-
-    void FixedUpdate()
-    {
-        //m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
-    }
-
+    
     public void Move(float xVelocity)
     {
         m_rigb.velocity = new Vector3(xVelocity, m_rigb.velocity.y);

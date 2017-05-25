@@ -6,6 +6,7 @@ public class PressurePlate : MonoBehaviour
 {
     bool m_activated = false;
     Material m_mat;
+    private bool m_hadColision = false;
 
     public GameObject[] m_linkedObjects;
 
@@ -14,6 +15,8 @@ public class PressurePlate : MonoBehaviour
         m_mat = GetComponent<Renderer>().material;
 
         m_mat.color = Color.red;
+
+        StartCoroutine(CheckCollisions());
     }
 
     void Update()
@@ -30,6 +33,8 @@ public class PressurePlate : MonoBehaviour
         {
             if (Other.gameObject.tag == "Player" || Other.gameObject.tag == "Box")
             {
+                m_hadColision = true;
+
                 if (!m_activated)
                 {
                     for (int z = 0; z < m_linkedObjects.Length; z++)
@@ -50,7 +55,7 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision Other)
+    /*private void OnCollisionExit(Collision Other)
     {
         if (Other.gameObject.tag == "Player" || Other.gameObject.tag == "Box")
         {
@@ -71,5 +76,35 @@ public class PressurePlate : MonoBehaviour
 
             m_mat.color = Color.red;
         }
-    }
+    }*/
+
+    private IEnumerator CheckCollisions()
+    {
+        while (true)
+        {
+            if (!m_hadColision)
+            {
+                if (m_activated)
+                {
+                    for (int z = 0; z < m_linkedObjects.Length; z++)
+                    {
+                        ButtonInteraction script = m_linkedObjects[z].GetComponent<ButtonInteraction>();
+
+                        if (script)
+                        {
+                            script.OnInteract();
+                        }
+                    }
+                }
+
+                m_activated = false;
+
+                m_mat.color = Color.red;
+            }
+
+            m_hadColision = false;
+
+            yield return new WaitForFixedUpdate();
+        }
+    } 
 }

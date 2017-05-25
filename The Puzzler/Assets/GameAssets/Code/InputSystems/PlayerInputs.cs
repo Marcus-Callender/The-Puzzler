@@ -11,7 +11,8 @@ public enum E_INPUTS
     JUMP,
     MOVE_BOX,
     PRESS_BUTTON,
-    START_GHOST,
+    GHOST_BUTTON_PRESS,
+    GHOST_BUTTON_HOLD,
 
     END,
 
@@ -22,6 +23,14 @@ public class PlayerInputs : MonoBehaviour
 {
     private char m_Inputs;
     public bool m_pauseInputs = false;
+
+    public Timer m_ghostButtonTimer;
+
+    public virtual void Start()
+    {
+        m_ghostButtonTimer = new Timer();
+        m_ghostButtonTimer.m_time = 0.75f;
+    }
 
     public virtual void Cycle()
     {
@@ -64,9 +73,30 @@ public class PlayerInputs : MonoBehaviour
                 m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
             }
 
+            //if (Input.GetButtonDown("StartGhost"))
+            //{
+            //    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
+            //}
+
             if (Input.GetButtonDown("StartGhost"))
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.START_GHOST);
+                m_ghostButtonTimer.Play();
+            }
+
+            if (m_ghostButtonTimer.m_playing)
+            {
+                m_ghostButtonTimer.Cycle();
+
+                if (m_ghostButtonTimer.m_completed)
+                {
+                    m_ghostButtonTimer.m_playing = false;
+                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_HOLD);
+                }
+                else if (Input.GetButtonUp("StartGhost"))
+                {
+                    m_ghostButtonTimer.m_playing = false;
+                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ public class GhostStateMachine : BaseStateMachine
 
         for (int z = 0; z < m_matirialRenderers.Length; z++)
         {
-            m_matirialRenderers[z].material.color = new Color(0.1f, 1.0f, 1.0f, 1.0f);
+            m_matirialRenderers[z].material.color = new Color(0.1f, 1.0f, 1.0f, 0.5f);
         }
 
         // alows the ghost to animate again
@@ -44,7 +44,7 @@ public class GhostStateMachine : BaseStateMachine
 
         for (int z = 0; z < m_matirialRenderers.Length; z++)
         {
-            m_matirialRenderers[z].material.color = new Color(0.5f, 0.2f, 0.2f, 1.0f);
+            m_matirialRenderers[z].material.color = new Color(0.5f, 0.2f, 0.2f, 0.5f);
         }
 
         m_inputs = gameObject.AddComponent<GhostInputs>();

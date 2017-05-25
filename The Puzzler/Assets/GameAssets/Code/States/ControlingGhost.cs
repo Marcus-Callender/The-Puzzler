@@ -27,6 +27,11 @@ public class ControlingGhost : BasicState
             m_ghostInputs = m_GhostObject.GetComponent<GhostInputs>();
         }
 
+        if (m_inputs.GetInput(E_INPUTS.GHOST_BUTTON_HOLD) && m_ghostInputs.m_recorded)
+        {
+            m_ghostInputs.Reset();
+        }
+
         if (m_ghostInputs.m_recorded)
         {
             m_inputs.m_pauseInputs = false;

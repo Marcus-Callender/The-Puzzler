@@ -68,7 +68,12 @@ public class PlayerStateMachine : BaseStateMachine
 
         base.Update();
 
-        if (m_inputs.GetInput(E_INPUTS.START_GHOST))
+        if (m_inputs.GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
+        {
+            m_newState = E_PLAYER_STATES.CONTROLING_GHOST;
+            CheckState();
+        }
+        else if (m_inputs.GetInput(E_INPUTS.GHOST_BUTTON_HOLD))
         {
             m_newState = E_PLAYER_STATES.CONTROLING_GHOST;
             CheckState();

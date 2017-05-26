@@ -19,7 +19,17 @@ public class GhostInputs : PlayerInputs
     {
         if (m_recording)
         {
-            if (m_arrayPosition < m_recordingSize)
+            // input to prematurely end the ghost recording
+            if (GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
+            {
+                m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
+
+                m_recorded = true;
+                m_recording = false;
+
+                gameObject.transform.position = m_startingPosition;
+            }
+            else if (m_arrayPosition < m_recordingSize)
             {
                 // resets the input
                 m_Inputs = (char)0;
@@ -65,6 +75,11 @@ public class GhostInputs : PlayerInputs
                     m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
                 }
 
+                if (Input.GetButtonDown("StartGhost"))
+                {
+                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
+                }
+
                 m_recordedInputs[m_arrayPosition] = m_Inputs;
                 m_arrayPosition++;
             }
@@ -78,7 +93,7 @@ public class GhostInputs : PlayerInputs
         }
         else if (m_playing)
         {
-            if (m_arrayPosition < m_recordingSize)
+            if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition] != (char)InputToBit(E_INPUTS.END)))
             {
                 m_Inputs = m_recordedInputs[m_arrayPosition];
                 m_arrayPosition++;

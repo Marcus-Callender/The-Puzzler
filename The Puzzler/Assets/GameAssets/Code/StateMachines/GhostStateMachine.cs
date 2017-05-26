@@ -70,7 +70,8 @@ public class GhostStateMachine : BaseStateMachine
 
         base.Update();
 
-        if (m_inputs.m_recorded && m_inputs.m_arrayPosition == GhostInputs.m_recordingSize)
+        //if (m_inputs.m_recorded && m_inputs.m_arrayPosition == GhostInputs.m_recordingSize)
+        if (m_inputs.m_recorded && !m_inputs.m_playing)
         {
             gameObject.tag = "Ghost";
             // runs if the recording has finished and the ghost is not playing

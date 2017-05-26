@@ -72,12 +72,7 @@ public class PlayerInputs : MonoBehaviour
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
             }
-
-            //if (Input.GetButtonDown("StartGhost"))
-            //{
-            //    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
-            //}
-
+            
             if (Input.GetButtonDown("StartGhost"))
             {
                 m_ghostButtonTimer.Play();

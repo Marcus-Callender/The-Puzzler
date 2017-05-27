@@ -25,12 +25,6 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual void Update()
     {
-        if (transform.position.y < -10.0f)
-        {
-            int scene = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        }
-
         m_newState = m_states[(int)m_currentState].Cycle();
         CheckState();
 

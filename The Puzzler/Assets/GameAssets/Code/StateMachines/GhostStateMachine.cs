@@ -9,6 +9,10 @@ public class GhostStateMachine : BaseStateMachine
     public GhostInputs m_inputs = null;
     private Renderer[] m_matirialRenderers;
 
+    // this boolean is set to true on entering the state and remains true 
+    // while the ghost is coliding with any interactables that it isn't standing on
+    private bool m_stuckInBox = false;
+
     public void Activate(Vector3 pos)
     {
         gameObject.tag = "Player";
@@ -64,6 +68,16 @@ public class GhostStateMachine : BaseStateMachine
 
     public override void Update()
     {
+        if (transform.position.y < -10.0f)
+        {
+            m_inputs.Stop();
+
+            gameObject.tag = "Ghost";
+            // runs if the recording has finished and the ghost is not playing
+            m_data.m_anim.SetBool("Stopped", true);
+            m_inputs.m_pauseInputs = true;
+        }
+
         m_inputs.Cycle();
 
         m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);

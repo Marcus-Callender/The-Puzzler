@@ -55,6 +55,12 @@ public class PlayerStateMachine : BaseStateMachine
 
     public override void Update()
     {
+        if (transform.position.y < -10.0f)
+        {
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        }
+
         m_inputs.Cycle();
         
         m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);

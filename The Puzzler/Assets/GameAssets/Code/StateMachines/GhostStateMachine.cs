@@ -11,11 +11,17 @@ public class GhostStateMachine : BaseStateMachine
 
     // this boolean is set to true on entering the state and remains true 
     // while the ghost is coliding with any interactables that it isn't standing on
-    private bool m_stuckInBox = false;
+    //private bool m_colidedWithInteractable = false;
+    //private bool m_reduceColisions = true;
 
     public void Activate(Vector3 pos)
     {
         gameObject.tag = "Player";
+        // set layer to Ghost (reduced Collisions)
+        gameObject.layer = 11;
+
+        //m_reduceColisions = true;
+        //m_colidedWithInteractable = false;
 
         for (int z = 0; z < m_matirialRenderers.Length; z++)
         {
@@ -52,6 +58,8 @@ public class GhostStateMachine : BaseStateMachine
         }
 
         m_inputs = gameObject.AddComponent<GhostInputs>();
+
+        //StartCoroutine(CheckColisions());
 
         m_states[0] = gameObject.AddComponent<OnGround>();
         m_states[1] = gameObject.AddComponent<InAIr>();
@@ -93,4 +101,37 @@ public class GhostStateMachine : BaseStateMachine
             m_inputs.m_pauseInputs = true;
         }
     }
+
+    /*public void FixedUpdate()
+    {
+        m_colidedWithInteractable = false;
+    }*/
+
+    /*public override void OnCollisionStay(Collision Other)
+    {
+        base.OnCollisionStay(Other);
+
+
+        float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
+
+        if (Mathf.Approximately(angle, 90.0f) && Other.gameObject.tag == "Interactable")
+        {
+            m_colidedWithInteractable = true;
+        }
+    }*/
+
+    /*private IEnumerator CheckColisions()
+    {
+        while (true)
+        {
+            if (!m_colidedWithInteractable && m_reduceColisions)
+            {
+                gameObject.layer = 9;
+
+                m_reduceColisions = false;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+    }*/
 }

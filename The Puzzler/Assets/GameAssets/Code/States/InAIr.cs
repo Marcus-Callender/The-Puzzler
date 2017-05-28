@@ -12,11 +12,11 @@ public class InAIr : BasicState
     
     public override void Enter()
     {
-        Vector3 pos = gameObject.transform.position;
+        /*Vector3 pos = gameObject.transform.position;
 
         pos.y += 0.001f;
 
-        gameObject.transform.position = pos;
+        gameObject.transform.position = pos;*/
 
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
         

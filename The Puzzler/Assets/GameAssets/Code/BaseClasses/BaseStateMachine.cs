@@ -10,6 +10,7 @@ public class BaseStateMachine : MonoBehaviour
     protected PlayerData m_data;
     protected Rigidbody m_rigb;
 
+    [SerializeField]
     protected E_PLAYER_STATES m_currentState = E_PLAYER_STATES.IN_AIR;
     protected E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
@@ -33,8 +34,6 @@ public class BaseStateMachine : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("Physics");
-
         m_newState = m_states[(int)m_currentState].PhysCycle();
         CheckState();
 
@@ -51,8 +50,6 @@ public class BaseStateMachine : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("MoveBox");
-
             if (m_data.m_linkedBox != null)
             {
                 m_linkedBox.Move(m_data.m_velocityX);
@@ -83,12 +80,10 @@ public class BaseStateMachine : MonoBehaviour
         }
     }
 
-    void OnCollisionStay(Collision Other)
+    public virtual void OnCollisionStay(Collision Other)
     {
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
-
-        Debug.Log("Collision");
-
+        
         E_DIRECTIONS dir = E_DIRECTIONS.TOP;
 
         if (Mathf.Approximately(angle, 0.0f))

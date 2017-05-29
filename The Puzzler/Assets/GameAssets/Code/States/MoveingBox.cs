@@ -75,12 +75,18 @@ public class MoveingBox : BasicState
             }
             else
             {
+                m_data.m_linkedBox.Move(0.0f);
                 m_data.m_velocityX = 0.0f;
                 m_pauseTimer.Play();
 
                 m_dragingTimer.m_playing = false;
             }
-
+        }
+        else
+        {
+            m_pauseTimer.Play();
+            m_dragingTimer.Play();
+            m_data.m_linkedBox.Move(0.0f);
         }
         
         if (!m_inputs.GetInput(E_INPUTS.MOVE_BOX))

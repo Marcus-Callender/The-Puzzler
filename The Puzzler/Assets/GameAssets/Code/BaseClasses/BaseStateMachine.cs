@@ -62,9 +62,9 @@ public class BaseStateMachine : MonoBehaviour
     private void CheckGroundColl()
     {
         var up = transform.TransformDirection(Vector3.up);
-        // note: the use of var as the type. This is because in c# you 
+        // note: the use of var as the type. This is because in c# you
         // can have lamda functions which open up the use of untyped variables
-        // these variables can only live INSIDE a function. 
+        // these variables can only live INSIDE a function.
         RaycastHit hit;
         Debug.DrawRay(transform.position, -up * 2, Color.green);
 

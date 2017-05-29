@@ -9,7 +9,7 @@ public class InAIr : BasicState
 
     private int m_enableGroundCollisionFrames = 2;
     private int m_enableGroundCollisionCount = 2;
-    
+
     public override void Enter()
     {
         /*Vector3 pos = gameObject.transform.position;
@@ -19,7 +19,7 @@ public class InAIr : BasicState
         gameObject.transform.position = pos;*/
 
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
-        
+
         m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
         m_data.m_anim.SetBool("Airborn", true);
     }

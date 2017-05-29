@@ -72,6 +72,8 @@ public class MoveingBox : BasicState
             {
                 m_dragingTimer.Cycle();
                 MoveHorzontal(m_dragSpeed);
+
+                m_data.m_linkedBox.Move(m_data.m_velocityX);
             }
             else
             {
@@ -88,7 +90,7 @@ public class MoveingBox : BasicState
             m_dragingTimer.Play();
             m_data.m_linkedBox.Move(0.0f);
         }
-        
+
         if (!m_inputs.GetInput(E_INPUTS.MOVE_BOX))
         {
             return E_PLAYER_STATES.ON_GROUND;

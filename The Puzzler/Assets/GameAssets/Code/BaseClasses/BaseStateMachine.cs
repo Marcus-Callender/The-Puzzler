@@ -14,14 +14,14 @@ public class BaseStateMachine : MonoBehaviour
     protected E_PLAYER_STATES m_currentState = E_PLAYER_STATES.IN_AIR;
     protected E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
-    public BoxMovenemt m_linkedBox = null;
+    //public BoxMovenemt m_linkedBox = null;
 
     public virtual void Start()
     {
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
 
-        StartCoroutine(MoveBox());
+        //StartCoroutine(MoveBox());
     }
 
     public virtual void Update()
@@ -46,18 +46,18 @@ public class BaseStateMachine : MonoBehaviour
         }
     }
 
-    IEnumerator MoveBox()
-    {
-        while (true)
-        {
-            if (m_data.m_linkedBox != null)
-            {
-                m_linkedBox.Move(m_data.m_velocityX);
-            }
-
-            yield return new WaitForFixedUpdate();
-        }
-    }
+    //IEnumerator MoveBox()
+    //{
+    //    while (true)
+    //    {
+    //        if (m_data.m_linkedBox != null)
+    //        {
+    //            m_linkedBox.Move(m_data.m_velocityX);
+    //        }
+    //
+    //        yield return new WaitForFixedUpdate();
+    //    }
+    //}
 
     private void CheckGroundColl()
     {
@@ -141,19 +141,19 @@ public class BaseStateMachine : MonoBehaviour
 
                     if (m_data.m_InteractableContacts[3])
                     {
-                        m_linkedBox.m_requestStop = true;
+                        //m_linkedBox.m_requestStop = true;
                         Debug.Log("Stop Requested");
                     }
                 }
                 else
                 {
-                    m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
+                    //m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
 
                     m_data.m_InteractableContacts[1] = true;
 
                     if (m_data.m_contacts[3])
                     {
-                        m_linkedBox.m_requestStop = true;
+                        //m_linkedBox.m_requestStop = true;
 
                         Debug.Log("Stop Requested");
                     }
@@ -175,19 +175,19 @@ public class BaseStateMachine : MonoBehaviour
 
                     if (m_data.m_InteractableContacts[1])
                     {
-                        m_linkedBox.m_requestStop = true;
+                        //m_linkedBox.m_requestStop = true;
                         Debug.Log("Stop Requested");
                     }
                 }
                 else
                 {
-                    m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
+                    //m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
 
                     m_data.m_InteractableContacts[3] = true;
 
                     if (m_data.m_contacts[1])
                     {
-                        m_linkedBox.m_requestStop = true;
+                        //m_linkedBox.m_requestStop = true;
 
                         Debug.Log("Stop Requested");
                     }

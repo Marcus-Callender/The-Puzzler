@@ -50,21 +50,21 @@ public class BoxMovenemt : MonoBehaviour
             if (m_playerRefs[z].m_moveingBox && Mathf.Abs(gameObject.transform.position.x - m_playerRefs[z].transform.position.x) < ((gameObject.transform.localScale.x + m_playerRefs[z].transform.localScale.x) * 0.5f))
             {
                 Debug.Log("Overlapping");
-            
+
                 if (gameObject.transform.position.x > m_rigb.transform.position.x /*&& m_player.m_velocityX > 0.0f*/)
                 {
                     Vector3 newPos = gameObject.transform.position;
-                
+
                     newPos.x = m_playerRefs[z].transform.position.x - ((gameObject.transform.localScale.x + m_playerRefs[z].transform.localScale.x) * 0.5f);
-                
+
                     gameObject.transform.position = newPos;
                 }
                 else if (gameObject.transform.position.x < m_rigb.transform.position.x /*&& m_player.m_velocityX < 0.0f*/)
                 {
                     Vector3 newPos = gameObject.transform.position;
-                
+
                     newPos.x = m_playerRefs[z].transform.position.x + ((gameObject.transform.localScale.x + m_playerRefs[z].transform.localScale.x) * 0.5f);
-                
+
                     gameObject.transform.position = newPos;
                 }
             }
@@ -72,7 +72,7 @@ public class BoxMovenemt : MonoBehaviour
 
         m_requestStop = false;
     }
-    
+
     public void Move(float xVelocity)
     {
         m_rigb.velocity = new Vector3(xVelocity, m_rigb.velocity.y);

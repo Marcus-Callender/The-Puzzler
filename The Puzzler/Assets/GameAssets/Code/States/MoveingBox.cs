@@ -99,6 +99,20 @@ public class MoveingBox : BasicState
         return E_PLAYER_STATES.MOVEING_BLOCK;
     }
 
+
+    public override E_PLAYER_STATES Colide(E_DIRECTIONS _dir, string _tag)
+    {
+        base.Colide(_dir, _tag);
+    
+        if (_tag != "Box" && (_dir == E_DIRECTIONS.LEFT || _dir == E_DIRECTIONS.RIGHT))
+        {
+            //m_data.m_linkedBox.m_requestStop = true
+            return E_PLAYER_STATES.ON_GROUND;
+        }
+    
+        return E_PLAYER_STATES.MOVEING_BLOCK;
+    }
+
     public override E_PLAYER_STATES LeaveColision(string _tag)
     {
         return base.LeaveColision(_tag);

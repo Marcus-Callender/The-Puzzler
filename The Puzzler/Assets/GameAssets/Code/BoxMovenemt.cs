@@ -70,6 +70,21 @@ public class BoxMovenemt : MonoBehaviour
             }
         }
 
+        bool linked = false;
+
+        for (int z = 0; z < m_playerRefs.Length; z++)
+        {
+            if (m_playerRefs[z].m_linkedBox == this)
+            {
+                linked = true;
+            }
+        }
+
+        if (!linked)
+        {
+            Move(0.0f);
+        }
+
         m_requestStop = false;
     }
 

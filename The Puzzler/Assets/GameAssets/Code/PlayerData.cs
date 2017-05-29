@@ -31,6 +31,8 @@ public class PlayerData : MonoBehaviour
     public GameObject m_ghost;
     public BoxMovenemt m_linkedBox;
 
+    public GameObject m_overideFollow;
+
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();

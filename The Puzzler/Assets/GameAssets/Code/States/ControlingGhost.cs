@@ -39,9 +39,15 @@ public class ControlingGhost : BasicState
         }
         else
         {
+            m_data.m_overideFollow = m_ghostStateMachine.gameObject;
             m_inputs.m_pauseInputs = true;
             m_ghostStateMachine.Activate(gameObject.transform.position);
         }
+    }
+
+    public override void Exit()
+    {
+        m_data.m_overideFollow = null;
     }
 
     public override E_PLAYER_STATES Cycle()

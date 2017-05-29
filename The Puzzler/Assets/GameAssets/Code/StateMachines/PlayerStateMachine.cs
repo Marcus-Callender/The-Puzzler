@@ -85,4 +85,14 @@ public class PlayerStateMachine : BaseStateMachine
             CheckState();
         }
     }
+
+    public Vector3 getFollowPos()
+    {
+        if (m_data.m_overideFollow)
+        {
+            return m_data.m_overideFollow.transform.position;
+        }
+
+        return gameObject.transform.position;
+    }
 }

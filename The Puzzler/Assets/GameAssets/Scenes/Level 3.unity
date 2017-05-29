@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e5b83adb141a408e126566d46630a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_point2: {x: -15.2, y: 5.55, z: 0}
+  m_point2: {x: -15.2, y: 5.39, z: 0}
   m_speed: 1
   m_moveing: 0
 --- !u!1001 &290266233
@@ -331,7 +331,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4487221603359604, guid: 26125ad30c32a0341aa977dee67011e2, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 23096563461487038, guid: 26125ad30c32a0341aa977dee67011e2,
         type: 2}
@@ -452,7 +452,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4751512618569060, guid: 9f6f7a7bedabb6349894135b598de9d9, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1235125511074882, guid: 9f6f7a7bedabb6349894135b598de9d9, type: 2}
       propertyPath: m_Name

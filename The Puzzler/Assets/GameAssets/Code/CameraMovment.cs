@@ -35,7 +35,18 @@ public class CameraMovment : MonoBehaviour
 
         Vector3 pos = new Vector3(transform.position.x, yPosLerp, -8.0f);
 
-        if (playerPos.x > gameObject.transform.position.x + 1.0f)
+        if (Mathf.Abs(playerPos.x - gameObject.transform.position.x) > 1.5f)
+        {
+            if (playerPos.x > gameObject.transform.position.x)
+            {
+                pos.x += 14.0f * Time.deltaTime;
+            }
+            else
+            {
+                pos.x -= 14.0f * Time.deltaTime;
+            }
+        }
+        else if (playerPos.x > gameObject.transform.position.x + 1.0f)
         {
             pos.x = playerPos.x - 1.0f;
         }

@@ -75,4 +75,13 @@ public class PlayerData : MonoBehaviour
             m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
         }
     }
+
+    public Vector3 GetCenterTransform()
+    {
+        Vector3 newTreansform = gameObject.transform.position;
+
+        newTreansform.y += gameObject.transform.localScale.y * 0.5f;
+
+        return newTreansform;
+    }
 }

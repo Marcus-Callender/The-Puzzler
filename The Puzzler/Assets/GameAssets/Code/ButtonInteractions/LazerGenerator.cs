@@ -8,15 +8,19 @@ public class LazerGenerator : ButtonInteraction
 
     private Timer m_timer;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         m_timer = new Timer();
         m_timer.m_time = 0.5f;
         m_timer.Play();
     }
 
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (!m_activated)
         {
             RaycastHit hit;

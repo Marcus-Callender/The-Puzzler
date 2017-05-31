@@ -19,8 +19,10 @@ public class MoveBetweenPoints : ButtonInteraction
 
     private Vector3 m_speedSegments;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         m_rigb = GetComponent<Rigidbody>();
 
         m_point1 = gameObject.transform.position;
@@ -35,8 +37,10 @@ public class MoveBetweenPoints : ButtonInteraction
         Debug.Log(m_speedSegments);
     }
 
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (m_moveing)
         {
             m_rigb.isKinematic = false;
@@ -46,22 +50,12 @@ public class MoveBetweenPoints : ButtonInteraction
                 m_rigb.velocity = m_speedSegments * m_speed;
 
                 m_traveledDistance += m_speed * Time.deltaTime;
-
-                /*if (m_traveledDistance >= m_distance)
-                {
-                    m_moveing = false;
-                }*/
             }
             else
             {
                 m_rigb.velocity = m_speedSegments * -m_speed;
 
                 m_traveledDistance -= m_speed * Time.deltaTime;
-
-                /*if (m_traveledDistance <= 0.0f)
-                {
-                    m_moveing = false;
-                }*/
             }
 
             if (HasRechedDestination())
@@ -76,9 +70,9 @@ public class MoveBetweenPoints : ButtonInteraction
         }
     }
 
-    public override void OnInteract()
+    public override void Activate()
     {
-        base.OnInteract();
+        base.Activate();
 
         m_goToPoint2 = !m_goToPoint2;
         m_moveing = true;

@@ -20,8 +20,10 @@ public class PauseMovement : ButtonInteraction
 
     private Vector3 m_speedSegments;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         m_rigb = GetComponent<Rigidbody>();
 
         m_point1 = gameObject.transform.position;
@@ -36,8 +38,10 @@ public class PauseMovement : ButtonInteraction
         Debug.Log(m_speedSegments);
     }
 
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (m_moveing)
         {
             if (m_goToPoint2)

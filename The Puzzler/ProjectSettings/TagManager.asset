@@ -8,6 +8,7 @@ TagManager:
   - Enviroment
   - Ladder
   - Ghost
+  - Enemy
   layers:
   - Default
   - TransparentFX

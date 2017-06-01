@@ -95,7 +95,7 @@ public class BaseStateMachine : MonoBehaviour
                 m_data.m_velocityX += Other.gameObject.GetComponent<Rigidbody>().velocity.x;
             }
 
-            if (Other.gameObject.tag != "Box")
+            if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
             {
                 m_data.m_contacts[2] = true;
 
@@ -110,7 +110,7 @@ public class BaseStateMachine : MonoBehaviour
         {
             dir = E_DIRECTIONS.TOP;
 
-            if (Other.gameObject.tag != "Box")
+            if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
             {
                 m_data.m_contacts[0] = true;
 
@@ -129,7 +129,7 @@ public class BaseStateMachine : MonoBehaviour
             {
                 dir = E_DIRECTIONS.RIGHT;
 
-                if (Other.gameObject.tag != "Box")
+                if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
                 {
                     m_data.m_contacts[1] = true;
 
@@ -163,7 +163,7 @@ public class BaseStateMachine : MonoBehaviour
             {
                 dir = E_DIRECTIONS.LEFT;
 
-                if (Other.gameObject.tag != "Box")
+                if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
                 {
                     m_data.m_contacts[3] = true;
 

@@ -80,7 +80,7 @@ public class PlayerData : MonoBehaviour
     {
         Vector3 newTreansform = gameObject.transform.position;
 
-        newTreansform.y += gameObject.transform.localScale.y * 0.5f;
+        newTreansform.y += gameObject.transform.localScale.y/* * 0.5f*/;
 
         return newTreansform;
     }

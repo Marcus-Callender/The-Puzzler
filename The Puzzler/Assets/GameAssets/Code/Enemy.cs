@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     private bool m_grounded = false;
     private bool m_folowingPlayer = false;
 
+    private bool m_playerClose = false;
+
     // y = -11 is eqivelent to null as y = -10 is the kill floor
     private Vector3 m_PlayerLastPosition;
 
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
     {
         m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
         m_folowingPlayer = false;
+        m_playerClose = false;
 
         Debug.Log("Searching for player");
 
@@ -74,6 +77,10 @@ public class Enemy : MonoBehaviour
                     }
                 }
             }
+            else if (m_players[z].tag == "Player" && distance <= 1.5f)
+            {
+                m_playerClose = true;
+            }
         }
 
         if (!m_folowingPlayer)
@@ -93,6 +100,11 @@ public class Enemy : MonoBehaviour
 
                 if (Mathf.Abs(m_PlayerLastPosition.x - gameObject.transform.position.x) < 0.2f)
                 {
+                    if ((m_PlayerLastPosition.y - gameObject.transform.position.y) > 0.5f && !m_playerClose)
+                    {
+                        m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.0f);
+                    }
+
                     m_PlayerLastPosition.y = -11.0f;
                 }
             }

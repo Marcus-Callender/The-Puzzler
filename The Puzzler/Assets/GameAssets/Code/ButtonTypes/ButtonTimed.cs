@@ -48,13 +48,13 @@ public class ButtonTimed : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player"&& m_activated)
         {
             PlayerData player = other.GetComponent<PlayerData>();
 
             if (player)
             {
-                if (player.m_pressingButton && m_activated)
+                if (player.m_pressingButton)
                 {
                     m_activated = false;
 

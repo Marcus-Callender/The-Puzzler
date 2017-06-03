@@ -373,6 +373,16 @@ Prefab:
       propertyPath: m_linkedObjects.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 65329212698423440, guid: 9a426132dd752bb4b9ecae3a906da3d7,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 65329212698423440, guid: 9a426132dd752bb4b9ecae3a906da3d7,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114708252952192448, guid: 9a426132dd752bb4b9ecae3a906da3d7, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9a426132dd752bb4b9ecae3a906da3d7, type: 2}
@@ -965,6 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ba21b376b2e924aa2e975967f49a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_KOd: 0
 --- !u!1001 &1370722601
 Prefab:
   m_ObjectHideFlags: 0

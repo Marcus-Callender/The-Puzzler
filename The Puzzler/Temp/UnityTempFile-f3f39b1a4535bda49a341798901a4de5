@@ -98,6 +98,7 @@ Assets/GameAssets/Code/ButtonTypes/Button.cs
 Assets/GameAssets/Code/ButtonTypes/ButtonTimed.cs
 Assets/GameAssets/Code/ButtonTypes/PressurePlate.cs
 Assets/GameAssets/Code/CameraMovment.cs
+"Assets/GameAssets/Code/Enemy(2).cs"
 Assets/GameAssets/Code/Enemy.cs
 Assets/GameAssets/Code/InputSystems/GhostInputs.cs
 Assets/GameAssets/Code/InputSystems/PlayerInputs.cs

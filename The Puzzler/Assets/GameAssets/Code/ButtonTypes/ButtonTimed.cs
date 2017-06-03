@@ -54,7 +54,7 @@ public class ButtonTimed : MonoBehaviour
 
             if (player)
             {
-                if (player.m_pressingButton)
+                if (player.m_pressingButton && m_activated)
                 {
                     m_activated = false;
 

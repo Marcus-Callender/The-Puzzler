@@ -73,7 +73,7 @@ public class InAIr : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
-        if (_tag == "Ladder" && !m_inputs.GetInput(E_INPUTS.JUMP))
+        if (_tag == "Ladder" && m_inputs.GetInput(E_INPUTS.UP))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

@@ -11,9 +11,11 @@ public class Enemy : MonoBehaviour
     private bool m_folowingPlayer = false;
 
     private bool m_playerClose = false;
-
+    
     // y = -11 is eqivelent to null as y = -10 is the kill floor
     private Vector3 m_PlayerLastPosition;
+
+    public bool m_KOd = false;
 
     void Start()
     {
@@ -121,6 +123,16 @@ public class Enemy : MonoBehaviour
             {
                 m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.0f);
             }
+        }
+
+        if (m_KOd)
+        {
+            m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
+        }
+
+        if (gameObject.transform.position.y < -10.0f)
+        {
+            Destroy(gameObject);
         }
     }
 

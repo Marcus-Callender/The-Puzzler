@@ -38,6 +38,11 @@ public class LazerGenerator : ButtonInteraction
                 PlayerData data = hit.collider.gameObject.GetComponent<PlayerData>();
                 data.m_squished = true;
             }
+            else if (hit.collider.gameObject.tag == "Enemy")
+            {
+                Enemy data = hit.collider.gameObject.GetComponent<Enemy>();
+                data.m_KOd = true;
+            }
 
             Vector3[] positions = new Vector3[2];
             positions[0] = gameObject.transform.position;

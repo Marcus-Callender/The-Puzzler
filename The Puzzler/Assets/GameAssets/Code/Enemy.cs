@@ -118,10 +118,10 @@ public class Enemy : MonoBehaviour
                 m_faceingLeft = false;
             }
 
-            if ((gameObject.transform.position.y + 1.0f) < m_targate.GetCenterTransform().y && m_grounded)
+            /*if ((gameObject.transform.position.y + 1.0f) < m_targate.GetCenterTransform().y && m_grounded)
             {
                 m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.5f);
-            }
+            }*/
         }
     }
 
@@ -141,6 +141,15 @@ public class Enemy : MonoBehaviour
 
             if (Physics.Raycast(transform.position, new Vector3(m_faceingLeft ? -1.0f : 1.0f, 0.0f), 0.7f))
             {
+                Debug.Log("Jump up platform");
+                m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.5f);
+            }
+
+            Debug.DrawRay(transform.position, new Vector3(m_faceingLeft ? -1.0f : 1.0f, -1.0f), Color.yellow);
+
+            if (!Physics.Raycast(transform.position, new Vector3(m_faceingLeft ? -1.0f : 1.0f, -1.0f)))
+            {
+                Debug.Log("Jump over gap");
                 m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.5f);
             }
         }

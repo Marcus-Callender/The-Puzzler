@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (m_actionState == E_ActionState.PATROLLING && m_PlayerLastPosition.y != 11.0f)
+        if (m_actionState == E_ActionState.PATROLLING && m_PlayerLastPosition.y != -11.0f)
         {
             m_actionState = E_ActionState.LOOKING_FOR_PLAYER;
             m_renderer.material.color = Color.yellow;
@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
 
     void Movement()
     {
-        if (m_actionState == E_ActionState.FOLOWING_PLAYER || m_actionState == E_ActionState.LOOKING_FOR_PLAYER)
+        if (m_actionState == E_ActionState.FOLOWING_PLAYER)
         {
             if (gameObject.transform.position.x > m_targate.GetCenterTransform().x)
             {
@@ -117,11 +117,24 @@ public class Enemy : MonoBehaviour
                 m_rigb.velocity = new Vector3(3.0f, m_rigb.velocity.y);
                 m_faceingLeft = false;
             }
-
-            /*if ((gameObject.transform.position.y + 1.0f) < m_targate.GetCenterTransform().y && m_grounded)
+        }
+        else if (m_actionState == E_ActionState.LOOKING_FOR_PLAYER)
+        {
+            if (Mathf.Abs(gameObject.transform.position.x - m_PlayerLastPosition.x) < 0.1f)
             {
-                m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.5f);
-            }*/
+                m_PlayerLastPosition.y = -11.0f;
+            }
+
+            if (gameObject.transform.position.x > m_PlayerLastPosition.x)
+            {
+                m_rigb.velocity = new Vector3(-3.0f, m_rigb.velocity.y);
+                m_faceingLeft = true;
+            }
+            else
+            {
+                m_rigb.velocity = new Vector3(3.0f, m_rigb.velocity.y);
+                m_faceingLeft = false;
+            }
         }
     }
 
@@ -149,8 +162,13 @@ public class Enemy : MonoBehaviour
 
             if (!Physics.Raycast(transform.position, new Vector3(m_faceingLeft ? -1.0f : 1.0f, -1.0f)))
             {
-                Debug.Log("Jump over gap");
-                m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.5f);
+                Debug.DrawRay(transform.position + new Vector3(m_faceingLeft ? -1.0f : 1.0f, -1.0f), new Vector3(m_faceingLeft ? -2.0f : 2.0f, 0.0f), Color.yellow);
+
+                if (Physics.Raycast(transform.position + new Vector3(m_faceingLeft ? -1.0f : 1.0f, -1.0f), new Vector3(m_faceingLeft ? -2.0f : 2.0f, 0.0f)))
+                {
+                    Debug.Log("Jump over gap");
+                    m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.5f);
+                }
             }
         }
 

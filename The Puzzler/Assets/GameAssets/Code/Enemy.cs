@@ -47,7 +47,11 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
+        if (m_grounded)
+        {
+            m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
+        }
+
         m_folowingPlayer = false;
         m_playerClose = false;
 

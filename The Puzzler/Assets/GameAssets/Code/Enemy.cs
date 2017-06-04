@@ -33,6 +33,9 @@ public class Enemy : MonoBehaviour
     private float m_yDir = 0.0f;
     private E_ActionState m_actionState;
 
+    private bool m_patrollingLeft = false;
+    private Vector3 m_patrollingCenter;
+
     private PlayerData m_targate = null;
 
     void Start()
@@ -43,6 +46,7 @@ public class Enemy : MonoBehaviour
 
         m_actionState = E_ActionState.PATROLLING;
         m_PlayerLastPosition = new Vector3(0.0f, -11.0f, 0.0f);
+        m_patrollingCenter = gameObject.transform.position;
     }
 
     void Update()
@@ -61,7 +65,9 @@ public class Enemy : MonoBehaviour
 
     void CheckForPlayer()
     {
-        m_actionState = E_ActionState.PATROLLING;
+        E_ActionState m_previousState = m_actionState;
+
+        m_actionState = E_ActionState.NULL;
         m_targate = null;
         m_renderer.material.color = Color.green;
 
@@ -100,10 +106,20 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (m_actionState == E_ActionState.PATROLLING && m_PlayerLastPosition.y != -11.0f)
+        if (m_actionState == E_ActionState.NULL && m_PlayerLastPosition.y != -11.0f)
         {
             m_actionState = E_ActionState.LOOKING_FOR_PLAYER;
             m_renderer.material.color = Color.yellow;
+        }
+
+        if (m_actionState == E_ActionState.NULL)
+        {
+            if (m_previousState != E_ActionState.PATROLLING)
+            {
+                m_patrollingCenter = gameObject.transform.position;
+            }
+
+            m_actionState = E_ActionState.PATROLLING;
         }
     }
 
@@ -139,6 +155,19 @@ public class Enemy : MonoBehaviour
                 m_rigb.velocity = new Vector3(3.0f, m_rigb.velocity.y);
                 m_faceingLeft = false;
             }
+        }
+        else if (m_actionState == E_ActionState.PATROLLING)
+        {
+            if (gameObject.transform.position.x > m_patrollingCenter.x + 1.0f)
+            {
+                m_patrollingLeft = true;
+            }
+            else if (gameObject.transform.position.x < m_patrollingCenter.x - 1.0f)
+            {
+                m_patrollingLeft = false;
+            }
+
+            m_rigb.velocity = new Vector3(m_patrollingLeft ? -1.5f : 1.5f, 0.0f);
         }
     }
 

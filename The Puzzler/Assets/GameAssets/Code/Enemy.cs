@@ -19,18 +19,13 @@ public class Enemy : MonoBehaviour
     private Rigidbody m_rigb;
     private bool m_faceingLeft;
     private bool m_grounded = false;
-    private bool m_folowingPlayer = false;
-
-    private bool m_playerClose = false;
-
+    
     // y = -11 is eqivelent to null as y = -10 is the kill floor
     private Vector3 m_PlayerLastPosition;
     private Renderer m_renderer;
 
     public bool m_KOd = false;
-
-    private float m_xDir = 0.0f;
-    private float m_yDir = 0.0f;
+    
     private E_ActionState m_actionState;
 
     private bool m_patrollingLeft = false;
@@ -38,11 +33,30 @@ public class Enemy : MonoBehaviour
 
     private PlayerData m_targate = null;
 
+    private GameObject m_attack;
+
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
         m_players = FindObjectsOfType<PlayerData>();
         m_renderer = GetComponent<Renderer>();
+
+        Transform[] refrences = gameObject.GetComponentsInChildren<Transform>();
+
+        for (int z = 0; z < refrences.Length; z++)
+        {
+            if (refrences[z].tag == "Attack")
+            {
+                m_attack = refrences[z].gameObject;
+            }
+        }
+
+        if (m_attack == null)
+        {
+            Debug.Log("-----Error attack refrence not found!------");
+        }
+
+        m_attack.SetActive(false);
 
         m_actionState = E_ActionState.PATROLLING;
         m_PlayerLastPosition = new Vector3(0.0f, -11.0f, 0.0f);
@@ -55,10 +69,7 @@ public class Enemy : MonoBehaviour
         {
             m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
         }
-
-        m_folowingPlayer = false;
-        m_playerClose = false;
-
+        
         CheckForPlayer();
         Movement();
     }
@@ -167,7 +178,7 @@ public class Enemy : MonoBehaviour
                 m_patrollingLeft = false;
             }
 
-            m_rigb.velocity = new Vector3(m_patrollingLeft ? -1.5f : 1.5f, 0.0f);
+            m_rigb.velocity = new Vector3(m_patrollingLeft ? -1.0f : 1.0f, 0.0f);
         }
     }
 

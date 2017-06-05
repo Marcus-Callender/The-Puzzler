@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - Ghost
   - Enemy
+  - Attack
   layers:
   - Default
   - TransparentFX

@@ -92,8 +92,13 @@ public class GhostStateMachine : BaseStateMachine
             m_data.m_anim.SetBool("Stopped", true);
             m_inputs.m_pauseInputs = true;
             m_data.m_squished = false;
+
+            if (!m_inputs.m_recorded)
+            {
+                m_overrideRecording = true;
+            }
+
             m_inputs.m_recorded = true;
-            m_overrideRecording = true;
         }
 
         m_inputs.Cycle();

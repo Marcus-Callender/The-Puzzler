@@ -208,7 +208,7 @@ public class Enemy : MonoBehaviour
                 m_patrollingLeft = false;
             }
 
-            m_rigb.velocity = new Vector3(m_patrollingLeft ? -1.0f : 1.0f, 0.0f);
+            m_rigb.velocity = new Vector3(m_patrollingLeft ? -1.0f : 1.0f, m_rigb.velocity.y);
         }
         else if (m_actionState == E_ActionState.NEXT_TO_PLAYER)
         {
@@ -228,11 +228,6 @@ public class Enemy : MonoBehaviour
         }
         else if(m_actionState == E_ActionState.ATTACKING)
         {
-            /*if (!m_attackActiveTimer.m_playing)
-            {
-                m_attackActiveTimer.Play();
-            }*/
-
             if (m_attackActiveTimer.m_completed)
             {
                 m_attackActiveTimer.Stop();
@@ -261,7 +256,7 @@ public class Enemy : MonoBehaviour
         {
             m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
         }
-        else if ((m_actionState == E_ActionState.FOLOWING_PLAYER || m_actionState == E_ActionState.LOOKING_FOR_PLAYER) && m_grounded)
+        else if ((m_actionState == E_ActionState.FOLOWING_PLAYER || m_actionState == E_ActionState.LOOKING_FOR_PLAYER || m_actionState == E_ActionState.PATROLLING) && m_grounded)
         {
             Debug.DrawRay(transform.position, new Vector3(m_faceingLeft ? -1.0f : 1.0f, 0.0f), Color.red);
 

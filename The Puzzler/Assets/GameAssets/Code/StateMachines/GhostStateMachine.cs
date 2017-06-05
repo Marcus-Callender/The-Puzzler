@@ -8,6 +8,7 @@ public class GhostStateMachine : BaseStateMachine
 {
     public GhostInputs m_inputs = null;
     private Renderer[] m_matirialRenderers;
+    private bool m_overrideRecording = false;
 
     // this boolean is set to true on entering the state and remains true 
     // while the ghost is coliding with any interactables that it isn't standing on
@@ -22,6 +23,12 @@ public class GhostStateMachine : BaseStateMachine
 
         //m_reduceColisions = true;
         //m_colidedWithInteractable = false;
+
+        if (m_overrideRecording)
+        {
+            m_overrideRecording = false;
+            m_inputs.m_recorded = false;
+        }
 
         for (int z = 0; z < m_matirialRenderers.Length; z++)
         {
@@ -86,6 +93,7 @@ public class GhostStateMachine : BaseStateMachine
             m_inputs.m_pauseInputs = true;
             m_data.m_squished = false;
             m_inputs.m_recorded = true;
+            m_overrideRecording = true;
         }
 
         m_inputs.Cycle();

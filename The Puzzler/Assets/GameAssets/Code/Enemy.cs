@@ -94,10 +94,6 @@ public class Enemy : MonoBehaviour
         {
             CheckForPlayer();
         }
-        else
-        {
-            Debug.Log("Attacking");
-        }
 
         Movement();
     }

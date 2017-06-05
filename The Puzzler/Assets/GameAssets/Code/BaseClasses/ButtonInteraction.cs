@@ -14,9 +14,6 @@ public class ButtonInteraction : MonoBehaviour
     {
         m_delayTimer = new Timer();
         m_delayTimer.m_time = m_activateDelayTime;
-
-        m_delayTimer.Play();
-        m_delayTimer.m_playing = false;
     }
 
     public virtual void OnInteract()

@@ -19,9 +19,6 @@ public class ButtonTimed : MonoBehaviour
         m_Timer = new Timer();
         m_Timer.m_time = m_pressedTime;
 
-        m_Timer.Play();
-        m_Timer.m_playing = false;
-
         m_mat.color = Color.blue;
     }
 

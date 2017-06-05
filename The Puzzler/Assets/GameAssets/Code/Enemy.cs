@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     private bool m_patrollingLeft = false;
     private Vector3 m_patrollingCenter;
 
-    private float m_attackDelay = 0.2f;
+    private float m_attackDelay = 0.6f;
     private float m_attackActive = 0.6f;
     private float m_attackRecovery = 0.6f;
     private Timer m_attackDelayTimer;

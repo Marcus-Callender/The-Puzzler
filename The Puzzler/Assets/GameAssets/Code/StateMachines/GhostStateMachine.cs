@@ -136,4 +136,14 @@ public class GhostStateMachine : BaseStateMachine
             yield return new WaitForFixedUpdate();
         }
     }*/
+
+    public override void OnTriggerStay(Collider other)
+    {
+        if (m_inputs.m_recorded && other.gameObject.tag == "Attack")
+        {
+            m_data.m_squished = true;
+        }
+
+        base.OnTriggerStay(other);
+    }
 }

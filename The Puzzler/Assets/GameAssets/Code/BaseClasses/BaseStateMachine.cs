@@ -210,7 +210,7 @@ public class BaseStateMachine : MonoBehaviour
         CheckState();
     }
 
-    void OnTriggerStay(Collider other)
+    public virtual void OnTriggerStay(Collider other)
     {
         if (other.tag == "Ladder")
         {

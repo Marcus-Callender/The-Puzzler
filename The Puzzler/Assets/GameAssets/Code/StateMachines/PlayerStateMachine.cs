@@ -95,4 +95,14 @@ public class PlayerStateMachine : BaseStateMachine
 
         return gameObject.transform.position;
     }
+
+    public override void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Attack")
+        {
+            m_data.m_squished = true;
+        }
+
+        base.OnTriggerStay(other);
+    }
 }

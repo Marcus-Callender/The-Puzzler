@@ -8,6 +8,7 @@ enum E_ActionState
     FOLOWING_PLAYER,
     LOOKING_FOR_PLAYER,
     PATROLLING,
+    ATTACKING,
 
     SIZE,
     NULL
@@ -30,6 +31,13 @@ public class Enemy : MonoBehaviour
 
     private bool m_patrollingLeft = false;
     private Vector3 m_patrollingCenter;
+
+    private float m_attackDelay = 0.2f;
+    private float m_attackActive = 0.6f;
+    private float m_attackRecovery = 0.6f;
+    private Timer m_attackDelayTimer;
+    private Timer m_attackActiveTimer;
+    private Timer m_attackRecoveryTimer;
 
     private PlayerData m_targate = null;
 
@@ -57,7 +65,15 @@ public class Enemy : MonoBehaviour
         }
 
         m_attack.SetActive(false);
+        
+        m_attackDelayTimer = new Timer();
+        m_attackActiveTimer = new Timer();
+        m_attackRecoveryTimer = new Timer();
 
+        m_attackDelayTimer.m_time = m_attackDelay;
+        m_attackActiveTimer.m_time = m_attackActive;
+        m_attackRecoveryTimer.m_time = m_attackRecovery;
+        
         m_actionState = E_ActionState.PATROLLING;
         m_PlayerLastPosition = new Vector3(0.0f, -11.0f, 0.0f);
         m_patrollingCenter = gameObject.transform.position;
@@ -69,8 +85,20 @@ public class Enemy : MonoBehaviour
         {
             m_rigb.velocity = new Vector3(0.0f, m_rigb.velocity.y);
         }
+
+        m_attackDelayTimer.Cycle();
+        m_attackActiveTimer.Cycle();
+        m_attackRecoveryTimer.Cycle();
         
-        CheckForPlayer();
+        if (m_actionState != E_ActionState.ATTACKING)
+        {
+            CheckForPlayer();
+        }
+        else
+        {
+            Debug.Log("Attacking");
+        }
+
         Movement();
     }
 
@@ -132,6 +160,12 @@ public class Enemy : MonoBehaviour
 
             m_actionState = E_ActionState.PATROLLING;
         }
+
+        if (m_previousState == E_ActionState.NEXT_TO_PLAYER && !(m_actionState == E_ActionState.NEXT_TO_PLAYER /*|| m_actionState == E_ActionState.ATTACKING*/))
+        {
+            m_attackDelayTimer.m_completed = false;
+            m_attackDelayTimer.m_playing = false;
+        }
     }
 
     void Movement()
@@ -179,6 +213,45 @@ public class Enemy : MonoBehaviour
             }
 
             m_rigb.velocity = new Vector3(m_patrollingLeft ? -1.0f : 1.0f, 0.0f);
+        }
+        else if (m_actionState == E_ActionState.NEXT_TO_PLAYER)
+        {
+            if (!m_attackDelayTimer.m_playing)
+            {
+                m_attackDelayTimer.Play();
+            }
+
+            if (m_attackDelayTimer.m_completed)
+            {
+                m_actionState = E_ActionState.ATTACKING;
+                m_attackDelayTimer.Stop();
+                m_attackActiveTimer.Play();
+
+                m_attack.SetActive(true);
+            }
+        }
+        else if(m_actionState == E_ActionState.ATTACKING)
+        {
+            /*if (!m_attackActiveTimer.m_playing)
+            {
+                m_attackActiveTimer.Play();
+            }*/
+
+            if (m_attackActiveTimer.m_completed)
+            {
+                m_attackActiveTimer.Stop();
+
+                m_attack.SetActive(false);
+
+                m_attackRecoveryTimer.Play();
+            }
+
+            if (m_attackRecoveryTimer.m_completed)
+            {
+                m_attackRecoveryTimer.Stop();
+
+                m_actionState = E_ActionState.PATROLLING;
+            }
         }
     }
 

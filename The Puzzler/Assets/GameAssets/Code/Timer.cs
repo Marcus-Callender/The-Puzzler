@@ -10,7 +10,7 @@ public class Timer
 
     public float m_time = 0.0f;
     private float m_timeCount = 0.0f;
-    
+
     public void Cycle()
     {
         if (!m_completed && m_playing)
@@ -41,7 +41,7 @@ public class Timer
         m_reversed = reverse;
         m_playing = true;
         m_completed = false;
-        
+
         if (reverse)
         {
             m_timeCount = m_time;
@@ -50,6 +50,14 @@ public class Timer
         {
             m_timeCount = 0.0f;
         }
+    }
+
+    public void Stop()
+    {
+        m_completed = false;
+        m_playing = false;
+        
+        m_timeCount = 0.0f;
     }
 
     public float GetLerp()

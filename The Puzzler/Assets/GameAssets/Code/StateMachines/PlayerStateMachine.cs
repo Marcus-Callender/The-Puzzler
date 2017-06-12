@@ -40,8 +40,17 @@ public class PlayerStateMachine : BaseStateMachine
 
         m_inputs = gameObject.AddComponent<PlayerInputs>();
 
-        m_states[0] = gameObject.AddComponent<OnGround>();
-        m_states[1] = gameObject.AddComponent<InAIr>();
+        if (!m_data.m_use3D)
+        {
+            m_states[0] = gameObject.AddComponent<OnGround>();
+            m_states[1] = gameObject.AddComponent<InAIr>();
+        }
+        else
+        {
+            m_states[0] = gameObject.AddComponent<OnGround3D>();
+            m_states[1] = gameObject.AddComponent<InAir3D>();
+        }
+
         m_states[2] = gameObject.AddComponent<MoveingBox>();
         m_states[3] = gameObject.AddComponent<ClimbingLadder>();
         m_states[5] = gameObject.AddComponent<ControlingGhost>();

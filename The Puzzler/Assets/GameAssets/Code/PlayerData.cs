@@ -6,7 +6,7 @@ public class PlayerData : MonoBehaviour
 {
     public float m_velocityX = 0.0f;
     public float m_velocityY = 0.0f;
-    
+
     public bool m_moveingBox = false;
     public bool m_closeToBox = false;
 
@@ -33,6 +33,8 @@ public class PlayerData : MonoBehaviour
 
     public GameObject m_overideFollow;
 
+    public bool m_use3D = false;
+
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
@@ -40,39 +42,49 @@ public class PlayerData : MonoBehaviour
         PersistantData data = PersistantData.m_instance;
 
         m_anim = GetComponent<Animator>();
-        
+
         if (data)
         {
             m_playerDoubleJump = data.m_playerDoubleJump;
             m_playerWallSlide = data.m_playerWallSlide;
         }
     }
-    
+
     void Update()
     {
-        if (m_left_right && m_velocityX < 0.0f)
+        if (!m_use3D)
         {
-            gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+            if (m_left_right && m_velocityX < 0.0f)
+            {
+                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
 
-            m_left_right = false;
-        }
-        else if (!m_left_right && m_velocityX > 0.0f)
-        {
-            gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                m_left_right = false;
+            }
+            else if (!m_left_right && m_velocityX > 0.0f)
+            {
+                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
 
-            m_left_right = true;
+                m_left_right = true;
+            }
         }
     }
 
     void FixedUpdate()
     {
-        if (!m_squished)
+        if (!m_use3D)
         {
-            m_rigb.velocity = new Vector3(m_velocityX, m_velocityY);
+            if (!m_squished)
+            {
+                m_rigb.velocity = new Vector3(m_velocityX, m_velocityY);
+            }
+            else
+            {
+                m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
+            }
         }
         else
         {
-            m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
+            m_rigb.velocity = (gameObject.transform.forward * m_velocityX) + (gameObject.transform.up * m_velocityY);
         }
     }
 

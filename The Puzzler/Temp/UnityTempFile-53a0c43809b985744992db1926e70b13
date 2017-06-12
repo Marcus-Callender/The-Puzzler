@@ -87,6 +87,8 @@
 -define:UNITY_TEAM_LICENSE
 -define:ENABLE_VSTU
 -define:CROSS_PLATFORM_INPUT
+Assets/GameAssets/Code/3D/CameraMovment3D.cs
+Assets/GameAssets/Code/3D/InAir3D.cs
 Assets/GameAssets/Code/3D/OnGround3D.cs
 Assets/GameAssets/Code/3D/PlayerData3D.cs
 Assets/GameAssets/Code/3D/PlayerStateMachine3D.cs

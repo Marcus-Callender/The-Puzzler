@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateMachine3D : MonoBehaviour
+public class DimentionTransition : MonoBehaviour
 {
-    
+
     void Start()
     {
 

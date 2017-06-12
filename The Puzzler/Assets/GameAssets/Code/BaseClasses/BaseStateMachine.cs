@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BaseStateMachine : MonoBehaviour
 {
-    protected BasicState[] m_states = new BasicState[6];
+    protected BasicState[] m_states = new BasicState[8];
     protected PlayerData m_data;
     protected Rigidbody m_rigb;
 

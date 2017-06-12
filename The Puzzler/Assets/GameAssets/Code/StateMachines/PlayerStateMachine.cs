@@ -45,12 +45,14 @@ public class PlayerStateMachine : BaseStateMachine
         m_states[2] = gameObject.AddComponent<MoveingBox>();
         m_states[3] = gameObject.AddComponent<ClimbingLadder>();
         m_states[5] = gameObject.AddComponent<ControlingGhost>();
+        m_states[7] = gameObject.AddComponent<WallSlide>();
 
         m_states[0].Initialize(m_rigb, m_data, m_inputs);
         m_states[1].Initialize(m_rigb, m_data, m_inputs);
         m_states[2].Initialize(m_rigb, m_data, m_inputs);
         m_states[3].Initialize(m_rigb, m_data, m_inputs);
         m_states[5].Initialize(m_rigb, m_data, m_inputs);
+        m_states[7].Initialize(m_rigb, m_data, m_inputs);
     }
 
     public override void Update()

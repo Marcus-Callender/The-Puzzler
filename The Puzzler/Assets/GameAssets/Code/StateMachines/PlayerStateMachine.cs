@@ -40,28 +40,34 @@ public class PlayerStateMachine : BaseStateMachine
 
         m_inputs = gameObject.AddComponent<PlayerInputs>();
 
-        if (!m_data.m_use3D)
-        {
-            m_states[0] = gameObject.AddComponent<OnGround>();
-            m_states[1] = gameObject.AddComponent<InAIr>();
-        }
-        else
-        {
-            m_states[0] = gameObject.AddComponent<OnGround3D>();
-            m_states[1] = gameObject.AddComponent<InAir3D>();
-        }
+        m_states2D[0] = gameObject.AddComponent<OnGround>();
+        m_states2D[1] = gameObject.AddComponent<InAIr>();
+        m_states2D[2] = gameObject.AddComponent<MoveingBox>();
+        m_states2D[3] = gameObject.AddComponent<ClimbingLadder>();
+        m_states2D[5] = gameObject.AddComponent<ControlingGhost>();
+        m_states2D[7] = gameObject.AddComponent<WallSlide>();
 
-        m_states[2] = gameObject.AddComponent<MoveingBox>();
-        m_states[3] = gameObject.AddComponent<ClimbingLadder>();
-        m_states[5] = gameObject.AddComponent<ControlingGhost>();
-        m_states[7] = gameObject.AddComponent<WallSlide>();
+        m_states2D[0].Initialize(m_rigb, m_data, m_inputs);
+        m_states2D[1].Initialize(m_rigb, m_data, m_inputs);
+        m_states2D[2].Initialize(m_rigb, m_data, m_inputs);
+        m_states2D[3].Initialize(m_rigb, m_data, m_inputs);
+        m_states2D[5].Initialize(m_rigb, m_data, m_inputs);
+        m_states2D[7].Initialize(m_rigb, m_data, m_inputs);
 
-        m_states[0].Initialize(m_rigb, m_data, m_inputs);
-        m_states[1].Initialize(m_rigb, m_data, m_inputs);
-        m_states[2].Initialize(m_rigb, m_data, m_inputs);
-        m_states[3].Initialize(m_rigb, m_data, m_inputs);
-        m_states[5].Initialize(m_rigb, m_data, m_inputs);
-        m_states[7].Initialize(m_rigb, m_data, m_inputs);
+
+        m_states3D[0] = gameObject.AddComponent<OnGround3D>();
+        m_states3D[1] = gameObject.AddComponent<InAir3D>();
+        m_states3D[2] = gameObject.AddComponent<MoveingBox>();
+        m_states3D[3] = gameObject.AddComponent<ClimbingLadder>();
+        m_states3D[5] = gameObject.AddComponent<ControlingGhost>();
+        m_states3D[7] = gameObject.AddComponent<WallSlide>();
+
+        m_states3D[0].Initialize(m_rigb, m_data, m_inputs);
+        m_states3D[1].Initialize(m_rigb, m_data, m_inputs);
+        m_states3D[2].Initialize(m_rigb, m_data, m_inputs);
+        m_states3D[3].Initialize(m_rigb, m_data, m_inputs);
+        m_states3D[5].Initialize(m_rigb, m_data, m_inputs);
+        m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
     }
 
     public override void Update()

@@ -14,4 +14,17 @@ public class DimentionTransition : MonoBehaviour
     {
 
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ghost")
+        {
+            PlayerData data = other.gameObject.GetComponent<PlayerData>();
+
+            if (data)
+            {
+                data.m_use3D = !data.m_use3D;
+            }
+        }
+    }
 }

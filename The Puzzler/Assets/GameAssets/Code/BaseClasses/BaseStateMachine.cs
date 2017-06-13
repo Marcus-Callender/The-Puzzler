@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class BaseStateMachine : MonoBehaviour
 {
-    protected BasicState[] m_states = new BasicState[8];
-    protected PlayerData m_data;
+    protected BasicState[] m_states2D = new BasicState[8];
+    protected BasicState[] m_states3D = new BasicState[8];
+    public PlayerData m_data;
     protected Rigidbody m_rigb;
 
     [SerializeField]
@@ -26,7 +27,7 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual void Update()
     {
-        m_newState = m_states[(int)m_currentState].Cycle();
+        m_newState = GetCurrentState().Cycle();
         CheckState();
 
         m_data.m_closeToBox = false;
@@ -34,7 +35,7 @@ public class BaseStateMachine : MonoBehaviour
 
     void FixedUpdate()
     {
-        m_newState = m_states[(int)m_currentState].PhysCycle();
+        m_newState = GetCurrentState().PhysCycle();
         CheckState();
 
         m_data.m_onLadder = false;
@@ -200,13 +201,13 @@ public class BaseStateMachine : MonoBehaviour
             m_data.m_squished = true;
         }
 
-        m_newState = m_states[(int)m_currentState].Colide(dir, Other.gameObject.tag);
+        m_newState = GetCurrentState().Colide(dir, Other.gameObject.tag);
         CheckState();
     }
 
     void OnCollisionExit(Collision Other)
     {
-        m_newState = m_states[(int)m_currentState].LeaveColision(Other.gameObject.tag);
+        m_newState = GetCurrentState().LeaveColision(Other.gameObject.tag);
         CheckState();
     }
 
@@ -217,13 +218,13 @@ public class BaseStateMachine : MonoBehaviour
             m_data.m_onLadder = true;
         }
 
-        m_newState = m_states[(int)m_currentState].InTrigger(other.gameObject.tag);
+        m_newState = GetCurrentState().InTrigger(other.gameObject.tag);
         CheckState();
     }
 
     void OnTriggerExit(Collider other)
     {
-        m_newState = m_states[(int)m_currentState].LeaveTrigger(other.gameObject.tag);
+        m_newState = GetCurrentState().LeaveTrigger(other.gameObject.tag);
         CheckState();
     }
 
@@ -231,12 +232,32 @@ public class BaseStateMachine : MonoBehaviour
     {
         if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState)
         {
-            m_states[(int)m_currentState].Exit();
-            m_states[(int)m_newState].Enter();
+            GetCurrentState().Exit();
+            m_states2D[(int)m_newState].Enter();
 
             Debug.Log(m_currentState + " -> " + m_newState);
 
             m_currentState = m_newState;
         }
+    }
+
+    protected BasicState GetCurrentState()
+    {
+        if (m_data.m_use3D)
+        {
+            return m_states3D[(int)m_currentState];
+        }
+
+        return m_states2D[(int)m_currentState];
+    }
+
+    protected BasicState GetNewState()
+    {
+        if (m_data.m_use3D)
+        {
+            return m_states3D[(int)m_newState];
+        }
+
+        return m_states2D[(int)m_newState];
     }
 }

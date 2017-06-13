@@ -34,6 +34,7 @@ public class PlayerData : MonoBehaviour
     public GameObject m_overideFollow;
 
     public bool m_use3D = false;
+    public Quaternion m_rotation;
 
     void Start()
     {
@@ -42,6 +43,8 @@ public class PlayerData : MonoBehaviour
         PersistantData data = PersistantData.m_instance;
 
         m_anim = GetComponent<Animator>();
+
+        m_rotation = gameObject.transform.rotation;
 
         if (data)
         {
@@ -57,16 +60,26 @@ public class PlayerData : MonoBehaviour
             if (m_left_right && m_velocityX < 0.0f)
             {
                 gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                //m_rotation.x = 90.0f;
+                m_rotation = gameObject.transform.rotation;
 
                 m_left_right = false;
             }
             else if (!m_left_right && m_velocityX > 0.0f)
             {
                 gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                //m_rotation.x = -90.0f;
+                m_rotation = gameObject.transform.rotation;
 
                 m_left_right = true;
             }
         }
+
+        gameObject.transform.rotation = m_rotation;
+
+        Debug.Log("Y: " + (gameObject.transform.rotation.y - m_rotation.y));
+        Debug.Log("W: " + (gameObject.transform.rotation.w - m_rotation.w));
+        Debug.Log("Rotation: " + m_rotation);
     }
 
     void FixedUpdate()

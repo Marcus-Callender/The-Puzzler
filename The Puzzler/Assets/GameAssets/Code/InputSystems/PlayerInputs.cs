@@ -78,6 +78,7 @@ public class PlayerInputs : MonoBehaviour
                 m_ghostButtonTimer.Play();
             }
 
+            // this sometimes gives a null refrence error when reloading the game after falling from the world, though it dosen't seem to affect gameplay
             if (m_ghostButtonTimer.m_playing)
             {
                 m_ghostButtonTimer.Cycle();

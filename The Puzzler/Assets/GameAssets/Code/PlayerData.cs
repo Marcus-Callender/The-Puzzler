@@ -60,7 +60,7 @@ public class PlayerData : MonoBehaviour
             if (m_left_right && m_velocityX < 0.0f)
             {
                 gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-                //m_rotation.x = 90.0f;
+
                 m_rotation = gameObject.transform.rotation;
 
                 m_left_right = false;
@@ -68,7 +68,7 @@ public class PlayerData : MonoBehaviour
             else if (!m_left_right && m_velocityX > 0.0f)
             {
                 gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-                //m_rotation.x = -90.0f;
+
                 m_rotation = gameObject.transform.rotation;
 
                 m_left_right = true;
@@ -76,10 +76,6 @@ public class PlayerData : MonoBehaviour
         }
 
         gameObject.transform.rotation = m_rotation;
-
-        Debug.Log("Y: " + (gameObject.transform.rotation.y - m_rotation.y));
-        Debug.Log("W: " + (gameObject.transform.rotation.w - m_rotation.w));
-        Debug.Log("Rotation: " + m_rotation);
     }
 
     void FixedUpdate()
@@ -108,5 +104,34 @@ public class PlayerData : MonoBehaviour
         newTreansform.y += gameObject.transform.localScale.y/* * 0.5f*/;
 
         return newTreansform;
+    }
+
+    public Quaternion GetRealRotation()
+    {
+        if (m_use3D)
+        {
+            return gameObject.transform.rotation;
+        }
+
+        Quaternion realRotation = gameObject.transform.rotation;
+
+        if (!m_left_right)
+        {
+            realRotation.y += 180.0f;
+        }
+
+        return realRotation;
+    }
+
+    public void SetRotation(Quaternion rot)
+    {
+        if (!m_use3D)
+        {
+            Quaternion newRot = rot;
+
+            newRot *= Quaternion.Euler(0.0f, 90.0f, 0.0f);
+
+            m_rotation = newRot;
+        }
     }
 }

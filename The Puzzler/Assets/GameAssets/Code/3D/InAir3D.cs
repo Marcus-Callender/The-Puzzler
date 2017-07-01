@@ -39,13 +39,13 @@ public class InAir3D : BasicState
         if (m_inputs.GetInput(E_INPUTS.LEFT))
         {
             gameObject.transform.Rotate(gameObject.transform.up, 180 * Time.deltaTime);
-            //m_data.m_rotation.y += 180 * Time.deltaTime;
+
             m_data.m_rotation = gameObject.transform.rotation;
         }
         else if (m_inputs.GetInput(E_INPUTS.RIGHT))
         {
             gameObject.transform.Rotate(-gameObject.transform.up, 180 * Time.deltaTime);
-            //m_data.m_rotation.y -= 180 * Time.deltaTime;
+
             m_data.m_rotation = gameObject.transform.rotation;
         }
 

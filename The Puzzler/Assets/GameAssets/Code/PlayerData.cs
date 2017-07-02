@@ -101,7 +101,7 @@ public class PlayerData : MonoBehaviour
     {
         Vector3 newTreansform = gameObject.transform.position;
 
-        newTreansform.y += gameObject.transform.localScale.y/* * 0.5f*/;
+        newTreansform.y += gameObject.transform.localScale.y;
 
         return newTreansform;
     }
@@ -125,10 +125,12 @@ public class PlayerData : MonoBehaviour
 
     public void SetRotation(Quaternion rot)
     {
+        // only run when the player is in 2d
         if (!m_use3D)
         {
             Quaternion newRot = rot;
 
+            // rotates the player 90 degrees sideways
             newRot *= Quaternion.Euler(0.0f, 90.0f, 0.0f);
 
             m_rotation = newRot;

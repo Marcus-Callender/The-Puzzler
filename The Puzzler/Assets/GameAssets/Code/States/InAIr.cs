@@ -12,12 +12,6 @@ public class InAIr : BasicState
 
     public override void Enter()
     {
-        /*Vector3 pos = gameObject.transform.position;
-
-        pos.y += 0.001f;
-
-        gameObject.transform.position = pos;*/
-
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
 
         m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);

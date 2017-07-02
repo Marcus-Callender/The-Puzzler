@@ -41,8 +41,7 @@ public class GhostStateMachine : BaseStateMachine
         if (m_inputs.m_recorded)
         {
             m_inputs.m_arrayPosition = 0;
-            //IEnumerator couroutine = m_inputs.Play();
-            //StartCoroutine(couroutine);
+
             m_inputs.m_playing = true;
         }
         else
@@ -65,9 +64,7 @@ public class GhostStateMachine : BaseStateMachine
         }
 
         m_inputs = gameObject.AddComponent<GhostInputs>();
-
-        //StartCoroutine(CheckColisions());
-
+        
         m_states2D[0] = gameObject.AddComponent<OnGround>();
         m_states2D[1] = gameObject.AddComponent<InAIr>();
         m_states2D[2] = gameObject.AddComponent<MoveingBox>();
@@ -106,8 +103,7 @@ public class GhostStateMachine : BaseStateMachine
         m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
 
         base.Update();
-
-        //if (m_inputs.m_recorded && m_inputs.m_arrayPosition == GhostInputs.m_recordingSize)
+        
         if (m_inputs.m_recorded && !m_inputs.m_playing)
         {
             gameObject.tag = "Ghost";
@@ -116,40 +112,7 @@ public class GhostStateMachine : BaseStateMachine
             m_inputs.m_pauseInputs = true;
         }
     }
-
-    /*public void FixedUpdate()
-    {
-        m_colidedWithInteractable = false;
-    }*/
-
-    /*public override void OnCollisionStay(Collision Other)
-    {
-        base.OnCollisionStay(Other);
-
-
-        float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
-
-        if (Mathf.Approximately(angle, 90.0f) && Other.gameObject.tag == "Interactable")
-        {
-            m_colidedWithInteractable = true;
-        }
-    }*/
-
-    /*private IEnumerator CheckColisions()
-    {
-        while (true)
-        {
-            if (!m_colidedWithInteractable && m_reduceColisions)
-            {
-                gameObject.layer = 9;
-
-                m_reduceColisions = false;
-            }
-
-            yield return new WaitForFixedUpdate();
-        }
-    }*/
-
+    
     public override void OnTriggerStay(Collider other)
     {
         if (m_inputs.m_recorded && other.gameObject.tag == "Attack")

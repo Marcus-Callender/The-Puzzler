@@ -15,7 +15,7 @@ public class GhostStateMachine : BaseStateMachine
     //private bool m_colidedWithInteractable = false;
     //private bool m_reduceColisions = true;
 
-    public void Activate(Vector3 pos)
+    public void Activate(Vector3 pos, bool use3d)
     {
         gameObject.tag = "Player";
 
@@ -36,6 +36,7 @@ public class GhostStateMachine : BaseStateMachine
             m_matirialRenderers[z].material.color = new Color(0.1f, 1.0f, 1.0f, 0.5f);
         }
 
+
         // alows the ghost to animate again
         m_data.m_anim.SetBool("Stopped", false);
 
@@ -48,12 +49,13 @@ public class GhostStateMachine : BaseStateMachine
         else
         {
             gameObject.transform.position = pos;
+            m_data.m_use3D = use3d;
             m_inputs.m_arrayPosition = 0;
             m_inputs.m_recording = true;
             m_inputs.m_consumingInputs = true;
         }
     }
-    
+
     public override void Start()
     {
         base.Start();
@@ -65,7 +67,6 @@ public class GhostStateMachine : BaseStateMachine
             m_matirialRenderers[z].material.color = new Color(0.5f, 0.2f, 0.2f, 0.5f);
         }
 
-        //m_inputs = gameObject.AddComponent<GhostInputs>();
         m_inputs = gameObject.GetComponent<GhostInputs>();
 
         m_states2D[0] = gameObject.AddComponent<OnGround>();
@@ -106,7 +107,12 @@ public class GhostStateMachine : BaseStateMachine
         m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
 
         base.Update();
-        
+
+        if (!m_inputs.m_recorded && !m_inputs.m_recording && !m_inputs.m_playing)
+        {
+            m_data.m_squished = false;
+        }
+
         if (m_inputs.m_recorded && !m_inputs.m_playing)
         {
             gameObject.tag = "Ghost";
@@ -116,7 +122,7 @@ public class GhostStateMachine : BaseStateMachine
             m_inputs.m_consumingInputs = false;
         }
     }
-    
+
     public override void OnTriggerStay(Collider other)
     {
         if (m_inputs.m_recorded && other.gameObject.tag == "Attack")

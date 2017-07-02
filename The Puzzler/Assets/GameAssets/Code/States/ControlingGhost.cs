@@ -36,14 +36,14 @@ public class ControlingGhost : BasicState
         if (m_ghostInputs.m_recorded)
         {
             m_inputs.m_pauseInputs = false;
-            m_ghostStateMachine.Activate(gameObject.transform.position);
         }
         else
         {
             m_data.m_overideFollow = m_ghostStateMachine.m_data;
             m_inputs.m_pauseInputs = true;
-            m_ghostStateMachine.Activate(gameObject.transform.position);
         }
+
+        m_ghostStateMachine.Activate(gameObject.transform.position, m_data.m_use3D);
     }
 
     public override void Exit()

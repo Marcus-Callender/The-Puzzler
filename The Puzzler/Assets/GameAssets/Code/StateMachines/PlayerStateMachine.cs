@@ -111,6 +111,26 @@ public class PlayerStateMachine : BaseStateMachine
         return gameObject.transform.position;
     }
 
+    public Quaternion getFollowRot()
+    {
+        if (m_data.m_overideFollow)
+        {
+            return m_data.m_overideFollow.transform.rotation;
+        }
+
+        return gameObject.transform.rotation;
+    }
+
+    public bool getFollowLeftRight()
+    {
+        if (m_data.m_overideFollow)
+        {
+            return m_data.m_overideFollow.m_left_right;
+        }
+
+        return m_data.m_left_right;
+    }
+
     public override void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Attack")

@@ -31,7 +31,7 @@ public class PlayerData : MonoBehaviour
     public GameObject m_ghost;
     public BoxMovenemt m_linkedBox;
 
-    public GameObject m_overideFollow;
+    public PlayerData m_overideFollow;
 
     public bool m_use3D = false;
     public Quaternion m_rotation;

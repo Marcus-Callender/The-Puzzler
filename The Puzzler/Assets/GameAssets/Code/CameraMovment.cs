@@ -29,6 +29,8 @@ public class CameraMovment : MonoBehaviour
     void LateUpdate()
     {
         Vector3 playerPos = m_player.getFollowPos();
+        Quaternion playerRot = m_player.getFollowRot();
+        bool playerLeftRight = m_player.getFollowLeftRight();
         bool use3D = m_player.m_data.m_use3D;
 
         if (!use3D)
@@ -60,16 +62,16 @@ public class CameraMovment : MonoBehaviour
             gameObject.transform.position = pos;*/
 
 
-            gameObject.transform.position = m_player.gameObject.transform.position;
-            gameObject.transform.rotation = m_player.gameObject.transform.rotation;
+            gameObject.transform.position = playerPos;
+            gameObject.transform.rotation = playerRot;
 
-            gameObject.transform.Rotate(Vector3.up, (m_player.m_data.m_left_right ? -90.0f : 90.0f));
+            gameObject.transform.Rotate(Vector3.up, (playerLeftRight ? -90.0f : 90.0f));
             gameObject.transform.Translate(new Vector3(0.0f, 2.0f, -8.0f));
         }
         else
         {
-            gameObject.transform.position = m_player.gameObject.transform.position;
-            gameObject.transform.rotation = m_player.gameObject.transform.rotation;
+            gameObject.transform.position = playerPos;
+            gameObject.transform.rotation = playerRot;
 
             //gameObject.transform.Translate(new Vector3(-3.0f, 1.2f, 0.5f));
             gameObject.transform.Translate(new Vector3(0.5f, 1.2f, -3.0f));

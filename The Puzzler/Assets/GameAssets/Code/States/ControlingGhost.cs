@@ -40,7 +40,7 @@ public class ControlingGhost : BasicState
         }
         else
         {
-            m_data.m_overideFollow = m_ghostStateMachine.gameObject;
+            m_data.m_overideFollow = m_ghostStateMachine.m_data;
             m_inputs.m_pauseInputs = true;
             m_ghostStateMachine.Activate(gameObject.transform.position);
         }

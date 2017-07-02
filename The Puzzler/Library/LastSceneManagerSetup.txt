@@ -1,5 +1,4 @@
 sceneSetups:
-- path: C:/Users/Marcus/Downloads/UnitySkyboxShaders-master/UnitySkyboxShaders-master/Assets/Test/Gradient
-    Skybox.unity
+- path: Assets/GameAssets/Scenes/Level 4.unity
   isLoaded: 1
   isActive: 1

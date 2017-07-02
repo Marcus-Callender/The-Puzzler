@@ -18,6 +18,7 @@ public class GhostStateMachine : BaseStateMachine
     public void Activate(Vector3 pos)
     {
         gameObject.tag = "Player";
+
         // set layer to Ghost (reduced Collisions)
         gameObject.layer = 11;
 
@@ -49,6 +50,7 @@ public class GhostStateMachine : BaseStateMachine
             gameObject.transform.position = pos;
             m_inputs.m_arrayPosition = 0;
             m_inputs.m_recording = true;
+            m_inputs.m_consumingInputs = true;
         }
     }
     
@@ -63,8 +65,9 @@ public class GhostStateMachine : BaseStateMachine
             m_matirialRenderers[z].material.color = new Color(0.5f, 0.2f, 0.2f, 0.5f);
         }
 
-        m_inputs = gameObject.AddComponent<GhostInputs>();
-        
+        //m_inputs = gameObject.AddComponent<GhostInputs>();
+        m_inputs = gameObject.GetComponent<GhostInputs>();
+
         m_states2D[0] = gameObject.AddComponent<OnGround>();
         m_states2D[1] = gameObject.AddComponent<InAIr>();
         m_states2D[2] = gameObject.AddComponent<MoveingBox>();
@@ -110,6 +113,7 @@ public class GhostStateMachine : BaseStateMachine
             // runs if the recording has finished and the ghost is not playing
             m_data.m_anim.SetBool("Stopped", true);
             m_inputs.m_pauseInputs = true;
+            m_inputs.m_consumingInputs = false;
         }
     }
     

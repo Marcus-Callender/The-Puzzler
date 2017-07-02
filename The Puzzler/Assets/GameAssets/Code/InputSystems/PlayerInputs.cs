@@ -21,7 +21,7 @@ public enum E_INPUTS
 
 public class PlayerInputs : MonoBehaviour
 {
-    private char m_Inputs;
+    protected char m_Inputs;
     public bool m_pauseInputs = false;
 
     public Timer m_ghostButtonTimer;

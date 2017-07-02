@@ -6,12 +6,13 @@ public class GhostInputs : PlayerInputs
 {
     public const int m_recordingSize = 60 * 4;
 
-    private char m_Inputs;
+    //private char m_Inputs;
     private char[] m_recordedInputs = new char[m_recordingSize];
     public int m_arrayPosition = 0;
     public bool m_recorded = false;
     public bool m_recording = false;
     public bool m_playing = false;
+    public bool m_consumingInputs = false;
 
     public Vector3 m_startingPosition;
 

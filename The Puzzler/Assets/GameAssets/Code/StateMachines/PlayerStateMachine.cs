@@ -59,14 +59,12 @@ public class PlayerStateMachine : BaseStateMachine
         m_states3D[1] = gameObject.AddComponent<InAir3D>();
         m_states3D[2] = gameObject.AddComponent<MoveingBox>();
         m_states3D[3] = gameObject.AddComponent<ClimbingLadder>();
-        m_states3D[5] = gameObject.AddComponent<ControlingGhost>();
         m_states3D[7] = gameObject.AddComponent<WallSlide>();
 
         m_states3D[0].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[1].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[2].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[3].Initialize(m_rigb, m_data, m_inputs);
-        m_states3D[5].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
     }
 

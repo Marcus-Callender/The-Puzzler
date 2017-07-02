@@ -14,6 +14,7 @@ public class ControlingGhost : BasicState
         m_data = data;
         m_inputs = inputs;
 
+        Debug.Log("###### Creating ghost ######");
         m_GhostObject = Instantiate(m_data.m_ghost);
         m_GhostObject.SetActive(true);
         m_ghostStateMachine = m_GhostObject.GetComponent<GhostStateMachine>();
@@ -52,7 +53,7 @@ public class ControlingGhost : BasicState
 
     public override E_PLAYER_STATES Cycle()
     {
-        if (m_ghostInputs.m_recorded)
+        if (!m_ghostInputs.m_consumingInputs)
         {
             m_inputs.m_pauseInputs = false;
             return E_PLAYER_STATES.IN_AIR;

@@ -11,6 +11,7 @@ public class BoxMovenemt : MonoBehaviour
     float m_playerBoxMinDistance = 0.0f;
 
     public bool m_requestStop = false;
+    private GameObject m_linkedBox;
 
     void Start()
     {
@@ -88,8 +89,39 @@ public class BoxMovenemt : MonoBehaviour
     //    m_requestStop = false;
     //}
 
+    private void FixedUpdate()
+    {
+        //m_rigb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+    }
+
     public void Move(float xVelocity)
     {
         m_rigb.velocity = new Vector3(xVelocity, m_rigb.velocity.y);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Box")
+        {
+            m_linkedBox = other.gameObject;
+        }
+
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        //if (other.gameObject == m_linkedBox)
+        //{
+        //    //Rigidbody rigb = m_linkedBox.GetComponent<Rigidbody>();
+        //    //
+        //    //if (rigb)
+        //    //{
+        //    //    rigb.velocity.Set(0.0f, 0.0f, 0.0f);
+        //    //}
+        //
+        //    m_rigb.velocity.Set(0.0f, 0.0f, 0.0f);
+        //}
+
+        m_rigb.velocity.Set(0.0f, 0.0f, 0.0f);
     }
 }

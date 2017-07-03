@@ -124,7 +124,7 @@ public class MoveingBox : BasicState
 
         return E_PLAYER_STATES.MOVEING_BLOCK;
     }
-
+    
 
     public override E_PLAYER_STATES Colide(E_DIRECTIONS _dir, string _tag)
     {

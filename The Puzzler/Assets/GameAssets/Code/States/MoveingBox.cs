@@ -11,6 +11,9 @@ public class MoveingBox : BasicState
 
     private bool m_moveInput = false;
 
+    private GameObject m_box;
+    private Rigidbody m_boxRigb;
+
     public override void Enter()
     {
         m_pauseTimer = new Timer();
@@ -22,13 +25,33 @@ public class MoveingBox : BasicState
         m_data.m_velocityX = 0.0f;
 
         m_moveInput = false;
+        m_data.m_stopRotation = true;
+
+        RaycastHit hit;
+        Physics.Raycast(m_data.GetCenterTransform(), transform.forward, out hit);
+        Debug.DrawRay(m_data.GetCenterTransform(), transform.forward, Color.red);
+
+        if (hit.transform.tag == "Box")
+        {
+            m_box = hit.transform.gameObject;
+            m_box.transform.SetParent(gameObject.transform);
+            m_boxRigb = hit.rigidbody;
+            //m_boxRigb.mass = 1;
+        }
     }
 
     public override void Exit()
     {
         // stops the box from continuasly moving then un-links it
-        m_data.m_linkedBox.Move(0.0f);
-        m_data.m_linkedBox = null;
+        //m_data.m_linkedBox.Move(0.0f);
+        //m_data.m_linkedBox = null;
+
+        if (m_box)
+        {
+            m_box.transform.SetParent(null);
+            m_boxRigb.mass = 1000000;
+            m_boxRigb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        }
 
         m_pauseTimer.Play();
         m_pauseTimer.m_playing = false;
@@ -37,10 +60,16 @@ public class MoveingBox : BasicState
         m_dragingTimer.m_playing = false;
 
         m_data.m_moveingBox = false;
+        m_data.m_stopRotation = false;
     }
 
     public override E_PLAYER_STATES Cycle()
     {
+        if (!m_box)
+        {
+            return E_PLAYER_STATES.IN_AIR;
+        }
+
         bool getInput = m_inputs.GetInput(E_INPUTS.LEFT) || m_inputs.GetInput(E_INPUTS.RIGHT);
 
         if (getInput && !m_moveInput)
@@ -52,11 +81,6 @@ public class MoveingBox : BasicState
         }
 
         m_moveInput = getInput;
-
-        if (!m_data.m_closeToBox)
-        {
-            return E_PLAYER_STATES.IN_AIR;
-        }
 
         if (getInput)
         {
@@ -73,11 +97,11 @@ public class MoveingBox : BasicState
                 m_dragingTimer.Cycle();
                 MoveHorzontal(m_dragSpeed);
 
-                m_data.m_linkedBox.Move(m_data.m_velocityX);
+                //m_data.m_linkedBox.Move(m_data.m_velocityX);
             }
             else
             {
-                m_data.m_linkedBox.Move(0.0f);
+                //m_data.m_linkedBox.Move(0.0f);
                 m_data.m_velocityX = 0.0f;
                 m_pauseTimer.Play();
 
@@ -88,9 +112,11 @@ public class MoveingBox : BasicState
         {
             m_pauseTimer.Play();
             m_dragingTimer.Play();
-            m_data.m_linkedBox.Move(0.0f);
+            //m_data.m_linkedBox.Move(0.0f);
         }
 
+        m_boxRigb.velocity = new Vector3(m_data.m_velocityX, m_data.m_velocityY);
+        
         if (!m_inputs.GetInput(E_INPUTS.MOVE_BOX))
         {
             return E_PLAYER_STATES.ON_GROUND;

@@ -25,7 +25,7 @@ public class PlayerData : MonoBehaviour
     // left = false, right = true
     public bool m_left_right = true;
 
-    private Rigidbody m_rigb;
+    public Rigidbody m_rigb;
     public Animator m_anim;
 
     public GameObject m_ghost;
@@ -35,6 +35,7 @@ public class PlayerData : MonoBehaviour
 
     public bool m_use3D = false;
     public Quaternion m_rotation;
+    public bool m_stopRotation = false;
 
     void Start()
     {
@@ -55,27 +56,30 @@ public class PlayerData : MonoBehaviour
 
     void Update()
     {
-        if (!m_use3D)
+        if (!m_stopRotation)
         {
-            if (m_left_right && m_velocityX < 0.0f)
+            if (!m_use3D)
             {
-                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                if (m_left_right && m_velocityX < 0.0f)
+                {
+                    gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
 
-                m_rotation = gameObject.transform.rotation;
+                    m_rotation = gameObject.transform.rotation;
 
-                m_left_right = false;
+                    m_left_right = false;
+                }
+                else if (!m_left_right && m_velocityX > 0.0f)
+                {
+                    gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+
+                    m_rotation = gameObject.transform.rotation;
+
+                    m_left_right = true;
+                }
             }
-            else if (!m_left_right && m_velocityX > 0.0f)
-            {
-                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
 
-                m_rotation = gameObject.transform.rotation;
-
-                m_left_right = true;
-            }
+            gameObject.transform.rotation = m_rotation;
         }
-
-        gameObject.transform.rotation = m_rotation;
     }
 
     void FixedUpdate()

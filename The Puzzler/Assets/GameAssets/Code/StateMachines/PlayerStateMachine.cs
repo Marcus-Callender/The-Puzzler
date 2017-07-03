@@ -59,7 +59,10 @@ public class PlayerStateMachine : BaseStateMachine
         m_states3D[1] = gameObject.AddComponent<InAir3D>();
         m_states3D[2] = gameObject.AddComponent<MoveingBox>();
         m_states3D[3] = gameObject.AddComponent<ClimbingLadder>();
+        
+        // the controling ghost state is 2d/3d agnostic so the 2d/3d arrays can have a pointer to the same object
         m_states3D[5] = m_states2D[5];
+
         m_states3D[7] = gameObject.AddComponent<WallSlide>();
 
         m_states3D[0].Initialize(m_rigb, m_data, m_inputs);

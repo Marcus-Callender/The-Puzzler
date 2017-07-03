@@ -8,3 +8,6 @@ Dustyroom
 
 "Unity-chan!" Model 1.1
 unity-chan!
+
+skybox shaders 
+Copyright (C) 2013 Keijiro Takahashi

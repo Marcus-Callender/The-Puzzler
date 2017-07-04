@@ -31,7 +31,7 @@ public class CameraMovment : MonoBehaviour
         Vector3 playerPos = m_player.getFollowPos();
         Quaternion playerRot = m_player.getFollowRot();
         bool playerLeftRight = m_player.getFollowLeftRight();
-        bool use3D = m_player.m_data.m_use3D;
+        bool use3D = m_player.getFollow3D();
 
         if (!use3D)
         {

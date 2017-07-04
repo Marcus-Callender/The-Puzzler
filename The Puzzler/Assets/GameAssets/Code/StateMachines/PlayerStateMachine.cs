@@ -45,31 +45,31 @@ public class PlayerStateMachine : BaseStateMachine
         m_states2D[2] = gameObject.AddComponent<MoveingBox>();
         m_states2D[3] = gameObject.AddComponent<ClimbingLadder>();
         m_states2D[5] = gameObject.AddComponent<ControlingGhost>();
-        m_states2D[7] = gameObject.AddComponent<WallSlide>();
+        //m_states2D[7] = gameObject.AddComponent<WallSlide>();
 
         m_states2D[0].Initialize(m_rigb, m_data, m_inputs);
         m_states2D[1].Initialize(m_rigb, m_data, m_inputs);
         m_states2D[2].Initialize(m_rigb, m_data, m_inputs);
         m_states2D[3].Initialize(m_rigb, m_data, m_inputs);
         m_states2D[5].Initialize(m_rigb, m_data, m_inputs);
-        m_states2D[7].Initialize(m_rigb, m_data, m_inputs);
+        //m_states2D[7].Initialize(m_rigb, m_data, m_inputs);
 
 
         m_states3D[0] = gameObject.AddComponent<OnGround3D>();
         m_states3D[1] = gameObject.AddComponent<InAir3D>();
         m_states3D[2] = gameObject.AddComponent<MoveingBox>();
-        m_states3D[3] = gameObject.AddComponent<ClimbingLadder>();
+        m_states3D[3] = m_states2D[3];
         
         // the controling ghost state is 2d/3d agnostic so the 2d/3d arrays can have a pointer to the same object
         m_states3D[5] = m_states2D[5];
 
-        m_states3D[7] = gameObject.AddComponent<WallSlide>();
+        //m_states3D[7] = gameObject.AddComponent<WallSlide>();
 
         m_states3D[0].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[1].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[2].Initialize(m_rigb, m_data, m_inputs);
-        m_states3D[3].Initialize(m_rigb, m_data, m_inputs);
-        m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
+        //m_states3D[3].Initialize(m_rigb, m_data, m_inputs);
+        //m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
     }
 
     public override void Update()
@@ -133,6 +133,16 @@ public class PlayerStateMachine : BaseStateMachine
         }
 
         return m_data.m_left_right;
+    }
+
+    public bool getFollow3D()
+    {
+        if (m_data.m_overideFollow)
+        {
+            return m_data.m_overideFollow.m_use3D;
+        }
+
+        return m_data.m_use3D;
     }
 
     public override void OnTriggerStay(Collider other)

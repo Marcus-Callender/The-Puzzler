@@ -14,33 +14,28 @@ public class DimentionTransition : MonoBehaviour
     {
 
     }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        // checks if the thing that entered the trigger needs to change dimention
 
+    private void OnTriggerExit(Collider other)
+    {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ghost")
         {
-            // gets a player data refrence from it
             PlayerData data = other.gameObject.GetComponent<PlayerData>();
-            
-            // checks the refrence is valid
-            if (data)
-            {
-                // creates two refrences for each end of the trasition zone
-                Vector3 left = gameObject.transform.position - gameObject.transform.right;
-                Vector3 right = gameObject.transform.position + gameObject.transform.right;
 
-                // sets the using 3d to 
-                data.m_use3D = (Vector3.Distance(data.GetCenterTransform(), left) > Vector3.Distance(data.GetCenterTransform(), right));
-                
-                // sets this to prevent 2d contols being inverted
+            Physics.Raycast(new Ray(transform.position, other.transform.position - transform.position));
+
+            Debug.DrawRay(transform.position, other.transform.position - transform.position, Color.blue);
+            Debug.DrawRay(transform.position, transform.right, Color.green);
+
+            if (Vector3.Angle(transform.right, other.transform.position - transform.position) < 90.0f)
+            {
+                data.m_use3D = false;
                 data.m_left_right = true;
-                
-                // tells the player data what rotation this object has
                 data.SetRotation(gameObject.transform.rotation);
             }
+            else
+            {
+                data.m_use3D = true;
+            }
         }
-        
     }
 }

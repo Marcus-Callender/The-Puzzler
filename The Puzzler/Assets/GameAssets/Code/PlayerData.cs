@@ -140,4 +140,21 @@ public class PlayerData : MonoBehaviour
             m_rotation = newRot;
         }
     }
+
+    public Vector3 GetExpectedVelocity()
+    {
+        Vector3 vel = Vector3.zero;
+
+        if (!m_use3D && !m_left_right)
+        {
+            // used in excaptions where the box movment would be reversed
+            vel += (-m_velocityX * transform.forward) + (m_velocityY * transform.up);
+        }
+        else
+        {
+            vel += (m_velocityX * transform.forward) + (m_velocityY * transform.up);
+        }
+
+        return vel;
+    }
 }

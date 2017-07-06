@@ -155,7 +155,16 @@ public class MoveingBox : BasicState
             m_dragingTimer.Play();
         }
 
-        m_boxRigb.velocity = new Vector3(m_data.m_velocityX, m_data.m_velocityY);
+        /*if (m_data.m_use3D)
+        {
+            m_boxRigb.velocity = new Vector3(0.0f, m_data.m_velocityY, m_data.m_velocityX);
+        }
+        else
+        {
+            m_boxRigb.velocity = new Vector3(m_data.m_velocityX, m_data.m_velocityY);
+        }*/
+
+        m_boxRigb.velocity = m_data.GetExpectedVelocity();
 
         if (!m_inputs.GetInput(E_INPUTS.MOVE_BOX_HOLD))
         {

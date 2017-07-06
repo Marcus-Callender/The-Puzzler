@@ -57,7 +57,8 @@ public class PlayerStateMachine : BaseStateMachine
 
         m_states3D[0] = gameObject.AddComponent<OnGround3D>();
         m_states3D[1] = gameObject.AddComponent<InAir3D>();
-        m_states3D[2] = gameObject.AddComponent<MoveingBox>();
+        //m_states3D[2] = gameObject.AddComponent<MoveingBox3D>();
+        m_states3D[2] = m_states2D[2];
         m_states3D[3] = m_states2D[3];
         
         // the controling ghost state is 2d/3d agnostic so the 2d/3d arrays can have a pointer to the same object
@@ -67,7 +68,7 @@ public class PlayerStateMachine : BaseStateMachine
 
         m_states3D[0].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[1].Initialize(m_rigb, m_data, m_inputs);
-        m_states3D[2].Initialize(m_rigb, m_data, m_inputs);
+        //m_states3D[2].Initialize(m_rigb, m_data, m_inputs);
         //m_states3D[3].Initialize(m_rigb, m_data, m_inputs);
         //m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
     }

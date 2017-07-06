@@ -89,11 +89,6 @@ public class BoxMovenemt : MonoBehaviour
     //    m_requestStop = false;
     //}
 
-    private void FixedUpdate()
-    {
-        //m_rigb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
-    }
-
     public void Move(float xVelocity)
     {
         m_rigb.velocity = new Vector3(xVelocity, m_rigb.velocity.y);

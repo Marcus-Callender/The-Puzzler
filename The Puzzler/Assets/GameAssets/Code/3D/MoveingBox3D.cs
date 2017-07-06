@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveingBox : BasicState
+public class MoveingBox3D : BasicState
 {
     private Timer m_pauseTimer;
     private Timer m_dragingTimer;
@@ -42,9 +42,6 @@ public class MoveingBox : BasicState
         {
             m_box = hit.transform.gameObject;
             m_boxRigb = m_box.GetComponent<Rigidbody>();
-
-            //m_box.transform.SetParent(gameObject.transform);
-            //m_boxRigb.mass = 1;
         }
 
         if (!m_box)
@@ -55,14 +52,8 @@ public class MoveingBox : BasicState
 
     public override void Exit()
     {
-        // stops the box from continuasly moving then un-links it
-        //m_data.m_linkedBox.Move(0.0f);
-        //m_data.m_linkedBox = null;
-
         if (m_box)
         {
-            //m_box.transform.SetParent(null);
-
             m_box = null;
         }
 
@@ -92,16 +83,7 @@ public class MoveingBox : BasicState
             return E_PLAYER_STATES.ON_GROUND;
         }
 
-        bool getInput = false;
-
-        if (m_data.m_use3D)
-        {
-            getInput = m_inputs.GetInput(E_INPUTS.DOWN) || m_inputs.GetInput(E_INPUTS.UP);
-        }
-        else
-        {
-            getInput = m_inputs.GetInput(E_INPUTS.LEFT) || m_inputs.GetInput(E_INPUTS.RIGHT);
-        }
+        bool getInput = m_inputs.GetInput(E_INPUTS.UP) || m_inputs.GetInput(E_INPUTS.DOWN);
 
         if (getInput && !m_moveInput)
         {
@@ -126,19 +108,12 @@ public class MoveingBox : BasicState
             else if (!m_dragingTimer.m_completed)
             {
                 m_dragingTimer.Cycle();
+                
+                if (m_inputs.GetInput(E_INPUTS.UP))
+                    m_data.m_velocityX = m_dragSpeed;
 
-                if (m_data.m_use3D)
-                {
-                    if (m_inputs.GetInput(E_INPUTS.UP))
-                        m_data.m_velocityX = m_dragSpeed;
-
-                    if (m_inputs.GetInput(E_INPUTS.DOWN))
-                        m_data.m_velocityX = -m_dragSpeed;
-                }
-                else
-                {
-                    MoveHorzontal(m_dragSpeed);
-                }
+                if (m_inputs.GetInput(E_INPUTS.DOWN))
+                    m_data.m_velocityX = -m_dragSpeed;
             }
             else
             {
@@ -172,7 +147,6 @@ public class MoveingBox : BasicState
 
         if (_tag != "Box" && (_dir == E_DIRECTIONS.LEFT || _dir == E_DIRECTIONS.RIGHT))
         {
-            //m_data.m_linkedBox.m_requestStop = true
             return E_PLAYER_STATES.ON_GROUND;
         }
 

@@ -42,7 +42,7 @@ public class OnGround3D : BasicState
 
         m_data.m_velocityY = -9.81f;
 
-        if (m_data.m_closeToBox && m_inputs.GetInput(E_INPUTS.MOVE_BOX))
+        if (m_inputs.GetInput(E_INPUTS.MOVE_BOX))
         {
             m_data.m_moveingBox = true;
 

@@ -10,6 +10,7 @@ public enum E_INPUTS
     DOWN,
     JUMP,
     MOVE_BOX,
+    MOVE_BOX_HOLD,
     PRESS_BUTTON,
     GHOST_BUTTON_PRESS,
     GHOST_BUTTON_HOLD,
@@ -63,9 +64,14 @@ public class PlayerInputs : MonoBehaviour
                 m_Inputs |= (char)InputToBit(E_INPUTS.JUMP);
             }
 
-            if (Input.GetButton("MoveBox"))
+            if (Input.GetButtonDown("MoveBox"))
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX);
+            }
+
+            if (Input.GetButton("MoveBox"))
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX_HOLD);
             }
 
             if (Input.GetButtonDown("PressButton"))

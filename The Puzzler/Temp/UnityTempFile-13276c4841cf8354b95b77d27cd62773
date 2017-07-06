@@ -91,6 +91,7 @@ Assets/GameAssets/Code/3D/InAir3D.cs
 Assets/GameAssets/Code/3D/Lewagcy/CameraMovment3D.cs
 Assets/GameAssets/Code/3D/Lewagcy/PlayerData3D.cs
 Assets/GameAssets/Code/3D/Lewagcy/PlayerStateMachine3D.cs
+Assets/GameAssets/Code/3D/MoveingBox3D.cs
 Assets/GameAssets/Code/3D/OnGround3D.cs
 Assets/GameAssets/Code/BaseClasses/BaseStateMachine.cs
 Assets/GameAssets/Code/BaseClasses/BasicState.cs

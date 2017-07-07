@@ -237,6 +237,11 @@ public class BaseStateMachine : MonoBehaviour
             GetCurrentState().Exit();
             m_states2D[(int)m_newState].Enter();
 
+            if (m_states2D[(int)m_newState] == null)
+            {
+                Debug.Log("----- error state " + m_newState + " not found -----");
+            }
+
             Debug.Log(m_currentState + " -> " + m_newState);
 
             m_currentState = m_newState;

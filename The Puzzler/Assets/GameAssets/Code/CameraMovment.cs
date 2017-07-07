@@ -12,13 +12,9 @@ public class CameraMovment : MonoBehaviour
     //float m_cameraSpeed = 6.5f;
 
     private PlayerStateMachine m_player;
-
+    
     void Start()
-    {
-        //m_rigb = GetComponent<Rigidbody>();
-
-        //m_player = GameObject.Find("Player").GetComponent<PlayerData>();
-        
+    {        
         m_player = FindObjectOfType<PlayerStateMachine>();
 
         Vector3 playerPos = m_player.gameObject.transform.position;
@@ -76,5 +72,21 @@ public class CameraMovment : MonoBehaviour
             //gameObject.transform.Translate(new Vector3(-3.0f, 1.2f, 0.5f));
             gameObject.transform.Translate(new Vector3(0.5f, 1.2f, -3.0f));
         }
+    }
+
+    void Transition()
+    {
+        Vector3 playerPos = m_player.getFollowPos();
+        Quaternion playerRot = m_player.getFollowRot();
+        bool playerLeftRight = m_player.getFollowLeftRight();
+
+        float dt = Time.deltaTime * 5.0f;
+
+        Vector3 newPos = playerPos + new Vector3(0.0f, 2.0f, -8.0f);
+        Quaternion newRot = playerRot;
+        newRot *= Quaternion.Euler(Vector3.up * (playerLeftRight ? -90.0f : 90.0f));
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRot, dt);
+        transform.position = Vector3.Lerp(transform.position, newPos, dt);
     }
 }

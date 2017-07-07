@@ -61,8 +61,6 @@ public class MoveingBox : BasicState
 
         if (m_box)
         {
-            //m_box.transform.SetParent(null);
-
             m_box = null;
         }
 
@@ -142,7 +140,6 @@ public class MoveingBox : BasicState
             }
             else
             {
-
                 m_data.m_velocityX = 0.0f;
                 m_pauseTimer.Play();
 
@@ -154,15 +151,6 @@ public class MoveingBox : BasicState
             m_pauseTimer.Play();
             m_dragingTimer.Play();
         }
-
-        /*if (m_data.m_use3D)
-        {
-            m_boxRigb.velocity = new Vector3(0.0f, m_data.m_velocityY, m_data.m_velocityX);
-        }
-        else
-        {
-            m_boxRigb.velocity = new Vector3(m_data.m_velocityX, m_data.m_velocityY);
-        }*/
 
         m_boxRigb.velocity = m_data.GetExpectedVelocity();
 

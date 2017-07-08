@@ -67,7 +67,7 @@ public class MoveingBox : BasicState
         if (m_boxRigb)
         {
 
-            m_boxRigb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+            m_boxRigb.velocity = new Vector3(0.0f, -9.81f, 0.0f);
             m_boxRigb = null;
         }
 

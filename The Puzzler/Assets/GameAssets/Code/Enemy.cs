@@ -108,7 +108,6 @@ public class Enemy : MonoBehaviour
 
         for (int z = 0; z < m_players.Length; z++)
         {
-            //float distance = Mathf.Abs(gameObject.transform.position.x - m_players[z].GetCenterTransform().x) + Mathf.Abs(gameObject.transform.position.y - m_players[z].transform.position.y);
             float distance = Mathf.Abs(gameObject.transform.position.x - m_players[z].GetCenterTransform().x);
 
             if (m_players[z].tag == "Player" && distance <= 1.5f)

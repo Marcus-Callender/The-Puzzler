@@ -21,6 +21,14 @@ public class BoxMovenemt : MonoBehaviour
         m_playerBoxMinDistance = (gameObject.transform.localScale.x + m_playerRefs[0].gameObject.transform.localScale.x) * 0.5f;
     }
 
+    private void Update()
+    {
+        Debug.Log("Box Velocity: " + m_rigb.velocity);
+
+
+        m_rigb.velocity = new Vector3(m_rigb.velocity.x, m_rigb.velocity.y - 1.0f, m_rigb.velocity.z);
+    }
+
     //void LateUpdate()
     //{
     //    for (int z = 0; z < m_playerRefs.Length; z++)
@@ -116,6 +124,8 @@ public class BoxMovenemt : MonoBehaviour
         //
         //    m_rigb.velocity.Set(0.0f, 0.0f, 0.0f);
         //}
+
+        Debug.Log("Box Colision Exit");
 
         m_rigb.velocity.Set(0.0f, 0.0f, 0.0f);
     }

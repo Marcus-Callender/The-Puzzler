@@ -23,9 +23,6 @@ public class BoxMovenemt : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Box Velocity: " + m_rigb.velocity);
-
-
         m_rigb.velocity = new Vector3(m_rigb.velocity.x, m_rigb.velocity.y - 1.0f, m_rigb.velocity.z);
     }
 

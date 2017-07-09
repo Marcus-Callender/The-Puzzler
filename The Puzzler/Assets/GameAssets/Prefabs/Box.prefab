@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54410989062661172}
   - component: {fileID: 114464962210162478}
   - component: {fileID: 136090590304379260}
+  - component: {fileID: 65876509841600944}
   m_Layer: 10
   m_Name: Box
   m_TagString: Box
@@ -98,6 +99,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &65876509841600944
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1439157764578452}
+  m_Material: {fileID: 13400000, guid: 6da75f17a332cdb458babd85b630a91b, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &114464962210162478
 MonoBehaviour:
   m_ObjectHideFlags: 1

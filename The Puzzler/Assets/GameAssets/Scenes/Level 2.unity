@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e5b83adb141a408e126566d46630a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activateDelayTime: 0.1
   m_point2: {x: -15.2, y: 5.39, z: 0}
   m_speed: 1
   m_moveing: 0
@@ -600,7 +601,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1424657700
 MonoBehaviour:
@@ -723,7 +724,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &2080936391
 Prefab:
@@ -779,6 +780,11 @@ Prefab:
     - target: {fileID: 4592503639002856, guid: 29521f56a4d09b94099692c48b69419b, type: 2}
       propertyPath: m_LocalRotation.w
       value: 0.060806748
+      objectReference: {fileID: 0}
+    - target: {fileID: 114340096345502652, guid: 29521f56a4d09b94099692c48b69419b,
+        type: 2}
+      propertyPath: m_use3D
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29521f56a4d09b94099692c48b69419b, type: 2}

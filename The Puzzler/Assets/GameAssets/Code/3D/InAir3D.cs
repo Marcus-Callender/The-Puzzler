@@ -81,10 +81,10 @@ public class InAir3D : BasicState
         {
             return E_PLAYER_STATES.ON_GROUND;
         }
-        else if ((_dir == E_DIRECTIONS.LEFT || _dir == E_DIRECTIONS.RIGHT) && !m_inputs.GetInput(E_INPUTS.JUMP))
-        {
-            return E_PLAYER_STATES.WALL_SLIDEING;
-        }
+        //else if ((_dir == E_DIRECTIONS.LEFT || _dir == E_DIRECTIONS.RIGHT) && !m_inputs.GetInput(E_INPUTS.JUMP))
+        //{
+        //    return E_PLAYER_STATES.WALL_SLIDEING;
+        //}
 
         return E_PLAYER_STATES.IN_AIR;
     }

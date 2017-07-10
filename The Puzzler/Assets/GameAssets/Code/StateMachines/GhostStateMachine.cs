@@ -99,8 +99,6 @@ public class GhostStateMachine : BaseStateMachine
     {
         if (transform.position.y < -10.0f)
         {
-            m_inputs.Stop();
-
             gameObject.tag = "Ghost";
             // runs if the recording has finished and the ghost is not playing
             m_data.m_anim.SetBool("Stopped", true);
@@ -112,6 +110,8 @@ public class GhostStateMachine : BaseStateMachine
                 m_overrideRecording = true;
             }
 
+            m_inputs.Stop();
+            
             m_inputs.m_recorded = true;
         }
 

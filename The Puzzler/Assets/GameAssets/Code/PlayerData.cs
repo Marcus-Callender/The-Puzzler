@@ -86,16 +86,18 @@ public class PlayerData : MonoBehaviour
     {
         if (!m_use3D)
         {
-            if (!m_squished)
-            {
-                Debug.Log("Forward: " + transform.forward);
-                //m_rigb.velocity = new Vector3(m_velocityX, m_velocityY);
-                m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocityX) + (gameObject.transform.up * m_velocityY);
-            }
-            else
-            {
-                m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
-            }
+            //if (!m_squished)
+            //{
+            //    Debug.Log("Forward: " + transform.forward);
+            //    //m_rigb.velocity = new Vector3(m_velocityX, m_velocityY);
+            //    m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocityX) + (gameObject.transform.up * m_velocityY);
+            //}
+            //else
+            //{
+            //    m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
+            //}
+
+            m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocityX) + (gameObject.transform.up * m_velocityY);
         }
         else
         {

@@ -43,7 +43,7 @@ public class ControlingGhost : BasicState
             m_inputs.m_pauseInputs = true;
         }
 
-        m_ghostStateMachine.Activate(gameObject.transform, m_data.m_use3D);
+        m_ghostStateMachine.Activate(gameObject.transform, m_data.m_use3D, m_data.m_left_right);
     }
 
     public override void Exit()

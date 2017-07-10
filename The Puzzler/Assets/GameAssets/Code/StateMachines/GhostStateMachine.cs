@@ -15,7 +15,7 @@ public class GhostStateMachine : BaseStateMachine
     //private bool m_colidedWithInteractable = false;
     //private bool m_reduceColisions = true;
 
-    public void Activate(Transform _transform, bool use3d)
+    public void Activate(Transform _transform, bool use3d, bool _left_right)
     {
         gameObject.tag = "Player";
 
@@ -49,7 +49,9 @@ public class GhostStateMachine : BaseStateMachine
         else
         {
             gameObject.transform.position = _transform.position;
-            gameObject.transform.rotation = _transform.rotation;
+            m_data.m_rotation = _transform.rotation;
+            m_data.m_left_right = _left_right;
+
             m_data.m_use3D = use3d;
             m_inputs.m_arrayPosition = 0;
             m_inputs.m_recording = true;

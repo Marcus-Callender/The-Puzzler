@@ -29,8 +29,8 @@ public class DimentionTransition : MonoBehaviour
             if (Vector3.Angle(transform.right, other.transform.position - transform.position) < 90.0f)
             {
                 data.m_use3D = false;
-                //data.m_left_right = true;
-                data.m_left_right = (data.m_velocityX < 0.0f);
+                data.m_left_right = false;
+                //data.m_left_right = (data.m_velocityX < 0.0f);
                 data.SetRotation(gameObject.transform.rotation);
             }
             else

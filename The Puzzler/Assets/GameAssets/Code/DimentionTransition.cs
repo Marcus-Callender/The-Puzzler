@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DimentionTransition : MonoBehaviour
 {
+    public bool m_camera_left_right = false;
 
     void Start()
     {
@@ -29,8 +30,7 @@ public class DimentionTransition : MonoBehaviour
             if (Vector3.Angle(transform.right, other.transform.position - transform.position) < 90.0f)
             {
                 data.m_use3D = false;
-                data.m_left_right = false;
-                //data.m_left_right = (data.m_velocityX < 0.0f);
+                data.m_left_right = m_camera_left_right;
                 data.SetRotation(gameObject.transform.rotation);
             }
             else

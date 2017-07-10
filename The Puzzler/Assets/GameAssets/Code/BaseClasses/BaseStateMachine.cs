@@ -27,12 +27,8 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual void Update()
     {
-        Debug.DrawRay(m_data.GetCenterTransform(), transform.forward, Color.red);
-
         m_newState = GetCurrentState().Cycle();
         CheckState();
-
-        m_data.m_closeToBox = false;
     }
 
     void FixedUpdate()

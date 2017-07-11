@@ -105,7 +105,6 @@ public class BoxMovenemt : MonoBehaviour
         {
             m_linkedBox = other.gameObject;
         }
-
     }
 
     private void OnCollisionExit(Collision other)

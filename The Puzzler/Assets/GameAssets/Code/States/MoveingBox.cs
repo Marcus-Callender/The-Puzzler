@@ -11,8 +11,8 @@ public class MoveingBox : BasicState
 
     private bool m_moveInput = false;
 
-    private GameObject m_box;
-    private Rigidbody m_boxRigb;
+    public GameObject m_box;
+    public Rigidbody m_boxRigb;
 
     public override void Initialize(Rigidbody rigb, PlayerData data, PlayerInputs inputs)
     {
@@ -150,6 +150,7 @@ public class MoveingBox : BasicState
         {
             m_pauseTimer.Play();
             m_dragingTimer.Play();
+            m_data.m_velocityX = 0.0f;
         }
 
         m_boxRigb.velocity = m_data.GetExpectedVelocity();

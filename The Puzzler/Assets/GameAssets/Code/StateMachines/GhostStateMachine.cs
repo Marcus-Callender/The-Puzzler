@@ -20,7 +20,7 @@ public class GhostStateMachine : BaseStateMachine
         gameObject.tag = "Player";
 
         // set layer to Ghost (reduced Collisions)
-        gameObject.layer = 11;
+        //gameObject.layer = 11;
 
         //m_reduceColisions = true;
         //m_colidedWithInteractable = false;

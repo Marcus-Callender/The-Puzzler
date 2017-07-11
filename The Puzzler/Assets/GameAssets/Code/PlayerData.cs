@@ -37,6 +37,8 @@ public class PlayerData : MonoBehaviour
     public Quaternion m_rotation;
     public bool m_stopRotation = false;
 
+    private Vector3 m_vecOne;
+
     void Start()
     {
         m_rigb = GetComponent<Rigidbody>();
@@ -52,6 +54,8 @@ public class PlayerData : MonoBehaviour
             m_playerDoubleJump = data.m_playerDoubleJump;
             m_playerWallSlide = data.m_playerWallSlide;
         }
+
+        m_vecOne = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
     void Update()

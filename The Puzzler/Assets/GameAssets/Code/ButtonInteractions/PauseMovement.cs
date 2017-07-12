@@ -15,7 +15,7 @@ public class PauseMovement : ButtonInteraction
     private float m_traveledDistance = 0.0f;
 
     // when true this is moving from point 1 to point 2 and vice versa when false
-    private bool m_goToPoint2 = false;
+    public bool m_goToPoint2 = false;
     public bool m_moveing = false;
 
     private Vector3 m_speedSegments;

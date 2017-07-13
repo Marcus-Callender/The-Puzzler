@@ -120,84 +120,84 @@ public class BaseStateMachine : MonoBehaviour
                 }
             }
         }
-        else if (Mathf.Approximately(angle, 90.0f))
-        {
-            angle = Vector2.Angle(Other.contacts[0].normal, Vector2.left);
+        //else if (Mathf.Approximately(angle, 90.0f))
+        //{
+        //    angle = Vector2.Angle(Other.contacts[0].normal, Vector2.left);
+        //
+        //    if (Mathf.Approximately(angle, 0.0f))
+        //    {
+        //        dir = E_DIRECTIONS.RIGHT;
+        //
+        //        if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
+        //        {
+        //            m_data.m_contacts[1] = true;
+        //
+        //            if (m_data.m_contacts[3])
+        //            {
+        //                m_data.m_squished = true;
+        //                Debug.Log("Squished!");
+        //            }
+        //
+        //            if (m_data.m_InteractableContacts[3])
+        //            {
+        //                //m_linkedBox.m_requestStop = true;
+        //                Debug.Log("Stop Requested");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
+        //
+        //            m_data.m_InteractableContacts[1] = true;
+        //
+        //            if (m_data.m_contacts[3])
+        //            {
+        //                //m_linkedBox.m_requestStop = true;
+        //
+        //                Debug.Log("Stop Requested");
+        //            }
+        //        }
+        //    }
+        //    else if (Mathf.Approximately(angle, 180.0f))
+        //    {
+        //        dir = E_DIRECTIONS.LEFT;
+        //
+        //        if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
+        //        {
+        //            m_data.m_contacts[3] = true;
+        //
+        //            if (m_data.m_contacts[1])
+        //            {
+        //                m_data.m_squished = true;
+        //                Debug.Log("Squished!");
+        //            }
+        //
+        //            if (m_data.m_InteractableContacts[1])
+        //            {
+        //                //m_linkedBox.m_requestStop = true;
+        //                Debug.Log("Stop Requested");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
+        //
+        //            m_data.m_InteractableContacts[3] = true;
+        //
+        //            if (m_data.m_contacts[1])
+        //            {
+        //                //m_linkedBox.m_requestStop = true;
+        //
+        //                Debug.Log("Stop Requested");
+        //            }
+        //        }
+        //    }
+        //}
 
-            if (Mathf.Approximately(angle, 0.0f))
-            {
-                dir = E_DIRECTIONS.RIGHT;
-
-                if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
-                {
-                    m_data.m_contacts[1] = true;
-
-                    if (m_data.m_contacts[3])
-                    {
-                        m_data.m_squished = true;
-                        Debug.Log("Squished!");
-                    }
-
-                    if (m_data.m_InteractableContacts[3])
-                    {
-                        //m_linkedBox.m_requestStop = true;
-                        Debug.Log("Stop Requested");
-                    }
-                }
-                else
-                {
-                    //m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
-
-                    m_data.m_InteractableContacts[1] = true;
-
-                    if (m_data.m_contacts[3])
-                    {
-                        //m_linkedBox.m_requestStop = true;
-
-                        Debug.Log("Stop Requested");
-                    }
-                }
-            }
-            else if (Mathf.Approximately(angle, 180.0f))
-            {
-                dir = E_DIRECTIONS.LEFT;
-
-                if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
-                {
-                    m_data.m_contacts[3] = true;
-
-                    if (m_data.m_contacts[1])
-                    {
-                        m_data.m_squished = true;
-                        Debug.Log("Squished!");
-                    }
-
-                    if (m_data.m_InteractableContacts[1])
-                    {
-                        //m_linkedBox.m_requestStop = true;
-                        Debug.Log("Stop Requested");
-                    }
-                }
-                else
-                {
-                    //m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
-
-                    m_data.m_InteractableContacts[3] = true;
-
-                    if (m_data.m_contacts[1])
-                    {
-                        //m_linkedBox.m_requestStop = true;
-
-                        Debug.Log("Stop Requested");
-                    }
-                }
-            }
-        }
-
-        if (Mathf.Approximately(Vector2.Angle(Other.contacts[0].normal, Vector2.left), 90.0f) && Mathf.Approximately(Vector2.Angle(Other.contacts[0].normal, Vector2.up), 90.0f))
-        {
-            m_data.m_squished = true;
-        }
+        //if (Mathf.Approximately(Vector2.Angle(Other.contacts[0].normal, Vector2.left), 90.0f) && Mathf.Approximately(Vector2.Angle(Other.contacts[0].normal, Vector2.up), 90.0f))
+        //{
+        //    m_data.m_squished = true;
+        //}
 
         m_newState = GetCurrentState().Colide(dir, Other.gameObject.tag);
         CheckState();
@@ -228,6 +228,13 @@ public class BaseStateMachine : MonoBehaviour
 
     protected void CheckState()
     {
+        m_data.m_anim.SetBool("KOd", m_data.m_squished);
+
+        if (m_data.m_squished)
+        {
+            m_newState = E_PLAYER_STATES.KO;
+        }
+
         if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState)
         {
             GetCurrentState().Exit();

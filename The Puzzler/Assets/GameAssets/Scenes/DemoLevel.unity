@@ -537,7 +537,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4620583702024570, guid: ad01a7c26c05e4646ba2b2bf2827c8d8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.25
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: 4620583702024570, guid: ad01a7c26c05e4646ba2b2bf2827c8d8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -570,6 +570,16 @@ Prefab:
     - target: {fileID: 1160541971206662, guid: ad01a7c26c05e4646ba2b2bf2827c8d8, type: 2}
       propertyPath: m_Name
       value: Ladder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 65010306572000746, guid: ad01a7c26c05e4646ba2b2bf2827c8d8,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 65010306572000746, guid: ad01a7c26c05e4646ba2b2bf2827c8d8,
+        type: 2}
+      propertyPath: m_Center.z
+      value: -9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad01a7c26c05e4646ba2b2bf2827c8d8, type: 2}

@@ -68,9 +68,14 @@ public class GhostInputs : PlayerInputs
                     m_Inputs |= (char)InputToBit(E_INPUTS.JUMP);
                 }
 
-                if (Input.GetButton("MoveBox"))
+                if (Input.GetButtonDown("MoveBox"))
                 {
                     m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX);
+                }
+
+                if (Input.GetButton("MoveBox"))
+                {
+                    m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX_HOLD);
                 }
 
                 if (Input.GetButtonDown("PressButton"))

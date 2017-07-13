@@ -49,7 +49,7 @@ public class MoveingBox : BasicState
 
         if (!m_box)
         {
-            Debug.Log("--- error box refrence found was not valid ---");
+            Debug.Log("Box was not found");
         }
     }
 
@@ -85,7 +85,7 @@ public class MoveingBox : BasicState
     {
         if (!m_box)
         {
-            Debug.Log("--- no box refrence ---");
+            Debug.Log("No box refrence");
 
             return E_PLAYER_STATES.ON_GROUND;
         }
@@ -157,6 +157,7 @@ public class MoveingBox : BasicState
 
         if (!m_inputs.GetInput(E_INPUTS.MOVE_BOX_HOLD))
         {
+            Debug.Log("Box movment button relesed");
             return E_PLAYER_STATES.ON_GROUND;
         }
 

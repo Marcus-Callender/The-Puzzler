@@ -15,6 +15,7 @@ public class GhostInputs : PlayerInputs
     public bool m_consumingInputs = false;
 
     public Vector3 m_startingPosition;
+    public Quaternion m_startingRotation;
 
     public override void Cycle()
     {
@@ -39,6 +40,7 @@ public class GhostInputs : PlayerInputs
                 {
                     // if the recording has just started mark the current position
                     m_startingPosition = gameObject.transform.position;
+                    //m_startingRotation = gameObject.transform.rotation;
                 }
 
                 if (Input.GetAxisRaw("Horizontal") > 0.0f)
@@ -90,6 +92,7 @@ public class GhostInputs : PlayerInputs
                 m_recording = false;
 
                 gameObject.transform.position = m_startingPosition;
+                gameObject.transform.rotation = m_startingRotation;
             }
         }
         else if (m_playing)
@@ -104,6 +107,7 @@ public class GhostInputs : PlayerInputs
                 m_playing = false;
 
                 gameObject.transform.position = m_startingPosition;
+                gameObject.transform.rotation = m_startingRotation;
             }
         }
         else

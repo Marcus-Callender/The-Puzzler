@@ -35,8 +35,7 @@ public class GhostStateMachine : BaseStateMachine
         {
             m_matirialRenderers[z].material.color = new Color(0.1f, 1.0f, 1.0f, 0.5f);
         }
-
-
+        
         // alows the ghost to animate again
         m_data.m_anim.SetBool("Stopped", false);
 
@@ -50,6 +49,7 @@ public class GhostStateMachine : BaseStateMachine
         {
             gameObject.transform.position = _transform.position;
             m_data.m_rotation = _transform.rotation;
+            m_inputs.m_startingRotation = _transform.rotation;
             m_data.m_left_right = _left_right;
 
             m_data.m_use3D = use3d;

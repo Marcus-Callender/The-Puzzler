@@ -714,7 +714,7 @@ Prefab:
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
       propertyPath: m_point2.x
-      value: 26.75
+      value: 28.75
       objectReference: {fileID: 0}
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}

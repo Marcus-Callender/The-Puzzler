@@ -23,7 +23,7 @@ public class BoxMovenemt : MonoBehaviour
 
     private void Update()
     {
-        m_rigb.velocity = new Vector3(m_rigb.velocity.x, m_rigb.velocity.y - 1.0f, m_rigb.velocity.z);
+        m_rigb.velocity = new Vector3(m_rigb.velocity.x, m_rigb.velocity.y - 9.81f, m_rigb.velocity.z);
     }
 
     //void LateUpdate()

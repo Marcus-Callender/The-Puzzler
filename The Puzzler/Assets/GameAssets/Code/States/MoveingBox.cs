@@ -43,6 +43,10 @@ public class MoveingBox : BasicState
             m_box = hit.transform.gameObject;
             m_boxRigb = m_box.GetComponent<Rigidbody>();
 
+            //m_data.m_rotation = Quaternion.Euler(hit.normal);
+            //m_rigb.MoveRotation(Quaternion.Euler(hit.normal));
+            transform.forward = -hit.normal;
+
             //m_box.transform.SetParent(gameObject.transform);
             //m_boxRigb.mass = 1;
         }

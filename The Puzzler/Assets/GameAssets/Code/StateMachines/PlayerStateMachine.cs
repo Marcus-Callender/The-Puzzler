@@ -109,46 +109,16 @@ public class PlayerStateMachine : BaseStateMachine
         }
     }
 
-    public Vector3 getFollowPos()
+    public PlayerData getFollowData()
     {
         if (m_data.m_overideFollow)
         {
-            return m_data.m_overideFollow.transform.position;
+            return m_data.m_overideFollow;
         }
 
-        return gameObject.transform.position;
+        return m_data;
     }
-
-    public Quaternion getFollowRot()
-    {
-        if (m_data.m_overideFollow)
-        {
-            return m_data.m_overideFollow.transform.rotation;
-        }
-
-        return gameObject.transform.rotation;
-    }
-
-    public bool getFollowLeftRight()
-    {
-        if (m_data.m_overideFollow)
-        {
-            return m_data.m_overideFollow.m_left_right;
-        }
-
-        return m_data.m_left_right;
-    }
-
-    public bool getFollow3D()
-    {
-        if (m_data.m_overideFollow)
-        {
-            return m_data.m_overideFollow.m_use3D;
-        }
-
-        return m_data.m_use3D;
-    }
-
+    
     public override void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Attack")

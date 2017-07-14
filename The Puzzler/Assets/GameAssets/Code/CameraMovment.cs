@@ -6,15 +6,9 @@ public enum E_CamType
 {
     CAM_2D,
     CAM_3D_GROUND,
-    CAM_3D_AIR
-}
+    CAM_3D_AIR,
+    CAM_3D_MOVING_BOX
 
-public struct S_CAM_DATA
-{
-    public Vector3 playerPos;
-    public Quaternion playerRot;
-    public bool playerLeftRight;
-    public bool use3D;
 }
 
 public class CameraMovment : MonoBehaviour
@@ -54,19 +48,15 @@ public class CameraMovment : MonoBehaviour
 
     void LateUpdate()
     {
-        S_CAM_DATA camData = new S_CAM_DATA();
-        camData.playerPos = m_player.getFollowPos();
-        camData.playerRot = m_player.getFollowRot();
-        camData.playerLeftRight = m_player.getFollowLeftRight();
-        camData.use3D = m_player.getFollow3D();
+        PlayerData followData = m_player.getFollowData();
 
-        if (!camData.use3D)
+        if (!followData.m_use3D)
         {
             m_nextCam = E_CamType.CAM_2D;
         }
         else
         {
-            if (m_player.m_data.m_velocityY != -9.81f)
+            if (followData.m_velocityY != -9.81f)
             {
                 m_nextCam = E_CamType.CAM_3D_AIR;
             }
@@ -85,8 +75,8 @@ public class CameraMovment : MonoBehaviour
                 m_transitionTimer.Play();
             }
 
-            gameObject.transform.rotation = Quaternion.Slerp(getNewRot(m_currentCam, camData), getNewRot(m_nextCam, camData), m_transitionTimer.GetLerp());
-            gameObject.transform.position = Vector3.Lerp(getNewPos(m_currentCam, camData), getNewPos(m_nextCam, camData), m_transitionTimer.GetLerp());
+            gameObject.transform.rotation = Quaternion.Slerp(getNewRot(m_currentCam, followData), getNewRot(m_nextCam, followData), m_transitionTimer.GetLerp());
+            gameObject.transform.position = Vector3.Lerp(getNewPos(m_currentCam, followData), getNewPos(m_nextCam, followData), m_transitionTimer.GetLerp());
 
             if (m_transitionTimer.m_completed)
             {
@@ -99,16 +89,16 @@ public class CameraMovment : MonoBehaviour
         {
             m_transitionTimer.Stop();
 
-            gameObject.transform.rotation = getNewRot(m_currentCam, camData);
-            gameObject.transform.position = getNewPos(m_currentCam, camData);
+            gameObject.transform.rotation = getNewRot(m_currentCam, followData);
+            gameObject.transform.position = getNewPos(m_currentCam, followData);
         }
     }
 
-    void Transition()
+    void Transition(PlayerData data)
     {
-        Vector3 playerPos = m_player.getFollowPos();
-        Quaternion playerRot = m_player.getFollowRot();
-        bool playerLeftRight = m_player.getFollowLeftRight();
+        Vector3 playerPos = data.transform.position;
+        Quaternion playerRot = data.transform.rotation;
+        bool playerLeftRight = data.m_left_right;
 
         float dt = Time.deltaTime * 5.0f;
 
@@ -120,12 +110,12 @@ public class CameraMovment : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, newPos, dt);
     }
 
-    private Vector3 Camera2DPos( S_CAM_DATA data)
+    private Vector3 Camera2DPos(PlayerData data)
     {
         Vector3 pos = new Vector3();
-        
-        pos = data.playerPos;
-        
+
+        pos = data.transform.position;
+
         pos += transform.up * 2.0f;
         pos += transform.forward * -8.0f;
 
@@ -159,22 +149,22 @@ public class CameraMovment : MonoBehaviour
         return pos;
     }
 
-    private Quaternion Camera2DRot(S_CAM_DATA data)
+    private Quaternion Camera2DRot(PlayerData data)
     {
         Quaternion rot = new Quaternion();
 
-        rot = data.playerRot;
+        rot = data.transform.rotation;
 
-        rot *= Quaternion.Euler(Vector3.up * (data.playerLeftRight ? -90.0f : 90.0f));
+        rot *= Quaternion.Euler(Vector3.up * (data.m_left_right ? -90.0f : 90.0f));
 
         return rot;
     }
 
-    private Vector3 Camera3DGroundPos(S_CAM_DATA data)
+    private Vector3 Camera3DGroundPos(PlayerData data)
     {
         Vector3 pos = new Vector3();
 
-        pos = data.playerPos;
+        pos = data.transform.position;
 
         pos += transform.right * 0.5f;
         pos += transform.up * 1.2f;
@@ -183,22 +173,22 @@ public class CameraMovment : MonoBehaviour
         return pos;
     }
 
-    private Quaternion Camera3DGroundRot(S_CAM_DATA data)
+    private Quaternion Camera3DGroundRot(PlayerData data)
     {
         Quaternion rot = new Quaternion();
 
-        rot = data.playerRot;
-        
+        rot = data.transform.rotation;
+
         return rot;
     }
 
-    private Vector3 Camera3DAirPos(S_CAM_DATA data)
+    private Vector3 Camera3DAirPos(PlayerData data)
     {
         Vector3 pos = new Vector3();
 
-        pos = data.playerPos;
-        
-        gameObject.transform.position = data.playerPos;
+        pos = data.transform.position;
+
+        gameObject.transform.position = data.transform.position;
 
         pos += transform.right * 0.5f;
         pos += transform.up * 1.2f;
@@ -207,18 +197,44 @@ public class CameraMovment : MonoBehaviour
         return pos;
     }
 
-    private Quaternion Camera3DAirRot(S_CAM_DATA data)
+    private Quaternion Camera3DAirRot(PlayerData data)
     {
         Quaternion rot = new Quaternion();
 
-        rot = data.playerRot;
+        rot = data.transform.rotation;
 
         rot *= Quaternion.Euler(30.0f, 0.0f, 0.0f);
 
         return rot;
     }
 
-    private Vector3 getNewPos(E_CamType type, S_CAM_DATA data)
+    private Vector3 Camera3DMoveingBoxPos(PlayerData data)
+    {
+        Vector3 pos = new Vector3();
+
+        pos = data.transform.position;
+
+        gameObject.transform.position = data.transform.position;
+
+        pos += transform.right * 0.5f;
+        pos += transform.up * 2.2f;
+        pos += transform.forward * -3.0f;
+
+        return pos;
+    }
+
+    private Quaternion Camera3DMovingBoxRot(PlayerData data)
+    {
+        Quaternion rot = new Quaternion();
+
+        rot = data.transform.rotation;
+
+        rot *= Quaternion.Euler(30.0f, 0.0f, 0.0f);
+
+        return rot;
+    }
+
+    private Vector3 getNewPos(E_CamType type, PlayerData data)
     {
         if (type == E_CamType.CAM_3D_AIR)
         {
@@ -228,11 +244,15 @@ public class CameraMovment : MonoBehaviour
         {
             return Camera3DGroundPos(data);
         }
+        else if (type == E_CamType.CAM_3D_MOVING_BOX)
+        {
+            return Camera3DMoveingBoxPos(data);
+        }
 
         return Camera2DPos(data);
     }
 
-    private Quaternion getNewRot(E_CamType type, S_CAM_DATA data)
+    private Quaternion getNewRot(E_CamType type, PlayerData data)
     {
         if (type == E_CamType.CAM_3D_AIR)
         {
@@ -241,6 +261,10 @@ public class CameraMovment : MonoBehaviour
         else if (type == E_CamType.CAM_3D_GROUND)
         {
             return Camera3DGroundRot(data);
+        }
+        else if (type == E_CamType.CAM_3D_MOVING_BOX)
+        {
+            return Camera3DMovingBoxRot(data);
         }
 
         return Camera2DRot(data);

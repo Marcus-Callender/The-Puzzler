@@ -59,7 +59,6 @@ public class PlayerStateMachine : BaseStateMachine
 
         m_states3D[0] = gameObject.AddComponent<OnGround3D>();
         m_states3D[1] = gameObject.AddComponent<InAir3D>();
-        //m_states3D[2] = gameObject.AddComponent<MoveingBox3D>();
         m_states3D[2] = m_states2D[2];
         m_states3D[3] = m_states2D[3];
         m_states3D[4] = m_states2D[4];
@@ -71,8 +70,7 @@ public class PlayerStateMachine : BaseStateMachine
 
         m_states3D[0].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[1].Initialize(m_rigb, m_data, m_inputs);
-        //m_states3D[2].Initialize(m_rigb, m_data, m_inputs);
-        //m_states3D[3].Initialize(m_rigb, m_data, m_inputs);
+
         //m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
     }
 
@@ -87,14 +85,7 @@ public class PlayerStateMachine : BaseStateMachine
         m_inputs.Cycle();
         
         m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
-
-        m_data.m_moveingBox = false;
-
-        if (m_inputs.GetInput(E_INPUTS.MOVE_BOX))
-        {
-            m_data.m_moveingBox = true;
-        }
-
+        
         base.Update();
 
         if (m_inputs.GetInput(E_INPUTS.GHOST_BUTTON_PRESS))

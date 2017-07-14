@@ -29,7 +29,6 @@ public class OnGround : BasicState
 
         if (m_inputs.GetInput(E_INPUTS.MOVE_BOX))
         {
-            m_data.m_moveingBox = true;
             return E_PLAYER_STATES.MOVEING_BLOCK;
         }
 

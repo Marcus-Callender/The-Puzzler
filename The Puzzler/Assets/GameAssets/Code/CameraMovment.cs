@@ -60,6 +60,10 @@ public class CameraMovment : MonoBehaviour
             {
                 m_nextCam = E_CamType.CAM_3D_AIR;
             }
+            else if (followData.m_moveingBox)
+            {
+                m_nextCam = E_CamType.CAM_3D_MOVING_BOX;
+            }
             else
             {
                 m_nextCam = E_CamType.CAM_3D_GROUND;
@@ -218,7 +222,7 @@ public class CameraMovment : MonoBehaviour
 
         pos += transform.right * 0.5f;
         pos += transform.up * 2.2f;
-        pos += transform.forward * -3.0f;
+        pos += transform.forward * -4.5f;
 
         return pos;
     }
@@ -229,7 +233,7 @@ public class CameraMovment : MonoBehaviour
 
         rot = data.transform.rotation;
 
-        rot *= Quaternion.Euler(30.0f, 0.0f, 0.0f);
+        rot *= Quaternion.Euler(50.0f, 0.0f, 0.0f);
 
         return rot;
     }

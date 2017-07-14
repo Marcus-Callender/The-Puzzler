@@ -28,7 +28,7 @@ public class MoveingBox : BasicState
 
     public override void Enter()
     {
-
+        m_data.m_moveingBox = true;
         m_data.m_velocityX = 0.0f;
 
         m_moveInput = false;

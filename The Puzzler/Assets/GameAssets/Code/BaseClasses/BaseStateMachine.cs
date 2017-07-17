@@ -72,37 +72,37 @@ public class BaseStateMachine : MonoBehaviour
         if (Mathf.Approximately(angle, 0.0f))
         {
             dir = E_DIRECTIONS.BOTTOM;
-
+        
             if (Other.gameObject.GetComponent<Rigidbody>())
             {
                 m_data.m_velocityX += Other.gameObject.GetComponent<Rigidbody>().velocity.x;
             }
-
-            if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
-            {
-                m_data.m_contacts[2] = true;
-
-                if (m_data.m_contacts[0])
-                {
-                    m_data.m_squished = true;
-                    Debug.Log("Squished!");
-                }
-            }
+        
+            //if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
+            //{
+            //    m_data.m_contacts[2] = true;
+            //
+            //    if (m_data.m_contacts[0])
+            //    {
+            //        m_data.m_squished = true;
+            //        Debug.Log("Squished!");
+            //    }
+            //}
         }
         else if (Mathf.Approximately(angle, 180.0f))
         {
             dir = E_DIRECTIONS.TOP;
-
-            if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
-            {
-                m_data.m_contacts[0] = true;
-
-                if (m_data.m_contacts[2])
-                {
-                    m_data.m_squished = true;
-                    Debug.Log("Squished!");
-                }
-            }
+        
+            //if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
+            //{
+            //    m_data.m_contacts[0] = true;
+            //
+            //    if (m_data.m_contacts[2])
+            //    {
+            //        m_data.m_squished = true;
+            //        Debug.Log("Squished!");
+            //    }
+            //}
         }
 
         m_newState = GetCurrentState().Colide(dir, Other.gameObject.tag);

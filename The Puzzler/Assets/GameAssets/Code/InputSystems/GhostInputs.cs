@@ -178,17 +178,20 @@ public class GhostInputs : PlayerInputs
 
     public void Stop()
     {
-        for (int z = 0; z < m_recordingSize; z++)
+        if (m_recorded == false)
         {
-            m_recordedInputs[z] = (char)0;
+            for (int z = 0; z < m_recordingSize; z++)
+            {
+                m_recordedInputs[z] = (char)0;
+            }
         }
-
+        
         m_arrayPosition = 0;
-
-        m_recorded = false;
+        
         m_recording = false;
         m_playing = false;
 
         gameObject.transform.position = m_startingPosition;
+        gameObject.transform.rotation = m_startingRotation;
     }
 }

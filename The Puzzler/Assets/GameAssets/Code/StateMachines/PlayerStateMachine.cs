@@ -34,18 +34,24 @@ public class PlayerStateMachine : BaseStateMachine
 {
     public PlayerInputs m_inputs;
 
+    private GhostList m_ghostList;
+
     public override void Start()
     {
         base.Start();
 
         m_inputs = gameObject.AddComponent<PlayerInputs>();
+        m_ghostList = gameObject.AddComponent<GhostList>();
+        m_ghostList.m_ghostTemplate = m_data.m_ghost;
 
         m_states2D[0] = gameObject.AddComponent<OnGround>();
         m_states2D[1] = gameObject.AddComponent<InAIr>();
         m_states2D[2] = gameObject.AddComponent<MoveingBox>();
         m_states2D[3] = gameObject.AddComponent<ClimbingLadder>();
         m_states2D[4] = gameObject.AddComponent<KO>();
-        m_states2D[5] = gameObject.AddComponent<ControlingGhost>();
+        ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
+        temp.m_ghostList = m_ghostList;
+        m_states2D[5] = temp;
         //m_states2D[7] = gameObject.AddComponent<WallSlide>();
 
         m_states2D[0].Initialize(m_rigb, m_data, m_inputs);
@@ -118,5 +124,13 @@ public class PlayerStateMachine : BaseStateMachine
         }
 
         base.OnTriggerStay(other);
+    }
+
+    public override void Pause(bool paused)
+    {
+        base.Pause(paused);
+
+        m_inputs.m_pause = paused;
+        m_ghostList.Pause(paused);
     }
 }

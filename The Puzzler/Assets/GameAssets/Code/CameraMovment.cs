@@ -34,7 +34,7 @@ public class CameraMovment : MonoBehaviour
         m_transitionTimer = new Timer();
         m_transitionTimer.m_time = 0.2f;
 
-        if (m_player.m_data.m_use3D)
+        if (m_player && m_player.m_data.m_use3D)
         {
             m_currentCam = E_CamType.CAM_3D_AIR;
             m_nextCam = E_CamType.CAM_3D_AIR;
@@ -48,6 +48,13 @@ public class CameraMovment : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!m_player.m_data)
+        {
+            m_player = FindObjectOfType<PlayerStateMachine>();
+
+            Vector3 playerPos = m_player.gameObject.transform.position;
+        }
+
         PlayerData followData = m_player.getFollowData();
 
         if (!followData.m_use3D)

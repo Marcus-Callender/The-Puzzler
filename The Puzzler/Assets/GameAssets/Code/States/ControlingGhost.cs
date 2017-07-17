@@ -8,6 +8,8 @@ public class ControlingGhost : BasicState
     public GhostStateMachine m_ghostStateMachine;
     public GhostInputs m_ghostInputs;
 
+    public GhostList m_ghostList;
+
     public override void Initialize(Rigidbody rigb, PlayerData data, PlayerInputs inputs)
     {
         m_rigb = rigb;
@@ -15,8 +17,9 @@ public class ControlingGhost : BasicState
         m_inputs = inputs;
 
         Debug.Log("###### Creating ghost ######");
-        m_GhostObject = Instantiate(m_data.m_ghost);
-        m_GhostObject.SetActive(true);
+        //m_GhostObject = Instantiate(m_data.m_ghost);
+        //m_GhostObject.SetActive(true);
+        m_GhostObject = m_ghostList.createGhost();
         m_ghostStateMachine = m_GhostObject.GetComponent<GhostStateMachine>();
         m_ghostInputs = m_GhostObject.GetComponent<GhostInputs>();
     }

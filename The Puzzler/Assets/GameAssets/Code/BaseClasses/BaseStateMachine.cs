@@ -10,19 +10,16 @@ public class BaseStateMachine : MonoBehaviour
     protected BasicState[] m_states3D = new BasicState[8];
     public PlayerData m_data;
     protected Rigidbody m_rigb;
+    protected bool m_lockState = false;
 
     [SerializeField]
     protected E_PLAYER_STATES m_currentState = E_PLAYER_STATES.IN_AIR;
     protected E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
-    //public BoxMovenemt m_linkedBox = null;
-
     public virtual void Start()
     {
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
-
-        //StartCoroutine(MoveBox());
     }
 
     public virtual void Update()
@@ -44,19 +41,6 @@ public class BaseStateMachine : MonoBehaviour
             m_data.m_InteractableContacts[z] = false;
         }
     }
-
-    //IEnumerator MoveBox()
-    //{
-    //    while (true)
-    //    {
-    //        if (m_data.m_linkedBox != null)
-    //        {
-    //            m_linkedBox.Move(m_data.m_velocityX);
-    //        }
-    //
-    //        yield return new WaitForFixedUpdate();
-    //    }
-    //}
 
     private void CheckGroundColl()
     {
@@ -82,7 +66,7 @@ public class BaseStateMachine : MonoBehaviour
     public virtual void OnCollisionStay(Collision Other)
     {
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
-        
+
         E_DIRECTIONS dir = E_DIRECTIONS.TOP;
 
         if (Mathf.Approximately(angle, 0.0f))
@@ -120,84 +104,6 @@ public class BaseStateMachine : MonoBehaviour
                 }
             }
         }
-        //else if (Mathf.Approximately(angle, 90.0f))
-        //{
-        //    angle = Vector2.Angle(Other.contacts[0].normal, Vector2.left);
-        //
-        //    if (Mathf.Approximately(angle, 0.0f))
-        //    {
-        //        dir = E_DIRECTIONS.RIGHT;
-        //
-        //        if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
-        //        {
-        //            m_data.m_contacts[1] = true;
-        //
-        //            if (m_data.m_contacts[3])
-        //            {
-        //                m_data.m_squished = true;
-        //                Debug.Log("Squished!");
-        //            }
-        //
-        //            if (m_data.m_InteractableContacts[3])
-        //            {
-        //                //m_linkedBox.m_requestStop = true;
-        //                Debug.Log("Stop Requested");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            //m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
-        //
-        //            m_data.m_InteractableContacts[1] = true;
-        //
-        //            if (m_data.m_contacts[3])
-        //            {
-        //                //m_linkedBox.m_requestStop = true;
-        //
-        //                Debug.Log("Stop Requested");
-        //            }
-        //        }
-        //    }
-        //    else if (Mathf.Approximately(angle, 180.0f))
-        //    {
-        //        dir = E_DIRECTIONS.LEFT;
-        //
-        //        if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
-        //        {
-        //            m_data.m_contacts[3] = true;
-        //
-        //            if (m_data.m_contacts[1])
-        //            {
-        //                m_data.m_squished = true;
-        //                Debug.Log("Squished!");
-        //            }
-        //
-        //            if (m_data.m_InteractableContacts[1])
-        //            {
-        //                //m_linkedBox.m_requestStop = true;
-        //                Debug.Log("Stop Requested");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            //m_linkedBox = Other.gameObject.GetComponent<BoxMovenemt>();
-        //
-        //            m_data.m_InteractableContacts[3] = true;
-        //
-        //            if (m_data.m_contacts[1])
-        //            {
-        //                //m_linkedBox.m_requestStop = true;
-        //
-        //                Debug.Log("Stop Requested");
-        //            }
-        //        }
-        //    }
-        //}
-
-        //if (Mathf.Approximately(Vector2.Angle(Other.contacts[0].normal, Vector2.left), 90.0f) && Mathf.Approximately(Vector2.Angle(Other.contacts[0].normal, Vector2.up), 90.0f))
-        //{
-        //    m_data.m_squished = true;
-        //}
 
         m_newState = GetCurrentState().Colide(dir, Other.gameObject.tag);
         CheckState();
@@ -228,26 +134,29 @@ public class BaseStateMachine : MonoBehaviour
 
     protected void CheckState()
     {
-        m_data.m_anim.SetBool("KOd", m_data.m_squished);
-
-        if (m_data.m_squished)
+        if (!m_lockState)
         {
-            m_newState = E_PLAYER_STATES.KO;
-        }
+            m_data.m_anim.SetBool("KOd", m_data.m_squished);
 
-        if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState)
-        {
-            GetCurrentState().Exit();
-            m_states2D[(int)m_newState].Enter();
-
-            if (m_states2D[(int)m_newState] == null)
+            if (m_data.m_squished)
             {
-                Debug.Log("----- error state " + m_newState + " not found -----");
+                m_newState = E_PLAYER_STATES.KO;
             }
 
-            Debug.Log(m_currentState + " -> " + m_newState);
+            if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState)
+            {
+                GetCurrentState().Exit();
+                m_states2D[(int)m_newState].Enter();
 
-            m_currentState = m_newState;
+                if (m_states2D[(int)m_newState] == null)
+                {
+                    Debug.Log("----- error state " + m_newState + " not found -----");
+                }
+
+                Debug.Log(m_currentState + " -> " + m_newState);
+
+                m_currentState = m_newState;
+            }
         }
     }
 
@@ -269,5 +178,10 @@ public class BaseStateMachine : MonoBehaviour
         }
 
         return m_states2D[(int)m_newState];
+    }
+
+    public virtual void Pause(bool paused)
+    {
+        m_lockState = paused;
     }
 }

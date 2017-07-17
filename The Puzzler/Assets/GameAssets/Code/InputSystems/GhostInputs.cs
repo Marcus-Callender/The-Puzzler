@@ -19,118 +19,124 @@ public class GhostInputs : PlayerInputs
 
     public override void Cycle()
     {
-        if (m_recording)
+        if (!m_pause)
         {
-            // input to prematurely end the ghost recording
-            if (GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
+            if (m_recording)
             {
-                m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
+                // input to prematurely end the ghost recording
+                if (GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
+                {
+                    m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
 
-                m_recorded = true;
-                m_recording = false;
+                    m_recorded = true;
+                    m_recording = false;
 
-                gameObject.transform.position = m_startingPosition;
+                    gameObject.transform.position = m_startingPosition;
+                }
+                else if (m_arrayPosition < m_recordingSize)
+                {
+                    // resets the input
+                    m_Inputs = (char)0;
+
+                    if (m_arrayPosition == 0)
+                    {
+                        // if the recording has just started mark the current position
+                        m_startingPosition = gameObject.transform.position;
+                        //m_startingRotation = gameObject.transform.rotation;
+                    }
+
+                    if (Input.GetAxisRaw("Horizontal") > 0.0f)
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.LEFT);
+                    }
+
+                    if (Input.GetAxisRaw("Horizontal") < 0.0f)
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT);
+                    }
+
+                    if (Input.GetAxisRaw("Vertical") > 0.0f)
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.UP);
+                    }
+
+                    if (Input.GetAxisRaw("Vertical") < 0.0f)
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
+                    }
+
+                    if (Input.GetButton("Jump"))
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.JUMP);
+                    }
+
+                    if (Input.GetButtonDown("MoveBox"))
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX);
+                    }
+
+                    if (Input.GetButton("MoveBox"))
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX_HOLD);
+                    }
+
+                    if (Input.GetButtonDown("PressButton"))
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
+                    }
+
+                    if (Input.GetButtonDown("StartGhost"))
+                    {
+                        m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
+                    }
+
+                    m_recordedInputs[m_arrayPosition] = m_Inputs;
+                    m_arrayPosition++;
+                }
+                else
+                {
+                    m_recorded = true;
+                    m_recording = false;
+
+                    gameObject.transform.position = m_startingPosition;
+                    gameObject.transform.rotation = m_startingRotation;
+                }
             }
-            else if (m_arrayPosition < m_recordingSize)
+            else if (m_playing)
             {
-                // resets the input
+                if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition] != (char)InputToBit(E_INPUTS.END)))
+                {
+                    m_Inputs = m_recordedInputs[m_arrayPosition];
+                    m_arrayPosition++;
+                }
+                else
+                {
+                    m_playing = false;
+
+                    gameObject.transform.position = m_startingPosition;
+                    gameObject.transform.rotation = m_startingRotation;
+                }
+            }
+            else
+            {
+                // stops inputs from carrying over from when the ghost was moving
                 m_Inputs = (char)0;
-
-                if (m_arrayPosition == 0)
-                {
-                    // if the recording has just started mark the current position
-                    m_startingPosition = gameObject.transform.position;
-                    //m_startingRotation = gameObject.transform.rotation;
-                }
-
-                if (Input.GetAxisRaw("Horizontal") > 0.0f)
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.LEFT);
-                }
-
-                if (Input.GetAxisRaw("Horizontal") < 0.0f)
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT);
-                }
-
-                if (Input.GetAxisRaw("Vertical") > 0.0f)
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.UP);
-                }
-
-                if (Input.GetAxisRaw("Vertical") < 0.0f)
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
-                }
-
-                if (Input.GetButton("Jump"))
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.JUMP);
-                }
-
-                if (Input.GetButtonDown("MoveBox"))
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX);
-                }
-
-                if (Input.GetButton("MoveBox"))
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX_HOLD);
-                }
-
-                if (Input.GetButtonDown("PressButton"))
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
-                }
-
-                if (Input.GetButtonDown("StartGhost"))
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
-                }
-
-                m_recordedInputs[m_arrayPosition] = m_Inputs;
-                m_arrayPosition++;
             }
-            else
-            {
-                m_recorded = true;
-                m_recording = false;
-
-                gameObject.transform.position = m_startingPosition;
-                gameObject.transform.rotation = m_startingRotation;
-            }
-        }
-        else if (m_playing)
-        {
-            if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition] != (char)InputToBit(E_INPUTS.END)))
-            {
-                m_Inputs = m_recordedInputs[m_arrayPosition];
-                m_arrayPosition++;
-            }
-            else
-            {
-                m_playing = false;
-
-                gameObject.transform.position = m_startingPosition;
-                gameObject.transform.rotation = m_startingRotation;
-            }
-        }
-        else
-        {
-            // stops inputs from carrying over from when the ghost was moving
-            m_Inputs = (char)0;
         }
     }
 
     public IEnumerator Play()
     {
-        if (m_arrayPosition > m_recordingSize)
+        if (!m_pause)
         {
-            m_Inputs = m_recordedInputs[m_arrayPosition];
-            m_arrayPosition++;
-            yield return new WaitForSeconds(0.016f);
+            if (m_arrayPosition > m_recordingSize)
+            {
+                m_Inputs = m_recordedInputs[m_arrayPosition];
+                m_arrayPosition++;
+                yield return new WaitForSeconds(0.016f);
+            }
         }
-        
+
         yield return new WaitForSeconds(0.016f);
     }
 
@@ -178,7 +184,7 @@ public class GhostInputs : PlayerInputs
         }
 
         m_arrayPosition = 0;
-        
+
         m_recorded = false;
         m_recording = false;
         m_playing = false;

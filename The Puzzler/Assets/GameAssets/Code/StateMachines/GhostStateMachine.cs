@@ -149,4 +149,11 @@ public class GhostStateMachine : BaseStateMachine
 
         base.OnTriggerStay(other);
     }
+
+    public override void Pause(bool paused)
+    {
+        base.Pause(paused);
+
+        m_inputs.m_pause = paused;
+    }
 }

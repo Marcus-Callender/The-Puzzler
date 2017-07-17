@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
     private Transform m_menu;
     public GameObject m_resumeButton;
 
-    private PlayerData m_player;
+    private PlayerStateMachine m_player;
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-        m_player = GameObject.Find("Player").GetComponent<PlayerData>();
+        m_player = GameObject.Find("Player").GetComponent<PlayerStateMachine>();
     }
 
     void Update()

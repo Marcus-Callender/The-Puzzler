@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReturnToMainMenu : MonoBehaviour {
+using UnityEngine.SceneManagement;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class ReturnToMainMenu : MonoBehaviour
+{
+    void Start()
+    {
+        UnityEngine.UI.Button btn = gameObject.GetComponent<UnityEngine.UI.Button>();
+        btn.onClick.AddListener(Exit);
+    }
+
+    void Exit()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(0);
+    }
 }

@@ -340,6 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c32bb7d2669e54eb69deebfd9d4f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_resumeButton: {fileID: 547773516}
 --- !u!224 &180485042
 RectTransform:
   m_ObjectHideFlags: 0

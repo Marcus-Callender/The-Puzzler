@@ -165,4 +165,16 @@ public class PlayerData : MonoBehaviour
 
         return vel;
     }
+
+    public void Pause(bool paused)
+    {
+        if (paused)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 }

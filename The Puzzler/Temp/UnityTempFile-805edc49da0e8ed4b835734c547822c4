@@ -100,11 +100,13 @@ Assets/GameAssets/Code/ButtonTypes/PressurePlate.cs
 Assets/GameAssets/Code/CameraMovment.cs
 Assets/GameAssets/Code/DimentionTransition.cs
 Assets/GameAssets/Code/Enemy.cs
+Assets/GameAssets/Code/GhostList.cs
 Assets/GameAssets/Code/InputSystems/GhostInputs.cs
 Assets/GameAssets/Code/InputSystems/PlayerInputs.cs
 Assets/GameAssets/Code/Menu/PauseMenu.cs
 Assets/GameAssets/Code/Menu/Play.cs
 Assets/GameAssets/Code/Menu/QuitGame.cs
+Assets/GameAssets/Code/Menu/RandomizeText.cs
 Assets/GameAssets/Code/Menu/ReturnToMainMenu.cs
 Assets/GameAssets/Code/PersistantData.cs
 Assets/GameAssets/Code/PlayerData.cs

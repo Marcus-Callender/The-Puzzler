@@ -36,6 +36,31 @@ public class Timer
         }
     }
 
+    public void Cycle(float dt)
+    {
+        if (!m_completed && m_playing)
+        {
+            if (!m_reversed)
+            {
+                m_timeCount += dt;
+
+                if (m_time <= m_timeCount)
+                {
+                    m_completed = true;
+                }
+            }
+            if (m_reversed)
+            {
+                m_timeCount -= dt;
+
+                if (m_timeCount <= 0.0f)
+                {
+                    m_completed = true;
+                }
+            }
+        }
+    }
+
     public void Play(bool reverse = false)
     {
         m_reversed = reverse;

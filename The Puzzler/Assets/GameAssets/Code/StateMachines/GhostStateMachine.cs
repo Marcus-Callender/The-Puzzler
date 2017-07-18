@@ -35,7 +35,7 @@ public class GhostStateMachine : BaseStateMachine
         {
             m_matirialRenderers[z].material.color = new Color(0.1f, 1.0f, 1.0f, 0.5f);
         }
-        
+
         // alows the ghost to animate again
         m_data.m_anim.SetBool("Stopped", false);
 
@@ -115,7 +115,7 @@ public class GhostStateMachine : BaseStateMachine
             }
 
             m_inputs.Stop();
-            
+
             m_inputs.m_recorded = true;
         }
 

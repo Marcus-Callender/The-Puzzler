@@ -98,7 +98,8 @@ public class MoveingBox : BasicState
 
         if (m_data.m_use3D)
         {
-            getInput = m_inputs.GetInput(E_INPUTS.DOWN) || m_inputs.GetInput(E_INPUTS.UP);
+            getInput = m_inputs.GetInput(E_INPUTS.DOWN) || m_inputs.GetInput(E_INPUTS.UP) || 
+                m_inputs.GetInput(E_INPUTS.RIGHT) || m_inputs.GetInput(E_INPUTS.LEFT);
         }
         else
         {
@@ -136,6 +137,12 @@ public class MoveingBox : BasicState
 
                     if (m_inputs.GetInput(E_INPUTS.DOWN))
                         m_data.m_velocityX = -m_dragSpeed;
+
+                    if (m_inputs.GetInput(E_INPUTS.LEFT))
+                        m_data.m_velocityZ = m_dragSpeed;
+
+                    if (m_inputs.GetInput(E_INPUTS.RIGHT))
+                        m_data.m_velocityZ = -m_dragSpeed;
                 }
                 else
                 {

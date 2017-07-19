@@ -6,6 +6,7 @@ public class PlayerData : MonoBehaviour
 {
     public float m_velocityX = 0.0f;
     public float m_velocityY = 0.0f;
+    public float m_velocityZ = 0.0f;
 
     public bool m_moveingBox = false;
     public bool m_closeToBox = false;
@@ -105,8 +106,11 @@ public class PlayerData : MonoBehaviour
         }
         else
         {
-            m_rigb.velocity = (gameObject.transform.forward * m_velocityX) + (gameObject.transform.up * m_velocityY);
+            m_rigb.velocity = (gameObject.transform.forward * m_velocityX) + (gameObject.transform.up * m_velocityY) + (gameObject.transform.right * m_velocityZ);
         }
+
+        m_velocityX = 0.0f;
+        m_velocityZ = 0.0f;
     }
 
     public Vector3 GetCenterTransform()
@@ -156,11 +160,11 @@ public class PlayerData : MonoBehaviour
         if (!m_use3D && !m_left_right)
         {
             // used in excaptions where the box movment would be reversed
-            vel += (-m_velocityX * transform.forward) + (m_velocityY * transform.up);
+            vel += (-m_velocityX * transform.forward) + (m_velocityY * transform.up) + (gameObject.transform.right * m_velocityZ);
         }
         else
         {
-            vel += (m_velocityX * transform.forward) + (m_velocityY * transform.up);
+            vel += (m_velocityX * transform.forward) + (m_velocityY * transform.up) + (gameObject.transform.right * m_velocityZ);
         }
 
         return vel;

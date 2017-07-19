@@ -97,6 +97,7 @@ public class GhostInputs : PlayerInputs
                 {
                     m_recorded = true;
                     m_recording = false;
+                    m_pause = false;
 
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
@@ -104,6 +105,8 @@ public class GhostInputs : PlayerInputs
             }
             else if (m_playing)
             {
+                m_pause = false;
+
                 if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition] != (char)InputToBit(E_INPUTS.END)))
                 {
                     m_Inputs = m_recordedInputs[m_arrayPosition];
@@ -137,6 +140,7 @@ public class GhostInputs : PlayerInputs
             }
         }
 
+        // repetes tis function automatialy on the next frame
         yield return new WaitForSeconds(0.016f);
     }
 

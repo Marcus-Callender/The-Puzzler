@@ -15,7 +15,7 @@ public class RandomizeText : MonoBehaviour
     void Start()
     {
         m_changeTimer = new Timer();
-        m_changeTimer.m_time = Random.Range(1.0f, 2.0f);
+        m_changeTimer.m_time = Random.Range(0.032f, 0.064f);
         m_changeTimer.Play();
 
         m_text = GetComponent<Text>();
@@ -27,7 +27,7 @@ public class RandomizeText : MonoBehaviour
 
         if (m_changeTimer.m_completed)
         {
-            m_changeTimer.m_time = Random.Range(1.0f, 2.0f);
+            m_changeTimer.m_time = Random.Range(0.032f, 0.064f);
             m_changeTimer.Play();
 
 

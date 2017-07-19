@@ -48,6 +48,7 @@ public class CameraMovment : MonoBehaviour
 
     void LateUpdate()
     {
+        // ensures there is a valid refrence to the player
         if (!m_player.m_data)
         {
             m_player = FindObjectOfType<PlayerStateMachine>();
@@ -55,6 +56,7 @@ public class CameraMovment : MonoBehaviour
             Vector3 playerPos = m_player.gameObject.transform.position;
         }
 
+        // makes all movments relative to the charicter the player is controling
         PlayerData followData = m_player.getFollowData();
 
         if (!followData.m_use3D)

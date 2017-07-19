@@ -23,7 +23,7 @@ public enum E_INPUTS
 public class PlayerInputs : MonoBehaviour
 {
     protected char m_Inputs;
-    public bool m_pauseInputs;
+    //public bool m_pauseInputs;
     public bool m_pause;
 
     public Timer m_ghostButtonTimer;
@@ -33,7 +33,7 @@ public class PlayerInputs : MonoBehaviour
         m_ghostButtonTimer = new Timer();
         m_ghostButtonTimer.m_time = 0.75f;
 
-        m_pauseInputs = false;
+        //m_pauseInputs = false;
         m_pause = false;
     }
 
@@ -104,6 +104,10 @@ public class PlayerInputs : MonoBehaviour
                     m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
                 }
             }
+        }
+        else
+        {
+            m_Inputs = (char)0;
         }
     }
 

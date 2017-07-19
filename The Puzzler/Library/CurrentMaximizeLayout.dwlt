@@ -22,10 +22,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 987
-  m_MinSize: {x: 911, y: 442}
-  m_MaxSize: {x: 22006, y: 10021}
+  m_MinSize: {x: 913, y: 421}
+  m_MaxSize: {x: 22008, y: 10000}
   vertical: 0
-  controlID: 3600
+  controlID: 8359
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -122,10 +122,10 @@ MonoBehaviour:
     y: 0
     width: 906
     height: 987
-  m_MinSize: {x: 202, y: 442}
-  m_MaxSize: {x: 4002, y: 8042}
+  m_MinSize: {x: 202, y: 421}
+  m_MaxSize: {x: 4002, y: 8021}
   vertical: 1
-  controlID: 3601
+  controlID: 8360
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,8 +144,8 @@ MonoBehaviour:
     y: 0
     width: 906
     height: 506
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -179,14 +179,14 @@ MonoBehaviour:
     width: 904
     height: 485
   m_SceneLighting: 1
-  lastFramingTime: 23163.191938396212
+  lastFramingTime: 962.6933351310207
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -19.20829, y: 3.7917576, z: -9.612024}
+    m_Target: {x: 2.3470683, y: 6.606435, z: 3.4695282}
     speed: 2
-    m_Value: {x: -19.20829, y: 3.7917576, z: -9.612024}
+    m_Value: {x: 2.3470683, y: 6.606435, z: 3.4695282}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -209,13 +209,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.06775719, y: 0.00807473, z: -0.0005477798, w: -0.99766904}
+    m_Target: {x: 0.21030632, y: 0.24988976, z: -0.055699915, w: 0.9435168}
     speed: 2
-    m_Value: {x: -0.06775719, y: 0.00807473, z: -0.0005477798, w: -0.99766904}
+    m_Value: {x: -0.2103063, y: -0.24988975, z: 0.05569991, w: -0.94351673}
   m_Size:
-    m_Target: 3.6258633
+    m_Target: 22
     speed: 2
-    m_Value: 3.6258633
+    m_Value: 22
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -339,19 +339,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/GameAssets/Code/Menu
+    - Assets/GameAssets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/GameAssets/Code/Menu
+  - Assets/GameAssets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: be270000
-    m_LastClickedID: 10174
-    m_ExpandedIDs: 00000000bc26000004270000682700009c270000b4270000cc270000a828000072290000a02a0000182b00004e2c0000782d0000842d0000942d00008e2e0000c82e00001e2f0000502f0000c2370000c4370000c6370000c837000000ca9a3bffffff7f
+    m_SelectedIDs: a22c0000
+    m_LastClickedID: 11426
+    m_ExpandedIDs: 00000000c0260000082700006c270000a0270000b8270000d0270000ac28000076290000a42a00001c2b0000522c00007c2d0000882d0000982d0000922e0000cc2e0000222f0000542f0000cc370000ce370000d0370000d237000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -379,7 +379,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000bc26000004270000682700009c270000b4270000cc270000a828000072290000a02a0000182b00004e2c0000782d0000842d0000942d00008e2e0000c82e00001e2f0000502f0000c2370000c4370000c6370000c837000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000c0260000082700006c270000a0270000b8270000d0270000ac28000076290000a42a00001c2b0000522c00007c2d0000882d0000982d0000922e0000cc2e0000222f0000542f0000cc370000ce370000d0370000d237000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -404,9 +404,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 62420100
-    m_LastClickedInstanceID: 82530
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 2c87fdff
+    m_LastClickedInstanceID: -162004
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -478,8 +478,8 @@ MonoBehaviour:
     y: 0
     width: 274
     height: 987
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -513,9 +513,9 @@ MonoBehaviour:
     height: 966
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 62420100
-    m_LastClickedID: 82530
-    m_ExpandedIDs: 3eb5fbff72d4fbff40d9fbff02dafbff1addfeff2e19ffff164effffe2fbffff000000002e3000005830000062300000d8300000ae410100d8410100e24101000442010058420100
+    m_SelectedIDs: 2c87fdff
+    m_LastClickedID: -162004
+    m_ExpandedIDs: 1488fdff3403feffe2fbffff00000000363000006a300000dca0000040b3000074b3000096b30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -556,8 +556,8 @@ MonoBehaviour:
     y: 0
     width: 431
     height: 987
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -591,7 +591,7 @@ MonoBehaviour:
     y: 92
     width: 429
     height: 966
-  m_ScrollPosition: {x: 0, y: 147.95508}
+  m_ScrollPosition: {x: 0, y: 331.95508}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 380

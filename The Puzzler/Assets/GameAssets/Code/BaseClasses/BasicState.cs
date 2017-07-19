@@ -7,8 +7,7 @@ public class BasicState : MonoBehaviour
     protected PlayerData m_data;
     protected Rigidbody m_rigb;
     protected PlayerInputs m_inputs;
-
-    float direction;
+    
     public bool m_useWallGravity = false;
 
 

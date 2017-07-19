@@ -22,6 +22,7 @@ public class PauseMenu : MonoBehaviour
 
             if (button)
             {
+                // calls toggle pause when the resume button is clicked
                 button.onClick.AddListener(TogglePause);
             }
         }

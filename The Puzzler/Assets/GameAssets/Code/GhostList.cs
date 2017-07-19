@@ -11,6 +11,7 @@ public class GhostList : MonoBehaviour
 
     public GameObject m_ghostTemplate;
     
+    // creates a new ghost, records its data and returns a refrence to it
     public GameObject createGhost()
     {
         m_ghosts[m_ghostsCreated] = Instantiate(m_ghostTemplate);
@@ -25,6 +26,7 @@ public class GhostList : MonoBehaviour
 
     public void Pause(bool paused)
     {
+        // tells al the ghosts to pause
         for (int z = 0; z < m_ghostsCreated; z++)
         {
             m_ghostInputs[z].m_pause = paused;

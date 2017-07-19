@@ -106,8 +106,10 @@ public class GhostStateMachine : BaseStateMachine
             gameObject.tag = "Ghost";
             // runs if the recording has finished and the ghost is not playing
             m_data.m_anim.SetBool("Stopped", true);
-            m_inputs.m_pauseInputs = true;
+            //m_inputs.m_pauseInputs = true;
+            m_inputs.m_pause = false;
             m_data.m_squished = false;
+            m_inputs.m_consumingInputs = false;
 
             if (!m_inputs.m_recorded)
             {
@@ -135,7 +137,8 @@ public class GhostStateMachine : BaseStateMachine
             gameObject.tag = "Ghost";
             // runs if the recording has finished and the ghost is not playing
             m_data.m_anim.SetBool("Stopped", true);
-            m_inputs.m_pauseInputs = true;
+            //m_inputs.m_pauseInputs = true;
+            //m_inputs.m_pause = true;
             m_inputs.m_consumingInputs = false;
         }
     }

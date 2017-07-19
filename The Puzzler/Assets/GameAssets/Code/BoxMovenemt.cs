@@ -6,8 +6,7 @@ public class BoxMovenemt : MonoBehaviour
 {
     Rigidbody m_rigb;
     PlayerData[] m_playerRefs;
-
-    float m_playerInteractDistance = 0.5f;
+    
     float m_playerBoxMinDistance = 0.0f;
 
     public bool m_requestStop = false;
@@ -23,6 +22,7 @@ public class BoxMovenemt : MonoBehaviour
 
     private void Update()
     {
+        // makes sure the box always has a downward velocity
         m_rigb.velocity = new Vector3(m_rigb.velocity.x, m_rigb.velocity.y - 9.81f, m_rigb.velocity.z);
     }
 

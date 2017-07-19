@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 872b30fff551b5446af0372fc7b8566a, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b3661243b6dea424b9bf2ef551a0838e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -558,6 +558,11 @@ Prefab:
         type: 2}
       propertyPath: m_point2.z
       value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_speed
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
@@ -2263,6 +2268,11 @@ Prefab:
       propertyPath: m_point2.z
       value: -4.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_speed
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
   m_IsPrefabParent: 0
@@ -2930,8 +2940,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1463465653}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.5, y: 4.5, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 2.5}
+  m_LocalPosition: {x: -13.75, y: 4.5, z: 0}
+  m_LocalScale: {x: 4.5, y: 4, z: 2.5}
   m_Children: []
   m_Father: {fileID: 715138078}
   m_RootOrder: 2
@@ -3259,15 +3269,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4200640743290838, guid: 29521f56a4d09b94099692c48b69419b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.65
+      value: 44.398
       objectReference: {fileID: 0}
     - target: {fileID: 4200640743290838, guid: 29521f56a4d09b94099692c48b69419b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.16
+      value: 9.39
       objectReference: {fileID: 0}
     - target: {fileID: 4200640743290838, guid: 29521f56a4d09b94099692c48b69419b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 10.63
       objectReference: {fileID: 0}
     - target: {fileID: 4200640743290838, guid: 29521f56a4d09b94099692c48b69419b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3308,11 +3318,36 @@ Prefab:
     - target: {fileID: 114340096345502652, guid: 29521f56a4d09b94099692c48b69419b,
         type: 2}
       propertyPath: m_use3D
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4200640743290838, guid: 29521f56a4d09b94099692c48b69419b, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 136110409372561362, guid: 29521f56a4d09b94099692c48b69419b,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 136110409372561362, guid: 29521f56a4d09b94099692c48b69419b,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 136110409372561362, guid: 29521f56a4d09b94099692c48b69419b,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 136110409372561362, guid: 29521f56a4d09b94099692c48b69419b,
+        type: 2}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 136110409372561362, guid: 29521f56a4d09b94099692c48b69419b,
+        type: 2}
+      propertyPath: m_Height
+      value: 1.53
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29521f56a4d09b94099692c48b69419b, type: 2}
@@ -3572,6 +3607,11 @@ Prefab:
         type: 2}
       propertyPath: m_point2.y
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_speed
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}

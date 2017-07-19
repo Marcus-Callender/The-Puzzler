@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UICountdown : MonoBehaviour
 {
     Image m_sprite;
-    public float m_progress = 1.0f;
+    public float m_progress = 0.0f;
 
     void Start()
     {
@@ -15,7 +15,7 @@ public class UICountdown : MonoBehaviour
 
         m_sprite.type = Image.Type.Filled;
         m_sprite.fillMethod = Image.FillMethod.Radial360;
-        m_sprite.fillAmount = 1.0f;
+        m_sprite.fillAmount = 0.0f;
         m_sprite.fillClockwise = false;
     }
     

@@ -17,6 +17,25 @@ public class GhostInputs : PlayerInputs
     public Vector3 m_startingPosition;
     public Quaternion m_startingRotation;
 
+    public UICountdown m_countdown;
+
+    public override void Start()
+    {
+        base.Start();
+
+        if (GameObject.Find("GhostCountdown"))
+        {
+            Debug.Log("-- found GhostCountdown");
+
+            m_countdown = GameObject.Find("GhostCountdown").GetComponent<UICountdown>();
+
+            if (m_countdown)
+            {
+                Debug.Log("-- found UICountdown");
+            }
+        }
+    }
+
     public override void Cycle()
     {
         if (!m_pause)
@@ -92,6 +111,13 @@ public class GhostInputs : PlayerInputs
 
                     m_recordedInputs[m_arrayPosition] = m_Inputs;
                     m_arrayPosition++;
+
+                    if (m_countdown)
+                    {
+                        m_countdown.m_progress = 1.0f - ((float)m_arrayPosition / (float)m_recordingSize) /** 100.0f*/;
+
+                        Debug.Log("Progress: " + m_countdown.m_progress);
+                    }
                 }
                 else
                 {

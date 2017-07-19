@@ -9,8 +9,7 @@ public class BasicState : MonoBehaviour
     protected PlayerInputs m_inputs;
     
     public bool m_useWallGravity = false;
-
-
+    
     public virtual void Initialize(Rigidbody rigb, PlayerData data, PlayerInputs inputs)
     {
         m_rigb = rigb;
@@ -65,10 +64,6 @@ public class BasicState : MonoBehaviour
 
     protected void MoveHorzontal(float _speed)
     {
-        //direction = Input.GetAxisRaw("Horizontal");
-        //
-        //m_data.m_velocityX = direction * _speed;
-
         m_data.m_velocityX = 0.0f;
 
         if (m_inputs.GetInput(E_INPUTS.LEFT))

@@ -5,15 +5,17 @@ using UnityEngine;
 public class LazerGenerator : ButtonInteraction
 {
     private LineRenderer m_line;
-
     private Timer m_timer;
+
+    public float m_cycleTime = 0.5f;
 
     public override void Start()
     {
         base.Start();
 
+        // sets up the timer
         m_timer = new Timer();
-        m_timer.m_time = 0.5f;
+        m_timer.m_time = m_cycleTime;
         m_timer.Play();
     }
 
@@ -57,13 +59,11 @@ public class LazerGenerator : ButtonInteraction
             float alpha = 1.0f;
             Gradient gradient = new Gradient();
 
-            //Color col = new Color(0.5f + (m_timer.GetLerp() * 0.5f), 0.0f, 0.0f);
             Color col = new Color(1.0f, m_timer.GetLerp(), m_timer.GetLerp(), 0.5f);
 
             gradient.SetKeys(
                 new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) },
                 new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
-                //new GradientAlphaKey[] { new GradientAlphaKey(0.5f, 0.5f), new GradientAlphaKey(0.5f, 0.5f) }
                 );
 
             m_line.colorGradient = gradient;
@@ -78,8 +78,7 @@ public class LazerGenerator : ButtonInteraction
         else
         {
             Gradient gradient = new Gradient();
-
-            //Color col = new Color(0.5f + (m_timer.GetLerp() * 0.5f), 0.0f, 0.0f);
+            
             Color col = new Color(1.0f, m_timer.GetLerp(), m_timer.GetLerp(), 0.0f);
 
             gradient.SetKeys(

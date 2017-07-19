@@ -44,10 +44,11 @@ public class BaseStateMachine : MonoBehaviour
 
     private void CheckGroundColl()
     {
-        var up = transform.TransformDirection(Vector3.up);
         // note: the use of var as the type. This is because in c# you
         // can have lamda functions which open up the use of untyped variables
         // these variables can only live INSIDE a function.
+        var up = transform.TransformDirection(Vector3.up);
+
         RaycastHit hit;
         Debug.DrawRay(transform.position, -up * 2, Color.green);
 
@@ -77,32 +78,10 @@ public class BaseStateMachine : MonoBehaviour
             {
                 m_data.m_velocityX += Other.gameObject.GetComponent<Rigidbody>().velocity.x;
             }
-        
-            //if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
-            //{
-            //    m_data.m_contacts[2] = true;
-            //
-            //    if (m_data.m_contacts[0])
-            //    {
-            //        m_data.m_squished = true;
-            //        Debug.Log("Squished!");
-            //    }
-            //}
         }
         else if (Mathf.Approximately(angle, 180.0f))
         {
             dir = E_DIRECTIONS.TOP;
-        
-            //if (Other.gameObject.tag != "Box" && Other.gameObject.tag != "Enemy")
-            //{
-            //    m_data.m_contacts[0] = true;
-            //
-            //    if (m_data.m_contacts[2])
-            //    {
-            //        m_data.m_squished = true;
-            //        Debug.Log("Squished!");
-            //    }
-            //}
         }
 
         m_newState = GetCurrentState().Colide(dir, Other.gameObject.tag);
@@ -134,6 +113,7 @@ public class BaseStateMachine : MonoBehaviour
 
     protected void CheckState()
     {
+        // prevents the state from changing
         if (!m_lockState)
         {
             m_data.m_anim.SetBool("KOd", m_data.m_squished);
@@ -145,16 +125,14 @@ public class BaseStateMachine : MonoBehaviour
 
             if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState)
             {
+                // tells the old state is is being left and the new state is being entered
                 GetCurrentState().Exit();
                 m_states2D[(int)m_newState].Enter();
-
-                if (m_states2D[(int)m_newState] == null)
-                {
-                    Debug.Log("----- error state " + m_newState + " not found -----");
-                }
-
+                
+                // shows the state transition that took place
                 Debug.Log(m_currentState + " -> " + m_newState);
 
+                // sets the new state to be used
                 m_currentState = m_newState;
             }
         }

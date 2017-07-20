@@ -91,17 +91,6 @@ public class PlayerData : MonoBehaviour
     {
         if (!m_use3D)
         {
-            //if (!m_squished)
-            //{
-            //    Debug.Log("Forward: " + transform.forward);
-            //    //m_rigb.velocity = new Vector3(m_velocityX, m_velocityY);
-            //    m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocityX) + (gameObject.transform.up * m_velocityY);
-            //}
-            //else
-            //{
-            //    m_rigb.velocity = new Vector3(0.0f, -7.0f, -7.0f);
-            //}
-
             m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocityX) + (gameObject.transform.up * m_velocityY);
         }
         else
@@ -124,6 +113,7 @@ public class PlayerData : MonoBehaviour
 
     public Quaternion GetRealRotation()
     {
+        // adjustes for left/right rotations in 2d mode to make calculations easier
         if (m_use3D)
         {
             return gameObject.transform.rotation;
@@ -153,6 +143,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    // returns the vecolity the player will attempt to move this frame
     public Vector3 GetExpectedVelocity()
     {
         Vector3 vel = Vector3.zero;

@@ -36,6 +36,8 @@ public class PlayerStateMachine : BaseStateMachine
 
     private GhostList m_ghostList;
 
+    private SaveData m_saveData;
+
     public override void Start()
     {
         base.Start();
@@ -132,5 +134,10 @@ public class PlayerStateMachine : BaseStateMachine
 
         m_inputs.m_pause = paused;
         m_ghostList.Pause(paused);
+    }
+
+    public void Upgrade(E_UPGRADES type)
+    {
+
     }
 }

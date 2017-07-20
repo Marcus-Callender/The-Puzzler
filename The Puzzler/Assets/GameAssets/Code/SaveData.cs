@@ -40,4 +40,21 @@ public class SaveData : MonoBehaviour
             Debug.Log("Created new file.");
         }
     }
+
+    private int IntToBit(int input)
+    {
+        // function return examples
+        // 0 => 1
+        // 3 => 8
+        // 7 => 128
+
+        int bit = 1;
+
+        for (int z = 0; z < input; z++)
+        {
+            bit *= 2;
+        }
+
+        return bit;
+    }
 }

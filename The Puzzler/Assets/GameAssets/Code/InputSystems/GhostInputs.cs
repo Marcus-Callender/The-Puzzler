@@ -50,6 +50,8 @@ public class GhostInputs : PlayerInputs
                     m_recorded = true;
                     m_recording = false;
 
+                    m_countdown.m_progress = 0.0f;
+
                     gameObject.transform.position = m_startingPosition;
                 }
                 else if (m_arrayPosition < m_recordingSize)
@@ -114,7 +116,7 @@ public class GhostInputs : PlayerInputs
 
                     if (m_countdown)
                     {
-                        m_countdown.m_progress = 1.0f - ((float)m_arrayPosition / (float)m_recordingSize) /** 100.0f*/;
+                        m_countdown.m_progress = 1.0f - ((float)m_arrayPosition / (float)m_recordingSize);
 
                         Debug.Log("Progress: " + m_countdown.m_progress);
                     }

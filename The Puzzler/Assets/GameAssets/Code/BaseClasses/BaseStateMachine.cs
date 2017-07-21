@@ -123,7 +123,7 @@ public class BaseStateMachine : MonoBehaviour
                 m_newState = E_PLAYER_STATES.KO;
             }
 
-            if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState)
+            if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState && m_states2D[(int)m_newState])
             {
                 // tells the old state is is being left and the new state is being entered
                 GetCurrentState().Exit();

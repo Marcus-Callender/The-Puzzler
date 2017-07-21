@@ -117,8 +117,6 @@ public class GhostInputs : PlayerInputs
                     if (m_countdown)
                     {
                         m_countdown.m_progress = 1.0f - ((float)m_arrayPosition / (float)m_recordingSize);
-
-                        Debug.Log("Progress: " + m_countdown.m_progress);
                     }
                 }
                 else

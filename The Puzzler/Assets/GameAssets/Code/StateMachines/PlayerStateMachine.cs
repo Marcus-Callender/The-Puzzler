@@ -80,6 +80,8 @@ public class PlayerStateMachine : BaseStateMachine
         m_states3D[1].Initialize(m_rigb, m_data, m_inputs);
 
         //m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
+
+        m_saveData = GetComponent<SaveData>();
     }
 
     public override void Update()
@@ -91,9 +93,9 @@ public class PlayerStateMachine : BaseStateMachine
         }
 
         m_inputs.Cycle();
-        
+
         m_data.m_pressingButton = m_inputs.GetInput(E_INPUTS.PRESS_BUTTON);
-        
+
         base.Update();
 
         if (m_inputs.GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
@@ -117,7 +119,7 @@ public class PlayerStateMachine : BaseStateMachine
 
         return m_data;
     }
-    
+
     public override void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Attack")
@@ -140,13 +142,18 @@ public class PlayerStateMachine : BaseStateMachine
     {
         if (type == E_UPGRADES.GHOST_1)
         {
-            ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
-            temp.m_ghostList = m_ghostList;
-            m_states2D[5] = temp;
+            if (!m_states2D[5])
+            {
+                ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
+                temp.m_ghostList = m_ghostList;
+                m_states2D[5] = temp;
 
-            m_states2D[5].Initialize(m_rigb, m_data, m_inputs);
+                m_states2D[5].Initialize(m_rigb, m_data, m_inputs);
 
-            m_states3D[5] = m_states2D[5];
+                m_states3D[5] = m_states2D[5];
+
+                m_saveData.AddUpgrade(type);
+            }
         }
     }
 }

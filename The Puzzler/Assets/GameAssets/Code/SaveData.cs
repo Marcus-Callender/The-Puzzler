@@ -8,6 +8,7 @@ using System.IO;
 public class SaveData : MonoBehaviour
 {
     public string m_data = "";
+    public char m_upgrades;
     public string m_directory = "";
 
     void Start()
@@ -19,6 +20,8 @@ public class SaveData : MonoBehaviour
         Debug.Log("File is : " + m_directory);
 
         Load();
+
+        m_upgrades = (char)int.Parse(m_data);
     }
     
     public void Save()
@@ -39,6 +42,14 @@ public class SaveData : MonoBehaviour
             File.WriteAllText(m_directory, "Text");
             Debug.Log("Created new file.");
         }
+    }
+
+    public void AddUpgrade(E_UPGRADES type)
+    {
+        m_upgrades |= (char)IntToBit((int)type);
+        m_data = ((int)m_upgrades).ToString();
+
+        Save();
     }
 
     private int IntToBit(int input)

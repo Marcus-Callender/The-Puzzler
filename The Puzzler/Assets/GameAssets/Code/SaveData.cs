@@ -22,6 +22,8 @@ public class SaveData : MonoBehaviour
         Load();
 
         m_upgrades = (char)int.Parse(m_data);
+
+        GetSavedUpgrades();
     }
     
     public void Save()
@@ -42,6 +44,8 @@ public class SaveData : MonoBehaviour
             File.WriteAllText(m_directory, "Text");
             Debug.Log("Created new file.");
         }
+
+        m_upgrades = (char)int.Parse(m_data);
     }
 
     public void AddUpgrade(E_UPGRADES type)
@@ -67,5 +71,16 @@ public class SaveData : MonoBehaviour
         }
 
         return bit;
+    }
+
+    public bool[] GetSavedUpgrades()
+    {
+        bool[] ret = new bool[(int)E_UPGRADES.SIZE];
+
+        ret[(int)E_UPGRADES.MOVE_CRATE] = (m_upgrades & IntToBit((int)E_UPGRADES.MOVE_CRATE)) > 0;
+        ret[(int)E_UPGRADES.GHOST_1] = (m_upgrades & IntToBit((int)E_UPGRADES.GHOST_1)) > 0;
+        ret[(int)E_UPGRADES.GHOST_2] = (m_upgrades & IntToBit((int)E_UPGRADES.GHOST_2)) > 0;
+
+        return ret;
     }
 }

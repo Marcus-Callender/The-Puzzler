@@ -33,9 +33,7 @@ public enum E_DIRECTIONS
 public class PlayerStateMachine : BaseStateMachine
 {
     public PlayerInputs m_inputs;
-
     private GhostList m_ghostList;
-
     private SaveData m_saveData;
 
     public override void Start()
@@ -82,6 +80,31 @@ public class PlayerStateMachine : BaseStateMachine
         //m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
 
         m_saveData = GetComponent<SaveData>();
+        m_saveData.Initialize();
+
+        if (m_saveData.m_upgradeArray[(int)E_UPGRADES.MOVE_CRATE])
+        {
+
+        }
+
+        if (m_saveData.m_upgradeArray[(int)E_UPGRADES.GHOST_1])
+        {
+            if (!m_states2D[5])
+            {
+                ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
+                temp.m_ghostList = m_ghostList;
+                m_states2D[5] = temp;
+
+                m_states2D[5].Initialize(m_rigb, m_data, m_inputs);
+
+                m_states3D[5] = m_states2D[5];
+            }
+        }
+
+        if (m_saveData.m_upgradeArray[(int)E_UPGRADES.GHOST_2])
+        {
+
+        }
     }
 
     public override void Update()

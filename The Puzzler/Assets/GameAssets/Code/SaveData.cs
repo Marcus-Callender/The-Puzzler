@@ -10,8 +10,10 @@ public class SaveData : MonoBehaviour
     public string m_data = "";
     public char m_upgrades;
     public string m_directory = "";
+    public bool[] m_upgradeArray = new bool[(int)E_UPGRADES.SIZE];
 
-    void Start()
+    // this is insted of a start function to decide when this function is called
+    public void Initialize()
     {
         m_directory = Directory.GetCurrentDirectory();
         //m_directory += "\\Saves";
@@ -73,14 +75,10 @@ public class SaveData : MonoBehaviour
         return bit;
     }
 
-    public bool[] GetSavedUpgrades()
+    public void GetSavedUpgrades()
     {
-        bool[] ret = new bool[(int)E_UPGRADES.SIZE];
-
-        ret[(int)E_UPGRADES.MOVE_CRATE] = (m_upgrades & IntToBit((int)E_UPGRADES.MOVE_CRATE)) > 0;
-        ret[(int)E_UPGRADES.GHOST_1] = (m_upgrades & IntToBit((int)E_UPGRADES.GHOST_1)) > 0;
-        ret[(int)E_UPGRADES.GHOST_2] = (m_upgrades & IntToBit((int)E_UPGRADES.GHOST_2)) > 0;
-
-        return ret;
+        m_upgradeArray[(int)E_UPGRADES.MOVE_CRATE] = (m_upgrades & IntToBit((int)E_UPGRADES.MOVE_CRATE)) > 0;
+        m_upgradeArray[(int)E_UPGRADES.GHOST_1] = (m_upgrades & IntToBit((int)E_UPGRADES.GHOST_1)) > 0;
+        m_upgradeArray[(int)E_UPGRADES.GHOST_2] = (m_upgrades & IntToBit((int)E_UPGRADES.GHOST_2)) > 0;
     }
 }

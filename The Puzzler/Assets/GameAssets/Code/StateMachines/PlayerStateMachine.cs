@@ -49,18 +49,12 @@ public class PlayerStateMachine : BaseStateMachine
         m_states2D[2] = gameObject.AddComponent<MoveingBox>();
         m_states2D[3] = gameObject.AddComponent<ClimbingLadder>();
         m_states2D[4] = gameObject.AddComponent<KO>();
-        //ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
-        //temp.m_ghostList = m_ghostList;
-        //m_states2D[5] = temp;
-        //m_states2D[7] = gameObject.AddComponent<WallSlide>();
 
         m_states2D[0].Initialize(m_rigb, m_data, m_inputs);
         m_states2D[1].Initialize(m_rigb, m_data, m_inputs);
         m_states2D[2].Initialize(m_rigb, m_data, m_inputs);
         m_states2D[3].Initialize(m_rigb, m_data, m_inputs);
         m_states2D[4].Initialize(m_rigb, m_data, m_inputs);
-        //m_states2D[5].Initialize(m_rigb, m_data, m_inputs);
-        //m_states2D[7].Initialize(m_rigb, m_data, m_inputs);
 
 
         m_states3D[0] = gameObject.AddComponent<OnGround3D>();
@@ -68,16 +62,9 @@ public class PlayerStateMachine : BaseStateMachine
         m_states3D[2] = m_states2D[2];
         m_states3D[3] = m_states2D[3];
         m_states3D[4] = m_states2D[4];
-
-        // the controling ghost state is 2d/3d agnostic so the 2d/3d arrays can have a pointer to the same object
-        //m_states3D[5] = m_states2D[5];
-
-        //m_states3D[7] = gameObject.AddComponent<WallSlide>();
-
+        
         m_states3D[0].Initialize(m_rigb, m_data, m_inputs);
         m_states3D[1].Initialize(m_rigb, m_data, m_inputs);
-
-        //m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
 
         m_saveData = GetComponent<SaveData>();
         m_saveData.Initialize();
@@ -97,13 +84,21 @@ public class PlayerStateMachine : BaseStateMachine
 
                 m_states2D[5].Initialize(m_rigb, m_data, m_inputs);
 
+                // the controling ghost state is 2d/3d agnostic so the 2d/3d arrays can have a pointer to the same object
                 m_states3D[5] = m_states2D[5];
             }
         }
 
         if (m_saveData.m_upgradeArray[(int)E_UPGRADES.GHOST_2])
         {
+            ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
+            temp.m_ghostList = m_ghostList;
+            m_states2D[6] = temp;
 
+            m_states2D[6].Initialize(m_rigb, m_data, m_inputs);
+
+            // the controling ghost state is 2d/3d agnostic so the 2d/3d arrays can have a pointer to the same object
+            m_states3D[6] = m_states2D[6];
         }
     }
 
@@ -174,6 +169,21 @@ public class PlayerStateMachine : BaseStateMachine
                 m_states2D[5].Initialize(m_rigb, m_data, m_inputs);
 
                 m_states3D[5] = m_states2D[5];
+
+                m_saveData.AddUpgrade(type);
+            }
+        }
+        else if (type == E_UPGRADES.GHOST_2)
+        {
+            if (!m_states2D[6])
+            {
+                ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
+                temp.m_ghostList = m_ghostList;
+                m_states2D[6] = temp;
+
+                m_states2D[6].Initialize(m_rigb, m_data, m_inputs);
+
+                m_states3D[6] = m_states2D[6];
 
                 m_saveData.AddUpgrade(type);
             }

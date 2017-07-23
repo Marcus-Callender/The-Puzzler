@@ -71,6 +71,6 @@ public class ControlingGhost : BasicState
             return E_PLAYER_STATES.IN_AIR;
         }
         
-        return E_PLAYER_STATES.CONTROLING_GHOST;
+        return E_PLAYER_STATES.NULL;
     }
 }

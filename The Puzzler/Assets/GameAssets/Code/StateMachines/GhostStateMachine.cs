@@ -10,6 +10,8 @@ public class GhostStateMachine : BaseStateMachine
     private Renderer[] m_matirialRenderers;
     private bool m_overrideRecording = false;
 
+    public int m_id;
+
     // this boolean is set to true on entering the state and remains true 
     // while the ghost is coliding with any interactables that it isn't standing on
     //private bool m_colidedWithInteractable = false;

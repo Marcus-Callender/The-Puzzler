@@ -12,23 +12,25 @@ public class BaseStateMachine : MonoBehaviour
     protected Rigidbody m_rigb;
     protected bool m_lockState = false;
 
+    protected char m_inputs;
+
     [SerializeField]
     protected E_PLAYER_STATES m_currentState = E_PLAYER_STATES.IN_AIR;
     protected E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
-    public virtual void Start()
+    public virtual void Initialize()
     {
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
     }
 
-    public virtual void Update()
+    public virtual void Cycle()
     {
-        m_newState = GetCurrentState().Cycle();
+        m_newState = GetCurrentState().Cycle(m_inputs);
         CheckState();
     }
 
-    void FixedUpdate()
+    public void FixedCycle()
     {
         m_newState = GetCurrentState().PhysCycle();
         CheckState();
@@ -40,6 +42,12 @@ public class BaseStateMachine : MonoBehaviour
             m_data.m_contacts[z] = false;
             m_data.m_InteractableContacts[z] = false;
         }
+    }
+
+    public void GetInputs(char inputs)
+    {
+        m_inputs = inputs;
+        m_data.m_inputs = inputs;
     }
 
     private void CheckGroundColl()
@@ -140,6 +148,16 @@ public class BaseStateMachine : MonoBehaviour
 
     protected BasicState GetCurrentState()
     {
+        if (!m_data)
+        {
+            Debug.Log("--- Data refrence not found");
+        }
+
+        if (!m_states3D[(int)m_currentState] || !m_states2D[(int)m_currentState])
+        {
+            Debug.Log("--- State refrence not found");
+        }
+
         if (m_data.m_use3D)
         {
             return m_states3D[(int)m_currentState];
@@ -161,5 +179,22 @@ public class BaseStateMachine : MonoBehaviour
     public virtual void Pause(bool paused)
     {
         m_lockState = paused;
+    }
+
+    public virtual bool GetInput(E_INPUTS input)
+    {
+        return (m_inputs & (char)InputToBit(input)) > 0;
+    }
+
+    protected virtual int InputToBit(E_INPUTS input)
+    {
+        int bit = 1;
+
+        for (int z = 0; z < (int)input; z++)
+        {
+            bit *= 2;
+        }
+
+        return bit;
     }
 }

@@ -10,11 +10,10 @@ public class ControlingGhost : BasicState
 
     public GhostList m_ghostList;
 
-    public override void Initialize(Rigidbody rigb, PlayerData data, PlayerInputs inputs)
+    public override void Initialize(Rigidbody rigb, PlayerData data)
     {
         m_rigb = rigb;
         m_data = data;
-        m_inputs = inputs;
 
         Debug.Log("###### Creating ghost ######");
         //m_GhostObject = Instantiate(m_data.m_ghost);
@@ -32,7 +31,7 @@ public class ControlingGhost : BasicState
             m_ghostInputs = m_GhostObject.GetComponent<GhostInputs>();
         }
 
-        if (m_inputs.GetInput(E_INPUTS.GHOST_BUTTON_HOLD) && m_ghostInputs.m_recorded)
+        if (GetInput(E_INPUTS.GHOST_BUTTON_HOLD) && m_ghostInputs.m_recorded)
         {
             // tels the ghostInputs to re-record there recording
             m_ghostInputs.Reset();
@@ -41,14 +40,12 @@ public class ControlingGhost : BasicState
         if (m_ghostInputs.m_recorded)
         {
             //m_inputs.m_pauseInputs = false;
-            m_inputs.m_pause = false;
         }
         else
         {
             // sets the camra to follow the active ghost
             m_data.m_overideFollow = m_ghostStateMachine.m_data;
             //m_inputs.m_pauseInputs = true;
-            m_inputs.m_pause = true;
         }
 
         m_data.m_velocityX = 0.0f;
@@ -62,12 +59,11 @@ public class ControlingGhost : BasicState
         m_data.m_overideFollow = null;
     }
 
-    public override E_PLAYER_STATES Cycle()
+    public override E_PLAYER_STATES Cycle(char inputs)
     {
         if (!m_ghostInputs.m_consumingInputs)
         {
             //m_inputs.m_pauseInputs = false;
-            m_inputs.m_pause = false;
             return E_PLAYER_STATES.IN_AIR;
         }
         

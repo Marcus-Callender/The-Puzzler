@@ -130,10 +130,12 @@ public class InputSystem : MonoBehaviour
         if (m_currentGhost)
         {
             m_currentGhost.GetInputs(m_Inputs);
+            m_player.m_data.m_overideFollow = m_currentGhost.m_data;
         }
         else
         {
             m_player.GetInputs(m_Inputs);
+            m_player.m_data.m_overideFollow = null;
         }
 
         m_player.Cycle();

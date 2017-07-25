@@ -60,6 +60,10 @@ public class GhostStateMachine : BaseStateMachine
             m_arrayPosition = 0;
 
             m_playing = true;
+            m_data.m_pause = false;
+
+            //Play();
+            StartCoroutine(Play());
         }
         else
         {

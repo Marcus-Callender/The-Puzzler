@@ -11,7 +11,7 @@ public class GhostStateMachine : BaseStateMachine
     private bool m_overrideRecording = false;
 
     public int m_id;
-    
+
     public const int m_recordingSize = 60 * 4;
 
     //private char m_Inputs;
@@ -110,6 +110,18 @@ public class GhostStateMachine : BaseStateMachine
         //m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
 
         m_data.m_anim.SetBool("Stopped", true);
+
+        if (GameObject.Find("GhostCountdown"))
+        {
+            Debug.Log("-- found GhostCountdown");
+
+            m_countdown = GameObject.Find("GhostCountdown").GetComponent<UICountdown>();
+
+            if (m_countdown)
+            {
+                Debug.Log("-- found UICountdown");
+            }
+        }
     }
 
     public override void Cycle()
@@ -132,9 +144,69 @@ public class GhostStateMachine : BaseStateMachine
             m_recorded = true;
         }
 
-        m_data.m_pressingButton = GetInput(E_INPUTS.PRESS_BUTTON);
+        if (!m_data.m_pause)
+        {
+            if (m_recording)
+            {
+                if (GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
+                {
+                    m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
 
-        base.Cycle();
+                    m_recorded = true;
+                    m_recording = false;
+
+                    m_countdown.m_progress = 0.0f;
+
+                    gameObject.transform.position = m_startingPosition;
+                }
+                else if (m_arrayPosition < m_recordingSize)
+                {
+                    if (m_arrayPosition == 0)
+                    {
+                        // if the recording has just started mark the current position
+                        m_startingPosition = gameObject.transform.position;
+                        m_startingRotation = gameObject.transform.rotation;
+                    }
+
+                    m_recordedInputs[m_arrayPosition] = m_data.m_inputs;
+                    m_arrayPosition++;
+
+                    if (m_countdown)
+                    {
+                        m_countdown.m_progress = 1.0f - ((float)m_arrayPosition / (float)m_recordingSize);
+                    }
+                }
+                else
+                {
+                    m_recorded = true;
+                    m_recording = false;
+                    m_data.m_pause = false;
+    
+                    gameObject.transform.position = m_startingPosition;
+                    gameObject.transform.rotation = m_startingRotation;
+                }
+            }
+            else if (m_playing)
+            {
+                m_data.m_pause = false;
+
+                if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition] != (char)InputToBit(E_INPUTS.END)))
+                {
+                    m_data.m_inputs = m_recordedInputs[m_arrayPosition];
+                    m_arrayPosition++;
+                }
+                else
+                {
+                    m_playing = false;
+
+                    gameObject.transform.position = m_startingPosition;
+                    gameObject.transform.rotation = m_startingRotation;
+                }
+            }
+        }
+
+
+        m_data.m_pressingButton = GetInput(E_INPUTS.PRESS_BUTTON);
 
         if (!m_recorded && !m_recording && !m_playing)
         {
@@ -148,7 +220,10 @@ public class GhostStateMachine : BaseStateMachine
             m_data.m_anim.SetBool("Stopped", true);
             //m_inputs.m_pauseInputs = true;
             //m_inputs.m_pause = true;
+            m_data.m_pause = true;
         }
+
+        base.Cycle();
     }
 
     public override void OnTriggerStay(Collider other)
@@ -183,5 +258,21 @@ public class GhostStateMachine : BaseStateMachine
 
         gameObject.transform.position = m_startingPosition;
         gameObject.transform.rotation = m_startingRotation;
+    }
+
+    public IEnumerator Play()
+    {
+        if (!m_data.m_pause)
+        {
+            if (m_arrayPosition > m_recordingSize)
+            {
+                m_data.m_inputs = m_recordedInputs[m_arrayPosition];
+                m_arrayPosition++;
+                yield return new WaitForSeconds(0.016f);
+            }
+        }
+
+        // repetes tis function automatialy on the next frame
+        yield return new WaitForSeconds(0.016f);
     }
 }

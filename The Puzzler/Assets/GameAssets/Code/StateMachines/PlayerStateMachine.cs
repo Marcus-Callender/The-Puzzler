@@ -110,8 +110,6 @@ public class PlayerStateMachine : BaseStateMachine
 
         m_data.m_pressingButton = GetInput(E_INPUTS.PRESS_BUTTON);
 
-        base.Cycle();
-
         if (GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
         {
             m_newState = E_PLAYER_STATES.CONTROLING_GHOST;
@@ -122,6 +120,8 @@ public class PlayerStateMachine : BaseStateMachine
             m_newState = E_PLAYER_STATES.CONTROLING_GHOST;
             CheckState();
         }
+
+        base.Cycle();
     }
 
     public PlayerData getFollowData()

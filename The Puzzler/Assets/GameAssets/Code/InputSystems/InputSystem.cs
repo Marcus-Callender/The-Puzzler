@@ -13,7 +13,7 @@ public class InputSystem : MonoBehaviour
     public PlayerStateMachine m_player;
     public GhostList m_ghostList;
 
-    public BaseStateMachine m_currentlyControling;
+    private GhostStateMachine m_currentGhost;
 
     public virtual void Start()
     {
@@ -24,8 +24,8 @@ public class InputSystem : MonoBehaviour
         m_player = GetComponent<PlayerStateMachine>();
         m_player.Initialize();
         m_ghostList = GetComponent<GhostList>();
-
-        m_currentlyControling = m_player;
+        
+        m_currentGhost = null;
     }
 
     public virtual void Update()
@@ -110,15 +110,48 @@ public class InputSystem : MonoBehaviour
             m_Inputs = (char)0;
         }
 
-        m_currentlyControling.GetInputs(m_Inputs);
-        m_currentlyControling.Cycle();
+        m_currentGhost = null;
+        
+        for (int z = 0; z < m_ghostList.m_ghostsCreated; z++)
+        {
+            if (m_ghostList.m_ghostStateMachines[z].m_recording)
+            {
+                m_currentGhost = m_ghostList.m_ghostStateMachines[z];
+            }
+        }
 
+        m_player.GetInputs((char)0);
 
+        for (int z = 0; z < m_ghostList.m_ghostsCreated; z++)
+        {
+            m_ghostList.m_ghostStateMachines[z].GetInputs((char)0);
+        }
+
+        if (m_currentGhost)
+        {
+            m_currentGhost.GetInputs(m_Inputs);
+        }
+        else
+        {
+            m_player.GetInputs(m_Inputs);
+        }
+
+        m_player.Cycle();
+
+        for (int z = 0; z < m_ghostList.m_ghostsCreated; z++)
+        {
+            m_ghostList.m_ghostStateMachines[z].Cycle();
+        }
     }
 
     private void FixedUpdate()
     {
-        m_currentlyControling.FixedCycle();
+        m_player.FixedCycle();
+
+        for (int z = 0; z < m_ghostList.m_ghostsCreated; z++)
+        {
+            m_ghostList.m_ghostStateMachines[z].FixedCycle();
+        }
     }
 
     public virtual bool GetInput(E_INPUTS input)

@@ -28,6 +28,7 @@ public class BasicState : MonoBehaviour
 
     public virtual E_PLAYER_STATES Cycle(char inputs)
     {
+        m_data.m_inputs = (char)0;
         return E_PLAYER_STATES.NULL;
     }
 

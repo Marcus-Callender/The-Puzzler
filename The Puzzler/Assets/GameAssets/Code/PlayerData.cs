@@ -40,9 +40,10 @@ public class PlayerData : MonoBehaviour
 
     private Vector3 m_vecOne;
 
+    public bool m_pause = false;
     public char m_inputs;
 
-    void Start()
+    public void Initialize()
     {
         m_rigb = GetComponent<Rigidbody>();
 

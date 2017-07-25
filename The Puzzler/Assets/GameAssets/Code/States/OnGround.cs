@@ -15,11 +15,6 @@ public class OnGround : BasicState
     public override E_PLAYER_STATES Cycle(char inputs)
     {
         MoveHorzontal(m_speed);
-
-        if(inputs != (char)0)
-        {
-            int x = 3 + 6;
-        }
         
         if (GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT))
         {

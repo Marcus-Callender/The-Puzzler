@@ -12,8 +12,6 @@ public class BaseStateMachine : MonoBehaviour
     protected Rigidbody m_rigb;
     protected bool m_lockState = false;
 
-    protected char m_inputs;
-
     [SerializeField]
     protected E_PLAYER_STATES m_currentState = E_PLAYER_STATES.IN_AIR;
     protected E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
@@ -22,11 +20,13 @@ public class BaseStateMachine : MonoBehaviour
     {
         m_data = GetComponent<PlayerData>();
         m_rigb = GetComponent<Rigidbody>();
+
+        m_data.Initialize();
     }
 
     public virtual void Cycle()
     {
-        m_newState = GetCurrentState().Cycle(m_inputs);
+        m_newState = GetCurrentState().Cycle(m_data.m_inputs);
         CheckState();
     }
 
@@ -46,7 +46,6 @@ public class BaseStateMachine : MonoBehaviour
 
     public void GetInputs(char inputs)
     {
-        m_inputs = inputs;
         m_data.m_inputs = inputs;
     }
 
@@ -183,7 +182,7 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual bool GetInput(E_INPUTS input)
     {
-        return (m_inputs & (char)InputToBit(input)) > 0;
+        return (m_data.m_inputs & (char)InputToBit(input)) > 0;
     }
 
     protected virtual int InputToBit(E_INPUTS input)

@@ -8,7 +8,7 @@ public class GhostStateMachine : BaseStateMachine
 {
     //public GhostInputs m_inputs = null;
     private Renderer[] m_matirialRenderers;
-    private bool m_overrideRecording = false;
+    public bool m_overrideRecording = false;
 
     public int m_id;
 
@@ -45,6 +45,8 @@ public class GhostStateMachine : BaseStateMachine
         {
             m_overrideRecording = false;
             m_recorded = false;
+            m_countdown.m_progress = 1.0f;
+            m_data.m_pause = false;
         }
 
         for (int z = 0; z < m_matirialRenderers.Length; z++)
@@ -278,5 +280,17 @@ public class GhostStateMachine : BaseStateMachine
 
         // repetes tis function automatialy on the next frame
         yield return new WaitForSeconds(0.016f);
+    }
+
+    public void EndRecording()
+    {
+        m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
+
+        m_recorded = true;
+        m_recording = false;
+
+        m_countdown.m_progress = 0.0f;
+
+        gameObject.transform.position = m_startingPosition;
     }
 }

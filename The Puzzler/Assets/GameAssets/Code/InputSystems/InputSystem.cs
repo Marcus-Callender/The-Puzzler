@@ -19,12 +19,12 @@ public class InputSystem : MonoBehaviour
     {
         m_ghostButtonTimer = new Timer();
         m_ghostButtonTimer.m_time = 0.75f;
-        
+
         m_pause = false;
         m_player = GetComponent<PlayerStateMachine>();
         m_player.Initialize();
         m_ghostList = GetComponent<GhostList>();
-        
+
         m_currentGhost = null;
     }
 
@@ -87,22 +87,108 @@ public class InputSystem : MonoBehaviour
                 if (m_ghostButtonTimer.m_completed)
                 {
                     m_ghostButtonTimer.m_playing = false;
-                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_HOLD);
+                    //m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_HOLD);
+
+                    if (m_currentGhost == null)
+                    {
+                        if (Input.GetButton("Ghost1"))
+                        {
+                            if (m_ghostList.m_ghostStateMachines[0])
+                            {
+                                m_currentGhost = m_ghostList.m_ghostStateMachines[0];
+                            }
+                        }
+                        else if (Input.GetButton("Ghost2"))
+                        {
+                            if (m_ghostList.m_ghostStateMachines[1])
+                            {
+                                m_currentGhost = m_ghostList.m_ghostStateMachines[1];
+                            }
+                        }
+
+                        if (m_currentGhost)
+                        {
+                            m_currentGhost.m_overrideRecording = true;
+                            m_currentGhost.Activate(m_player.transform, m_player.m_data.m_use3D, m_player.m_data.m_left_right);
+                        }
+                    }
+                    else
+                    {
+                        GhostStateMachine nextGhost = null;
+
+                        if (Input.GetButton("Ghost1"))
+                        {
+                            if (m_ghostList.m_ghostStateMachines[0])
+                            {
+                                nextGhost = m_ghostList.m_ghostStateMachines[0];
+                            }
+                        }
+                        else if (Input.GetButton("Ghost2"))
+                        {
+                            if (m_ghostList.m_ghostStateMachines[1])
+                            {
+                                nextGhost = m_ghostList.m_ghostStateMachines[1];
+                            }
+                        }
+
+                        if (m_currentGhost == nextGhost && !m_ghostList.m_ghostInUse[nextGhost.m_id])
+                        {
+                            m_currentGhost.EndRecording();
+
+                            nextGhost.m_overrideRecording = true;
+                            nextGhost.Activate(m_currentGhost.transform, m_currentGhost.m_data.m_use3D, m_currentGhost.m_data.m_left_right);
+
+                            m_ghostList.m_ghostInUse[m_currentGhost.m_id] = true;
+                            m_currentGhost = nextGhost;
+                        }
+                    }
                 }
                 else if (Input.GetButtonUp("Ghost1") || Input.GetButtonUp("Ghost2"))
                 {
                     m_ghostButtonTimer.m_playing = false;
-                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
+                    //m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
+
+                    GhostStateMachine nextGhost = GetNextGhost();
+
+                    if (m_currentGhost == null)
+                    {
+                        if (Input.GetButtonUp("Ghost1"))
+                        {
+                            if (m_ghostList.m_ghostStateMachines[0])
+                            {
+                                m_currentGhost = m_ghostList.m_ghostStateMachines[0];
+                            }
+                        }
+                        else if (Input.GetButtonUp("Ghost2"))
+                        {
+                            if (m_ghostList.m_ghostStateMachines[1])
+                            {
+                                m_currentGhost = m_ghostList.m_ghostStateMachines[1];
+                            }
+                        }
+
+                        if (m_currentGhost)
+                        {
+                            m_currentGhost.Activate(m_player.transform, m_player.m_data.m_use3D, m_player.m_data.m_left_right);
+                        }
+                    }
+                    else
+                    {
+                        if (m_currentGhost.m_recording)
+                        {
+                            m_currentGhost.EndRecording();
+                        }
+                    }
                 }
 
-                if (Input.GetButton("Ghost1"))
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_1);
-                }
-                else if (Input.GetButton("Ghost2"))
-                {
-                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_2);
-                }
+                //if (Input.GetButton("Ghost1"))
+                //{
+                //    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_1);
+                //}
+                //else if (Input.GetButton("Ghost2"))
+                //{
+                //    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_2);
+                //}
             }
         }
         else
@@ -110,13 +196,21 @@ public class InputSystem : MonoBehaviour
             m_Inputs = (char)0;
         }
 
-        m_currentGhost = null;
-        
-        for (int z = 0; z < m_ghostList.m_ghostsCreated; z++)
+        //m_currentGhost = null;
+        //
+        //for (int z = 0; z < m_ghostList.m_ghostsCreated; z++)
+        //{
+        //    if (m_ghostList.m_ghostStateMachines[z].m_recording)
+        //    {
+        //        m_currentGhost = m_ghostList.m_ghostStateMachines[z];
+        //    }
+        //}
+
+        if (m_currentGhost)
         {
-            if (m_ghostList.m_ghostStateMachines[z].m_recording)
+            if (!m_currentGhost.m_recording)
             {
-                m_currentGhost = m_ghostList.m_ghostStateMachines[z];
+                m_currentGhost = null;
             }
         }
 
@@ -171,5 +265,43 @@ public class InputSystem : MonoBehaviour
         }
 
         return bit;
+    }
+
+    private GhostStateMachine GetNextGhost()
+    {
+        // checks for all button up events BEFORE checking for button
+        if (Input.GetButtonUp("Ghost1"))
+        {
+            if (m_ghostList.m_ghostStateMachines[0])
+            {
+                return m_ghostList.m_ghostStateMachines[0];
+            }
+        }
+
+        if (Input.GetButtonUp("Ghost2"))
+        {
+            if (m_ghostList.m_ghostStateMachines[1])
+            {
+                return m_ghostList.m_ghostStateMachines[1];
+            }
+        }
+
+        if (Input.GetButton("Ghost1"))
+        {
+            if (m_ghostList.m_ghostStateMachines[0])
+            {
+                return m_ghostList.m_ghostStateMachines[0];
+            }
+        }
+
+        if (Input.GetButton("Ghost2"))
+        {
+            if (m_ghostList.m_ghostStateMachines[1])
+            {
+                return m_ghostList.m_ghostStateMachines[1];
+            }
+        }
+
+        return null;
     }
 }

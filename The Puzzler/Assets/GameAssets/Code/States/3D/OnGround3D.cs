@@ -12,9 +12,9 @@ public class OnGround3D : BasicState
 
     }
 
-    public override E_PLAYER_STATES Cycle()
+    public override E_PLAYER_STATES Cycle(char inputs)
     {
-        if (m_inputs.GetInput(E_INPUTS.UP))
+        if (GetInput(E_INPUTS.UP))
         {
             m_data.m_anim.SetBool("Walking", true);
 
@@ -27,13 +27,13 @@ public class OnGround3D : BasicState
             m_data.m_velocityX = 0.0f;
         }
 
-        if (m_inputs.GetInput(E_INPUTS.LEFT))
+        if (GetInput(E_INPUTS.LEFT))
         {
             gameObject.transform.Rotate(gameObject.transform.up, 180 * Time.deltaTime);
 
             m_data.m_rotation = gameObject.transform.rotation;
         }
-        else if (m_inputs.GetInput(E_INPUTS.RIGHT))
+        else if (GetInput(E_INPUTS.RIGHT))
         {
             gameObject.transform.Rotate(-gameObject.transform.up, 180 * Time.deltaTime);
 
@@ -42,12 +42,12 @@ public class OnGround3D : BasicState
 
         m_data.m_velocityY = -9.81f;
 
-        if (m_inputs.GetInput(E_INPUTS.MOVE_BOX))
+        if (GetInput(E_INPUTS.MOVE_BOX))
         {
             return E_PLAYER_STATES.MOVEING_BLOCK;
         }
 
-        if (m_inputs.GetInput(E_INPUTS.JUMP) && !m_data.m_moveingBox)
+        if (GetInput(E_INPUTS.JUMP) && !m_data.m_moveingBox)
         {
             m_data.m_velocityY = m_jumpSpeed;
 
@@ -64,7 +64,7 @@ public class OnGround3D : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
-        if (_tag == "Ladder" && m_inputs.GetInput(E_INPUTS.UP))
+        if (_tag == "Ladder" && GetInput(E_INPUTS.UP))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

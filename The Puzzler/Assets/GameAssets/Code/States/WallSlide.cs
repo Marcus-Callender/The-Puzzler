@@ -22,7 +22,7 @@ public class WallSlide : BasicState
         m_StickTimer.Play();
     }
 
-    public override E_PLAYER_STATES Cycle()
+    public override E_PLAYER_STATES Cycle(char inputs)
     {
         m_StickTimer.Cycle();
 
@@ -38,7 +38,7 @@ public class WallSlide : BasicState
 
         MoveHorzontal(m_speed);
 
-        if (m_inputs.GetInput(E_INPUTS.JUMP))
+        if (GetInput(E_INPUTS.JUMP))
         {
             return E_PLAYER_STATES.IN_AIR;
         }

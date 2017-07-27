@@ -102,6 +102,7 @@ Assets/GameAssets/Code/DimentionTransition.cs
 Assets/GameAssets/Code/Enemy.cs
 Assets/GameAssets/Code/GhostList.cs
 Assets/GameAssets/Code/InputSystems/GhostInputs.cs
+Assets/GameAssets/Code/InputSystems/InputSystem.cs
 Assets/GameAssets/Code/InputSystems/PlayerInputs.cs
 Assets/GameAssets/Code/Menu/PauseMenu.cs
 Assets/GameAssets/Code/Menu/Play.cs

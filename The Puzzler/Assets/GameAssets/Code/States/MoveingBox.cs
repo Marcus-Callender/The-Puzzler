@@ -14,9 +14,9 @@ public class MoveingBox : BasicState
     public GameObject m_box;
     public Rigidbody m_boxRigb;
 
-    public override void Initialize(Rigidbody rigb, PlayerData data, PlayerInputs inputs)
+    public override void Initialize(Rigidbody rigb, PlayerData data)
     {
-        base.Initialize(rigb, data, inputs);
+        base.Initialize(rigb, data);
 
         m_pauseTimer = new Timer();
         m_dragingTimer = new Timer();
@@ -85,7 +85,7 @@ public class MoveingBox : BasicState
         m_data.m_stopRotation = false;
     }
 
-    public override E_PLAYER_STATES Cycle()
+    public override E_PLAYER_STATES Cycle(char inputs)
     {
         if (!m_box)
         {
@@ -98,12 +98,12 @@ public class MoveingBox : BasicState
 
         if (m_data.m_use3D)
         {
-            getInput = m_inputs.GetInput(E_INPUTS.DOWN) || m_inputs.GetInput(E_INPUTS.UP) || 
-                m_inputs.GetInput(E_INPUTS.RIGHT) || m_inputs.GetInput(E_INPUTS.LEFT);
+            getInput = GetInput(E_INPUTS.DOWN) || GetInput(E_INPUTS.UP) || 
+                GetInput(E_INPUTS.RIGHT) || GetInput(E_INPUTS.LEFT);
         }
         else
         {
-            getInput = m_inputs.GetInput(E_INPUTS.LEFT) || m_inputs.GetInput(E_INPUTS.RIGHT);
+            getInput = GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT);
         }
 
         if (getInput && !m_moveInput)
@@ -132,16 +132,16 @@ public class MoveingBox : BasicState
 
                 if (m_data.m_use3D)
                 {
-                    if (m_inputs.GetInput(E_INPUTS.UP))
+                    if (GetInput(E_INPUTS.UP))
                         m_data.m_velocityX = m_dragSpeed;
 
-                    if (m_inputs.GetInput(E_INPUTS.DOWN))
+                    if (GetInput(E_INPUTS.DOWN))
                         m_data.m_velocityX = -m_dragSpeed;
 
-                    if (m_inputs.GetInput(E_INPUTS.LEFT))
+                    if (GetInput(E_INPUTS.LEFT))
                         m_data.m_velocityZ = m_dragSpeed;
 
-                    if (m_inputs.GetInput(E_INPUTS.RIGHT))
+                    if (GetInput(E_INPUTS.RIGHT))
                         m_data.m_velocityZ = -m_dragSpeed;
                 }
                 else
@@ -166,7 +166,7 @@ public class MoveingBox : BasicState
 
         m_boxRigb.velocity = m_data.GetExpectedVelocity();
 
-        if (!m_inputs.GetInput(E_INPUTS.MOVE_BOX_HOLD))
+        if (!GetInput(E_INPUTS.MOVE_BOX_HOLD))
         {
             Debug.Log("Box movment button relesed");
             return E_PLAYER_STATES.ON_GROUND;

@@ -64,13 +64,13 @@ public class BasicState : MonoBehaviour
 
     protected void MoveHorzontal(float _speed)
     {
-        m_data.m_velocityX = 0.0f;
+        m_data.m_velocityX += 0.0f;
 
         if (GetInput(E_INPUTS.LEFT))
-            m_data.m_velocityX = _speed;
+            m_data.m_velocityX += _speed;
 
         if (GetInput(E_INPUTS.RIGHT))
-            m_data.m_velocityX = -_speed;
+            m_data.m_velocityX += -_speed;
     }
 
     protected void ApplyGravity(float _force)

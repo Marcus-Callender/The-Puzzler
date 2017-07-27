@@ -80,10 +80,14 @@ public class BaseStateMachine : MonoBehaviour
         if (Mathf.Approximately(angle, 0.0f))
         {
             dir = E_DIRECTIONS.BOTTOM;
-        
-            if (Other.gameObject.GetComponent<Rigidbody>())
+
+            Rigidbody rigb = Other.gameObject.GetComponent<Rigidbody>();
+
+            if (rigb)
             {
-                m_data.m_velocityX += Other.gameObject.GetComponent<Rigidbody>().velocity.x;
+                m_data.m_velocityX += rigb.velocity.x;
+                m_data.m_velocityY += rigb.velocity.y;
+                m_data.m_velocityZ += rigb.velocity.z;
             }
         }
         else if (Mathf.Approximately(angle, 180.0f))

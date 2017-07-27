@@ -91,6 +91,7 @@ public class PlayerData : MonoBehaviour
     }
 
     void FixedUpdate()
+    //void LateUpdate()
     {
         if (!m_use3D)
         {

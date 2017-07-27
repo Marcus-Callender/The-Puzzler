@@ -40,7 +40,10 @@ public class PlayerData : MonoBehaviour
 
     private Vector3 m_vecOne;
 
-    void Start()
+    public bool m_pause = false;
+    public char m_inputs;
+
+    public void Initialize()
     {
         m_rigb = GetComponent<Rigidbody>();
 
@@ -88,6 +91,7 @@ public class PlayerData : MonoBehaviour
     }
 
     void FixedUpdate()
+    //void LateUpdate()
     {
         if (!m_use3D)
         {

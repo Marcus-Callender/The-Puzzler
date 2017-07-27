@@ -23,11 +23,11 @@ public class InAir3D : BasicState
         m_data.m_anim.SetBool("Airborn", false);
     }
 
-    public override E_PLAYER_STATES Cycle()
+    public override E_PLAYER_STATES Cycle(char inputs)
     {
         ApplyGravity(m_gravity);
 
-        if (m_inputs.GetInput(E_INPUTS.UP))
+        if (GetInput(E_INPUTS.UP))
         {
             m_data.m_velocityX = m_speed;
         }
@@ -36,20 +36,20 @@ public class InAir3D : BasicState
             m_data.m_velocityX = 0.0f;
         }
 
-        if (m_inputs.GetInput(E_INPUTS.LEFT))
+        if (GetInput(E_INPUTS.LEFT))
         {
             gameObject.transform.Rotate(gameObject.transform.up, 180 * Time.deltaTime);
 
             m_data.m_rotation = gameObject.transform.rotation;
         }
-        else if (m_inputs.GetInput(E_INPUTS.RIGHT))
+        else if (GetInput(E_INPUTS.RIGHT))
         {
             gameObject.transform.Rotate(-gameObject.transform.up, 180 * Time.deltaTime);
 
             m_data.m_rotation = gameObject.transform.rotation;
         }
 
-        if (!m_inputs.GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)
+        if (!GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)
         {
             Debug.Log("Short Jump");
             m_data.m_velocityY = 0.0f;
@@ -91,7 +91,7 @@ public class InAir3D : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
-        if (_tag == "Ladder" && m_inputs.GetInput(E_INPUTS.UP))
+        if (_tag == "Ladder" && GetInput(E_INPUTS.UP))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

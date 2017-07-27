@@ -23,13 +23,13 @@ public class InAIr : BasicState
         m_data.m_anim.SetBool("Airborn", false);
     }
 
-    public override E_PLAYER_STATES Cycle()
+    public override E_PLAYER_STATES Cycle(char inputs)
     {
         ApplyGravity(m_gravity);
 
         MoveHorzontal(m_speed);
 
-        if (!m_inputs.GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)
+        if (!GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)
         {
             Debug.Log("Short Jump");
             m_data.m_velocityY = 0.0f;
@@ -71,7 +71,7 @@ public class InAIr : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
-        if (_tag == "Ladder" && m_inputs.GetInput(E_INPUTS.UP))
+        if (_tag == "Ladder" && GetInput(E_INPUTS.UP))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

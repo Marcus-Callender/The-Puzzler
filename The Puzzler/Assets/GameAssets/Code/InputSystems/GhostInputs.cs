@@ -106,7 +106,7 @@ public class GhostInputs : PlayerInputs
                         m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
                     }
 
-                    if (Input.GetButtonDown("StartGhost"))
+                    if (Input.GetButtonDown("Ghost1") || Input.GetButtonDown("Ghost2"))
                     {
                         m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
                     }

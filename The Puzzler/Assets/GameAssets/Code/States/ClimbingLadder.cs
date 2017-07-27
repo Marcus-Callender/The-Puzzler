@@ -16,19 +16,19 @@ public class ClimbingLadder : BasicState
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
     }
 
-    public override E_PLAYER_STATES Cycle()
+    public override E_PLAYER_STATES Cycle(char inputs)
     {
         MoveHorzontal(m_speed);
         
         m_data.m_velocityY = 0.1962f;
 
-        if (m_inputs.GetInput(E_INPUTS.DOWN))
+        if (GetInput(E_INPUTS.DOWN))
             m_data.m_velocityY = -m_climbSpeed;
 
-        if (m_inputs.GetInput(E_INPUTS.UP))
+        if (GetInput(E_INPUTS.UP))
             m_data.m_velocityY = m_climbSpeed;
         
-        if (m_inputs.GetInput(E_INPUTS.JUMP))
+        if (GetInput(E_INPUTS.JUMP))
         {
             m_data.m_velocityY = m_jumpSpeed;
 

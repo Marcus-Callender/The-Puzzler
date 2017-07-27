@@ -14,6 +14,8 @@ public enum E_INPUTS
     PRESS_BUTTON,
     GHOST_BUTTON_PRESS,
     GHOST_BUTTON_HOLD,
+    GHOST_BUTTON_1,
+    GHOST_BUTTON_2,
 
     END,
 
@@ -83,7 +85,7 @@ public class PlayerInputs : MonoBehaviour
                 m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
             }
             
-            if (Input.GetButtonDown("StartGhost"))
+            if (Input.GetButtonDown("Ghost1") || Input.GetButtonDown("Ghost2"))
             {
                 m_ghostButtonTimer.Play();
             }
@@ -98,10 +100,19 @@ public class PlayerInputs : MonoBehaviour
                     m_ghostButtonTimer.m_playing = false;
                     m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_HOLD);
                 }
-                else if (Input.GetButtonUp("StartGhost"))
+                else if (Input.GetButtonUp("Ghost1") || Input.GetButtonUp("Ghost2"))
                 {
                     m_ghostButtonTimer.m_playing = false;
                     m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
+                }
+
+                if (Input.GetButton("Ghost1"))
+                {
+                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_1);
+                }
+                else if (Input.GetButton("Ghost2"))
+                {
+                    m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_2);
                 }
             }
         }

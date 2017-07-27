@@ -108,17 +108,23 @@ MonoBehaviour:
     y: 30
     width: 1920
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 947
   m_MinSize: {x: 787, y: 442}
   m_MaxSize: {x: 16012, y: 8042}
   vertical: 0
   controlID: 89
 =======
+=======
+>>>>>>> origin/master
     height: 987
   m_MinSize: {x: 787, y: 442}
   m_MaxSize: {x: 16012, y: 8042}
   vertical: 0
   controlID: 35
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 --- !u!114 &6
 MonoBehaviour:
@@ -140,11 +146,19 @@ MonoBehaviour:
     y: 0
     width: 905
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 947
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
   controlID: 34
+=======
+    height: 987
+  m_MinSize: {x: 202, y: 442}
+  m_MaxSize: {x: 4002, y: 8042}
+  vertical: 1
+  controlID: 36
+>>>>>>> origin/master
 =======
     height: 987
   m_MinSize: {x: 202, y: 442}
@@ -170,7 +184,11 @@ MonoBehaviour:
     y: 0
     width: 905
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 485
+=======
+    height: 505
+>>>>>>> origin/master
 =======
     height: 505
 >>>>>>> origin/master
@@ -199,9 +217,15 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 485
     width: 905
     height: 462
+=======
+    y: 505
+    width: 905
+    height: 482
+>>>>>>> origin/master
 =======
     y: 505
     width: 905
@@ -258,7 +282,11 @@ MonoBehaviour:
     y: 0
     width: 274
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 947
+=======
+    height: 987
+>>>>>>> origin/master
 =======
     height: 987
 >>>>>>> origin/master
@@ -287,7 +315,11 @@ MonoBehaviour:
     y: 0
     width: 432
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 947
+=======
+    height: 987
+>>>>>>> origin/master
 =======
     height: 987
 >>>>>>> origin/master
@@ -372,15 +404,21 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 0
     y: 577
     width: 903
     height: 441
 =======
+=======
+>>>>>>> origin/master
     x: 1920
     y: 597
     width: 903
     height: 461
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
@@ -412,9 +450,15 @@ MonoBehaviour:
       y: 17
       width: 903
 <<<<<<< HEAD
+<<<<<<< HEAD
       height: 424
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 451.5, y: 212}
+=======
+      height: 444
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 451.5, y: 222}
+>>>>>>> origin/master
 =======
       height: 444
     m_Scale: {x: 1, y: 1}
@@ -428,9 +472,15 @@ MonoBehaviour:
       serializedVersion: 2
       x: -451.5
 <<<<<<< HEAD
+<<<<<<< HEAD
       y: -212
       width: 903
       height: 424
+=======
+      y: -222
+      width: 903
+      height: 444
+>>>>>>> origin/master
 =======
       y: -222
       width: 903
@@ -441,7 +491,11 @@ MonoBehaviour:
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LastWindowPixelSize: {x: 903, y: 441}
+=======
+  m_LastWindowPixelSize: {x: 903, y: 461}
+>>>>>>> origin/master
 =======
   m_LastWindowPixelSize: {x: 903, y: 461}
 >>>>>>> origin/master
@@ -474,7 +528,11 @@ MonoBehaviour:
     y: 92
     width: 903
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 464
+=======
+    height: 484
+>>>>>>> origin/master
 =======
     height: 484
 >>>>>>> origin/master
@@ -485,9 +543,15 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: -1.6219412, y: 9.140404, z: -14.079763}
     speed: 2
     m_Value: {x: -1.6219412, y: 9.140404, z: -14.079763}
+=======
+    m_Target: {x: -19.044285, y: 8.170465, z: -25.3707}
+    speed: 2
+    m_Value: {x: -19.044285, y: 8.170465, z: -25.3707}
+>>>>>>> origin/master
 =======
     m_Target: {x: -19.044285, y: 8.170465, z: -25.3707}
     speed: 2
@@ -516,6 +580,7 @@ MonoBehaviour:
       m_Value: 0
   m_Rotation:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: 0.24465598, y: -0.16310781, z: 0.041793235, w: 0.9548784}
     speed: 2
     m_Value: {x: 0.24465598, y: -0.16310781, z: 0.041793235, w: 0.9548784}
@@ -524,6 +589,8 @@ MonoBehaviour:
     speed: 2
     m_Value: 10.07176
 =======
+=======
+>>>>>>> origin/master
     m_Target: {x: -0.07896712, y: -0.29679862, z: 0.024635777, w: -0.9513506}
     speed: 2
     m_Value: {x: -0.07896712, y: -0.2967986, z: 0.024635777, w: -0.95135057}
@@ -531,6 +598,9 @@ MonoBehaviour:
     m_Target: 1.6578841
     speed: 2
     m_Value: 1.6578841
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
   m_Ortho:
     m_Target: 0
@@ -590,7 +660,11 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 907
+=======
+    x: 2827
+>>>>>>> origin/master
 =======
     x: 2827
 >>>>>>> origin/master
@@ -609,11 +683,19 @@ MonoBehaviour:
     m_SearchArea: 0
     m_Folders:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/GameAssets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
   - Assets/GameAssets/Scenes
+=======
+    - Assets/UnityChan/Scripts
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets/UnityChan/Scripts
+>>>>>>> origin/master
 =======
     - Assets/UnityChan/Scripts
   m_ViewMode: 1
@@ -627,9 +709,15 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedIDs: b22c0000
     m_LastClickedID: 11442
     m_ExpandedIDs: 00000000ca2600001227000076270000aa270000c2270000da270000ba28000084290000b22a00002a2b0000622c0000922c0000902d00009c2d0000a62d0000ac2d0000a62e0000e02e0000362f0000682f00001e38000020380000223800002438000000ca9a3bffffff7f
+=======
+    m_SelectedIDs: 9c2c0000
+    m_LastClickedID: 11420
+    m_ExpandedIDs: 00000000ca2600001227000076270000aa270000c2270000da27000064280000ba28000084290000b22a00002a2b0000622c0000922c0000902d00009c2d0000a62d0000ac2d0000a62e0000e02e0000362f0000682f00001e380000203800002238000024380000
+>>>>>>> origin/master
 =======
     m_SelectedIDs: 9c2c0000
     m_LastClickedID: 11420
@@ -688,8 +776,13 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 60c10000
     m_LastClickedInstanceID: 49504
+=======
+    m_SelectedInstanceIDs: ba310000
+    m_LastClickedInstanceID: 12730
+>>>>>>> origin/master
 =======
     m_SelectedInstanceIDs: ba310000
     m_LastClickedInstanceID: 12730
@@ -745,10 +838,17 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 907
     y: 92
     width: 305
     height: 926
+=======
+    x: 2827
+    y: 92
+    width: 305
+    height: 966
+>>>>>>> origin/master
 =======
     x: 2827
     y: 92
@@ -778,7 +878,11 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 1216
+=======
+    x: 3136
+>>>>>>> origin/master
 =======
     x: 3136
 >>>>>>> origin/master
@@ -788,9 +892,15 @@ MonoBehaviour:
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_SelectedIDs: 82c10000
     m_LastClickedID: 49538
     m_ExpandedIDs: 4415fcffb44dfcffba52fcffb856fcff265dfcff6261fcff9c67fcff72dffdffb6e5fdff7a17feff5e1efeffec22fefff429feff38a3ffffa6a8ffff5ec4ffff7ecbffff40ccffffe2fbffff00000000dc4200008a860000c4860000228e000060c1000076c10000
+=======
+    m_SelectedIDs: 82300000
+    m_LastClickedID: 12418
+    m_ExpandedIDs: e2fbffff00000000
+>>>>>>> origin/master
 =======
     m_SelectedIDs: 82300000
     m_LastClickedID: 12418
@@ -841,10 +951,17 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 1490
     y: 92
     width: 430
     height: 926
+=======
+    x: 3410
+    y: 92
+    width: 430
+    height: 966
+>>>>>>> origin/master
 =======
     x: 3410
     y: 92
@@ -888,6 +1005,9 @@ MonoBehaviour:
 =======
     width: 429
     height: 966
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 --- !u!114 &21
 MonoBehaviour:

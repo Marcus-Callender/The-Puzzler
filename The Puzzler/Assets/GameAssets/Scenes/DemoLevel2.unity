@@ -1484,10 +1484,7 @@ MonoBehaviour:
   m_pause: 0
   m_player: {fileID: 0}
   m_ghostList: {fileID: 0}
-<<<<<<< HEAD
   m_currentGhost: {fileID: 0}
-=======
->>>>>>> origin/master
 --- !u!114 &1174510702
 MonoBehaviour:
   m_ObjectHideFlags: 0

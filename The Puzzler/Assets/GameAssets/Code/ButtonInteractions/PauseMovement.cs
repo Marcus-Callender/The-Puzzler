@@ -20,6 +20,8 @@ public class PauseMovement : ButtonInteraction
 
     private Vector3 m_speedSegments;
 
+    private GameObject m_keepScale;
+
     public override void Start()
     {
         base.Start();
@@ -34,6 +36,10 @@ public class PauseMovement : ButtonInteraction
         m_speedSegments.x = m_speedSegments.x / m_distance;
         m_speedSegments.y = m_speedSegments.y / m_distance;
         m_speedSegments.z = m_speedSegments.z / m_distance;
+
+        m_keepScale = new GameObject();
+        m_keepScale.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        m_keepScale.transform.SetParent(gameObject.transform);
 
         Debug.Log(m_speedSegments);
     }
@@ -78,5 +84,26 @@ public class PauseMovement : ButtonInteraction
         base.OnInteract();
 
         m_moveing = !m_moveing;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.transform.SetParent(m_keepScale.transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Transform[] children = GetComponentsInChildren<Transform>();
+
+        for (int z = 0; z < children.Length; z++)
+        {
+            if (collision.gameObject.transform == children[z])
+            {
+                children[z].SetParent(null);
+            }
+        }
     }
 }

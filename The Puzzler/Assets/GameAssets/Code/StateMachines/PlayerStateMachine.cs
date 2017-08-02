@@ -38,29 +38,26 @@ public class PlayerStateMachine : BaseStateMachine
     public override void Initialize()
     {
         base.Initialize();
-        
+
         m_ghostList = gameObject.AddComponent<GhostList>();
         m_ghostList.m_ghostTemplate = m_data.m_ghost;
 
         m_states2D[0] = gameObject.AddComponent<OnGround>();
         m_states2D[1] = gameObject.AddComponent<InAIr>();
-        m_states2D[2] = gameObject.AddComponent<MoveingBox>();
         m_states2D[3] = gameObject.AddComponent<ClimbingLadder>();
         m_states2D[4] = gameObject.AddComponent<KO>();
 
         m_states2D[0].Initialize(m_rigb, m_data);
         m_states2D[1].Initialize(m_rigb, m_data);
-        m_states2D[2].Initialize(m_rigb, m_data);
         m_states2D[3].Initialize(m_rigb, m_data);
         m_states2D[4].Initialize(m_rigb, m_data);
 
 
         m_states3D[0] = gameObject.AddComponent<OnGround3D>();
         m_states3D[1] = gameObject.AddComponent<InAir3D>();
-        m_states3D[2] = m_states2D[2];
         m_states3D[3] = m_states2D[3];
         m_states3D[4] = m_states2D[4];
-        
+
         m_states3D[0].Initialize(m_rigb, m_data);
         m_states3D[1].Initialize(m_rigb, m_data);
 
@@ -69,7 +66,12 @@ public class PlayerStateMachine : BaseStateMachine
 
         if (m_saveData.m_upgradeArray[(int)E_UPGRADES.MOVE_CRATE])
         {
-
+            if (!m_states2D[2])
+            {
+                m_states2D[2] = gameObject.AddComponent<MoveingBox>();
+                m_states2D[2].Initialize(m_rigb, m_data);
+                m_states3D[2] = m_states2D[2];
+            }
         }
 
         if (m_saveData.m_upgradeArray[(int)E_UPGRADES.GHOST_1])
@@ -147,13 +149,25 @@ public class PlayerStateMachine : BaseStateMachine
     public override void Pause(bool paused)
     {
         base.Pause(paused);
-        
+
         m_ghostList.Pause(paused);
     }
 
     public void Upgrade(E_UPGRADES type)
     {
-        if (type == E_UPGRADES.GHOST_1)
+
+        if (m_saveData.m_upgradeArray[(int)E_UPGRADES.MOVE_CRATE])
+        {
+            if (!m_states2D[2])
+            {
+                m_states2D[2] = gameObject.AddComponent<MoveingBox>();
+                m_states2D[2].Initialize(m_rigb, m_data);
+                m_states3D[2] = m_states2D[2];
+
+                m_saveData.AddUpgrade(type);
+            }
+        }
+        else if (type == E_UPGRADES.GHOST_1)
         {
             if (!m_states2D[5])
             {

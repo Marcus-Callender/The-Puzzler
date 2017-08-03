@@ -49,7 +49,7 @@ public class MoveBetweenPoints : ButtonInteraction
 
         if (m_moveing)
         {
-            m_rigb.isKinematic = false;
+            //m_rigb.isKinematic = false;
 
             if (m_goToPoint2)
             {
@@ -72,7 +72,7 @@ public class MoveBetweenPoints : ButtonInteraction
         else
         {
             m_rigb.velocity = Vector3.zero;
-            m_rigb.isKinematic = true;
+            //m_rigb.isKinematic = true;
         }
     }
 

@@ -79,10 +79,17 @@ public class PauseMovement : ButtonInteraction
         }
     }
 
-    public override void OnInteract()
-    {
-        base.OnInteract();
+    //public override void OnInteract()
+    //{
+    //    base.OnInteract();
+    //
+    //    m_moveing = !m_moveing;
+    //}
 
+    public override void Activate()
+    {
+        base.Activate();
+        
         m_moveing = !m_moveing;
     }
 

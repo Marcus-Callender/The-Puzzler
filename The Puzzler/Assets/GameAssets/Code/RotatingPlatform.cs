@@ -22,6 +22,7 @@ public class RotatingPlatform : MonoBehaviour
         if (m_active)
         {
             transform.Rotate(m_rotation.normalized * m_speed * Time.deltaTime);
+            //transform.RotateAroundLocal(m_rotation.normalized * m_speed * Time.deltaTime);
         }
     }
 

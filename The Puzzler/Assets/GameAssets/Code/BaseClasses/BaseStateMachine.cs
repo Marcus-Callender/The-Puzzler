@@ -182,6 +182,7 @@ public class BaseStateMachine : MonoBehaviour
     public virtual void Pause(bool paused)
     {
         m_lockState = paused;
+        m_data.m_anim.SetBool("Paused", paused);
     }
 
     public virtual bool GetInput(E_INPUTS input)

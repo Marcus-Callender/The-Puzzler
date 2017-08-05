@@ -34,7 +34,7 @@ public class DimentionTransition : MonoBehaviour
                     Vector3 newPos = Vector3.zero;
 
                     newPos = transform.position;
-                    newPos.y = data.transform.position.y /*+ Mathf.Epsilon*/;
+                    newPos.y = data.transform.position.y;
                     newPos += -transform.forward * (transform.localScale.x * 2.0f);
 
                     data.transform.position = newPos;

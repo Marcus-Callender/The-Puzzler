@@ -14,7 +14,7 @@ public class DisplayText : MonoBehaviour
         m_displayText.text = "";
 
         m_displayTimer = new Timer();
-        m_displayTimer.m_time = 4.0f;
+        m_displayTimer.m_time = 2.5f;
     }
     
     void Update()

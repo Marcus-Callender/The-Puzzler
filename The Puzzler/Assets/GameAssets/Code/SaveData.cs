@@ -16,7 +16,6 @@ public class SaveData : MonoBehaviour
     public void Initialize()
     {
         m_directory = Directory.GetCurrentDirectory();
-        //m_directory += "\\Saves";
         m_directory += "\\save.sav";
 
         Debug.Log("File is : " + m_directory);

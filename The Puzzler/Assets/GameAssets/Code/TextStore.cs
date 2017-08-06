@@ -9,6 +9,7 @@ public class TextStore : MonoBehaviour
 
     void Start()
     {
+        // finds a refrence to the text componant that will display this text
         m_screenText = GameObject.Find("UI").GetComponentInChildren<DisplayText>();
 
         if (!m_screenText)
@@ -26,6 +27,7 @@ public class TextStore : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ghost")
         {
+            // when the player or a ghost enters the colider of this object the text this stores is displayed
             m_screenText.ReceveText(m_textToDisplay);
         }
     }

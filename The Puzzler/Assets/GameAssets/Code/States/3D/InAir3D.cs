@@ -14,6 +14,7 @@ public class InAir3D : BasicState
     {
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
 
+        // sets the animator variables
         m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
         m_data.m_anim.SetBool("Airborn", true);
     }
@@ -49,12 +50,14 @@ public class InAir3D : BasicState
             m_data.m_rotation = gameObject.transform.rotation;
         }
 
+        // stops the upward movment if the player lets go of the jump button
         if (!GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)
         {
             Debug.Log("Short Jump");
             m_data.m_velocityY = 0.0f;
         }
 
+        // updates the animator on the player current y velocity
         m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
 
         return E_PLAYER_STATES.IN_AIR;
@@ -91,6 +94,7 @@ public class InAir3D : BasicState
 
     public override E_PLAYER_STATES InTrigger(string _tag)
     {
+        // if the player can and wants to climb a ladder move to the using ladder state
         if (_tag == "Ladder" && GetInput(E_INPUTS.UP))
         {
             return E_PLAYER_STATES.USEING_LADDER;

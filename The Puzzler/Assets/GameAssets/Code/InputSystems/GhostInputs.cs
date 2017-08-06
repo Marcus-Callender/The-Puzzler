@@ -5,17 +5,13 @@ using UnityEngine;
 public class GhostInputs : PlayerInputs
 {
     public const int m_recordingSize = 60 * 4;
-
-    //private char m_Inputs;
+    
     private char[] m_recordedInputs = new char[m_recordingSize];
     public int m_arrayPosition = 0;
     public bool m_recorded = false;
     public bool m_recording = false;
     public bool m_playing = false;
     public bool m_consumingInputs = false;
-
-    //public Vector3 m_startingPosition;
-    //public Quaternion m_startingRotation;
 
     public UICountdown m_countdown;
 
@@ -51,21 +47,11 @@ public class GhostInputs : PlayerInputs
                     m_recording = false;
 
                     m_countdown.m_progress = 0.0f;
-
-                    //gameObject.transform.position = m_startingPosition;
-                    //gameObject.transform.rotation = m_startingRotation;
                 }
                 else if (m_arrayPosition < m_recordingSize)
                 {
                     // resets the input
                     m_Inputs = (char)0;
-
-                    if (m_arrayPosition == 0)
-                    {
-                        // if the recording has just started mark the current position
-                        //m_startingPosition = gameObject.transform.position;
-                        //m_startingRotation = gameObject.transform.rotation;
-                    }
 
                     if (Input.GetAxisRaw("Horizontal") > 0.0f)
                     {
@@ -125,9 +111,6 @@ public class GhostInputs : PlayerInputs
                     m_recorded = true;
                     m_recording = false;
                     m_pause = false;
-
-                    //gameObject.transform.position = m_startingPosition;
-                    //gameObject.transform.rotation = m_startingRotation;
                 }
             }
             else if (m_playing)
@@ -142,9 +125,6 @@ public class GhostInputs : PlayerInputs
                 else
                 {
                     m_playing = false;
-
-                    //gameObject.transform.position = m_startingPosition;
-                    //gameObject.transform.rotation = m_startingRotation;
                 }
             }
             else
@@ -221,8 +201,5 @@ public class GhostInputs : PlayerInputs
         
         m_recording = false;
         m_playing = false;
-
-        //gameObject.transform.position = m_startingPosition;
-        //gameObject.transform.rotation = m_startingRotation;
     }
 }

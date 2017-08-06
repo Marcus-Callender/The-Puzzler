@@ -63,8 +63,7 @@ public class GhostStateMachine : BaseStateMachine
 
             m_playing = true;
             m_data.m_pause = false;
-
-            //Play();
+            
             StartCoroutine(Play());
         }
         else
@@ -72,7 +71,6 @@ public class GhostStateMachine : BaseStateMachine
             gameObject.transform.position = _transform.position;
             gameObject.transform.rotation = _transform.rotation;
             m_data.m_rotation = _transform.rotation;
-            //m_startingRotation = _transform.rotation;
             m_data.m_left_right = _left_right;
 
             m_data.m_use3D = use3d;
@@ -105,16 +103,11 @@ public class GhostStateMachine : BaseStateMachine
 
         m_states3D[0] = gameObject.AddComponent<OnGround3D>();
         m_states3D[1] = gameObject.AddComponent<InAir3D>();
-        //m_states3D[2] = gameObject.AddComponent<MoveingBox>();
         m_states3D[2] = m_states2D[2];
         m_states3D[3] = m_states2D[3];
-        //m_states3D[7] = gameObject.AddComponent<WallSlide>();
 
         m_states3D[0].Initialize(m_rigb, m_data);
         m_states3D[1].Initialize(m_rigb, m_data);
-        //m_states3D[2].Initialize(m_rigb, m_data, m_inputs);
-        //m_states3D[3].Initialize(m_rigb, m_data, m_inputs);
-        //m_states3D[7].Initialize(m_rigb, m_data, m_inputs);
 
         m_data.m_anim.SetBool("Stopped", true);
 
@@ -138,7 +131,6 @@ public class GhostStateMachine : BaseStateMachine
             gameObject.tag = "Ghost";
             // runs if the recording has finished and the ghost is not playing
             m_data.m_anim.SetBool("Stopped", true);
-            //m_inputs.m_pauseInputs = true;
             m_data.m_squished = false;
 
             if (!m_recorded)
@@ -232,8 +224,6 @@ public class GhostStateMachine : BaseStateMachine
             gameObject.tag = "Ghost";
             // runs if the recording has finished and the ghost is not playing
             m_data.m_anim.SetBool("Stopped", true);
-            //m_inputs.m_pauseInputs = true;
-            //m_inputs.m_pause = true;
             m_data.m_pause = true;
         }
 
@@ -294,6 +284,7 @@ public class GhostStateMachine : BaseStateMachine
 
     public void EndRecording()
     {
+        // adds a symbol to the end of the recording so the playback knows when the recording ends
         m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
 
         m_recorded = true;

@@ -12,7 +12,7 @@ public class GhostStateMachine : BaseStateMachine
 
     public int m_id;
 
-    public const int m_recordingSize = 60 * 4;
+    public const int m_recordingSize = 60 * 6;
 
     //private char m_Inputs;
     private char[] m_recordedInputs = new char[m_recordingSize];
@@ -70,8 +70,8 @@ public class GhostStateMachine : BaseStateMachine
         else
         {
             gameObject.transform.position = _transform.position;
-            m_data.m_rotation = _transform.rotation;
-            m_startingRotation = _transform.rotation;
+            //m_data.m_rotation = _transform.rotation;
+            //m_startingRotation = _transform.rotation;
             m_data.m_left_right = _left_right;
 
             m_data.m_use3D = use3d;
@@ -164,6 +164,7 @@ public class GhostStateMachine : BaseStateMachine
                     m_countdown.m_progress = 0.0f;
 
                     gameObject.transform.position = m_startingPosition;
+                    gameObject.transform.rotation = m_startingRotation;
                 }
                 else if (m_arrayPosition < m_recordingSize)
                 {
@@ -292,5 +293,6 @@ public class GhostStateMachine : BaseStateMachine
         m_countdown.m_progress = 0.0f;
 
         gameObject.transform.position = m_startingPosition;
+        gameObject.transform.rotation = m_startingRotation;
     }
 }

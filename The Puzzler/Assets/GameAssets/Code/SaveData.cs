@@ -43,8 +43,9 @@ public class SaveData : MonoBehaviour
         }
         else
         {
-            File.WriteAllText(m_directory, "Text");
+            File.WriteAllText(m_directory, "0");
             Debug.Log("Created new file.");
+            m_data = "0";
         }
 
         m_upgrades = (char)int.Parse(m_data);

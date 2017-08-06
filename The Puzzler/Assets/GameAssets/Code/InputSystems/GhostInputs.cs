@@ -14,8 +14,8 @@ public class GhostInputs : PlayerInputs
     public bool m_playing = false;
     public bool m_consumingInputs = false;
 
-    public Vector3 m_startingPosition;
-    public Quaternion m_startingRotation;
+    //public Vector3 m_startingPosition;
+    //public Quaternion m_startingRotation;
 
     public UICountdown m_countdown;
 
@@ -52,7 +52,8 @@ public class GhostInputs : PlayerInputs
 
                     m_countdown.m_progress = 0.0f;
 
-                    gameObject.transform.position = m_startingPosition;
+                    //gameObject.transform.position = m_startingPosition;
+                    //gameObject.transform.rotation = m_startingRotation;
                 }
                 else if (m_arrayPosition < m_recordingSize)
                 {
@@ -62,7 +63,7 @@ public class GhostInputs : PlayerInputs
                     if (m_arrayPosition == 0)
                     {
                         // if the recording has just started mark the current position
-                        m_startingPosition = gameObject.transform.position;
+                        //m_startingPosition = gameObject.transform.position;
                         //m_startingRotation = gameObject.transform.rotation;
                     }
 
@@ -125,8 +126,8 @@ public class GhostInputs : PlayerInputs
                     m_recording = false;
                     m_pause = false;
 
-                    gameObject.transform.position = m_startingPosition;
-                    gameObject.transform.rotation = m_startingRotation;
+                    //gameObject.transform.position = m_startingPosition;
+                    //gameObject.transform.rotation = m_startingRotation;
                 }
             }
             else if (m_playing)
@@ -142,8 +143,8 @@ public class GhostInputs : PlayerInputs
                 {
                     m_playing = false;
 
-                    gameObject.transform.position = m_startingPosition;
-                    gameObject.transform.rotation = m_startingRotation;
+                    //gameObject.transform.position = m_startingPosition;
+                    //gameObject.transform.rotation = m_startingRotation;
                 }
             }
             else
@@ -221,7 +222,7 @@ public class GhostInputs : PlayerInputs
         m_recording = false;
         m_playing = false;
 
-        gameObject.transform.position = m_startingPosition;
-        gameObject.transform.rotation = m_startingRotation;
+        //gameObject.transform.position = m_startingPosition;
+        //gameObject.transform.rotation = m_startingRotation;
     }
 }

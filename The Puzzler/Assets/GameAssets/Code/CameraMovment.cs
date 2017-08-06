@@ -8,7 +8,6 @@ public enum E_CamType
     CAM_3D_GROUND,
     CAM_3D_AIR,
     CAM_3D_MOVING_BOX
-
 }
 
 public class CameraMovment : MonoBehaviour

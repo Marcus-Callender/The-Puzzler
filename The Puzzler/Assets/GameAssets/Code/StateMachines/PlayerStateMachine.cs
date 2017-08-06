@@ -155,8 +155,7 @@ public class PlayerStateMachine : BaseStateMachine
 
     public void Upgrade(E_UPGRADES type)
     {
-
-        if (m_saveData.m_upgradeArray[(int)E_UPGRADES.MOVE_CRATE])
+        if (type == E_UPGRADES.MOVE_CRATE)
         {
             if (!m_states2D[2])
             {

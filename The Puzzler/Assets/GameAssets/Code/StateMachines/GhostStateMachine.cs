@@ -70,7 +70,8 @@ public class GhostStateMachine : BaseStateMachine
         else
         {
             gameObject.transform.position = _transform.position;
-            //m_data.m_rotation = _transform.rotation;
+            gameObject.transform.rotation = _transform.rotation;
+            m_data.m_rotation = _transform.rotation;
             //m_startingRotation = _transform.rotation;
             m_data.m_left_right = _left_right;
 
@@ -165,6 +166,8 @@ public class GhostStateMachine : BaseStateMachine
 
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
+
+                    m_data.m_rotation = m_startingRotation;
                 }
                 else if (m_arrayPosition < m_recordingSize)
                 {
@@ -191,6 +194,8 @@ public class GhostStateMachine : BaseStateMachine
     
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
+
+                    m_data.m_rotation = m_startingRotation;
                 }
             }
             else if (m_playing)
@@ -208,6 +213,8 @@ public class GhostStateMachine : BaseStateMachine
 
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
+
+                    m_data.m_rotation = m_startingRotation;
                 }
             }
         }
@@ -265,6 +272,8 @@ public class GhostStateMachine : BaseStateMachine
 
         gameObject.transform.position = m_startingPosition;
         gameObject.transform.rotation = m_startingRotation;
+
+        m_data.m_rotation = m_startingRotation;
     }
 
     public IEnumerator Play()
@@ -294,5 +303,7 @@ public class GhostStateMachine : BaseStateMachine
 
         gameObject.transform.position = m_startingPosition;
         gameObject.transform.rotation = m_startingRotation;
+
+        m_data.m_rotation = m_startingRotation;
     }
 }

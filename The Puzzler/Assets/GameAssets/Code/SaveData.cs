@@ -12,6 +12,8 @@ public class SaveData : MonoBehaviour
     public string m_directory = "";
     public bool[] m_upgradeArray = new bool[(int)E_UPGRADES.SIZE];
 
+    private SoundSystem m_soundSystem;
+
     // this is insted of a start function to decide when this function is called
     public void Initialize()
     {
@@ -25,6 +27,8 @@ public class SaveData : MonoBehaviour
         m_upgrades = (char)int.Parse(m_data);
 
         GetSavedUpgrades();
+
+        m_soundSystem = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundSystem>();
     }
     
     public void Save()
@@ -56,6 +60,11 @@ public class SaveData : MonoBehaviour
         m_data = ((int)m_upgrades).ToString();
 
         Save();
+
+        if (m_soundSystem)
+        {
+            m_soundSystem.NextTrack();
+        }
     }
 
     private int IntToBit(int input)

@@ -109,6 +109,7 @@ Assets/GameAssets/Code/PersistantData.cs
 Assets/GameAssets/Code/PlayerData.cs
 Assets/GameAssets/Code/RotatingPlatform.cs
 Assets/GameAssets/Code/SaveData.cs
+Assets/GameAssets/Code/SavePosition.cs
 Assets/GameAssets/Code/SoundSystem.cs
 Assets/GameAssets/Code/StateMachines/GhostStateMachine.cs
 Assets/GameAssets/Code/StateMachines/PlayerStateMachine.cs

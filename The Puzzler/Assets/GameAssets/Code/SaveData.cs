@@ -29,6 +29,19 @@ public class SaveData : MonoBehaviour
         GetSavedUpgrades();
 
         m_soundSystem = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundSystem>();
+
+        if (m_upgrades > (char)0)
+        {
+            m_soundSystem.NextTrack();
+        }
+        if (m_upgrades > (char)1)
+        {
+            m_soundSystem.NextTrack();
+        }
+        if (m_upgrades > (char)3)
+        {
+            m_soundSystem.NextTrack();
+        }
     }
     
     public void Save()

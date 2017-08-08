@@ -103,6 +103,7 @@ public class SaveData : MonoBehaviour
         }
         else
         {
+
             File.WriteAllText(m_positionDirectory, transform.position + "\n" + transform.rotation);
             Debug.Log("Created new file.");
             //m_data = "0";

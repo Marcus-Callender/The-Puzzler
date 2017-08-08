@@ -104,7 +104,7 @@ public class PlayerStateMachine : BaseStateMachine
 
     public override void Cycle()
     {
-        if (transform.position.y < -10.0f)
+        if (transform.position.y < -40.0f)
         {
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);

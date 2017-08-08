@@ -126,7 +126,7 @@ public class GhostStateMachine : BaseStateMachine
 
     public override void Cycle()
     {
-        if (transform.position.y < -10.0f)
+        if (transform.position.y < -40.0f)
         {
             gameObject.tag = "Ghost";
             // runs if the recording has finished and the ghost is not playing

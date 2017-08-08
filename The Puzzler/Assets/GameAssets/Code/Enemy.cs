@@ -247,7 +247,7 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (gameObject.transform.position.y < -10.0f)
+        if (gameObject.transform.position.y < -40.0f)
         {
             Destroy(gameObject);
         }

@@ -13,8 +13,13 @@ public class SaveData : MonoBehaviour
     public string m_positionDirectory = "";
     public bool[] m_upgradeArray = new bool[(int)E_UPGRADES.SIZE];
 
-    public Vector3 m_savedPos;
-    public Quaternion m_savedRot;
+    //public Vector3 m_savedPos;
+    //public Quaternion m_savedRot;
+    //
+    //public bool m_savedLeft_right;
+    //public bool m_savedUse3D;
+
+    public CharicterPosition m_savedPosData;
 
     private SoundSystem m_soundSystem;
 
@@ -31,6 +36,8 @@ public class SaveData : MonoBehaviour
         Debug.Log("File is : " + m_directory);
 
         m_playerData = gameObject.GetComponent<PlayerData>();
+
+        m_savedPosData = new CharicterPosition();
 
         Load();
         LoadPosition();
@@ -92,9 +99,9 @@ public class SaveData : MonoBehaviour
             // creates a new string where ever there is a ','
             string[] pos = lines[0].Split(',');
 
-            m_savedPos.x = float.Parse(pos[0]);
-            m_savedPos.y = float.Parse(pos[1]);
-            m_savedPos.z = float.Parse(pos[2]);
+            m_savedPosData.pos.x = float.Parse(pos[0]);
+            m_savedPosData.pos.y = float.Parse(pos[1]);
+            m_savedPosData.pos.z = float.Parse(pos[2]);
 
             // removes the brackets() at the start and end of the string
             lines[1] = lines[1].Substring(1, lines[1].Length - 2);
@@ -102,20 +109,31 @@ public class SaveData : MonoBehaviour
             // creates a new string where ever there is a ','
             string[] rot = lines[1].Split(',');
 
-            m_savedRot.x = float.Parse(rot[0]);
-            m_savedRot.y = float.Parse(rot[1]);
-            m_savedRot.z = float.Parse(rot[2]);
-            m_savedRot.w = float.Parse(rot[3]);
+            m_savedPosData.rot.x = float.Parse(rot[0]);
+            m_savedPosData.rot.y = float.Parse(rot[1]);
+            m_savedPosData.rot.z = float.Parse(rot[2]);
+            m_savedPosData.rot.w = float.Parse(rot[3]);
 
-            transform.position = m_savedPos;
-            transform.rotation = m_savedRot;
+            m_savedPosData.left_right = (lines[2] == "True");
+            m_savedPosData.use3D = (lines[3] == "True");
+
+            transform.position = m_savedPosData.pos;
+            transform.rotation = m_savedPosData.rot;
+
+            m_playerData.m_left_right = m_savedPosData.left_right;
+            m_playerData.m_use3D = m_savedPosData.use3D;
         }
         else
         {
-            m_savedPos = transform.position;
-            m_savedRot = transform.rotation;
+            m_savedPosData.pos = transform.position;
+            m_savedPosData.rot = transform.rotation;
 
-            File.WriteAllText(m_positionDirectory, m_savedPos + "\n" + m_savedRot + "\n" + m_playerData.m_left_right + "\n" + m_playerData.m_use3D);
+            m_savedPosData.left_right = m_playerData.m_left_right;
+            m_savedPosData.use3D = m_playerData.m_use3D;
+
+            File.WriteAllText(m_positionDirectory, m_savedPosData.pos + "\n" + m_savedPosData.rot + "\n" + 
+                m_playerData.m_left_right + "\n" + m_playerData.m_use3D);
+
             Debug.Log("Created new pos file.");
         }
 
@@ -161,9 +179,13 @@ public class SaveData : MonoBehaviour
 
     public void SavePosition(Vector3 pos, Quaternion rot)
     {
-        m_savedPos = pos;
-        m_savedRot = rot;
+        m_savedPosData.pos = pos;
+        m_savedPosData.rot = rot;
 
-        File.WriteAllText(m_positionDirectory, m_savedPos + "\n" + m_savedRot);
+        m_savedPosData.left_right = m_playerData.m_left_right;
+        m_savedPosData.use3D = m_playerData.m_use3D;
+        
+        File.WriteAllText(m_positionDirectory, m_savedPosData.pos + "\n" + m_savedPosData.rot + "\n" + 
+            m_playerData.m_left_right + "\n" + m_playerData.m_use3D);
     }
 }

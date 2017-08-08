@@ -1245,6 +1245,11 @@ Prefab:
       propertyPath: m_moveing
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
   m_IsPrefabParent: 0
@@ -1872,7 +1877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateDelayTime: 0
-  m_point2: {x: 42.4, y: 21.5, z: 68.2}
+  m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
   m_speedReverse: 3.75
   m_goToPoint2: 0
@@ -2067,7 +2072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateDelayTime: 0.1
-  m_point2: {x: 42.4, y: 21.5, z: 70.2}
+  m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
   m_speedReverse: 3.75
   m_goToPoint2: 0
@@ -2166,6 +2171,16 @@ Prefab:
         type: 2}
       propertyPath: m_activateDelayTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.x
+      value: 32.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.y
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
@@ -3075,6 +3090,11 @@ Prefab:
       propertyPath: m_moveing
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
   m_IsPrefabParent: 0
@@ -3847,7 +3867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateDelayTime: 0.1
-  m_point2: {x: 40.6, y: 23.5, z: 74.75}
+  m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
   m_speedReverse: 3.75
   m_goToPoint2: 0
@@ -4369,6 +4389,11 @@ Prefab:
         type: 2}
       propertyPath: m_activateDelayTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.z
+      value: -2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
@@ -4978,6 +5003,11 @@ Prefab:
       propertyPath: m_activateDelayTime
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.y
+      value: 2.45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
   m_IsPrefabParent: 0
@@ -5371,7 +5401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateDelayTime: 0
-  m_point2: {x: 44.3, y: 15, z: -17}
+  m_distanceToMove: {x: 0, y: 2.5, z: -7}
   m_speed: 2
   m_speedReverse: 2
   m_goToPoint2: 0
@@ -7359,7 +7389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateDelayTime: 0.1
-  m_point2: {x: 42.4, y: 24.5, z: 75.75}
+  m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
   m_speedReverse: 3.75
   m_goToPoint2: 0
@@ -7778,7 +7808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateDelayTime: 0.1
-  m_point2: {x: 42.4, y: 24.5, z: 73.75}
+  m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
   m_speedReverse: 3.75
   m_goToPoint2: 0
@@ -7986,6 +8016,11 @@ Prefab:
         type: 2}
       propertyPath: m_activateDelayTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.y
+      value: 4.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
@@ -8468,7 +8503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateDelayTime: 0.1
-  m_point2: {x: 40.6, y: 22.5, z: 69.2}
+  m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
   m_speedReverse: 3.75
   m_goToPoint2: 0
@@ -8644,6 +8679,16 @@ Prefab:
         type: 2}
       propertyPath: m_speed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.y
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
@@ -8971,6 +9016,11 @@ Prefab:
         type: 2}
       propertyPath: m_moveing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
@@ -9674,11 +9724,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4203268026081348, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
       propertyPath: m_LocalScale.x
-      value: 2.500001
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4203268026081348, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.50000024
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1922375826757078, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
       propertyPath: m_Name
@@ -9712,6 +9762,11 @@ Prefab:
         type: 2}
       propertyPath: m_activateDelayTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
+        type: 2}
+      propertyPath: m_distanceToMove.z
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}

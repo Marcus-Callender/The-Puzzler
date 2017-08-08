@@ -7,7 +7,8 @@ public class MoveBetweenPoints : ButtonInteraction
     private Rigidbody m_rigb;
 
     private Vector3 m_point1;
-    public Vector3 m_point2;
+    //private Vector3 m_point2;
+    public Vector3 m_distanceToMove;
 
     public float m_speed = 1.0f;
     private float m_distance = 0.0f;
@@ -28,13 +29,12 @@ public class MoveBetweenPoints : ButtonInteraction
         m_rigb = GetComponent<Rigidbody>();
 
         m_point1 = gameObject.transform.position;
+        
+        m_distance = Mathf.Abs(m_distanceToMove.x) + Mathf.Abs(m_distanceToMove.y) + Mathf.Abs(m_distanceToMove.z);
 
-        m_speedSegments = m_point2 - m_point1;
-        m_distance = Mathf.Abs(m_speedSegments.x) + Mathf.Abs(m_speedSegments.y) + Mathf.Abs(m_speedSegments.z);
-
-        m_speedSegments.x = m_speedSegments.x / m_distance;
-        m_speedSegments.y = m_speedSegments.y / m_distance;
-        m_speedSegments.z = m_speedSegments.z / m_distance;
+        m_speedSegments.x = m_distanceToMove.x / m_distance;
+        m_speedSegments.y = m_distanceToMove.y / m_distance;
+        m_speedSegments.z = m_distanceToMove.z / m_distance;
 
         m_keepScale = new GameObject();
         m_keepScale.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -88,14 +88,14 @@ public class MoveBetweenPoints : ButtonInteraction
     {
         if (m_goToPoint2)
         {
-            if (GetDistanceBetweenPoints(gameObject.transform.position, m_point1) >= GetDistanceBetweenPoints(m_point1, m_point2))
+            if (GetDistanceBetweenPoints(gameObject.transform.position, m_point1) >= GetDistanceBetweenPoints(m_point1, m_point1 + m_distanceToMove))
             {
                 return true;
             }
         }
         else
         {
-            if (GetDistanceBetweenPoints(gameObject.transform.position, m_point2) >= GetDistanceBetweenPoints(m_point1, m_point2))
+            if (GetDistanceBetweenPoints(gameObject.transform.position, m_point1 + m_distanceToMove) >= GetDistanceBetweenPoints(m_point1, m_point1 + m_distanceToMove))
             {
                 return true;
             }

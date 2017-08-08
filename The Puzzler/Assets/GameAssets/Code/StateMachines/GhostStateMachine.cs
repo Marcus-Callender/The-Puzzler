@@ -31,7 +31,7 @@ public class GhostStateMachine : BaseStateMachine
     //private bool m_colidedWithInteractable = false;
     //private bool m_reduceColisions = true;
 
-    public void Activate(Transform _transform, bool use3d, bool _left_right)
+    public void Activate(CharicterPosition posData)
     {
         gameObject.tag = "Player";
 
@@ -68,12 +68,12 @@ public class GhostStateMachine : BaseStateMachine
         }
         else
         {
-            gameObject.transform.position = _transform.position;
-            gameObject.transform.rotation = _transform.rotation;
-            m_data.m_rotation = _transform.rotation;
-            m_data.m_left_right = _left_right;
+            gameObject.transform.position = posData.pos;
+            gameObject.transform.rotation = posData.rot;
+            m_data.m_rotation = posData.rot;
+            m_data.m_left_right = posData.left_right;
 
-            m_data.m_use3D = use3d;
+            m_data.m_use3D = posData.use3D;
             m_arrayPosition = 0;
             m_recording = true;
         }

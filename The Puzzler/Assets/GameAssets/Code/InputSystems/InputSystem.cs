@@ -266,11 +266,11 @@ public class InputSystem : MonoBehaviour
     {
         if (m_currentGhost)
         {
-            ghost.Activate(m_currentGhost.transform, m_currentGhost.m_data.m_use3D, m_currentGhost.m_data.m_left_right);
+            ghost.Activate(m_currentGhost.m_data.getPositionData());
         }
         else
         {
-            ghost.Activate(m_player.transform, m_player.m_data.m_use3D, m_player.m_data.m_left_right);
+            ghost.Activate(m_player.m_data.getPositionData());
         }
     }
 }

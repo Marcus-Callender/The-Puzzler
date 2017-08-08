@@ -38,7 +38,7 @@ public class ControlingGhost : BasicState
 
         m_data.m_velocityX = 0.0f;
 
-        m_ghostStateMachine.Activate(gameObject.transform, m_data.m_use3D, m_data.m_left_right);
+        m_ghostStateMachine.Activate(m_data.getPositionData());
     }
 
     public override void Exit()

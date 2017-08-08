@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct CharicterPosition
+{
+    public Vector3 pos;
+    public Quaternion rot;
+    public bool left_right;
+    public bool use3D;
+}
+
 public class PlayerData : MonoBehaviour
 {
     public float m_velocityX = 0.0f;
@@ -162,5 +170,17 @@ public class PlayerData : MonoBehaviour
         }
 
         return vel;
+    }
+
+    public CharicterPosition getPositionData()
+    {
+        CharicterPosition posData = new CharicterPosition();
+
+        posData.pos = transform.position;
+        posData.rot = transform.rotation;
+        posData.use3D = m_use3D;
+        posData.left_right = m_left_right;
+
+        return posData;
     }
 }

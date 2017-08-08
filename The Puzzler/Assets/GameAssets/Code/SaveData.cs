@@ -18,6 +18,8 @@ public class SaveData : MonoBehaviour
 
     private SoundSystem m_soundSystem;
 
+    private PlayerData m_playerData;
+
     // this is insted of a start function to decide when this function is called
     public void Initialize()
     {
@@ -27,6 +29,8 @@ public class SaveData : MonoBehaviour
         m_positionDirectory += "\\posSave.sav";
 
         Debug.Log("File is : " + m_directory);
+
+        m_playerData = gameObject.GetComponent<PlayerData>();
 
         Load();
         LoadPosition();
@@ -41,10 +45,12 @@ public class SaveData : MonoBehaviour
         {
             m_soundSystem.NextTrack();
         }
+
         if (m_upgrades > (char)1)
         {
             m_soundSystem.NextTrack();
         }
+
         if (m_upgrades > (char)3)
         {
             m_soundSystem.NextTrack();
@@ -100,13 +106,17 @@ public class SaveData : MonoBehaviour
             m_savedRot.y = float.Parse(rot[1]);
             m_savedRot.z = float.Parse(rot[2]);
             m_savedRot.w = float.Parse(rot[3]);
+
+            transform.position = m_savedPos;
+            transform.rotation = m_savedRot;
         }
         else
         {
+            m_savedPos = transform.position;
+            m_savedRot = transform.rotation;
 
-            File.WriteAllText(m_positionDirectory, transform.position + "\n" + transform.rotation);
-            Debug.Log("Created new file.");
-            //m_data = "0";
+            File.WriteAllText(m_positionDirectory, m_savedPos + "\n" + m_savedRot + "\n" + m_playerData.m_left_right + "\n" + m_playerData.m_use3D);
+            Debug.Log("Created new pos file.");
         }
 
         //m_upgrades = (char)int.Parse(m_data);
@@ -151,6 +161,9 @@ public class SaveData : MonoBehaviour
 
     public void SavePosition(Vector3 pos, Quaternion rot)
     {
+        m_savedPos = pos;
+        m_savedRot = rot;
 
+        File.WriteAllText(m_positionDirectory, m_savedPos + "\n" + m_savedRot);
     }
 }

@@ -14,6 +14,8 @@ public class OnGround3D : BasicState
 
     public override E_PLAYER_STATES Cycle(char inputs)
     {
+        Debug.DrawRay(transform.position + (-transform.up * 0.1f), -transform.up * 0.1f, Color.red);
+
         if (GetInput(E_INPUTS.UP))
         {
             m_data.m_anim.SetBool("Walking", true);
@@ -66,7 +68,22 @@ public class OnGround3D : BasicState
 
     public override E_PLAYER_STATES LeaveColision(string _tag)
     {
-        return E_PLAYER_STATES.IN_AIR;
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position, new Vector3(0.0f, -1.0f, 0.0f) * 1.0f, Color.green);
+
+        if (!Physics.Raycast(transform.position + new Vector3(0.0f, 0.1f, 0.0f), new Vector3(0.0f, -1.0f, 0.0f), out hit, 1.0f))
+        {
+            Debug.Log("----- no collision ----");
+            return E_PLAYER_STATES.IN_AIR;
+        }
+        else
+        {
+            Debug.Log("----- collision " + hit.collider.name + " ----");
+
+        }
+
+        return E_PLAYER_STATES.ON_GROUND;
     }
 
     public override E_PLAYER_STATES InTrigger(string _tag)

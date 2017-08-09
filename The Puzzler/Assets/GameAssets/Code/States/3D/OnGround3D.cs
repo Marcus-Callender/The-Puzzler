@@ -20,9 +20,16 @@ public class OnGround3D : BasicState
 
             m_data.m_velocityX = m_speed;
         }
+        else if (GetInput(E_INPUTS.DOWN))
+        {
+            m_data.m_anim.SetBool("WalkingBack", true);
+
+            m_data.m_velocityX = -m_speed * 0.5f;
+        }
         else
         {
             m_data.m_anim.SetBool("Walking", false);
+            m_data.m_anim.SetBool("WalkingBack", false);
 
             m_data.m_velocityX = 0.0f;
         }

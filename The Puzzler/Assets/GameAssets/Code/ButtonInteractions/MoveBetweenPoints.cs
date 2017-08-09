@@ -39,8 +39,6 @@ public class MoveBetweenPoints : ButtonInteraction
         m_keepScale = new GameObject();
         m_keepScale.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         m_keepScale.transform.SetParent(gameObject.transform);
-
-        Debug.Log(m_speedSegments);
     }
 
     public override void Update()

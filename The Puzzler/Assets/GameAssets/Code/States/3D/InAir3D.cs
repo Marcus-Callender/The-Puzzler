@@ -50,6 +50,9 @@ public class InAir3D : BasicState
             m_data.m_rotation = gameObject.transform.rotation;
         }
 
+        gameObject.transform.Rotate(transform.up, Input.GetAxis("Mouse X"));
+        m_data.m_rotation = gameObject.transform.rotation;
+
         // stops the upward movment if the player lets go of the jump button
         if (!GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)
         {

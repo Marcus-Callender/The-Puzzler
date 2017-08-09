@@ -25,6 +25,8 @@ public class InAIr : BasicState
 
     public override E_PLAYER_STATES Cycle(char inputs)
     {
+        Debug.DrawRay(transform.position + (transform.up * 1.5f), transform.up * 0.1f, Color.blue);
+
         ApplyGravity(m_gravity);
 
         MoveHorzontal(m_speed);
@@ -54,8 +56,17 @@ public class InAIr : BasicState
     {
         if (_dir == E_DIRECTIONS.TOP && m_data.m_velocityY > 0.0f)
         {
-            Debug.Log("Hit ceiling");
-            m_data.m_velocityY = 0.0f;
+            RaycastHit hit;
+
+            //if (Physics.Raycast(transform.position, transform.up * 0.6f, out hit))
+            if (Physics.Raycast(transform.position + (transform.up * 1.5f), transform.up * 0.1f, out hit))
+            {
+                if (hit.collider.tag != "Player")
+                {
+                    Debug.Log("Hit ceiling");
+                    //m_data.m_velocityY = 0.0f;
+                }
+            }
         }
         else if (_dir == E_DIRECTIONS.BOTTOM && m_enableGroundCollisionCount == 0)
         {

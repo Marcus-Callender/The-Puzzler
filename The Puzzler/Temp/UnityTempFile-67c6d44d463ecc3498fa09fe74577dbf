@@ -107,6 +107,7 @@ Assets/GameAssets/Code/InputSystems/InputSystem.cs
 Assets/GameAssets/Code/InputSystems/PlayerInputs.cs
 Assets/GameAssets/Code/PersistantData.cs
 Assets/GameAssets/Code/PlayerData.cs
+Assets/GameAssets/Code/ResetData.cs
 Assets/GameAssets/Code/RotatingPlatform.cs
 Assets/GameAssets/Code/SaveData.cs
 Assets/GameAssets/Code/SavePosition.cs

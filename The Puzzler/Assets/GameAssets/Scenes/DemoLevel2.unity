@@ -5945,8 +5945,6 @@ MonoBehaviour:
   m_directory: 
   m_positionDirectory: 
   m_upgradeArray: 000000
-  m_savedPos: {x: 0, y: 0, z: 0}
-  m_savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1198738888
 GameObject:
   m_ObjectHideFlags: 0

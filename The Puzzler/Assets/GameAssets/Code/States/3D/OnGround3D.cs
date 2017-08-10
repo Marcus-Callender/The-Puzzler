@@ -49,7 +49,7 @@ public class OnGround3D : BasicState
             m_data.m_rotation = gameObject.transform.rotation;
         }
 
-        gameObject.transform.Rotate(transform.up, Input.GetAxis("Mouse X"));
+        gameObject.transform.Rotate(transform.up, Input.GetAxis("Mouse X") * Time.deltaTime * 60.0f);
         m_data.m_rotation = gameObject.transform.rotation;
 
         m_data.m_velocityY = -9.81f;

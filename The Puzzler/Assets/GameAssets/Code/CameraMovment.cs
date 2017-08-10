@@ -22,6 +22,10 @@ public class CameraMovment : MonoBehaviour
     private E_CamType m_nextCam;
     private Timer m_transitionTimer;
 
+    private float m_VerticalOffset = 0.0f;
+    public float m_MaxVerticalOffset = 15.0f;
+    public float m_MinVerticalOffset = -30.0f;
+
     void Start()
     {
         m_player = FindObjectOfType<PlayerStateMachine>();
@@ -54,6 +58,9 @@ public class CameraMovment : MonoBehaviour
 
             Vector3 playerPos = m_player.gameObject.transform.position;
         }
+
+        m_VerticalOffset += Input.GetAxis("Mouse Y") * Time.deltaTime * 60.0f;
+        m_VerticalOffset = Mathf.Clamp(m_VerticalOffset, m_MinVerticalOffset, m_MaxVerticalOffset);
 
         // makes all movments relative to the charicter the player is controling
         PlayerData followData = m_player.getFollowData();
@@ -100,6 +107,11 @@ public class CameraMovment : MonoBehaviour
         else
         {
             m_transitionTimer.Stop();
+
+            if (m_currentCam == E_CamType.CAM_2D)
+            {
+                m_VerticalOffset = 0.0f;
+            }
 
             gameObject.transform.rotation = getNewRot(m_currentCam, followData);
             gameObject.transform.position = getNewPos(m_currentCam, followData);
@@ -190,6 +202,8 @@ public class CameraMovment : MonoBehaviour
         Quaternion rot = new Quaternion();
 
         rot = data.transform.rotation;
+
+        rot *= Quaternion.Euler(Vector3.left * m_VerticalOffset);
 
         return rot;
     }

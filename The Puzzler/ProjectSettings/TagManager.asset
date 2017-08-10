@@ -10,6 +10,7 @@ TagManager:
   - Ghost
   - Enemy
   - Attack
+  - MenuScreen
   layers:
   - Default
   - TransparentFX

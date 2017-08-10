@@ -6,6 +6,8 @@ public enum E_INPUTS
 {
     LEFT,
     RIGHT,
+    LEFT_2,
+    RIGHT_2,
     UP,
     DOWN,
     JUMP,

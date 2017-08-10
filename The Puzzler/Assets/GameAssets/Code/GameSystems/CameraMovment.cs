@@ -60,6 +60,7 @@ public class CameraMovment : MonoBehaviour
         }
 
         m_VerticalOffset += Input.GetAxis("Mouse Y") * Time.deltaTime * 60.0f;
+        m_VerticalOffset += Input.GetAxis("Right Stick Y") * Time.deltaTime * 60.0f * 2.0f;
         m_VerticalOffset = Mathf.Clamp(m_VerticalOffset, m_MinVerticalOffset, m_MaxVerticalOffset);
 
         // makes all movments relative to the charicter the player is controling

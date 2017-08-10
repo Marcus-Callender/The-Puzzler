@@ -54,6 +54,17 @@ public class InputSystem : MonoBehaviour
                 m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
             }
 
+            // can't be consolidated into one axis as they will need diffrent behavior in 2D
+            if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) > 0.0f)
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.LEFT_2);
+            }
+
+            if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) < 0.0f)
+            {
+                m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT_2);
+            }
+
             if (Input.GetButton("Jump"))
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.JUMP);

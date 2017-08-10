@@ -36,22 +36,19 @@ public class OnGround3D : BasicState
             m_data.m_velocityX = 0.0f;
         }
 
-        if (GetInput(E_INPUTS.LEFT))
+        if (GetInput(E_INPUTS.LEFT_2))
         {
             gameObject.transform.Rotate(gameObject.transform.up, 180 * Time.deltaTime);
-
+        
             m_data.m_rotation = gameObject.transform.rotation;
         }
-        else if (GetInput(E_INPUTS.RIGHT))
+        else if (GetInput(E_INPUTS.RIGHT_2))
         {
             gameObject.transform.Rotate(-gameObject.transform.up, 180 * Time.deltaTime);
-
+        
             m_data.m_rotation = gameObject.transform.rotation;
         }
-
-        gameObject.transform.Rotate(transform.up, Input.GetAxis("Mouse X") * Time.deltaTime * 60.0f);
-        m_data.m_rotation = gameObject.transform.rotation;
-
+        
         m_data.m_velocityY = -9.81f;
 
         if (GetInput(E_INPUTS.MOVE_BOX))

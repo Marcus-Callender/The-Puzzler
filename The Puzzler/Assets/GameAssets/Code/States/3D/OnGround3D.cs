@@ -91,7 +91,6 @@ public class OnGround3D : BasicState
         else
         {
             Debug.Log("----- collision " + hit.collider.name + " ----");
-
         }
 
         return E_PLAYER_STATES.ON_GROUND;

@@ -94,8 +94,14 @@ public class InAir3D : BasicState
     {
         if (_dir == E_DIRECTIONS.TOP && m_data.m_velocityY > 0.0f)
         {
-            Debug.Log("Hit ceiling");
-            m_data.m_velocityY = 0.0f;
+            RaycastHit hit;
+
+            if (!Physics.Raycast(transform.position + new Vector3(0.0f, 1.4f, 0.0f) + (-transform.forward * 0.1f), new Vector3(0.0f, 1.0f, 0.0f), out hit, 0.25f))
+            {
+                Debug.Log("Hit ceiling");
+                //m_data.m_velocityY = 0.0f;
+            }
+
         }
         else if (_dir == E_DIRECTIONS.BOTTOM && m_enableGroundCollisionCount == 0)
         {

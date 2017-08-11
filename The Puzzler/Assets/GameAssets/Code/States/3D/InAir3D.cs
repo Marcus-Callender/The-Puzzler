@@ -32,11 +32,28 @@ public class InAir3D : BasicState
         {
             m_data.m_velocityX = m_speed;
         }
+        else if (GetInput(E_INPUTS.DOWN))
+        {
+            m_data.m_velocityX = -m_speed;
+        }
         else
         {
             m_data.m_velocityX = 0.0f;
         }
-        
+
+        if (GetInput(E_INPUTS.LEFT))
+        {
+            m_data.m_velocityZ = m_speed;
+        }
+        else if (GetInput(E_INPUTS.RIGHT))
+        {
+            m_data.m_velocityZ = -m_speed;
+        }
+        else
+        {
+            m_data.m_velocityZ = 0.0f;
+        }
+
         if (GetInput(E_INPUTS.LEFT_2))
         {
             gameObject.transform.Rotate(gameObject.transform.up, 180 * Time.deltaTime);

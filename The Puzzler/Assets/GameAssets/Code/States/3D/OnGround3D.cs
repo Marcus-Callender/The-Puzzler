@@ -36,6 +36,17 @@ public class OnGround3D : BasicState
             m_data.m_velocityX = 0.0f;
         }
 
+        if (GetInput(E_INPUTS.LEFT))
+        {
+            m_data.m_velocityZ = Mathf.Abs(m_data.m_velocityX);
+        }
+        else if (GetInput(E_INPUTS.RIGHT))
+        {
+            m_data.m_velocityZ = -Mathf.Abs(m_data.m_velocityX);
+        }
+
+        m_data.m_anim.SetFloat("Horizontal Velocity", m_data.m_velocityZ);
+
         if (GetInput(E_INPUTS.LEFT_2))
         {
             gameObject.transform.Rotate(gameObject.transform.up, 180 * Time.deltaTime);

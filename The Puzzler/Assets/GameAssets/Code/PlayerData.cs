@@ -51,6 +51,8 @@ public class PlayerData : MonoBehaviour
     public bool m_pause = false;
     public char m_inputs;
 
+    public Quaternion m_playerLookingDirection;
+
     public void Initialize()
     {
         m_rigb = GetComponent<Rigidbody>();
@@ -66,6 +68,8 @@ public class PlayerData : MonoBehaviour
             m_playerDoubleJump = data.m_playerDoubleJump;
             m_playerWallSlide = data.m_playerWallSlide;
         }
+
+        m_playerLookingDirection = transform.rotation;
 
         m_vecOne = new Vector3(1.0f, 1.0f, 1.0f);
     }

@@ -22,7 +22,7 @@ public class KO : BasicState
         m_KOTime.Play();
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs)
+    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
     {
         m_data.m_velocityX = 0.0f;
         m_data.m_velocityY = 0.0f;

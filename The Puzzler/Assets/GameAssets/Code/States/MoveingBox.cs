@@ -85,7 +85,7 @@ public class MoveingBox : BasicState
         m_data.m_stopRotation = false;
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs)
+    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
     {
         if (!m_box)
         {
@@ -98,12 +98,12 @@ public class MoveingBox : BasicState
 
         if (m_data.m_use3D)
         {
-            getInput = GetInput(E_INPUTS.DOWN) || GetInput(E_INPUTS.UP) || 
-                GetInput(E_INPUTS.RIGHT) || GetInput(E_INPUTS.LEFT);
+            getInput = GetInput(E_INPUTS.DOWN, inputs) || GetInput(E_INPUTS.UP, inputs) || 
+                GetInput(E_INPUTS.RIGHT, inputs) || GetInput(E_INPUTS.LEFT, inputs);
         }
         else
         {
-            getInput = GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT);
+            getInput = GetInput(E_INPUTS.LEFT, inputs) || GetInput(E_INPUTS.RIGHT, inputs);
         }
 
         if (getInput && !m_moveInput)
@@ -132,21 +132,21 @@ public class MoveingBox : BasicState
 
                 if (m_data.m_use3D)
                 {
-                    if (GetInput(E_INPUTS.UP))
+                    if (GetInput(E_INPUTS.UP, inputs))
                         m_data.m_velocityX = m_dragSpeed;
 
-                    if (GetInput(E_INPUTS.DOWN))
+                    if (GetInput(E_INPUTS.DOWN, inputs))
                         m_data.m_velocityX = -m_dragSpeed;
 
-                    if (GetInput(E_INPUTS.LEFT))
+                    if (GetInput(E_INPUTS.LEFT, inputs))
                         m_data.m_velocityZ = m_dragSpeed;
 
-                    if (GetInput(E_INPUTS.RIGHT))
+                    if (GetInput(E_INPUTS.RIGHT, inputs))
                         m_data.m_velocityZ = -m_dragSpeed;
                 }
                 else
                 {
-                    MoveHorzontal(m_dragSpeed);
+                    MoveHorzontal(m_dragSpeed, inputs);
                 }
             }
             else
@@ -166,7 +166,7 @@ public class MoveingBox : BasicState
 
         m_boxRigb.velocity = m_data.GetExpectedVelocity();
 
-        if (!GetInput(E_INPUTS.MOVE_BOX_HOLD))
+        if (!GetInput(E_INPUTS.MOVE_BOX_HOLD, inputs))
         {
             Debug.Log("Box movment button relesed");
             return E_PLAYER_STATES.ON_GROUND;

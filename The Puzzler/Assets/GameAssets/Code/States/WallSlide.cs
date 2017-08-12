@@ -22,7 +22,7 @@ public class WallSlide : BasicState
         m_StickTimer.Play();
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs)
+    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
     {
         m_StickTimer.Cycle();
 
@@ -36,9 +36,9 @@ public class WallSlide : BasicState
             m_data.m_velocityY = 0.0f;
         }
 
-        MoveHorzontal(m_speed);
+        MoveHorzontal(m_speed, inputs);
 
-        if (GetInput(E_INPUTS.JUMP))
+        if (GetInput(E_INPUTS.JUMP, inputs))
         {
             return E_PLAYER_STATES.IN_AIR;
         }
@@ -47,7 +47,7 @@ public class WallSlide : BasicState
     }
 
 
-    public override E_PLAYER_STATES PhysCycle()
+    public override E_PLAYER_STATES PhysCycle(char inputs, char joystickMovement)
     {
         if (!m_collideLeftRight)
         {

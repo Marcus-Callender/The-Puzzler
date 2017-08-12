@@ -16,6 +16,9 @@ public class BaseStateMachine : MonoBehaviour
     protected E_PLAYER_STATES m_currentState = E_PLAYER_STATES.IN_AIR;
     protected E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
+    protected char m_inputs;
+    protected char m_JoystickMovement;
+
     public virtual void Initialize()
     {
         m_data = GetComponent<PlayerData>();
@@ -26,13 +29,13 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual void Cycle()
     {
-        m_newState = GetCurrentState().Cycle(m_data.m_inputs);
+        m_newState = GetCurrentState().Cycle(m_inputs, m_JoystickMovement);
         CheckState();
     }
 
     public void FixedCycle()
     {
-        m_newState = GetCurrentState().PhysCycle();
+        m_newState = GetCurrentState().PhysCycle(m_inputs, m_JoystickMovement);
         CheckState();
 
         m_data.m_onLadder = false;
@@ -46,8 +49,8 @@ public class BaseStateMachine : MonoBehaviour
 
     public void GetInputs(char inputs, char stickMovements)
     {
-        m_data.m_inputs = inputs;
-        m_data.m_JoystickMovement = stickMovements;
+        m_inputs = inputs;
+        m_JoystickMovement = stickMovements;
     }
 
     private void CheckGroundColl()
@@ -113,7 +116,7 @@ public class BaseStateMachine : MonoBehaviour
             m_data.m_onLadder = true;
         }
 
-        m_newState = GetCurrentState().InTrigger(other.gameObject.tag);
+        m_newState = GetCurrentState().InTrigger(other.gameObject.tag, m_inputs);
         CheckState();
     }
 
@@ -188,7 +191,7 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual bool GetInput(E_INPUTS input)
     {
-        return (m_data.m_inputs & (char)InputToBit(input)) > 0;
+        return (m_inputs & (char)InputToBit(input)) > 0;
     }
 
     protected virtual int InputToBit(E_INPUTS input)

@@ -173,8 +173,8 @@ public class GhostStateMachine : BaseStateMachine
                         m_startingRotation = gameObject.transform.rotation;
                     }
 
-                    m_recordedInputs[m_arrayPosition] = m_data.m_inputs;
-                    m_recordedJoystickPositions[m_arrayPosition] = m_data.m_JoystickMovement;
+                    m_recordedInputs[m_arrayPosition] = m_inputs;
+                    m_recordedJoystickPositions[m_arrayPosition] = m_JoystickMovement;
                     m_arrayPosition++;
 
                     if (m_countdown)
@@ -201,8 +201,8 @@ public class GhostStateMachine : BaseStateMachine
 
                 if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition] != (char)InputToBit(E_INPUTS.END)))
                 {
-                    m_data.m_inputs = m_recordedInputs[m_arrayPosition];
-                    m_data.m_JoystickMovement = m_recordedJoystickPositions[m_arrayPosition];
+                    m_inputs = m_recordedInputs[m_arrayPosition];
+                    m_JoystickMovement = m_recordedJoystickPositions[m_arrayPosition];
                     m_arrayPosition++;
                 }
                 else
@@ -281,8 +281,8 @@ public class GhostStateMachine : BaseStateMachine
         {
             if (m_arrayPosition > m_recordingSize)
             {
-                m_data.m_inputs = m_recordedInputs[m_arrayPosition];
-                m_data.m_JoystickMovement = m_recordedJoystickPositions[m_arrayPosition];
+                m_inputs = m_recordedInputs[m_arrayPosition];
+                m_JoystickMovement = m_recordedJoystickPositions[m_arrayPosition];
                 m_arrayPosition++;
                 yield return new WaitForSeconds(0.016f);
             }

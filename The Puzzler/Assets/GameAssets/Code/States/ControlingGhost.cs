@@ -47,7 +47,7 @@ public class ControlingGhost : BasicState
         m_data.m_overideFollow = null;
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs)
+    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
     {
         //if (!m_ghostInputs.m_consumingInputs)
         if (!m_data.m_pause)

@@ -12,11 +12,11 @@ public class OnGround : BasicState
         
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs)
+    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
     {
-        MoveHorzontal(m_speed);
+        MoveHorzontal(m_speed, inputs);
         
-        if (GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT))
+        if (GetInput(E_INPUTS.LEFT, inputs) || GetInput(E_INPUTS.RIGHT, inputs))
         {
             m_data.m_anim.SetBool("Walking", true);
         }
@@ -27,12 +27,12 @@ public class OnGround : BasicState
 
         m_data.m_velocityY = -9.81f;
 
-        if (GetInput(E_INPUTS.MOVE_BOX))
+        if (GetInput(E_INPUTS.MOVE_BOX, inputs))
         {
             return E_PLAYER_STATES.MOVEING_BLOCK;
         }
 
-        if (GetInput(E_INPUTS.JUMP) && !m_data.m_moveingBox)
+        if (GetInput(E_INPUTS.JUMP, inputs) && !m_data.m_moveingBox)
         {
             m_data.m_velocityY = m_jumpSpeed;
 
@@ -47,9 +47,9 @@ public class OnGround : BasicState
         return E_PLAYER_STATES.IN_AIR;
     }
 
-    public override E_PLAYER_STATES InTrigger(string _tag)
+    public override E_PLAYER_STATES InTrigger(string _tag, char inputs)
     {
-        if (_tag == "Ladder" && GetInput(E_INPUTS.UP))
+        if (_tag == "Ladder" && GetInput(E_INPUTS.UP, inputs))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

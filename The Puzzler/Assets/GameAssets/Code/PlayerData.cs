@@ -47,8 +47,8 @@ public class PlayerData : MonoBehaviour
     public bool m_stopRotation = false;
     
     public bool m_pause = false;
-    public char m_inputs;
-    public char m_JoystickMovement;
+    //public char m_inputs;
+    //public char m_JoystickMovement;
 
     public Quaternion m_cameraRotation;
 

@@ -23,15 +23,15 @@ public class InAIr : BasicState
         m_data.m_anim.SetBool("Airborn", false);
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs)
+    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
     {
         Debug.DrawRay(transform.position + (transform.up * 1.5f), transform.up * 0.1f, Color.blue);
 
         ApplyGravity(m_gravity);
 
-        MoveHorzontal(m_speed);
+        MoveHorzontal(m_speed, inputs);
 
-        if (!GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)
+        if (!GetInput(E_INPUTS.JUMP, inputs) & m_data.m_velocityY > 0.0f)
         {
             Debug.Log("Short Jump");
             m_data.m_velocityY = 0.0f;
@@ -42,7 +42,7 @@ public class InAIr : BasicState
         return E_PLAYER_STATES.IN_AIR;
     }
 
-    public override E_PLAYER_STATES PhysCycle()
+    public override E_PLAYER_STATES PhysCycle(char inputs, char joystickMovement)
     {
         if (m_enableGroundCollisionCount > 0)
         {
@@ -80,9 +80,9 @@ public class InAIr : BasicState
         return E_PLAYER_STATES.IN_AIR;
     }
 
-    public override E_PLAYER_STATES InTrigger(string _tag)
+    public override E_PLAYER_STATES InTrigger(string _tag, char inputs)
     {
-        if (_tag == "Ladder" && GetInput(E_INPUTS.UP))
+        if (_tag == "Ladder" && GetInput(E_INPUTS.UP, inputs))
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

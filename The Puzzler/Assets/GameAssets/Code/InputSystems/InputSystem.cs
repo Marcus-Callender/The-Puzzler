@@ -310,7 +310,6 @@ public class InputSystem : MonoBehaviour
 
     private int GetThirdOfAxis(float ammount)
     {
-        Debug.Log("Axis Ammount: " + Mathf.Min((int)(Mathf.Abs(ammount) / 0.3f), 7));
         return Mathf.Min((int)(Mathf.Abs(ammount) / 0.3f), 7);
 
         if (Mathf.Abs(ammount) > 0.9f)

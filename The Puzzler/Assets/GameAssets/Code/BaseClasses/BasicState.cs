@@ -79,12 +79,10 @@ public class BasicState : MonoBehaviour
 
         if (GetInput(E_INPUTS.LEFT_2))
         {
-            Debug.Log("Left: " + GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
             m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
         else if (GetInput(E_INPUTS.RIGHT_2))
         {
-            Debug.Log("Right: " + GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
             m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
 
@@ -92,49 +90,9 @@ public class BasicState : MonoBehaviour
 
         Quaternion charicterRot = m_data.m_playerLookingDirection;
 
-        if (GetInput(E_INPUTS.UP) || GetInput(E_INPUTS.DOWN))
+        if (GetInput(E_INPUTS.UP) || GetInput(E_INPUTS.DOWN) || GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT))
         {
-            if (GetInput(E_INPUTS.UP))
-            {
-                if (GetInput(E_INPUTS.LEFT))
-                {
-                    charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
-                }
-                else if (GetInput(E_INPUTS.RIGHT))
-                {
-                    charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
-                }
-            }
-            if (GetInput(E_INPUTS.DOWN))
-            {
-                charicterRot *= Quaternion.Euler(Vector3.up * 180.0f);
-
-                if (GetInput(E_INPUTS.LEFT))
-                {
-                    charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
-                }
-                else if (GetInput(E_INPUTS.RIGHT))
-                {
-                    charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
-                }
-            }
-
-            m_data.m_anim.SetBool("Walking", true);
-            transform.rotation = charicterRot;
-            m_data.m_rotation = charicterRot;
-            m_data.m_velocityX = _speed;
-        }
-        else if (GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT))
-        {
-
-            if (GetInput(E_INPUTS.LEFT))
-            {
-                charicterRot *= Quaternion.Euler(Vector3.up * 90.0f);
-            }
-            else if (GetInput(E_INPUTS.RIGHT))
-            {
-                charicterRot *= Quaternion.Euler(Vector3.up * -90.0f);
-            }
+            charicterRot *= Quaternion.Euler(Vector3.up * (Mathf.Atan2(GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL), GetJoystickMovment(E_JOYSTICK_INPUTS.VERTICAL)) * Mathf.Rad2Deg));
 
             m_data.m_anim.SetBool("Walking", true);
             transform.rotation = charicterRot;
@@ -145,6 +103,60 @@ public class BasicState : MonoBehaviour
         {
             m_data.m_anim.SetBool("Walking", false);
         }
+
+        //if (GetInput(E_INPUTS.UP) || GetInput(E_INPUTS.DOWN))
+        //{
+        //    if (GetInput(E_INPUTS.UP))
+        //    {
+        //        if (GetInput(E_INPUTS.LEFT))
+        //        {
+        //            charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
+        //        }
+        //        else if (GetInput(E_INPUTS.RIGHT))
+        //        {
+        //            charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
+        //        }
+        //    }
+        //    if (GetInput(E_INPUTS.DOWN))
+        //    {
+        //        charicterRot *= Quaternion.Euler(Vector3.up * 180.0f);
+        //
+        //        if (GetInput(E_INPUTS.LEFT))
+        //        {
+        //            charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
+        //        }
+        //        else if (GetInput(E_INPUTS.RIGHT))
+        //        {
+        //            charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
+        //        }
+        //    }
+        //
+        //    m_data.m_anim.SetBool("Walking", true);
+        //    transform.rotation = charicterRot;
+        //    m_data.m_rotation = charicterRot;
+        //    m_data.m_velocityX = _speed;
+        //}
+        //else if (GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT))
+        //{
+        //
+        //    if (GetInput(E_INPUTS.LEFT))
+        //    {
+        //        charicterRot *= Quaternion.Euler(Vector3.up * 90.0f);
+        //    }
+        //    else if (GetInput(E_INPUTS.RIGHT))
+        //    {
+        //        charicterRot *= Quaternion.Euler(Vector3.up * -90.0f);
+        //    }
+        //
+        //    m_data.m_anim.SetBool("Walking", true);
+        //    transform.rotation = charicterRot;
+        //    m_data.m_rotation = charicterRot;
+        //    m_data.m_velocityX = _speed;
+        //}
+        //else
+        //{
+        //    m_data.m_anim.SetBool("Walking", false);
+        //}
     }
 
     protected void ApplyGravity(float _force)
@@ -164,6 +176,11 @@ public class BasicState : MonoBehaviour
         magnitude += (m_data.m_StickMovements & (int)input) > 0 ? 1 : 0;
         magnitude += (m_data.m_StickMovements & (int)input * 2) > 0 ? 2 : 0;
         magnitude += (m_data.m_StickMovements & (int)input * 4) > 0 ? 4 : 0;
+
+        if (input == E_JOYSTICK_INPUTS.HORIZONTAL && GetInput(E_INPUTS.RIGHT) || input == E_JOYSTICK_INPUTS.VERTICAL && GetInput(E_INPUTS.DOWN))
+        {
+            magnitude *= -1;
+        }
 
         return magnitude;
     }

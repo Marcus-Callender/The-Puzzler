@@ -50,7 +50,7 @@ public class InputSystem : MonoBehaviour
                 m_StickMovements |= (char)(m_c_horizontalStickCode * 4);
             }
 
-            m_StickMovements |= (char)(m_c_horizontalStickCode * GetThirdOfAxis(Input.GetAxisRaw("Horizontal")));
+            m_StickMovements |= (char)(m_c_horizontalStickCode * AxisToBit(Input.GetAxisRaw("Horizontal")));
 
             if (Input.GetAxisRaw("Vertical") > 0.0f)
             {
@@ -63,7 +63,7 @@ public class InputSystem : MonoBehaviour
                 m_StickMovements |= (char)(m_c_verticalStickCode * 4);
             }
 
-            m_StickMovements |= (char)(m_c_verticalStickCode * GetThirdOfAxis(Input.GetAxisRaw("Vertical")));
+            m_StickMovements |= (char)(m_c_verticalStickCode * AxisToBit(Input.GetAxisRaw("Vertical")));
 
             // can't be consolidated into one axis as they will need diffrent behavior in 2D
             if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) > 0.0f)
@@ -77,7 +77,7 @@ public class InputSystem : MonoBehaviour
                 m_StickMovements |= (char)(m_c_horizontal2StickCode * 4);
             }
 
-            m_StickMovements |= (char)(m_c_horizontal2StickCode * GetThirdOfAxis(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")));
+            m_StickMovements |= (char)(m_c_horizontal2StickCode * AxisToBit(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")));
 
             if (Input.GetButton("Jump"))
             {
@@ -237,15 +237,15 @@ public class InputSystem : MonoBehaviour
         return (m_Inputs & (char)InputToBit(input)) > 0;
     }
 
-    public virtual int GetJoystickMovment(E_JOYSTICK_INPUTS input)
+    public virtual float GetJoystickMovment(E_JOYSTICK_INPUTS input)
     {
         int magnitude = 0;
 
         magnitude += (m_StickMovements & (int)input) > 0 ? 1 : 0;
         magnitude += (m_StickMovements & (int)input * 2) > 0 ? 2 : 0;
-        magnitude *= (m_StickMovements & (int)input * 4) > 0 ? 1 : -1;
+        magnitude *= (m_StickMovements & (int)input * 4) > 0 ? 4 : 0;
 
-        return magnitude;
+        return magnitude * (1.0f / 7.0f);
     }
 
     protected virtual int InputToBit(E_INPUTS input)
@@ -310,8 +310,10 @@ public class InputSystem : MonoBehaviour
         }
     }
 
-    private int GetThirdOfAxis(float ammount)
+    private int AxisToBit(float ammount)
     {
+        return (int)Mathf.Floor((ammount/(1.0f/7.0f)) + 0.5f);
+
         if (Mathf.Abs(ammount) > 0.9f)
         {
             return 3;

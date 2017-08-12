@@ -16,6 +16,7 @@ public class GhostStateMachine : BaseStateMachine
 
     //private char m_Inputs;
     private char[] m_recordedInputs = new char[m_recordingSize];
+    private char[] m_recordedJoystickPositions = new char[m_recordingSize];
     public int m_arrayPosition = 0;
     public bool m_recorded = false;
     public bool m_recording = false;
@@ -171,6 +172,7 @@ public class GhostStateMachine : BaseStateMachine
                     }
 
                     m_recordedInputs[m_arrayPosition] = m_data.m_inputs;
+                    m_recordedJoystickPositions[m_arrayPosition] = m_data.m_StickMovements;
                     m_arrayPosition++;
 
                     if (m_countdown)
@@ -197,6 +199,7 @@ public class GhostStateMachine : BaseStateMachine
                 if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition] != (char)InputToBit(E_INPUTS.END)))
                 {
                     m_data.m_inputs = m_recordedInputs[m_arrayPosition];
+                    m_data.m_StickMovements = m_recordedJoystickPositions[m_arrayPosition];
                     m_arrayPosition++;
                 }
                 else
@@ -252,6 +255,7 @@ public class GhostStateMachine : BaseStateMachine
             for (int z = 0; z < m_recordingSize; z++)
             {
                 m_recordedInputs[z] = (char)0;
+                m_recordedJoystickPositions[z] = (char)0;
             }
         }
 
@@ -273,6 +277,7 @@ public class GhostStateMachine : BaseStateMachine
             if (m_arrayPosition > m_recordingSize)
             {
                 m_data.m_inputs = m_recordedInputs[m_arrayPosition];
+                m_data.m_StickMovements = m_recordedJoystickPositions[m_arrayPosition];
                 m_arrayPosition++;
                 yield return new WaitForSeconds(0.016f);
             }

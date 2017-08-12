@@ -38,8 +38,6 @@ public class BaseStateMachine : MonoBehaviour
         m_newState = GetCurrentState().PhysCycle(m_inputs, m_JoystickMovement);
         CheckState();
 
-        m_data.m_onLadder = false;
-
         for (int z = 0; z < 4; z++)
         {
             m_data.m_contacts[z] = false;
@@ -111,11 +109,6 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Ladder")
-        {
-            m_data.m_onLadder = true;
-        }
-
         m_newState = GetCurrentState().InTrigger(other.gameObject.tag, m_inputs);
         CheckState();
     }

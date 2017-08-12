@@ -16,16 +16,17 @@ public class PlayerData : MonoBehaviour
     public float m_velocityY = 0.0f;
     public float m_velocityZ = 0.0f;
 
+    // used to tell the camera to transition to a new state
     public bool m_moveingBox = false;
-    public bool m_closeToBox = false;
 
+    // used by buttons to tell  if the player wants them to activate
     public bool m_pressingButton = false;
 
     public bool m_playerDoubleJump = false;
     public bool m_playerWallSlide = false;
 
+    // moves the player to the KOd state
     public bool m_squished = false;
-    public bool m_onLadder = false;
 
     // 0 = top, 1 = right, 2 = bottom, 3 = left
     public bool[] m_contacts = new bool[4];
@@ -43,13 +44,16 @@ public class PlayerData : MonoBehaviour
     public PlayerData m_overideFollow;
 
     public bool m_use3D = false;
+
+    // TODO see if this can be removed
     public Quaternion m_rotation;
+
+    // used to prevent the player flipping while in 2D and moving crates 
     public bool m_stopRotation = false;
     
+    // used to prevent delta time indapendent actions such as ghost playbacks from running while the game is paused
     public bool m_pause = false;
-    //public char m_inputs;
-    //public char m_JoystickMovement;
-
+    
     public Quaternion m_cameraRotation;
 
     public void Initialize()

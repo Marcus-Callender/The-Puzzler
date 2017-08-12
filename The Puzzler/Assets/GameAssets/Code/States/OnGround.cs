@@ -32,7 +32,7 @@ public class OnGround : BasicState
             return E_PLAYER_STATES.MOVEING_BLOCK;
         }
 
-        if (GetInput(E_INPUTS.JUMP, inputs) && !m_data.m_moveingBox)
+        if (GetInput(E_INPUTS.JUMP, inputs))
         {
             m_data.m_velocityY = m_jumpSpeed;
 

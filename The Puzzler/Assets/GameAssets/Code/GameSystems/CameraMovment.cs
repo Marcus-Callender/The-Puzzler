@@ -58,6 +58,12 @@ public class CameraMovment : MonoBehaviour
 
             Vector3 playerPos = m_player.gameObject.transform.position;
         }
+        
+        // this is teh only player input that directly affects the camera system
+        if (Input.GetButtonDown("ResetCamera"))
+        {
+            m_VerticalOffset = 0.0f;
+        }
 
         m_VerticalOffset += Input.GetAxis("Mouse Y") * Time.deltaTime * 60.0f;
         m_VerticalOffset += Input.GetAxis("Right Stick Y") * Time.deltaTime * 60.0f * 2.0f;

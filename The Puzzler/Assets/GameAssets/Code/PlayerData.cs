@@ -185,7 +185,7 @@ public class PlayerData : MonoBehaviour
         return posData;
     }
 
-    public void resetPlayerLookingDirection()
+    public void resetCameraDirection()
     {
         m_cameraRotation = transform.rotation;
         m_rotation = transform.rotation;

@@ -2,35 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum E_INPUTS
-{
-    LEFT,
-    RIGHT,
-    LEFT_2,
-    RIGHT_2,
-    UP,
-    DOWN,
-    JUMP,
-    MOVE_BOX,
-    MOVE_BOX_HOLD,
-    PRESS_BUTTON,
-    GHOST_BUTTON_PRESS,
-    GHOST_BUTTON_HOLD,
-    GHOST_BUTTON_1,
-    GHOST_BUTTON_2,
-
-    END,
-
-    NULL
-}
-
-public enum E_JOYSTICK_INPUTS
-{
-    HORIZONTAL = 1,
-    VERTICAL = 8,
-    HORIZONTAL_2 = 64
-}
-
 public class PlayerInputs : MonoBehaviour
 {
     protected char m_Inputs;

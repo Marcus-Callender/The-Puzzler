@@ -77,6 +77,11 @@ public class BasicState : MonoBehaviour
     {
         Debug.DrawRay(transform.position + (-transform.up * 0.1f), -transform.up * 0.1f, Color.red);
 
+        if (GetInput(E_INPUTS.RESET_CAMERA))
+        {
+            m_data.resetCameraDirection();
+        }
+
         if (GetInput(E_INPUTS.LEFT_2))
         {
             m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));

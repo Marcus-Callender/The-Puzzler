@@ -22,7 +22,7 @@ public class DimentionTransition : MonoBehaviour
         {
             PlayerData data = other.gameObject.GetComponent<PlayerData>();
 
-            data.resetPlayerLookingDirection();
+            data.resetCameraDirection();
 
             Physics.Raycast(new Ray(transform.position, other.transform.position - transform.position));
 

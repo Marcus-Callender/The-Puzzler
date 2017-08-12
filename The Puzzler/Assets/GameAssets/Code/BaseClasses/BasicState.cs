@@ -79,13 +79,11 @@ public class BasicState : MonoBehaviour
 
         if (GetInput(E_INPUTS.LEFT_2))
         {
-            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2) * 2.0f);
-            Debug.Log("Joystick: " + GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
-            }
+            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
+        }
         else if (GetInput(E_INPUTS.RIGHT_2))
         {
-            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2) * 2.0f);
-            Debug.Log("Joystick: " + -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
+            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
 
         Debug.DrawRay(transform.position, m_data.m_playerLookingDirection * Vector3.forward, Color.red);
@@ -157,15 +155,15 @@ public class BasicState : MonoBehaviour
         return (m_data.m_inputs & (char)InputToBit(input)) > 0;
     }
 
-    public virtual float GetJoystickMovment(E_JOYSTICK_INPUTS input)
+    public virtual int GetJoystickMovment(E_JOYSTICK_INPUTS input)
     {
         int magnitude = 0;
 
         magnitude += (m_data.m_StickMovements & (int)input) > 0 ? 1 : 0;
         magnitude += (m_data.m_StickMovements & (int)input * 2) > 0 ? 2 : 0;
-        magnitude *= (m_data.m_StickMovements & (int)input * 4) > 0 ? 4 : 0;
+        magnitude *= (m_data.m_StickMovements & (int)input * 4) > 0 ? 1 : -1;
 
-        return magnitude * (1.0f/7.0f);
+        return magnitude;
     }
 
     protected virtual int InputToBit(E_INPUTS input)

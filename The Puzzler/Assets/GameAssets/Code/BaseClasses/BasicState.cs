@@ -80,12 +80,12 @@ public class BasicState : MonoBehaviour
         if (GetInput(E_INPUTS.LEFT_2))
         {
             Debug.Log("Left: " + GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
-            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
+            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
         else if (GetInput(E_INPUTS.RIGHT_2))
         {
             Debug.Log("Right: " + GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
-            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
+            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
 
         Debug.DrawRay(transform.position, m_data.m_playerLookingDirection * Vector3.forward, Color.red);

@@ -28,44 +28,7 @@ public class InAir3D : BasicState
     {
         ApplyGravity(m_gravity);
 
-        if (GetInput(E_INPUTS.UP))
-        {
-            m_data.m_velocityX = m_speed;
-        }
-        else if (GetInput(E_INPUTS.DOWN))
-        {
-            m_data.m_velocityX = -m_speed;
-        }
-        else
-        {
-            m_data.m_velocityX = 0.0f;
-        }
-
-        if (GetInput(E_INPUTS.LEFT))
-        {
-            m_data.m_velocityZ = m_speed;
-        }
-        else if (GetInput(E_INPUTS.RIGHT))
-        {
-            m_data.m_velocityZ = -m_speed;
-        }
-        else
-        {
-            m_data.m_velocityZ = 0.0f;
-        }
-
-        if (GetInput(E_INPUTS.LEFT_2))
-        {
-            gameObject.transform.Rotate(gameObject.transform.up, 180 * Time.deltaTime);
-
-            m_data.m_rotation = gameObject.transform.rotation;
-        }
-        else if (GetInput(E_INPUTS.RIGHT_2))
-        {
-            gameObject.transform.Rotate(-gameObject.transform.up, 180 * Time.deltaTime);
-
-            m_data.m_rotation = gameObject.transform.rotation;
-        }
+        Standard3DMovment(m_speed);
 
         // stops the upward movment if the player lets go of the jump button
         if (!GetInput(E_INPUTS.JUMP) & m_data.m_velocityY > 0.0f)

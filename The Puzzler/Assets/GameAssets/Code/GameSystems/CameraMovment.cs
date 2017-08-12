@@ -200,11 +200,7 @@ public class CameraMovment : MonoBehaviour
 
     private Quaternion Camera3DGroundRot(PlayerData data)
     {
-        Quaternion rot = new Quaternion();
-
-        //rot = data.transform.rotation;
-
-        rot = data.m_playerLookingDirection;
+        Quaternion rot = data.m_playerLookingDirection;
         rot *= Quaternion.Euler(Vector3.left * m_VerticalOffset);
 
         return rot;
@@ -227,10 +223,7 @@ public class CameraMovment : MonoBehaviour
 
     private Quaternion Camera3DAirRot(PlayerData data)
     {
-        Quaternion rot = new Quaternion();
-
-        rot = data.transform.rotation;
-
+        Quaternion rot = data.m_playerLookingDirection;
         rot *= Quaternion.Euler(30.0f, 0.0f, 0.0f);
 
         return rot;

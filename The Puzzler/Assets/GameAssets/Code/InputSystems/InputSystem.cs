@@ -45,7 +45,7 @@ public class InputSystem : MonoBehaviour
                 m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT);
             }
 
-            m_JoystickMovement |= (char)(m_c_horizontalStickCode * GetThirdOfAxis(Input.GetAxisRaw("Horizontal")));
+            m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.HORIZONTAL * GetThirdOfAxis(Input.GetAxisRaw("Horizontal")));
 
             if (Input.GetAxisRaw("Vertical") > 0.0f)
             {
@@ -57,7 +57,7 @@ public class InputSystem : MonoBehaviour
                 m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
             }
 
-            m_JoystickMovement |= (char)(m_c_verticalStickCode * GetThirdOfAxis(Input.GetAxisRaw("Vertical")));
+            m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.VERTICAL * GetThirdOfAxis(Input.GetAxisRaw("Vertical")));
 
             // can't be consolidated into one axis as they will need diffrent behavior in 2D
             if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) > 0.0f)
@@ -70,7 +70,7 @@ public class InputSystem : MonoBehaviour
                 m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT_2);
             }
 
-            m_JoystickMovement |= (char)(m_c_horizontal2StickCode * GetThirdOfAxis(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")));
+            m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.HORIZONTAL_2 * GetThirdOfAxis(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")));
             //Debug.Log("Mouse: " + Input.GetAxisRaw("Mouse X"));
 
             if (Input.GetButton("Jump"))
@@ -307,20 +307,5 @@ public class InputSystem : MonoBehaviour
     private int GetThirdOfAxis(float ammount)
     {
         return Mathf.Min((int)(Mathf.Abs(ammount) / 0.3f), 7);
-
-        if (Mathf.Abs(ammount) > 0.9f)
-        {
-            return 3;
-        }
-        if (Mathf.Abs(ammount) > 0.6f)
-        {
-            return 2;
-        }
-        if (Mathf.Abs(ammount) > 0.3f)
-        {
-            return 1;
-        }
-
-        return 0;
     }
 }

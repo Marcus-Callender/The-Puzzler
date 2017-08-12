@@ -69,8 +69,6 @@ public class PlayerData : MonoBehaviour
         }
 
         m_cameraRotation = transform.rotation;
-
-        m_vecOne = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
     void Update()

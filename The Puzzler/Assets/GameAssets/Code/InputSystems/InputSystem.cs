@@ -47,7 +47,6 @@ public class InputSystem : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") < 0.0f)
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT);
-                m_StickMovements |= (char)(m_c_horizontalStickCode * 4);
             }
 
             m_StickMovements |= (char)(m_c_horizontalStickCode * GetThirdOfAxis(Input.GetAxisRaw("Horizontal")));
@@ -60,7 +59,6 @@ public class InputSystem : MonoBehaviour
             if (Input.GetAxisRaw("Vertical") < 0.0f)
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
-                m_StickMovements |= (char)(m_c_verticalStickCode * 4);
             }
 
             m_StickMovements |= (char)(m_c_verticalStickCode * GetThirdOfAxis(Input.GetAxisRaw("Vertical")));
@@ -74,10 +72,10 @@ public class InputSystem : MonoBehaviour
             if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) < 0.0f)
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT_2);
-                m_StickMovements |= (char)(m_c_horizontal2StickCode * 4);
             }
 
             m_StickMovements |= (char)(m_c_horizontal2StickCode * GetThirdOfAxis(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")));
+            //Debug.Log("Mouse: " + Input.GetAxisRaw("Mouse X"));
 
             if (Input.GetButton("Jump"))
             {
@@ -243,7 +241,7 @@ public class InputSystem : MonoBehaviour
 
         magnitude += (m_StickMovements & (int)input) > 0 ? 1 : 0;
         magnitude += (m_StickMovements & (int)input * 2) > 0 ? 2 : 0;
-        magnitude *= (m_StickMovements & (int)input * 4) > 0 ? 1 : -1;
+        magnitude += (m_StickMovements & (int)input * 4) > 0 ? 4 : 0;
 
         return magnitude;
     }
@@ -312,6 +310,9 @@ public class InputSystem : MonoBehaviour
 
     private int GetThirdOfAxis(float ammount)
     {
+        Debug.Log("Axis Ammount: " + Mathf.Min((int)(Mathf.Abs(ammount) / 0.3f), 7));
+        return Mathf.Min((int)(Mathf.Abs(ammount) / 0.3f), 7);
+
         if (Mathf.Abs(ammount) > 0.9f)
         {
             return 3;

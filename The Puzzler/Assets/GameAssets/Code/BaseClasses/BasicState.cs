@@ -79,11 +79,13 @@ public class BasicState : MonoBehaviour
 
         if (GetInput(E_INPUTS.LEFT_2))
         {
+            Debug.Log("Left: " + GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
             m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
         else if (GetInput(E_INPUTS.RIGHT_2))
         {
-            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
+            Debug.Log("Right: " + GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
+            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 60.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
 
         Debug.DrawRay(transform.position, m_data.m_playerLookingDirection * Vector3.forward, Color.red);
@@ -161,7 +163,7 @@ public class BasicState : MonoBehaviour
 
         magnitude += (m_data.m_StickMovements & (int)input) > 0 ? 1 : 0;
         magnitude += (m_data.m_StickMovements & (int)input * 2) > 0 ? 2 : 0;
-        magnitude *= (m_data.m_StickMovements & (int)input * 4) > 0 ? 1 : -1;
+        magnitude += (m_data.m_StickMovements & (int)input * 4) > 0 ? 4 : 0;
 
         return magnitude;
     }

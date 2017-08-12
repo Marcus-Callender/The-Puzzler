@@ -50,6 +50,7 @@ public class PlayerData : MonoBehaviour
 
     public bool m_pause = false;
     public char m_inputs;
+    public char m_StickMovements;
 
     public Quaternion m_playerLookingDirection;
 
@@ -186,5 +187,11 @@ public class PlayerData : MonoBehaviour
         posData.left_right = m_left_right;
 
         return posData;
+    }
+
+    public void resetPlayerLookingDirection()
+    {
+        m_playerLookingDirection = transform.rotation;
+        m_rotation = transform.rotation;
     }
 }

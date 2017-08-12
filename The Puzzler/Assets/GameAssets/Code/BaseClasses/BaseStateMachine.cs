@@ -44,9 +44,10 @@ public class BaseStateMachine : MonoBehaviour
         }
     }
 
-    public void GetInputs(char inputs)
+    public void GetInputs(char inputs, char stickMovements)
     {
         m_data.m_inputs = inputs;
+        m_data.m_StickMovements = stickMovements;
     }
 
     private void CheckGroundColl()

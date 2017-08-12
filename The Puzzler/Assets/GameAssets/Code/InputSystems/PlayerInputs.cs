@@ -24,6 +24,13 @@ public enum E_INPUTS
     NULL
 }
 
+public enum E_JOYSTICK_INPUTS
+{
+    HORIZONTAL = 1,
+    VERTICAL = 8,
+    HORIZONTAL_2 = 64
+}
+
 public class PlayerInputs : MonoBehaviour
 {
     protected char m_Inputs;

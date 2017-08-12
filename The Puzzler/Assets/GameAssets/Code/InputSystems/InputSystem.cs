@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InputSystem : MonoBehaviour
 {
-
     protected char m_Inputs;
+    protected char m_StickMovements;
     //public bool m_pauseInputs;
     public bool m_pause;
 
@@ -14,6 +14,10 @@ public class InputSystem : MonoBehaviour
     public GhostList m_ghostList;
 
     private GhostStateMachine m_currentGhost;
+
+    const int m_c_horizontalStickCode = 1;
+    const int m_c_verticalStickCode = 8;
+    const int m_c_horizontal2StickCode = 64;
 
     public virtual void Start()
     {
@@ -31,6 +35,7 @@ public class InputSystem : MonoBehaviour
     public virtual void Update()
     {
         m_Inputs = (char)0;
+        m_StickMovements = (char)0;
 
         if (!m_pause)
         {
@@ -42,7 +47,10 @@ public class InputSystem : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") < 0.0f)
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT);
+                m_StickMovements |= (char)(m_c_horizontalStickCode * 4);
             }
+
+            m_StickMovements |= (char)(m_c_horizontalStickCode * GetThirdOfAxis(Input.GetAxisRaw("Horizontal")));
 
             if (Input.GetAxisRaw("Vertical") > 0.0f)
             {
@@ -52,7 +60,10 @@ public class InputSystem : MonoBehaviour
             if (Input.GetAxisRaw("Vertical") < 0.0f)
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
+                m_StickMovements |= (char)(m_c_verticalStickCode * 4);
             }
+
+            m_StickMovements |= (char)(m_c_verticalStickCode * GetThirdOfAxis(Input.GetAxisRaw("Vertical")));
 
             // can't be consolidated into one axis as they will need diffrent behavior in 2D
             if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) > 0.0f)
@@ -63,7 +74,10 @@ public class InputSystem : MonoBehaviour
             if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) < 0.0f)
             {
                 m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT_2);
+                m_StickMovements |= (char)(m_c_horizontal2StickCode * 4);
             }
+
+            m_StickMovements |= (char)(m_c_horizontal2StickCode * GetThirdOfAxis(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")));
 
             if (Input.GetButton("Jump"))
             {
@@ -111,7 +125,7 @@ public class InputSystem : MonoBehaviour
 
                         nextGhost.m_overrideRecording = true;
                         ActivateGhost(nextGhost);
-                        
+
                         if (m_currentGhost)
                         {
                             m_ghostList.m_ghostInUse[m_currentGhost.m_id] = true;
@@ -182,21 +196,21 @@ public class InputSystem : MonoBehaviour
             }
         }
 
-        m_player.GetInputs((char)0);
+        m_player.GetInputs((char)0, (char)0);
 
         for (int z = 0; z < m_ghostList.m_ghostsCreated; z++)
         {
-            m_ghostList.m_ghostStateMachines[z].GetInputs((char)0);
+            m_ghostList.m_ghostStateMachines[z].GetInputs((char)0, (char)0);
         }
 
         if (m_currentGhost)
         {
-            m_currentGhost.GetInputs(m_Inputs);
+            m_currentGhost.GetInputs(m_Inputs, m_StickMovements);
             m_player.m_data.m_overideFollow = m_currentGhost.m_data;
         }
         else
         {
-            m_player.GetInputs(m_Inputs);
+            m_player.GetInputs(m_Inputs, m_StickMovements);
             m_player.m_data.m_overideFollow = null;
         }
 
@@ -221,6 +235,17 @@ public class InputSystem : MonoBehaviour
     public virtual bool GetInput(E_INPUTS input)
     {
         return (m_Inputs & (char)InputToBit(input)) > 0;
+    }
+
+    public virtual int GetJoystickMovment(E_JOYSTICK_INPUTS input)
+    {
+        int magnitude = 0;
+
+        magnitude += (m_StickMovements & (int)input) > 0 ? 1 : 0;
+        magnitude += (m_StickMovements & (int)input * 2) > 0 ? 2 : 0;
+        magnitude *= (m_StickMovements & (int)input * 4) > 0 ? 1 : -1;
+
+        return magnitude;
     }
 
     protected virtual int InputToBit(E_INPUTS input)
@@ -283,5 +308,23 @@ public class InputSystem : MonoBehaviour
         {
             ghost.Activate(m_player.m_data.getPositionData());
         }
+    }
+
+    private int GetThirdOfAxis(float ammount)
+    {
+        if (Mathf.Abs(ammount) > 0.9f)
+        {
+            return 3;
+        }
+        if (Mathf.Abs(ammount) > 0.6f)
+        {
+            return 2;
+        }
+        if (Mathf.Abs(ammount) > 0.3f)
+        {
+            return 1;
+        }
+
+        return 0;
     }
 }

@@ -26,7 +26,7 @@ public class OnGround3D : BasicState
         else if (GetInput(E_INPUTS.RIGHT_2))
         {
             //gameObject.transform.Rotate(-gameObject.transform.up, 180 * Time.deltaTime);
-        
+
             m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * -60.0f * 5.0f);
             //m_data.m_rotation = gameObject.transform.rotation;
         }
@@ -37,21 +37,33 @@ public class OnGround3D : BasicState
 
         if (GetInput(E_INPUTS.UP) || GetInput(E_INPUTS.DOWN))
         {
+            if (GetInput(E_INPUTS.UP))
+            {
+                if (GetInput(E_INPUTS.LEFT))
+                {
+                    charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
+                }
+                else if (GetInput(E_INPUTS.RIGHT))
+                {
+                    charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
+                }
+            }
             if (GetInput(E_INPUTS.DOWN))
             {
                 charicterRot *= Quaternion.Euler(Vector3.up * 180.0f);
+
+                if (GetInput(E_INPUTS.LEFT))
+                {
+                    charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
+                }
+                else if (GetInput(E_INPUTS.RIGHT))
+                {
+                    charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
+                }
             }
 
-            if (GetInput(E_INPUTS.LEFT))
-            {
-                charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
-            }
-            else if (GetInput(E_INPUTS.RIGHT))
-            {
-                charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
-            }
 
-            charicterRot *= Quaternion.Euler(Vector3.up * 90.0f);
+            //charicterRot *= Quaternion.Euler(Vector3.up * 90.0f);
             m_data.m_anim.SetBool("Walking", true);
             transform.rotation = charicterRot;
             m_data.m_rotation = charicterRot;
@@ -69,7 +81,7 @@ public class OnGround3D : BasicState
                 charicterRot *= Quaternion.Euler(Vector3.up * -90.0f);
             }
 
-            charicterRot *= Quaternion.Euler(Vector3.up * 90.0f);
+            //charicterRot *= Quaternion.Euler(Vector3.up * 90.0f);
             m_data.m_anim.SetBool("Walking", true);
             transform.rotation = charicterRot;
             m_data.m_rotation = charicterRot;
@@ -81,7 +93,7 @@ public class OnGround3D : BasicState
         }
 
         m_data.m_anim.SetFloat("Horizontal Velocity", m_data.m_velocityZ);
-        
+
         m_data.m_velocityY = -9.81f;
 
         if (GetInput(E_INPUTS.MOVE_BOX))

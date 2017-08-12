@@ -204,7 +204,7 @@ public class CameraMovment : MonoBehaviour
 
         //rot = data.transform.rotation;
 
-        rot *= data.m_playerLookingDirection;
+        rot = data.m_playerLookingDirection;
         rot *= Quaternion.Euler(Vector3.left * m_VerticalOffset);
 
         return rot;

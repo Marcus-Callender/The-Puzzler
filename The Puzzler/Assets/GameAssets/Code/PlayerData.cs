@@ -45,14 +45,12 @@ public class PlayerData : MonoBehaviour
     public bool m_use3D = false;
     public Quaternion m_rotation;
     public bool m_stopRotation = false;
-
-    private Vector3 m_vecOne;
-
+    
     public bool m_pause = false;
     public char m_inputs;
-    public char m_StickMovements;
+    public char m_JoystickMovement;
 
-    public Quaternion m_playerLookingDirection;
+    public Quaternion m_cameraRotation;
 
     public void Initialize()
     {
@@ -70,7 +68,7 @@ public class PlayerData : MonoBehaviour
             m_playerWallSlide = data.m_playerWallSlide;
         }
 
-        m_playerLookingDirection = transform.rotation;
+        m_cameraRotation = transform.rotation;
 
         m_vecOne = new Vector3(1.0f, 1.0f, 1.0f);
     }
@@ -191,7 +189,7 @@ public class PlayerData : MonoBehaviour
 
     public void resetPlayerLookingDirection()
     {
-        m_playerLookingDirection = transform.rotation;
+        m_cameraRotation = transform.rotation;
         m_rotation = transform.rotation;
     }
 }

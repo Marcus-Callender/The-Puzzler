@@ -79,16 +79,16 @@ public class BasicState : MonoBehaviour
 
         if (GetInput(E_INPUTS.LEFT_2))
         {
-            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
+            m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
         else if (GetInput(E_INPUTS.RIGHT_2))
         {
-            m_data.m_playerLookingDirection *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
+            m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2));
         }
 
-        Debug.DrawRay(transform.position, m_data.m_playerLookingDirection * Vector3.forward, Color.red);
+        Debug.DrawRay(transform.position, m_data.m_cameraRotation * Vector3.forward, Color.red);
 
-        Quaternion charicterRot = m_data.m_playerLookingDirection;
+        Quaternion charicterRot = m_data.m_cameraRotation;
 
         if (GetInput(E_INPUTS.UP) || GetInput(E_INPUTS.DOWN) || GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT))
         {
@@ -173,9 +173,9 @@ public class BasicState : MonoBehaviour
     {
         int magnitude = 0;
 
-        magnitude += (m_data.m_StickMovements & (int)input) > 0 ? 1 : 0;
-        magnitude += (m_data.m_StickMovements & (int)input * 2) > 0 ? 2 : 0;
-        magnitude += (m_data.m_StickMovements & (int)input * 4) > 0 ? 4 : 0;
+        magnitude += (m_data.m_JoystickMovement & (int)input) > 0 ? 1 : 0;
+        magnitude += (m_data.m_JoystickMovement & (int)input * 2) > 0 ? 2 : 0;
+        magnitude += (m_data.m_JoystickMovement & (int)input * 4) > 0 ? 4 : 0;
 
         if (input == E_JOYSTICK_INPUTS.HORIZONTAL && GetInput(E_INPUTS.RIGHT) || input == E_JOYSTICK_INPUTS.VERTICAL && GetInput(E_INPUTS.DOWN))
         {

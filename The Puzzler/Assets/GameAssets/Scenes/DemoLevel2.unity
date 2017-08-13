@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c98e544c5ff734e8c74bfbc75713bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_textToDisplay: Hold the right mouse button to move objects
+  m_textToDisplay: Hold the right mouse button (B) to move objects
 --- !u!1001 &207109934
 Prefab:
   m_ObjectHideFlags: 0
@@ -5541,7 +5541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c98e544c5ff734e8c74bfbc75713bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_textToDisplay: Use the 2 key to use a seccond ghost
+  m_textToDisplay: Use the 2 key (RB) to use a seccond ghost
 --- !u!1001 &1062055385
 Prefab:
   m_ObjectHideFlags: 0
@@ -5715,7 +5715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c98e544c5ff734e8c74bfbc75713bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_textToDisplay: Left mouse button presses buttons
+  m_textToDisplay: Left mouse button (X) presses buttons
 --- !u!65 &1069894892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7414,7 +7414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c98e544c5ff734e8c74bfbc75713bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_textToDisplay: Use the 1 key to reord/play a ghost of yourself
+  m_textToDisplay: Use the 1 key (LB) to reord/play a ghost of yourself
 --- !u!1 &1426817591
 GameObject:
   m_ObjectHideFlags: 0
@@ -8076,7 +8076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c98e544c5ff734e8c74bfbc75713bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_textToDisplay: Will you jump?
+  m_textToDisplay: Jump?
 --- !u!4 &1512556510
 Transform:
   m_ObjectHideFlags: 0

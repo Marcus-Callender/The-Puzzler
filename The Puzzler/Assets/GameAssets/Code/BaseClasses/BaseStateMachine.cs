@@ -49,12 +49,8 @@ public class BaseStateMachine : MonoBehaviour
     {
         if (m_data.m_preloadedInputs.Count > 0)
         {
-            Debug.Log("Input Count: " + m_data.m_preloadedInputs.Count);
-
             m_inputs = m_data.m_preloadedInputs[0];
             m_data.m_preloadedInputs.RemoveAt(0);
-
-            Debug.Log("Input Count: " + m_data.m_preloadedInputs.Count);
         }
         else
         {

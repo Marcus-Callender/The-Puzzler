@@ -7,9 +7,9 @@ public class BasicState : MonoBehaviour
     protected PlayerData m_data;
     protected Rigidbody m_rigb;
     //public char m_inputs;
-    
+
     public bool m_useWallGravity = false;
-    
+
     public virtual void Initialize(Rigidbody rigb, PlayerData data)
     {
         m_rigb = rigb;
@@ -66,11 +66,25 @@ public class BasicState : MonoBehaviour
         if (GetInput(E_INPUTS.LEFT, inputs))
         {
             m_data.m_velocityX += _speed;
+
+            if (!m_data.m_left_right)
+            {
+                m_data.m_left_right = true;
+                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                m_data.m_rotation = gameObject.transform.rotation;
+            }
         }
 
         if (GetInput(E_INPUTS.RIGHT, inputs))
         {
             m_data.m_velocityX += -_speed;
+
+            if (m_data.m_left_right)
+            {
+                m_data.m_left_right = false;
+                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                m_data.m_rotation = gameObject.transform.rotation;
+            }
         }
     }
 

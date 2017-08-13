@@ -82,26 +82,26 @@ public class PlayerData : MonoBehaviour
     {
         if (!m_stopRotation)
         {
-            if (!m_use3D)
-            {
-                if (m_left_right && m_velocityX < 0.0f)
-                {
-                    gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-
-                    m_rotation = gameObject.transform.rotation;
-
-                    m_left_right = false;
-                }
-                else if (!m_left_right && m_velocityX > 0.0f)
-                {
-                    gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-
-                    m_rotation = gameObject.transform.rotation;
-
-                    m_left_right = true;
-                }
-            }
-
+        //    if (!m_use3D)
+        //    {
+        //        //if (m_left_right && m_velocityX < 0.0f)
+        //        //{
+        //        //    gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+        //        //
+        //        //    m_rotation = gameObject.transform.rotation;
+        //        //
+        //        //    //m_left_right = false;
+        //        //}
+        //        //else if (!m_left_right && m_velocityX > 0.0f)
+        //        //{
+        //        //    gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+        //        //
+        //        //    m_rotation = gameObject.transform.rotation;
+        //        //
+        //        //    //m_left_right = true;
+        //        //}
+        //    }
+        //
             gameObject.transform.rotation = m_rotation;
         }
     }

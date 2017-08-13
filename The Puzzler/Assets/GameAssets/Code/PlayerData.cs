@@ -56,6 +56,9 @@ public class PlayerData : MonoBehaviour
     
     public Quaternion m_cameraRotation;
 
+    public List<char> m_preloadedInputs;
+    public List<char> m_preloadedJoystickMovements;
+
     public void Initialize()
     {
         m_rigb = GetComponent<Rigidbody>();

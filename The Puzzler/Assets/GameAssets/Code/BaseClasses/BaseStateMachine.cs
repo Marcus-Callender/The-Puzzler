@@ -47,8 +47,29 @@ public class BaseStateMachine : MonoBehaviour
 
     public void GetInputs(char inputs, char stickMovements)
     {
-        m_inputs = inputs;
-        m_JoystickMovement = stickMovements;
+        if (m_data.m_preloadedInputs.Count > 0)
+        {
+            Debug.Log("Input Count: " + m_data.m_preloadedInputs.Count);
+
+            m_inputs = m_data.m_preloadedInputs[0];
+            m_data.m_preloadedInputs.RemoveAt(0);
+
+            Debug.Log("Input Count: " + m_data.m_preloadedInputs.Count);
+        }
+        else
+        {
+            m_inputs = inputs;
+        }
+
+        if (m_data.m_preloadedJoystickMovements.Count > 0)
+        {
+            m_JoystickMovement = m_data.m_preloadedJoystickMovements[0];
+            m_data.m_preloadedJoystickMovements.RemoveAt(0);
+        }
+        else
+        {
+            m_JoystickMovement = stickMovements;
+        }
     }
 
     public virtual void OnCollisionStay(Collision Other)

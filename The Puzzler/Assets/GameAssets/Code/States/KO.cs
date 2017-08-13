@@ -26,6 +26,7 @@ public class KO : BasicState
     {
         m_data.m_velocityX = 0.0f;
         m_data.m_velocityY = 0.0f;
+        m_data.m_velocityZ = 0.0f;
 
         m_KOTime.Cycle();
 

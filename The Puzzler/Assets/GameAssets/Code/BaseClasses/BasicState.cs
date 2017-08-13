@@ -123,60 +123,6 @@ public class BasicState : MonoBehaviour
         {
             m_data.m_anim.SetBool("Walking", false);
         }
-
-        //if (GetInput(E_INPUTS.UP) || GetInput(E_INPUTS.DOWN))
-        //{
-        //    if (GetInput(E_INPUTS.UP))
-        //    {
-        //        if (GetInput(E_INPUTS.LEFT))
-        //        {
-        //            charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
-        //        }
-        //        else if (GetInput(E_INPUTS.RIGHT))
-        //        {
-        //            charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
-        //        }
-        //    }
-        //    if (GetInput(E_INPUTS.DOWN))
-        //    {
-        //        charicterRot *= Quaternion.Euler(Vector3.up * 180.0f);
-        //
-        //        if (GetInput(E_INPUTS.LEFT))
-        //        {
-        //            charicterRot *= Quaternion.Euler(Vector3.up * -45.0f);
-        //        }
-        //        else if (GetInput(E_INPUTS.RIGHT))
-        //        {
-        //            charicterRot *= Quaternion.Euler(Vector3.up * 45.0f);
-        //        }
-        //    }
-        //
-        //    m_data.m_anim.SetBool("Walking", true);
-        //    transform.rotation = charicterRot;
-        //    m_data.m_rotation = charicterRot;
-        //    m_data.m_velocityX = _speed;
-        //}
-        //else if (GetInput(E_INPUTS.LEFT) || GetInput(E_INPUTS.RIGHT))
-        //{
-        //
-        //    if (GetInput(E_INPUTS.LEFT))
-        //    {
-        //        charicterRot *= Quaternion.Euler(Vector3.up * 90.0f);
-        //    }
-        //    else if (GetInput(E_INPUTS.RIGHT))
-        //    {
-        //        charicterRot *= Quaternion.Euler(Vector3.up * -90.0f);
-        //    }
-        //
-        //    m_data.m_anim.SetBool("Walking", true);
-        //    transform.rotation = charicterRot;
-        //    m_data.m_rotation = charicterRot;
-        //    m_data.m_velocityX = _speed;
-        //}
-        //else
-        //{
-        //    m_data.m_anim.SetBool("Walking", false);
-        //}
     }
 
     protected void ApplyGravity(float _force)

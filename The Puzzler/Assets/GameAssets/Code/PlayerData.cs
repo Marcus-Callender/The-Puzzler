@@ -110,7 +110,7 @@ public class PlayerData : MonoBehaviour
     {
         if (!m_use3D)
         {
-            m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocityX) + (gameObject.transform.up * m_velocityY);
+            m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocityX) + (gameObject.transform.up * m_velocityY) + (gameObject.transform.right * m_velocityZ);
         }
         else
         {

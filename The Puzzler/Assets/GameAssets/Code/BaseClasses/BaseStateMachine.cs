@@ -97,8 +97,11 @@ public class BaseStateMachine : MonoBehaviour
                 }
                 else
                 {
-                    m_data.m_velocityX += rigb.velocity.x;
-                    m_data.m_velocityZ += rigb.velocity.z;
+                    Vector3 platformVelToLocalVel = transform.InverseTransformDirection(rigb.velocity);
+                    m_data.m_velocityX += platformVelToLocalVel.z;
+                    m_data.m_velocityZ += platformVelToLocalVel.x;
+                    //m_data.m_velocityX += rigb.velocity.x;
+                    //m_data.m_velocityZ += rigb.velocity.z;
                 }
 
                 //m_data.m_velocityX += (Mathf.Atan2(rigb.velocity.x, rigb.velocity.z) /** Mathf.Rad2Deg*/) * rigb.velocity.x;

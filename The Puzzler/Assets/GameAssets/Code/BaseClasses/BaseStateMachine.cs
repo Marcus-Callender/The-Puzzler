@@ -97,16 +97,9 @@ public class BaseStateMachine : MonoBehaviour
                 }
                 else
                 {
-                    Vector3 platformVelToLocalVel = transform.InverseTransformDirection(rigb.velocity);
-                    m_data.m_velocityX += platformVelToLocalVel.z;
-                    m_data.m_velocityZ += platformVelToLocalVel.x;
-                    //m_data.m_velocityX += rigb.velocity.x;
-                    //m_data.m_velocityZ += rigb.velocity.z;
+                    m_data.m_velocityX += rigb.velocity.x;
+                    m_data.m_velocityZ += rigb.velocity.z;
                 }
-
-                //m_data.m_velocityX += (Mathf.Atan2(rigb.velocity.x, rigb.velocity.z) /** Mathf.Rad2Deg*/) * rigb.velocity.x;
-                ////m_data.m_velocityZ += (Mathf.Atan2(rigb.velocity.z, rigb.velocity.x) /** Mathf.Rad2Deg*/) * rigb.velocity.z;
-                //m_data.m_velocityZ += (rigb.velocity.x + rigb.velocity.z) - m_data.m_velocityX;
             }
         }
         else if (Mathf.Approximately(angle, 180.0f))

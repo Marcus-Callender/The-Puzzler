@@ -1268,7 +1268,7 @@ Prefab:
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
       propertyPath: m_speed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
@@ -3142,7 +3142,7 @@ Prefab:
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
       propertyPath: m_speed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
@@ -4617,7 +4617,7 @@ Prefab:
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
       propertyPath: m_speed
-      value: 2.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4203268026081348, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -9248,7 +9248,7 @@ Prefab:
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
       propertyPath: m_speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
@@ -9593,7 +9593,7 @@ Prefab:
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
       propertyPath: m_speed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
@@ -9728,7 +9728,7 @@ Prefab:
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
       propertyPath: m_speed
-      value: 4.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
@@ -10465,7 +10465,7 @@ Prefab:
     - target: {fileID: 114873469956172470, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42,
         type: 2}
       propertyPath: m_speed
-      value: 2.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4203268026081348, guid: f3c8d6b2b15f48d42a39f1bb0c1aaf42, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y

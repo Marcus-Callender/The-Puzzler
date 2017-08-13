@@ -30,7 +30,8 @@ public class LazerGenerator : ButtonInteraction
             //if (Physics.Raycast(transform.position, -Vector3.up, out hit))
             //    print("Found an object - distance: " + hit.distance);
 
-            Physics.Raycast(transform.position, -Vector3.up, out hit);
+            Physics.Raycast(transform.position, -transform.up, out hit);
+            Debug.DrawRay(transform.position, -transform.up, Color.blue);
 
             m_line = GetComponent<LineRenderer>();
             m_line.material = new Material(Shader.Find("Sprites/Default"));
@@ -49,7 +50,8 @@ public class LazerGenerator : ButtonInteraction
             Vector3[] positions = new Vector3[2];
             positions[0] = gameObject.transform.position;
             positions[1] = gameObject.transform.position;
-            positions[1].y -= hit.distance;
+            //positions[1].y -= hit.distance;
+            positions[1] += -transform.up * hit.distance;
 
             m_line.positionCount = positions.Length;
             m_line.SetPositions(positions);

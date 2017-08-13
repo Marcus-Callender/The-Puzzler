@@ -29,7 +29,7 @@ public class MoveingBox : BasicState
     public override void Enter()
     {
         m_data.m_moveingBox = true;
-        m_data.m_velocityX = 0.0f;
+        //m_data.m_velocityX = 0.0f;
 
         m_moveInput = false;
         m_data.m_stopRotation = true;
@@ -133,10 +133,10 @@ public class MoveingBox : BasicState
                 if (m_data.m_use3D)
                 {
                     if (GetInput(E_INPUTS.UP, inputs))
-                        m_data.m_velocityX = m_dragSpeed;
+                        m_data.m_velocityX += m_dragSpeed;
 
                     if (GetInput(E_INPUTS.DOWN, inputs))
-                        m_data.m_velocityX = -m_dragSpeed;
+                        m_data.m_velocityX += -m_dragSpeed;
 
                     if (GetInput(E_INPUTS.LEFT, inputs))
                         m_data.m_velocityZ = m_dragSpeed;
@@ -151,7 +151,6 @@ public class MoveingBox : BasicState
             }
             else
             {
-                m_data.m_velocityX = 0.0f;
                 m_pauseTimer.Play();
 
                 m_dragingTimer.m_playing = false;
@@ -161,7 +160,6 @@ public class MoveingBox : BasicState
         {
             m_pauseTimer.Play();
             m_dragingTimer.Play();
-            m_data.m_velocityX = 0.0f;
         }
 
         m_boxRigb.velocity = m_data.GetExpectedVelocity();

@@ -22,10 +22,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 811, y: 421}
+  m_MinSize: {x: 811, y: 442}
   m_MaxSize: {x: 22006, y: 10000}
   vertical: 0
-  controlID: 1455
+  controlID: 6595
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -122,10 +122,10 @@ MonoBehaviour:
     y: 0
     width: 909
     height: 947
-  m_MinSize: {x: 202, y: 421}
-  m_MaxSize: {x: 4002, y: 8021}
+  m_MinSize: {x: 202, y: 442}
+  m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 1433
+  controlID: 6596
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -179,14 +179,14 @@ MonoBehaviour:
     width: 907
     height: 446
   m_SceneLighting: 1
-  lastFramingTime: 18575.04576045733
+  lastFramingTime: 707.9479569688407
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 37.512943, y: -32.820988, z: 0.7441523}
+    m_Target: {x: 156.42871, y: -14.261846, z: 46.13695}
     speed: 2
-    m_Value: {x: 37.512943, y: -32.820988, z: 0.7441523}
+    m_Value: {x: 156.42871, y: -14.261846, z: 46.13695}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -209,13 +209,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.1018296, y: -0.6744133, z: 0.094705395, w: -0.7251402}
+    m_Target: {x: -0.122671984, y: 0.83646905, z: -0.20871115, w: -0.491641}
     speed: 2
-    m_Value: {x: 0.1018296, y: 0.6744133, z: -0.094705395, w: 0.7251402}
+    m_Value: {x: -0.122671984, y: 0.83646905, z: -0.20871115, w: -0.491641}
   m_Size:
-    m_Target: 3.6905575
+    m_Target: 5.7157674
     speed: 2
-    m_Value: 3.6905575
+    m_Value: 5.7157674
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -293,8 +293,8 @@ MonoBehaviour:
     y: 467
     width: 909
     height: 480
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -354,9 +354,9 @@ MonoBehaviour:
     height: 926
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2c020000
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: defbffff00000000
+    m_ExpandedIDs: 3a44fcffce44fcffe62bfeffe2fbffff0000000054330000fa330000d6340000f4560000ca580000a2b1000078b300008ab40000ecb40000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -467,19 +467,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/GameAssets/Code/InputSystems
+    - Assets/UnityChan/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/GameAssets/Code/InputSystems
+  - Assets/UnityChan/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Marcus\Desktop\GitHub\The-Puzzler\The Puzzler
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 602d0000
-    m_LastClickedID: 11616
-    m_ExpandedIDs: 00000000f82600004027000044270000a8270000d6270000e0270000f8270000102800006828000000290000f62900002a2b0000d82b0000522c00002c2d0000602d00008e2e00009c2e0000a62e0000d62e00001630000050300000a6300000d8300000ba3c0000bc3c0000be3c0000c03c0000c23c000000ca9a3bffffff7f
+    m_SelectedIDs: 6e2d0000
+    m_LastClickedID: 11630
+    m_ExpandedIDs: 00000000f22600003a2700003e270000a2270000d0270000da270000f22700000a28000062280000a0280000fa280000f0290000242b0000d22b00004c2c0000262d00005a2d0000882e0000962e0000a02e0000d02e0000103000004a300000a0300000d2300000ac3c0000ae3c0000b03c0000b23c0000b43c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -507,7 +507,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f82600004027000044270000a8270000d6270000e0270000f8270000102800006828000000290000f62900002a2b0000d82b0000522c00002c2d0000602d00008e2e00009c2e0000a62e0000d62e00001630000050300000a6300000d8300000ba3c0000bc3c0000be3c0000c03c0000c23c000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000f22600003a2700003e270000a2270000d0270000da270000f22700000a28000062280000a0280000fa280000f0290000242b0000d22b00004c2c0000262d00005a2d0000882e0000962e0000a02e0000d02e0000103000004a300000a0300000d2300000ac3c0000ae3c0000b03c0000b23c0000b43c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -532,8 +532,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 2c020000
-    m_LastClickedInstanceID: 556
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 8c2c000072ab0100
     m_RenameOverlay:
@@ -614,7 +614,7 @@ MonoBehaviour:
     y: 92
     width: 431
     height: 926
-  m_ScrollPosition: {x: 0, y: 197.95508}
+  m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 191

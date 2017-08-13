@@ -50,29 +50,7 @@ public class BaseStateMachine : MonoBehaviour
         m_inputs = inputs;
         m_JoystickMovement = stickMovements;
     }
-
-    private void CheckGroundColl()
-    {
-        // note: the use of var as the type. This is because in c# you
-        // can have lamda functions which open up the use of untyped variables
-        // these variables can only live INSIDE a function.
-        var up = transform.TransformDirection(Vector3.up);
-
-        RaycastHit hit;
-        Debug.DrawRay(transform.position, -up * 2, Color.green);
-
-        if (Physics.Raycast(transform.position, -up, out hit, 2))
-        {
-
-            Debug.Log("HIT");
-
-            if (hit.collider.gameObject.name == "floor")
-            {
-                Destroy(GetComponent("Rigidbody"));
-            }
-        }
-    }
-
+    
     public virtual void OnCollisionStay(Collision Other)
     {
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
@@ -85,11 +63,25 @@ public class BaseStateMachine : MonoBehaviour
 
             Rigidbody rigb = Other.gameObject.GetComponent<Rigidbody>();
 
+            if (!rigb && gameObject.transform.parent)
+            {
+                rigb = gameObject.transform.parent.GetComponent<Rigidbody>();
+            }
+
             if (rigb)
             {
-                m_data.m_velocityX += rigb.velocity.x;
+                //m_data.m_velocityX += rigb.velocity.x;
                 m_data.m_velocityY += rigb.velocity.y;
-                m_data.m_velocityZ += rigb.velocity.z;
+                //m_data.m_velocityZ += rigb.velocity.z;
+
+                //m_data.m_velocityX += (Mathf.Atan2(rigb.velocity.x, rigb.velocity.z) /** Mathf.Rad2Deg*/) * rigb.velocity.x;
+                ////m_data.m_velocityZ += (Mathf.Atan2(rigb.velocity.z, rigb.velocity.x) /** Mathf.Rad2Deg*/) * rigb.velocity.z;
+                //m_data.m_velocityZ += (rigb.velocity.x + rigb.velocity.z) - m_data.m_velocityX;
+                Vector3 rot = -transform.forward * rigb.velocity.x;
+                rot += transform.right * rigb.velocity.z;
+
+                m_data.m_velocityX += rigb.velocity.x * rot.x;
+                m_data.m_velocityZ += rigb.velocity.z * rot.z;
             }
         }
         else if (Mathf.Approximately(angle, 180.0f))

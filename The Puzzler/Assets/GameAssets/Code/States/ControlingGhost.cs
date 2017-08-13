@@ -36,7 +36,7 @@ public class ControlingGhost : BasicState
         //    //m_inputs.m_pauseInputs = true;
         //}
 
-        m_data.m_velocityX = 0.0f;
+        //m_data.m_velocityX = 0.0f;
 
         m_ghostStateMachine.Activate(m_data.getPositionData());
     }

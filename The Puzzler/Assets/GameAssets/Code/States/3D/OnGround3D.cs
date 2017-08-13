@@ -16,7 +16,7 @@ public class OnGround3D : BasicState
     {
         Standard3DMovment(m_speed, inputs, joystickMovement);
 
-        m_data.m_anim.SetFloat("Horizontal Velocity", m_data.m_velocityZ);
+        //m_data.m_anim.SetFloat("Horizontal Velocity", m_data.m_velocityZ);
 
         m_data.m_velocityY = -9.81f;
 

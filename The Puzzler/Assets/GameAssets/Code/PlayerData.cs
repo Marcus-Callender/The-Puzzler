@@ -87,7 +87,7 @@ public class PlayerData : MonoBehaviour
 
                     m_rotation = gameObject.transform.rotation;
 
-                    m_left_right = false;
+                    //m_left_right = false;
                 }
                 else if (!m_left_right && m_velocityX > 0.0f)
                 {
@@ -95,7 +95,7 @@ public class PlayerData : MonoBehaviour
 
                     m_rotation = gameObject.transform.rotation;
 
-                    m_left_right = true;
+                    //m_left_right = true;
                 }
             }
 

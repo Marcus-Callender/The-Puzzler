@@ -18,7 +18,7 @@ public class CameraMovment : MonoBehaviour
     //float m_cameraSpeed = 6.5f;
 
     private PlayerStateMachine m_player;
-    private E_CamType m_currentCam;
+    public E_CamType m_currentCam;
     private E_CamType m_nextCam;
     private Timer m_transitionTimer;
 

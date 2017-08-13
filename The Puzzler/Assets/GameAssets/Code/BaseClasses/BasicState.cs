@@ -63,13 +63,17 @@ public class BasicState : MonoBehaviour
 
     protected void MoveHorzontal(float _speed, char inputs)
     {
-        m_data.m_velocityX += 0.0f;
-
         if (GetInput(E_INPUTS.LEFT, inputs))
+        {
             m_data.m_velocityX += _speed;
+            m_data.m_left_right = true;
+        }
 
         if (GetInput(E_INPUTS.RIGHT, inputs))
+        {
             m_data.m_velocityX += -_speed;
+            m_data.m_left_right = false;
+        }
     }
 
     protected void Standard3DMovment(float _speed, char inputs, char joystickMovement)
@@ -101,7 +105,7 @@ public class BasicState : MonoBehaviour
             m_data.m_anim.SetBool("Walking", true);
             transform.rotation = charicterRot;
             m_data.m_rotation = charicterRot;
-            m_data.m_velocityX = _speed;
+            m_data.m_velocityX += _speed;
         }
         else
         {

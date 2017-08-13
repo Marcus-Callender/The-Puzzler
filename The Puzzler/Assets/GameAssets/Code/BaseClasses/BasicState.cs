@@ -66,13 +66,11 @@ public class BasicState : MonoBehaviour
         if (GetInput(E_INPUTS.LEFT, inputs))
         {
             m_data.m_velocityX += _speed;
-            m_data.m_left_right = true;
         }
 
         if (GetInput(E_INPUTS.RIGHT, inputs))
         {
             m_data.m_velocityX += -_speed;
-            m_data.m_left_right = false;
         }
     }
 

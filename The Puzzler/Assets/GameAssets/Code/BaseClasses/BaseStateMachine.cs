@@ -50,7 +50,7 @@ public class BaseStateMachine : MonoBehaviour
         m_inputs = inputs;
         m_JoystickMovement = stickMovements;
     }
-    
+
     public virtual void OnCollisionStay(Collision Other)
     {
         float angle = Vector2.Angle(Other.contacts[0].normal, Vector2.up);
@@ -70,18 +70,23 @@ public class BaseStateMachine : MonoBehaviour
 
             if (rigb)
             {
-                //m_data.m_velocityX += rigb.velocity.x;
                 m_data.m_velocityY += rigb.velocity.y;
-                //m_data.m_velocityZ += rigb.velocity.z;
+
+                if (m_data.m_use3D)
+                {
+                    Vector3 platformVelToLocalVel = transform.InverseTransformDirection(rigb.velocity);
+                    m_data.m_velocityX += platformVelToLocalVel.z;
+                    m_data.m_velocityZ += platformVelToLocalVel.x;
+                }
+                else
+                {
+                    m_data.m_velocityX += rigb.velocity.x;
+                    m_data.m_velocityZ += rigb.velocity.z;
+                }
 
                 //m_data.m_velocityX += (Mathf.Atan2(rigb.velocity.x, rigb.velocity.z) /** Mathf.Rad2Deg*/) * rigb.velocity.x;
                 ////m_data.m_velocityZ += (Mathf.Atan2(rigb.velocity.z, rigb.velocity.x) /** Mathf.Rad2Deg*/) * rigb.velocity.z;
                 //m_data.m_velocityZ += (rigb.velocity.x + rigb.velocity.z) - m_data.m_velocityX;
-                Vector3 rot = -transform.forward * rigb.velocity.x;
-                rot += transform.right * rigb.velocity.z;
-
-                m_data.m_velocityX += rigb.velocity.x * rot.x;
-                m_data.m_velocityZ += rigb.velocity.z * rot.z;
             }
         }
         else if (Mathf.Approximately(angle, 180.0f))
@@ -128,7 +133,7 @@ public class BaseStateMachine : MonoBehaviour
                 // tells the old state is is being left and the new state is being entered
                 GetCurrentState().Exit();
                 m_states2D[(int)m_newState].Enter();
-                
+
                 // shows the state transition that took place
                 Debug.Log(m_currentState + " -> " + m_newState);
 

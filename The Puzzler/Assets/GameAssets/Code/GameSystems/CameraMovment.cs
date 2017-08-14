@@ -22,9 +22,17 @@ public class CameraMovment : MonoBehaviour
     private E_CamType m_nextCam;
     private Timer m_transitionTimer;
 
-    private float m_VerticalOffset = 0.0f;
-    public float m_MaxVerticalOffset = 15.0f;
-    public float m_MinVerticalOffset = -30.0f;
+    private float m_verticalTilt = 0.0f;
+    public float m_maxVerticalTilt = 15.0f;
+    public float m_minVerticalTilt = -30.0f;
+
+    public float m_minOffsetX = -4.0f;
+    public float m_maxOffsetX = 4.0f;
+    public float m_minOffsetY = -3.5f;
+    public float m_maxOffsetY = 1.5f;
+
+    private float m_offsetX = 0.0f;
+    private float m_offsetY = 0.0f;
 
     void Start()
     {
@@ -58,16 +66,22 @@ public class CameraMovment : MonoBehaviour
 
             Vector3 playerPos = m_player.gameObject.transform.position;
         }
-        
+
         // this is teh only player input that directly affects the camera system
         if (Input.GetButtonDown("ResetCamera"))
         {
-            m_VerticalOffset = 0.0f;
+            m_verticalTilt = 0.0f;
         }
 
-        m_VerticalOffset += Input.GetAxis("Mouse Y") * Time.deltaTime * 60.0f;
-        m_VerticalOffset += Input.GetAxis("Right Stick Y") * Time.deltaTime * 60.0f * 2.0f;
-        m_VerticalOffset = Mathf.Clamp(m_VerticalOffset, m_MinVerticalOffset, m_MaxVerticalOffset);
+        m_verticalTilt += Input.GetAxis("Mouse Y") * Time.deltaTime * 60.0f;
+        m_verticalTilt += Input.GetAxis("Right Stick Y") * Time.deltaTime * 60.0f * 2.0f;
+        m_verticalTilt = Mathf.Clamp(m_verticalTilt, m_minVerticalTilt, m_maxVerticalTilt);
+
+        if (Time.deltaTime > 0.0f)
+        {
+            m_offsetX = Input.GetAxisRaw("Right Stick X") * (Input.GetAxisRaw("Right Stick X") > 0 ? m_maxOffsetX : -m_minOffsetX);
+            m_offsetY = Input.GetAxisRaw("Right Stick Y") * (Input.GetAxisRaw("Right Stick Y") > 0 ? m_maxOffsetY : -m_minOffsetY);
+        }
 
         // makes all movments relative to the charicter the player is controling
         PlayerData followData = m_player.getFollowData();
@@ -117,7 +131,7 @@ public class CameraMovment : MonoBehaviour
 
             if (m_currentCam == E_CamType.CAM_2D)
             {
-                m_VerticalOffset = 0.0f;
+                m_verticalTilt = 0.0f;
             }
 
             gameObject.transform.rotation = getNewRot(m_currentCam, followData);
@@ -147,7 +161,8 @@ public class CameraMovment : MonoBehaviour
 
         pos = data.transform.position;
 
-        pos += transform.up * 2.0f;
+        pos += (transform.up * 2.0f) - (transform.up * m_offsetY);
+        pos += (transform.right * m_offsetX);
         pos += transform.forward * -8.0f;
 
         //float yPosLerp = Mathf.Lerp(gameObject.transform.position.y, data.playerPos.y + 3.0f, Time.deltaTime * 3.0f);
@@ -207,7 +222,7 @@ public class CameraMovment : MonoBehaviour
     private Quaternion Camera3DGroundRot(PlayerData data)
     {
         Quaternion rot = data.m_cameraRotation;
-        rot *= Quaternion.Euler(Vector3.left * m_VerticalOffset);
+        rot *= Quaternion.Euler(Vector3.left * m_verticalTilt);
 
         return rot;
     }

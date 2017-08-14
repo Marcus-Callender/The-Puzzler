@@ -262,7 +262,7 @@ public class Enemy : MonoBehaviour
             if (Physics.Raycast(transform.position, new Vector3(m_faceingLeft ? -1.0f : 1.0f, 0.0f), 0.7f))
             {
                 Debug.Log("Jump up platform");
-                m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.5f);
+                m_rigb.velocity = new Vector3(m_rigb.velocity.x, 6.5f);
             }
 
             Debug.DrawRay(transform.position, new Vector3(m_faceingLeft ? -1.0f : 1.0f, -1.0f), Color.yellow);
@@ -274,7 +274,7 @@ public class Enemy : MonoBehaviour
                 if (Physics.Raycast(transform.position + new Vector3(m_faceingLeft ? -1.0f : 1.0f, -1.0f), new Vector3(m_faceingLeft ? -2.0f : 2.0f, 0.0f)))
                 {
                     Debug.Log("Jump over gap");
-                    m_rigb.velocity = new Vector3(m_rigb.velocity.x, 4.5f);
+                    m_rigb.velocity = new Vector3(m_rigb.velocity.x, 6.5f);
                 }
             }
         }

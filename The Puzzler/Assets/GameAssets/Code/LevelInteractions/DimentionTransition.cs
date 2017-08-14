@@ -48,7 +48,15 @@ public class DimentionTransition : MonoBehaviour
                 data.m_left_right = m_camera_left_right;
                 // alignes the player with the dimention transitions rotation so the player can't unintentionaly walk off a platrorm
                 data.SetRotation(gameObject.transform.rotation);
-                fillInputArray(InputToBit(E_INPUTS.RIGHT), 30, data);
+
+                if (!m_camera_left_right)
+                {
+                    fillInputArray(InputToBit(E_INPUTS.RIGHT), 30, data);
+                }
+                else
+                {
+                    fillInputArray(InputToBit(E_INPUTS.LEFT), 30, data);
+                }
             }
             else
             {

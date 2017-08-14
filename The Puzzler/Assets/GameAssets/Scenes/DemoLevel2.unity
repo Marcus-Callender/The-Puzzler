@@ -2140,6 +2140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9619a2eeef181c4ea31664f3de68be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0
   m_cycleTime: 0.8
 --- !u!4 &349072624 stripped
@@ -2158,6 +2159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcef7278991a3443863d0b45a677fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0
   m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
@@ -2341,6 +2343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9619a2eeef181c4ea31664f3de68be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0
   m_cycleTime: 0.8
 --- !u!4 &402041299 stripped
@@ -2359,6 +2362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcef7278991a3443863d0b45a677fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0.1
   m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
@@ -2405,7 +2409,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 405284188}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 84.62, y: 12.4, z: 89}
+  m_LocalPosition: {x: 84, y: 12.4, z: 89}
   m_LocalScale: {x: 2, y: 1, z: 12}
   m_Children: []
   m_Father: {fileID: 698496246}
@@ -2713,6 +2717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9619a2eeef181c4ea31664f3de68be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 1
   m_activateDelayTime: 0
   m_cycleTime: 0.8
 --- !u!54 &441777840
@@ -4500,6 +4505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9619a2eeef181c4ea31664f3de68be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0
   m_cycleTime: 0.8
 --- !u!4 &745276284 stripped
@@ -4518,6 +4524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcef7278991a3443863d0b45a677fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0.1
   m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
@@ -6243,6 +6250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcef7278991a3443863d0b45a677fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0
   m_distanceToMove: {x: 0, y: 2.5, z: -7}
   m_speed: 2.5
@@ -6437,8 +6445,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1088155294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.5, y: 13.9, z: 89}
-  m_LocalScale: {x: 3, y: 2, z: 2}
+  m_LocalPosition: {x: 63.5, y: 13.6, z: 89}
+  m_LocalScale: {x: 3, y: 1.5, z: 2}
   m_Children: []
   m_Father: {fileID: 698496246}
   m_RootOrder: 36
@@ -7144,6 +7152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9619a2eeef181c4ea31664f3de68be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 1
   m_activateDelayTime: 0
   m_cycleTime: 0.8
 --- !u!54 &1253200697
@@ -8538,6 +8547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9619a2eeef181c4ea31664f3de68be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0
   m_cycleTime: 0.8
 --- !u!4 &1469748274 stripped
@@ -8556,6 +8566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcef7278991a3443863d0b45a677fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0.1
   m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
@@ -9140,6 +9151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9619a2eeef181c4ea31664f3de68be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0
   m_cycleTime: 0.8
 --- !u!4 &1636012159 stripped
@@ -9158,6 +9170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcef7278991a3443863d0b45a677fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0.1
   m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75
@@ -9934,6 +9947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9619a2eeef181c4ea31664f3de68be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0
   m_cycleTime: 0.8
 --- !u!4 &1779160224 stripped
@@ -9952,6 +9966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcef7278991a3443863d0b45a677fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activated: 0
   m_activateDelayTime: 0.1
   m_distanceToMove: {x: 0, y: 0, z: 0}
   m_speed: 3.75

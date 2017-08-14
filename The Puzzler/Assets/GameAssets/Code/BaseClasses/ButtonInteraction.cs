@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonInteraction : MonoBehaviour
 {
-    protected bool m_activated;
+    public bool m_activated;
 
     public float m_activateDelayTime = 0.1f;
     protected bool m_transitioning = false;

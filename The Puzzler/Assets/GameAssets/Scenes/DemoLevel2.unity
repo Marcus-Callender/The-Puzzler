@@ -4385,8 +4385,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_currentCam: 0
-  m_MaxVerticalOffset: 15
-  m_MinVerticalOffset: -30
+  m_maxVerticalTilt: 15
+  m_minVerticalTilt: -30
+  m_minOffsetX: -2.5
+  m_maxOffsetX: 2.5
+  m_minOffsetY: -1.5
+  m_maxOffsetY: 1.5
 --- !u!81 &733753193
 AudioListener:
   m_ObjectHideFlags: 0

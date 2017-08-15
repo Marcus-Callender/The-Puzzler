@@ -34,6 +34,9 @@ public class CameraMovment : MonoBehaviour
     private float m_offsetX = 0.0f;
     private float m_offsetY = 0.0f;
 
+    private const float m_offsetXMovmentSpeed = 0.1f;
+    private const float m_offsetYMovmentSpeed = 0.05f;
+
     void Start()
     {
         m_player = FindObjectOfType<PlayerStateMachine>();
@@ -79,8 +82,29 @@ public class CameraMovment : MonoBehaviour
 
         if (Time.deltaTime > 0.0f)
         {
+            float previousOffsetX = m_offsetX;
+            float previousOffsetY = m_offsetY;
+
             m_offsetX = Input.GetAxisRaw("Right Stick X") * (Input.GetAxisRaw("Right Stick X") > 0 ? m_maxOffsetX : -m_minOffsetX);
             m_offsetY = Input.GetAxisRaw("Right Stick Y") * (Input.GetAxisRaw("Right Stick Y") > 0 ? m_maxOffsetY : -m_minOffsetY);
+
+            if (m_offsetX > previousOffsetX + m_offsetXMovmentSpeed)
+            {
+                m_offsetX = previousOffsetX + m_offsetXMovmentSpeed;
+            }
+            else if (m_offsetX < previousOffsetX - m_offsetXMovmentSpeed)
+            {
+                m_offsetX = previousOffsetX - m_offsetXMovmentSpeed;
+            }
+            
+            if (m_offsetY > previousOffsetY + m_offsetYMovmentSpeed)
+            {
+                m_offsetY = previousOffsetY + m_offsetYMovmentSpeed;
+            }
+            else if (m_offsetY < previousOffsetY - m_offsetYMovmentSpeed)
+            {
+                m_offsetY = previousOffsetY - m_offsetYMovmentSpeed;
+            }
         }
 
         // makes all movments relative to the charicter the player is controling

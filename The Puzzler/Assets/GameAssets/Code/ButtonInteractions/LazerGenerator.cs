@@ -17,6 +17,9 @@ public class LazerGenerator : ButtonInteraction
         m_timer = new Timer();
         m_timer.m_time = m_cycleTime;
         m_timer.Play();
+
+        m_line = GetComponent<LineRenderer>();
+        m_line.material = new Material(Shader.Find("Sprites/Default"));
     }
 
     public override void Update()
@@ -32,9 +35,6 @@ public class LazerGenerator : ButtonInteraction
 
             Physics.Raycast(transform.position, -transform.up, out hit);
             Debug.DrawRay(transform.position, -transform.up, Color.blue);
-
-            m_line = GetComponent<LineRenderer>();
-            m_line.material = new Material(Shader.Find("Sprites/Default"));
 
             if (hit.collider.gameObject.tag == "Player")
             {
@@ -80,7 +80,7 @@ public class LazerGenerator : ButtonInteraction
         else
         {
             Gradient gradient = new Gradient();
-            
+
             Color col = new Color(1.0f, m_timer.GetLerp(), m_timer.GetLerp(), 0.0f);
 
             gradient.SetKeys(

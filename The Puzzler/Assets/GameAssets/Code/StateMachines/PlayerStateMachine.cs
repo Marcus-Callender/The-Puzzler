@@ -13,11 +13,6 @@ public enum E_PLAYER_STATES
     USEING_LADDER,
     KO,
 
-    CONTROLING_GHOST,
-
-    DOUBLE_JUMPING,
-    WALL_SLIDEING,
-
     SIZE,
     NULL
 }
@@ -76,29 +71,12 @@ public class PlayerStateMachine : BaseStateMachine
 
         if (m_saveData.m_upgradeArray[(int)E_UPGRADES.GHOST_1])
         {
-            if (!m_states2D[5])
-            {
-                ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
-                temp.m_ghostList = m_ghostList;
-                m_states2D[5] = temp;
-
-                m_states2D[5].Initialize(m_rigb, m_data);
-
-                // the controling ghost state is 2d/3d agnostic so the 2d/3d arrays can have a pointer to the same object
-                m_states3D[5] = m_states2D[5];
-            }
+            m_ghostList.createGhost();
         }
 
         if (m_saveData.m_upgradeArray[(int)E_UPGRADES.GHOST_2])
         {
-            ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
-            temp.m_ghostList = m_ghostList;
-            m_states2D[6] = temp;
-
-            m_states2D[6].Initialize(m_rigb, m_data);
-
-            // the controling ghost state is 2d/3d agnostic so the 2d/3d arrays can have a pointer to the same object
-            m_states3D[6] = m_states2D[6];
+            m_ghostList.createGhost();
         }
     }
 
@@ -111,17 +89,6 @@ public class PlayerStateMachine : BaseStateMachine
         }
 
         m_data.m_pressingButton = GetInput(E_INPUTS.PRESS_BUTTON);
-
-        if (GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
-        {
-            m_newState = E_PLAYER_STATES.CONTROLING_GHOST;
-            CheckState();
-        }
-        else if (GetInput(E_INPUTS.GHOST_BUTTON_HOLD))
-        {
-            m_newState = E_PLAYER_STATES.CONTROLING_GHOST;
-            CheckState();
-        }
 
         base.Cycle();
     }
@@ -168,32 +135,17 @@ public class PlayerStateMachine : BaseStateMachine
         }
         else if (type == E_UPGRADES.GHOST_1)
         {
-            if (!m_states2D[5])
+            // makes sure the player hasn't already got this upgrade
+            if (m_ghostList.m_ghostsCreated < 1)
             {
-                ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
-                temp.m_ghostList = m_ghostList;
-                m_states2D[5] = temp;
-
-                m_states2D[5].Initialize(m_rigb, m_data);
-
-                m_states3D[5] = m_states2D[5];
-
-                m_saveData.AddUpgrade(type);
+                m_ghostList.createGhost();
             }
         }
         else if (type == E_UPGRADES.GHOST_2)
         {
-            if (!m_states2D[6])
+            if (m_ghostList.m_ghostsCreated < 2)
             {
-                ControlingGhost temp = gameObject.AddComponent<ControlingGhost>();
-                temp.m_ghostList = m_ghostList;
-                m_states2D[6] = temp;
-
-                m_states2D[6].Initialize(m_rigb, m_data);
-
-                m_states3D[6] = m_states2D[6];
-
-                m_saveData.AddUpgrade(type);
+                m_ghostList.createGhost();
             }
         }
     }

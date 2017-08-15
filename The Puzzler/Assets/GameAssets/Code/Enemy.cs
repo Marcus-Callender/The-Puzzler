@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour
         {
             float distance = Mathf.Abs(gameObject.transform.position.x - m_players[z].GetCenterTransform().x);
 
-            if (m_players[z].tag == "Player" && distance <= 1.5f)
+            if (m_players[z].tag == "Player" && distance <= 1.25f)
             {
                 m_targate = m_players[z];
                 m_actionState = E_ActionState.NEXT_TO_PLAYER;

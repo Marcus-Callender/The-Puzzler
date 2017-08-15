@@ -32,9 +32,9 @@ public class Enemy : MonoBehaviour
     private bool m_patrollingLeft = false;
     private Vector3 m_patrollingCenter;
 
-    private float m_attackDelay = 0.6f;
+    private float m_attackDelay = 0.2f;
     private float m_attackActive = 0.6f;
-    private float m_attackRecovery = 0.6f;
+    private float m_attackRecovery = 0.8f;
     private Timer m_attackDelayTimer;
     private Timer m_attackActiveTimer;
     private Timer m_attackRecoveryTimer;
@@ -227,6 +227,8 @@ public class Enemy : MonoBehaviour
         }
         else if(m_actionState == E_ActionState.ATTACKING)
         {
+            m_attack.transform.Rotate(0.0f, 30.0f, 0.0f);
+
             if (m_attackActiveTimer.m_completed)
             {
                 m_attackActiveTimer.Stop();

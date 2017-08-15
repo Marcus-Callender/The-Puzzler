@@ -62,14 +62,6 @@ public class CameraMovment : MonoBehaviour
 
     void LateUpdate()
     {
-        // ensures there is a valid refrence to the player
-        if (!m_player.m_data)
-        {
-            m_player = FindObjectOfType<PlayerStateMachine>();
-
-            Vector3 playerPos = m_player.gameObject.transform.position;
-        }
-
         // this is teh only player input that directly affects the camera system
         if (Input.GetButtonDown("ResetCamera"))
         {

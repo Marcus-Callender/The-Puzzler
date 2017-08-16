@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyData : MonoBehaviour
+public class EnemyInputSystem : MonoBehaviour
 {
-    public float m_xVelocity;
-
-    public Transform m_targating;
 
     void Start()
     {

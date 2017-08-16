@@ -115,11 +115,11 @@ public class Enemy : MonoBehaviour
                 m_targate = m_players[z];
                 m_actionState = E_ActionState.NEXT_TO_PLAYER;
                 m_renderer.material.color = Color.magenta;
+
                 break;
             }
             else if (m_players[z].tag == "Player" && distance < 5.0f && distance > 1.5f)
             {
-
                 RaycastHit hitData;
 
                 Physics.Raycast(transform.position, m_players[z].GetCenterTransform() - transform.position, out hitData);

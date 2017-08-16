@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class EnemyBaseState : MonoBehaviour
 {
-    private EnemyData m_data;
-    private Rigidbody m_rigb;
+    protected EnemyData m_data;
+    protected Rigidbody m_rigb;
 
-    void Initialize()
+    public void Initialize(EnemyData data , Rigidbody rigb)
     {
-
+        m_data = data;
+        m_rigb = rigb;
     }
 
-    public virtual void Cycle()
+    public virtual E_ENEMY_STATES Cycle()
     {
-
+        return E_ENEMY_STATES.NULL;
     }
 
     public virtual E_ENEMY_STATES EnterState()

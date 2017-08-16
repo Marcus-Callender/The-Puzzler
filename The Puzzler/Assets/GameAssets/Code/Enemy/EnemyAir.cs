@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAir : MonoBehaviour
+public class EnemyAir : EnemyBaseState
 {
 
-    void Start()
+
+    public override E_ENEMY_STATES Cycle()
     {
-
-    }
-
-    void Update()
-    {
-
+        return E_ENEMY_STATES.NULL;
     }
 }

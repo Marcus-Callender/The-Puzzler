@@ -129,7 +129,7 @@ public class BaseStateMachine : MonoBehaviour
         CheckState();
     }
 
-    protected void CheckState()
+    protected virtual void CheckState()
     {
         // prevents the state from changing
         if (!m_lockState)
@@ -160,12 +160,12 @@ public class BaseStateMachine : MonoBehaviour
     {
         if (!m_data)
         {
-            Debug.Log("--- Data refrence not found");
+            Debug.LogError("--- Data refrence not found");
         }
 
         if (!m_states3D[(int)m_currentState] || !m_states2D[(int)m_currentState])
         {
-            Debug.Log("--- State refrence not found");
+            Debug.LogError("--- State refrence not found");
         }
 
         if (m_data.m_use3D)

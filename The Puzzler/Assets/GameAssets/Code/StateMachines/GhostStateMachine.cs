@@ -115,13 +115,13 @@ public class GhostStateMachine : BaseStateMachine
 
         if (GameObject.Find("GhostCountdown"))
         {
-            Debug.Log("-- found GhostCountdown");
+            //Debug.Log("-- found GhostCountdown");
 
             m_countdown = GameObject.Find("GhostCountdown").GetComponent<UICountdown>();
 
             if (m_countdown)
             {
-                Debug.Log("-- found UICountdown");
+                //Debug.Log("-- found UICountdown");
             }
         }
     }
@@ -307,5 +307,38 @@ public class GhostStateMachine : BaseStateMachine
 
         m_data.m_cameraRotation = m_startingRotation;
         m_data.m_rotation = m_startingRotation;
+    }
+
+    protected override void CheckState()
+    {
+        // prevents the state from changing
+        if (!m_lockState)
+        {
+            m_data.m_anim.SetBool("KOd", m_data.m_squished);
+
+            if (m_data.m_squished)
+            {
+                m_newState = E_PLAYER_STATES.KO;
+            }
+
+            if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState && m_states2D[(int)m_newState])
+            {
+                if (m_currentState == E_PLAYER_STATES.MOVEING_BLOCK)
+                    GetCurrentState().GhostSpecialExit();
+                
+                // tells the old state is is being left and the new state is being entered
+                GetCurrentState().Exit();
+                m_states2D[(int)m_newState].Enter();
+                
+                if (m_newState == E_PLAYER_STATES.MOVEING_BLOCK)
+                    m_states2D[(int)m_newState].GhostSpecialEnter();
+
+                // shows the state transition that took place
+                //Debug.Log(m_currentState + " -> " + m_newState);
+
+                // sets the new state to be used
+                m_currentState = m_newState;
+            }
+        }
     }
 }

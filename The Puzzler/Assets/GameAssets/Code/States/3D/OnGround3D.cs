@@ -43,12 +43,12 @@ public class OnGround3D : BasicState
 
         if (!Physics.Raycast(transform.position + new Vector3(0.0f, 0.1f, 0.0f), new Vector3(0.0f, -1.0f, 0.0f), out hit, 1.0f))
         {
-            Debug.Log("----- no collision ----");
+            //Debug.Log("----- no collision ----");
             return E_PLAYER_STATES.IN_AIR;
         }
         else
         {
-            Debug.Log("----- collision " + hit.collider.name + " ----");
+            //Debug.Log("----- collision " + hit.collider.name + " ----");
         }
 
         return E_PLAYER_STATES.ON_GROUND;

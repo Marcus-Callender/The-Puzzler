@@ -36,7 +36,7 @@ public class MoveingBox : BasicState
 
         RaycastHit hit;
         Physics.Raycast(m_data.GetCenterTransform(), transform.forward, out hit);
-        Debug.DrawRay(m_data.GetCenterTransform(), transform.forward, Color.red);
+        Debug.DrawRay(m_data.GetCenterTransform(), transform.forward, Color.red, 3.0f);
 
         if (hit.transform && hit.transform.tag == "Box")
         {
@@ -54,6 +54,23 @@ public class MoveingBox : BasicState
         if (!m_box)
         {
             Debug.Log("Box was not found");
+        }
+    }
+
+    public override void GhostSpecialEnter()
+    {
+        if (m_box != null)
+        {
+            IGhostInteractable interaction = m_box.GetComponent<IGhostInteractable>();
+
+            if (interaction == null)
+            {
+                Debug.Log("intection could not be found");
+            }
+            else
+            {
+                interaction.StartIntecation();
+            }
         }
     }
 
@@ -83,6 +100,23 @@ public class MoveingBox : BasicState
 
         m_data.m_moveingBox = false;
         m_data.m_stopRotation = false;
+    }
+
+    public override void GhostSpecialExit()
+    {
+        if (m_box != null)
+        {
+            IGhostInteractable interaction = m_box.GetComponent<IGhostInteractable>();
+
+            if (interaction == null)
+            {
+                Debug.Log("intection could not be found");
+            }
+            else
+            {
+                interaction.StopIntecation();
+            }
+        }
     }
 
     public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)

@@ -21,9 +21,10 @@ public class BasicState : MonoBehaviour
 
     }
 
-    public virtual void GhostSpecialEnter()
+    public virtual IGhostInteractable GhostSpecialEnter()
     {
         Debug.LogWarning("Ghost special enter has not been set up for this state.");
+        return null;
     }
 
     public virtual void Exit()
@@ -31,9 +32,10 @@ public class BasicState : MonoBehaviour
 
     }
 
-    public virtual void GhostSpecialExit()
+    public virtual IGhostInteractable GhostSpecialExit()
     {
         Debug.LogWarning("Ghost special exit has not been set up for this state.");
+        return null;
     }
 
     public virtual E_PLAYER_STATES Cycle(char inputs, char joystickMovement)

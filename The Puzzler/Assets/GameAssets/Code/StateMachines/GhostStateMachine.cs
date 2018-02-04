@@ -27,6 +27,8 @@ public class GhostStateMachine : BaseStateMachine
 
     public UICountdown m_countdown;
 
+    private List<IGhostInteractable> m_inteactions;
+
     // this boolean is set to true on entering the state and remains true 
     // while the ghost is coliding with any interactables that it isn't standing on
     //private bool m_colidedWithInteractable = false;
@@ -84,6 +86,8 @@ public class GhostStateMachine : BaseStateMachine
     public override void Initialize()
     {
         base.Initialize();
+
+        m_inteactions = new List<IGhostInteractable>();
 
         m_matirialRenderers = gameObject.GetComponentsInChildren<Renderer>();
 
@@ -153,6 +157,12 @@ public class GhostStateMachine : BaseStateMachine
                 {
                     m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
 
+                    foreach (IGhostInteractable interaction in m_inteactions)
+                    {
+                        if (interaction != null)
+                            interaction.StopIntecation();
+                    }
+
                     m_recorded = true;
                     m_recording = false;
 
@@ -187,7 +197,13 @@ public class GhostStateMachine : BaseStateMachine
                     m_recorded = true;
                     m_recording = false;
                     m_data.m_pause = false;
-    
+
+                    foreach (IGhostInteractable interaction in m_inteactions)
+                    {
+                        if (interaction != null)
+                            interaction.StopIntecation();
+                    }
+
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
 
@@ -207,7 +223,16 @@ public class GhostStateMachine : BaseStateMachine
                 }
                 else
                 {
+                    // the recording has finished playing
                     m_playing = false;
+
+                    foreach (IGhostInteractable interaction in m_inteactions)
+                    {
+                        if (interaction != null)
+                            interaction.StopIntecation();
+                    }
+
+                    m_inteactions.Clear();
 
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
@@ -297,6 +322,14 @@ public class GhostStateMachine : BaseStateMachine
         // adds a symbol to the end of the recording so the playback knows when the recording ends
         m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
 
+        foreach (IGhostInteractable interaction in m_inteactions)
+        {
+            if (interaction != null)
+                interaction.StopIntecation();
+        }
+
+        m_inteactions.Clear();
+
         m_recorded = true;
         m_recording = false;
 
@@ -323,15 +356,20 @@ public class GhostStateMachine : BaseStateMachine
 
             if (m_newState != E_PLAYER_STATES.NULL && m_newState != m_currentState && m_states2D[(int)m_newState])
             {
-                if (m_currentState == E_PLAYER_STATES.MOVEING_BLOCK)
+                /*if (m_currentState == E_PLAYER_STATES.MOVEING_BLOCK)
+                {
                     GetCurrentState().GhostSpecialExit();
+
+                }*/
                 
                 // tells the old state is is being left and the new state is being entered
                 GetCurrentState().Exit();
                 m_states2D[(int)m_newState].Enter();
                 
                 if (m_newState == E_PLAYER_STATES.MOVEING_BLOCK)
-                    m_states2D[(int)m_newState].GhostSpecialEnter();
+                {
+                    m_inteactions.Add(m_states2D[(int)m_newState].GhostSpecialEnter());
+                }
 
                 // shows the state transition that took place
                 //Debug.Log(m_currentState + " -> " + m_newState);

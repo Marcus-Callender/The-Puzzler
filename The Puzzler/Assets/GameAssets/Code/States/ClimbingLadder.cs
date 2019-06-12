@@ -16,18 +16,14 @@ public class ClimbingLadder : BasicState
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
+    public override E_PLAYER_STATES Cycle(S_inputStruct inputs)
     {
         MoveHorzontal(m_speed, inputs);
         
         m_data.m_velocityY = 0.1962f;
 
-        if (GetInput(E_INPUTS.DOWN, inputs))
-            m_data.m_velocityY = -m_climbSpeed;
+        m_data.m_velocityY = m_climbSpeed * inputs.m_movementVector.y;
 
-        if (GetInput(E_INPUTS.UP, inputs))
-            m_data.m_velocityY = m_climbSpeed;
-        
         if (GetInput(E_INPUTS.JUMP, inputs))
         {
             m_data.m_velocityY = m_jumpSpeed;
@@ -38,7 +34,7 @@ public class ClimbingLadder : BasicState
         return E_PLAYER_STATES.USEING_LADDER;
     }
 
-    public override E_PLAYER_STATES PhysCycle(char inputs, char joystickMovement)
+    public override E_PLAYER_STATES PhysCycle(S_inputStruct inputs)
     {
         if (m_enableGroundCollisionCount > 0)
         {

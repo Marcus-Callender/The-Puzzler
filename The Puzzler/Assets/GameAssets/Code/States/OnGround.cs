@@ -12,11 +12,11 @@ public class OnGround : BasicState
         
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
+    public override E_PLAYER_STATES Cycle(S_inputStruct inputs)
     {
         MoveHorzontal(m_speed, inputs);
         
-        if (GetInput(E_INPUTS.LEFT, inputs) || GetInput(E_INPUTS.RIGHT, inputs))
+        if (inputs.m_movementVector.x != 0.0f)
         {
             m_data.m_anim.SetBool("Walking", true);
         }
@@ -47,9 +47,9 @@ public class OnGround : BasicState
         return E_PLAYER_STATES.IN_AIR;
     }
 
-    public override E_PLAYER_STATES InTrigger(string _tag, char inputs)
+    public override E_PLAYER_STATES InTrigger(string _tag, S_inputStruct inputs)
     {
-        if (_tag == "Ladder" && GetInput(E_INPUTS.UP, inputs))
+        if (_tag == "Ladder" && inputs.m_movementVector.y > 0.0f)
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

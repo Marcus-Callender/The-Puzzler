@@ -15,8 +15,9 @@ public class GhostStateMachine : BaseStateMachine
     public const int m_recordingSize = 60 * 6;
 
     //private char m_Inputs;
-    private char[] m_recordedInputs = new char[m_recordingSize];
-    private char[] m_recordedJoystickPositions = new char[m_recordingSize];
+    //private char[] m_recordedInputs = new char[m_recordingSize];
+    //private char[] m_recordedJoystickPositions = new char[m_recordingSize];
+    private S_inputStruct[] m_recordedInputs = new S_inputStruct[m_recordingSize];
     public int m_arrayPosition = 0;
     public bool m_recorded = false;
     public bool m_recording = false;
@@ -155,7 +156,7 @@ public class GhostStateMachine : BaseStateMachine
             {
                 if (GetInput(E_INPUTS.GHOST_BUTTON_PRESS))
                 {
-                    m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
+                    m_recordedInputs[m_arrayPosition].m_buttons = (char)InputToBit(E_INPUTS.END);
 
                     foreach (IGhostInteractable interaction in m_inteactions)
                     {
@@ -184,7 +185,6 @@ public class GhostStateMachine : BaseStateMachine
                     }
 
                     m_recordedInputs[m_arrayPosition] = m_inputs;
-                    m_recordedJoystickPositions[m_arrayPosition] = m_JoystickMovement;
                     m_arrayPosition++;
 
                     if (m_countdown)
@@ -215,10 +215,9 @@ public class GhostStateMachine : BaseStateMachine
             {
                 m_data.m_pause = false;
 
-                if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition] != (char)InputToBit(E_INPUTS.END)))
+                if (m_arrayPosition < m_recordingSize && (m_recordedInputs[m_arrayPosition].m_buttons != (char)InputToBit(E_INPUTS.END)))
                 {
                     m_inputs = m_recordedInputs[m_arrayPosition];
-                    m_JoystickMovement = m_recordedJoystickPositions[m_arrayPosition];
                     m_arrayPosition++;
                 }
                 else
@@ -283,8 +282,7 @@ public class GhostStateMachine : BaseStateMachine
         {
             for (int z = 0; z < m_recordingSize; z++)
             {
-                m_recordedInputs[z] = (char)0;
-                m_recordedJoystickPositions[z] = (char)0;
+                m_recordedInputs[z].m_buttons = (char)0;
             }
         }
 
@@ -307,7 +305,6 @@ public class GhostStateMachine : BaseStateMachine
             if (m_arrayPosition > m_recordingSize)
             {
                 m_inputs = m_recordedInputs[m_arrayPosition];
-                m_JoystickMovement = m_recordedJoystickPositions[m_arrayPosition];
                 m_arrayPosition++;
                 yield return new WaitForSeconds(0.016f);
             }
@@ -320,7 +317,7 @@ public class GhostStateMachine : BaseStateMachine
     public void EndRecording()
     {
         // adds a symbol to the end of the recording so the playback knows when the recording ends
-        m_recordedInputs[m_arrayPosition] = (char)InputToBit(E_INPUTS.END);
+        m_recordedInputs[m_arrayPosition].m_buttons = (char)InputToBit(E_INPUTS.END);
 
         foreach (IGhostInteractable interaction in m_inteactions)
         {

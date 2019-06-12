@@ -56,16 +56,16 @@ public class PlayerData : MonoBehaviour
     
     public Quaternion m_cameraRotation;
 
-    public List<char> m_preloadedInputs;
-    public List<char> m_preloadedJoystickMovements;
+    public List<S_inputStruct> m_preloadedInputs;
 
     public void Initialize()
     {
         m_rigb = GetComponent<Rigidbody>();
+        m_anim = GetComponent<Animator>();
 
         PersistantData data = PersistantData.m_instance;
 
-        m_anim = GetComponent<Animator>();
+        m_preloadedInputs = new List<S_inputStruct>();
 
         m_rotation = gameObject.transform.rotation;
 

@@ -12,9 +12,9 @@ public class OnGround3D : BasicState
 
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
+    public override E_PLAYER_STATES Cycle(S_inputStruct inputs)
     {
-        Standard3DMovment(m_speed, inputs, joystickMovement);
+        Standard3DMovment(m_speed, inputs);
 
         //m_data.m_anim.SetFloat("Horizontal Velocity", m_data.m_velocityZ);
 
@@ -54,9 +54,9 @@ public class OnGround3D : BasicState
         return E_PLAYER_STATES.ON_GROUND;
     }
 
-    public override E_PLAYER_STATES InTrigger(string _tag, char inputs)
+    public override E_PLAYER_STATES InTrigger(string _tag, S_inputStruct inputs)
     {
-        if (_tag == "Ladder" && GetInput(E_INPUTS.UP, inputs))
+        if (_tag == "Ladder" && inputs.m_movementVector.y > 0.0f)
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

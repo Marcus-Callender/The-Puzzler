@@ -16,8 +16,7 @@ public class BaseStateMachine : MonoBehaviour
     protected E_PLAYER_STATES m_currentState = E_PLAYER_STATES.IN_AIR;
     protected E_PLAYER_STATES m_newState = E_PLAYER_STATES.IN_AIR;
 
-    protected char m_inputs;
-    protected char m_JoystickMovement;
+    protected S_inputStruct m_inputs;
 
     public virtual void Initialize()
     {
@@ -29,13 +28,13 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual void Cycle()
     {
-        m_newState = GetCurrentState().Cycle(m_inputs, m_JoystickMovement);
+        m_newState = GetCurrentState().Cycle(m_inputs);
         CheckState();
     }
 
     public void FixedCycle()
     {
-        m_newState = GetCurrentState().PhysCycle(m_inputs, m_JoystickMovement);
+        m_newState = GetCurrentState().PhysCycle(m_inputs);
         CheckState();
 
         for (int z = 0; z < 4; z++)
@@ -45,7 +44,7 @@ public class BaseStateMachine : MonoBehaviour
         }
     }
 
-    public void GetInputs(char inputs, char stickMovements)
+    public void GetInputs(S_inputStruct inputs)
     {
         if (m_data.m_preloadedInputs.Count > 0)
         {
@@ -57,7 +56,7 @@ public class BaseStateMachine : MonoBehaviour
             m_inputs = inputs;
         }
 
-        if (m_data.m_preloadedJoystickMovements.Count > 0)
+        /*if (m_data.m_preloadedJoystickMovements.Count > 0)
         {
             m_JoystickMovement = m_data.m_preloadedJoystickMovements[0];
             m_data.m_preloadedJoystickMovements.RemoveAt(0);
@@ -65,7 +64,7 @@ public class BaseStateMachine : MonoBehaviour
         else
         {
             m_JoystickMovement = stickMovements;
-        }
+        }*/
     }
 
     public virtual void OnCollisionStay(Collision Other)
@@ -194,7 +193,7 @@ public class BaseStateMachine : MonoBehaviour
 
     public virtual bool GetInput(E_INPUTS input)
     {
-        return (m_inputs & (char)InputToBit(input)) > 0;
+        return (m_inputs.m_buttons & (char)InputToBit(input)) > 0;
     }
 
     protected virtual int InputToBit(E_INPUTS input)

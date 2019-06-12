@@ -24,11 +24,11 @@ public class InAir3D : BasicState
         m_data.m_anim.SetBool("Airborn", false);
     }
 
-    public override E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
+    public override E_PLAYER_STATES Cycle(S_inputStruct inputs)
     {
         ApplyGravity(m_gravity);
 
-        Standard3DMovment(m_speed, inputs, joystickMovement);
+        Standard3DMovment(m_speed, inputs);
 
         // stops the upward movment if the player lets go of the jump button
         if (!GetInput(E_INPUTS.JUMP, inputs) & m_data.m_velocityY > 0.0f)
@@ -43,7 +43,7 @@ public class InAir3D : BasicState
         return E_PLAYER_STATES.IN_AIR;
     }
 
-    public override E_PLAYER_STATES PhysCycle(char inputs, char joystickMovement)
+    public override E_PLAYER_STATES PhysCycle(S_inputStruct inputs)
     {
         if (m_enableGroundCollisionCount > 0)
         {
@@ -78,10 +78,10 @@ public class InAir3D : BasicState
         return E_PLAYER_STATES.IN_AIR;
     }
 
-    public override E_PLAYER_STATES InTrigger(string _tag, char inputs)
+    public override E_PLAYER_STATES InTrigger(string _tag, S_inputStruct inputs)
     {
         // if the player can and wants to climb a ladder move to the using ladder state
-        if (_tag == "Ladder" && GetInput(E_INPUTS.UP, inputs))
+        if (_tag == "Ladder" && inputs.m_movementVector.y > 0.0f)
         {
             return E_PLAYER_STATES.USEING_LADDER;
         }

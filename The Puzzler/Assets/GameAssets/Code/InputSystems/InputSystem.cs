@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum E_INPUTS
 {
-    LEFT,
-    RIGHT,
-    LEFT_2,
-    RIGHT_2,
-    UP,
-    DOWN,
+    //LEFT,
+    //RIGHT,
+    //LEFT_2,
+    //RIGHT_2,
+    //UP,
+    //DOWN,
     JUMP,
     MOVE_BOX,
     MOVE_BOX_HOLD,
@@ -25,17 +25,39 @@ public enum E_INPUTS
     NULL
 }
 
-public enum E_JOYSTICK_INPUTS
+/*public enum E_JOYSTICK_INPUTS
 {
     HORIZONTAL = 1,
     VERTICAL = 8,
     HORIZONTAL_2 = 64
+}*/
+
+public struct S_inputStruct
+{
+    public char m_buttons;
+    public Vector2 m_movementVector;
+    public Vector2 m_cameraVector;
+
+    public S_inputStruct(int c)
+    {
+        m_buttons = (char)c;
+        m_movementVector = new Vector2(0.0f, 0.0f);
+        m_cameraVector = new Vector2(0.0f, 0.0f);
+    }
+
+    public S_inputStruct(float movementX, float movementY)
+    {
+        m_buttons = (char)0;
+        m_movementVector = new Vector2(movementX, movementY);
+        m_cameraVector = new Vector2(0.0f, 0.0f);
+    }
 }
 
 public class InputSystem : MonoBehaviour
 {
-    protected char m_Inputs;
-    protected char m_JoystickMovement;
+    ///protected char m_inputs;
+    ///protected char m_JoystickMovement;
+    protected S_inputStruct m_inputs;
     //public bool m_pauseInputs;
     public bool m_pause;
 
@@ -60,72 +82,74 @@ public class InputSystem : MonoBehaviour
 
     public virtual void Update()
     {
-        m_Inputs = (char)0;
-        m_JoystickMovement = (char)0;
+        m_inputs = new S_inputStruct(0);
 
         if (!m_pause)
         {
-            if (Input.GetAxisRaw("Horizontal") > 0.0f)
+            /*if (Input.GetAxisRaw("Horizontal") > 0.0f)
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.LEFT);
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.LEFT);
             }
 
             if (Input.GetAxisRaw("Horizontal") < 0.0f)
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT);
-            }
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.RIGHT);
+            }*/
 
-            m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.HORIZONTAL * GetThirdOfAxis(Input.GetAxisRaw("Horizontal")));
+            //m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.HORIZONTAL * GetThirdOfAxis(Input.GetAxisRaw("Horizontal")));
+            m_inputs.m_movementVector.x = Input.GetAxisRaw("Horizontal");
 
-            if (Input.GetAxisRaw("Vertical") > 0.0f)
+            /*if (Input.GetAxisRaw("Vertical") > 0.0f)
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.UP);
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.UP);
             }
 
             if (Input.GetAxisRaw("Vertical") < 0.0f)
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.DOWN);
-            }
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.DOWN);
+            }*/
 
-            m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.VERTICAL * GetThirdOfAxis(Input.GetAxisRaw("Vertical")));
+            //m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.VERTICAL * GetThirdOfAxis(Input.GetAxisRaw("Vertical")));
+            m_inputs.m_movementVector.y = Input.GetAxisRaw("Vertical");
 
             // can't be consolidated into one axis as they will need diffrent behavior in 2D
-            if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) > 0.0f)
+            /*if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) > 0.0f)
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.LEFT_2);
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.LEFT_2);
             }
 
             if ((Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")) < 0.0f)
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.RIGHT_2);
-            }
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.RIGHT_2);
+            }*/
 
-            m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.HORIZONTAL_2 * GetThirdOfAxis(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")));
+            //m_JoystickMovement |= (char)((int)E_JOYSTICK_INPUTS.HORIZONTAL_2 * GetThirdOfAxis(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X")));
+            m_inputs.m_cameraVector.x = Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Stick X");
             //Debug.Log("Mouse: " + Input.GetAxisRaw("Mouse X"));
 
             if (Input.GetButton("Jump"))
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.JUMP);
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.JUMP);
             }
 
             if (Input.GetButtonDown("MoveBox"))
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX);
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.MOVE_BOX);
             }
 
             if (Input.GetButton("MoveBox"))
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.MOVE_BOX_HOLD);
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.MOVE_BOX_HOLD);
             }
 
             if (Input.GetButtonDown("PressButton"))
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.PRESS_BUTTON);
             }
 
             if (Input.GetButtonDown("ResetCamera"))
             {
-                m_Inputs |= (char)InputToBit(E_INPUTS.RESET_CAMERA);
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.RESET_CAMERA);
             }
 
             if (Input.GetButtonDown("Ghost1") || Input.GetButtonDown("Ghost2"))
@@ -141,7 +165,7 @@ public class InputSystem : MonoBehaviour
                 if (m_ghostButtonTimer.m_completed)
                 {
                     m_ghostButtonTimer.m_playing = false;
-                    //m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_HOLD);
+                    //m_inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_HOLD);
 
                     GhostStateMachine nextGhost = GetNextGhost();
 
@@ -176,7 +200,7 @@ public class InputSystem : MonoBehaviour
                 else if (Input.GetButtonUp("Ghost1") || Input.GetButtonUp("Ghost2"))
                 {
                     m_ghostButtonTimer.m_playing = false;
-                    //m_Inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
+                    //m_inputs |= (char)InputToBit(E_INPUTS.GHOST_BUTTON_PRESS);
 
                     GhostStateMachine nextGhost = GetNextGhost();
 
@@ -214,7 +238,7 @@ public class InputSystem : MonoBehaviour
         }
         else
         {
-            m_Inputs = (char)0;
+            m_inputs.m_buttons = (char)0;
         }
 
         if (m_currentGhost)
@@ -225,21 +249,21 @@ public class InputSystem : MonoBehaviour
             }
         }
 
-        m_player.GetInputs((char)0, (char)0);
+        m_player.GetInputs(new S_inputStruct(0));
 
         for (int z = 0; z < m_ghostList.m_ghostsCreated; z++)
         {
-            m_ghostList.m_ghostStateMachines[z].GetInputs((char)0, (char)0);
+            m_ghostList.m_ghostStateMachines[z].GetInputs(new S_inputStruct(0));
         }
 
         if (m_currentGhost)
         {
-            m_currentGhost.GetInputs(m_Inputs, m_JoystickMovement);
+            m_currentGhost.GetInputs(m_inputs);
             m_player.m_data.m_overideFollow = m_currentGhost.m_data;
         }
         else
         {
-            m_player.GetInputs(m_Inputs, m_JoystickMovement);
+            m_player.GetInputs(m_inputs);
             m_player.m_data.m_overideFollow = null;
         }
 
@@ -263,10 +287,10 @@ public class InputSystem : MonoBehaviour
 
     public virtual bool GetInput(E_INPUTS input)
     {
-        return (m_Inputs & (char)InputToBit(input)) > 0;
+        return (m_inputs.m_buttons & (char)InputToBit(input)) > 0;
     }
 
-    public virtual int GetJoystickMovment(E_JOYSTICK_INPUTS input)
+    /*public virtual int GetJoystickMovment(E_JOYSTICK_INPUTS input)
     {
         int magnitude = 0;
 
@@ -275,7 +299,7 @@ public class InputSystem : MonoBehaviour
         magnitude += (m_JoystickMovement & (int)input * 4) > 0 ? 4 : 0;
 
         return magnitude;
-    }
+    }*/
 
     protected virtual int InputToBit(E_INPUTS input)
     {

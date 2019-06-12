@@ -38,12 +38,12 @@ public class BasicState : MonoBehaviour
         return null;
     }
 
-    public virtual E_PLAYER_STATES Cycle(char inputs, char joystickMovement)
+    public virtual E_PLAYER_STATES Cycle(S_inputStruct inputs)
     {
         return E_PLAYER_STATES.NULL;
     }
 
-    public virtual E_PLAYER_STATES PhysCycle(char inputs, char joystickMovement)
+    public virtual E_PLAYER_STATES PhysCycle(S_inputStruct inputs)
     {
         return E_PLAYER_STATES.NULL;
     }
@@ -63,7 +63,7 @@ public class BasicState : MonoBehaviour
         return E_PLAYER_STATES.NULL;
     }
 
-    public virtual E_PLAYER_STATES InTrigger(string _tag, char inputs)
+    public virtual E_PLAYER_STATES InTrigger(string _tag, S_inputStruct inputs)
     {
         return E_PLAYER_STATES.NULL;
     }
@@ -73,9 +73,9 @@ public class BasicState : MonoBehaviour
         return E_PLAYER_STATES.NULL;
     }
 
-    protected void MoveHorzontal(float _speed, char inputs)
+    protected void MoveHorzontal(float _speed, S_inputStruct inputs)
     {
-        if (GetInput(E_INPUTS.LEFT, inputs))
+        /*if (GetInput(E_INPUTS.LEFT, inputs))
         {
             m_data.m_velocityX += _speed;
 
@@ -97,10 +97,20 @@ public class BasicState : MonoBehaviour
                 gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
                 m_data.m_rotation = gameObject.transform.rotation;
             }
+        }*/
+
+
+        m_data.m_velocityX += _speed;
+
+        if (!m_data.m_left_right)
+        {
+            m_data.m_left_right = true;
+            gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+            m_data.m_rotation = gameObject.transform.rotation;
         }
     }
 
-    protected void Standard3DMovment(float _speed, char inputs, char joystickMovement)
+    protected void Standard3DMovment(float _speed, S_inputStruct inputs)
     {
         Debug.DrawRay(transform.position + (-transform.up * 0.1f), -transform.up * 0.1f, Color.red);
 
@@ -109,22 +119,25 @@ public class BasicState : MonoBehaviour
             m_data.resetCameraDirection();
         }
 
-        if (GetInput(E_INPUTS.LEFT_2, inputs))
+        /*if (GetInput(E_INPUTS.LEFT_2, inputs))
         {
             m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2, inputs, joystickMovement));
         }
         else if (GetInput(E_INPUTS.RIGHT_2, inputs))
         {
             m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2, inputs, joystickMovement));
-        }
+        }*/
+
+        m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * inputs.m_cameraVector.x);
 
         Debug.DrawRay(transform.position, m_data.m_cameraRotation * Vector3.forward, Color.red);
 
         Quaternion charicterRot = m_data.m_cameraRotation;
 
-        if (GetInput(E_INPUTS.UP, inputs) || GetInput(E_INPUTS.DOWN, inputs) || GetInput(E_INPUTS.LEFT, inputs) || GetInput(E_INPUTS.RIGHT, inputs))
+        //if (GetInput(E_INPUTS.UP, inputs) || GetInput(E_INPUTS.DOWN, inputs) || GetInput(E_INPUTS.LEFT, inputs) || GetInput(E_INPUTS.RIGHT, inputs))
+        if (inputs.m_movementVector.x != 0 || inputs.m_movementVector.y != 0)
         {
-            charicterRot *= Quaternion.Euler(Vector3.up * (Mathf.Atan2(GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL, inputs, joystickMovement), GetJoystickMovment(E_JOYSTICK_INPUTS.VERTICAL, inputs, joystickMovement)) * Mathf.Rad2Deg));
+            charicterRot *= Quaternion.Euler(Vector3.up * (Mathf.Atan2(inputs.m_movementVector.x, inputs.m_movementVector.y) * Mathf.Rad2Deg));
 
             m_data.m_anim.SetBool("Walking", true);
             transform.rotation = charicterRot;
@@ -142,12 +155,12 @@ public class BasicState : MonoBehaviour
         m_data.m_velocityY -= (_force * Time.deltaTime);
     }
 
-    public virtual bool GetInput(E_INPUTS input, char inputs)
+    public virtual bool GetInput(E_INPUTS input, S_inputStruct inputs)
     {
-        return (inputs & (char)InputToBit(input)) > 0;
+        return (inputs.m_buttons & (char)InputToBit(input)) > 0;
     }
 
-    public virtual int GetJoystickMovment(E_JOYSTICK_INPUTS input, char inputs, char joystickMovement)
+    /*public virtual int GetJoystickMovment(E_JOYSTICK_INPUTS input, S_inputStruct inputs)
     {
         int magnitude = 0;
 
@@ -161,7 +174,7 @@ public class BasicState : MonoBehaviour
         }
 
         return magnitude;
-    }
+    }*/
 
     protected virtual int InputToBit(E_INPUTS input)
     {

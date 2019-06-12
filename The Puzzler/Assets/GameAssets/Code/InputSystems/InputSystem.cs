@@ -19,6 +19,8 @@ public enum E_INPUTS
     GHOST_BUTTON_HOLD,
     GHOST_BUTTON_1,
     GHOST_BUTTON_2,
+    CHANGE_GRAVITY,
+    CANCEL_GRAVITY_CHANGE,
 
     END,
 
@@ -155,6 +157,18 @@ public class InputSystem : MonoBehaviour
             if (Input.GetButtonDown("Ghost1") || Input.GetButtonDown("Ghost2"))
             {
                 m_ghostButtonTimer.Play();
+            }
+
+            if (Input.GetAxis("Change Gravity") > 0.5f)
+            {
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.CHANGE_GRAVITY);
+                Debug.Log("Change Gravity");
+            }
+
+            if (Input.GetAxis("Cancel Gravity Change") > 0.5f)
+            {
+                m_inputs.m_buttons |= (char)InputToBit(E_INPUTS.CANCEL_GRAVITY_CHANGE);
+                Debug.Log("Cancel Gravity Change");
             }
 
             // this sometimes gives a null refrence error when reloading the game after falling from the world, though it dosen't seem to affect gameplay

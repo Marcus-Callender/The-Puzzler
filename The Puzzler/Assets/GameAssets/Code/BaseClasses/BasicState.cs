@@ -100,13 +100,16 @@ public class BasicState : MonoBehaviour
         }*/
 
 
-        m_data.m_velocityX += _speed;
+        m_data.m_velocityX += _speed * inputs.m_movementVector.x;
 
-        if (!m_data.m_left_right)
+        if (inputs.m_movementVector.x != 0.0f)
         {
-            m_data.m_left_right = true;
-            gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-            m_data.m_rotation = gameObject.transform.rotation;
+            if (inputs.m_movementVector.x > 0.0f == !m_data.m_left_right)
+            {
+                m_data.m_left_right = !m_data.m_left_right;
+                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                m_data.m_rotation = gameObject.transform.rotation;
+            }
         }
     }
 

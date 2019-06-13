@@ -72,7 +72,7 @@ public class DimentionTransition : MonoBehaviour
                 //fillInputArray(InputToBit(E_INPUTS.UP), 30, data);
                 for (int z = 0; z < 30; z++)
                 {
-                    data.m_preloadedInputs.Add(new S_inputStruct(0.0f, -1.0f));
+                    data.m_preloadedInputs.Add(new S_inputStruct(0.0f, 1.0f));
                 }
             }
         }

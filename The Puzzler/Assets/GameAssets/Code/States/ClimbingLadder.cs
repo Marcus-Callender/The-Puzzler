@@ -19,14 +19,12 @@ public class ClimbingLadder : BasicState
     public override E_PLAYER_STATES Cycle(S_inputStruct inputs)
     {
         MoveHorzontal(m_speed, inputs);
-        
-        m_data.m_velocityY = 0.1962f;
 
-        m_data.m_velocityY = m_climbSpeed * inputs.m_movementVector.y;
+        m_data.m_velocity.y = m_climbSpeed * inputs.m_movementVector.y;
 
         if (GetInput(E_INPUTS.JUMP, inputs))
         {
-            m_data.m_velocityY = m_jumpSpeed;
+            m_data.m_velocity.y = m_jumpSpeed;
 
             return E_PLAYER_STATES.IN_AIR;
         }

@@ -25,7 +25,7 @@ public class OnGround : BasicState
             m_data.m_anim.SetBool("Walking", false);
         }
 
-        m_data.m_velocityY = -9.81f;
+        m_data.m_velocity.y = -9.81f;
 
         if (GetInput(E_INPUTS.MOVE_BOX, inputs))
         {
@@ -34,7 +34,7 @@ public class OnGround : BasicState
 
         if (GetInput(E_INPUTS.JUMP, inputs))
         {
-            m_data.m_velocityY = m_jumpSpeed;
+            m_data.m_velocity.y = m_jumpSpeed;
 
             return E_PLAYER_STATES.IN_AIR;
         }

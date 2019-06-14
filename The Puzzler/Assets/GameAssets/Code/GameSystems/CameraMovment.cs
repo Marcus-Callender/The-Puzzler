@@ -108,7 +108,7 @@ public class CameraMovment : MonoBehaviour
         }
         else
         {
-            if (followData.m_velocityY != -9.81f)
+            if (followData.m_velocity.y != -9.81f)
             {
                 m_nextCam = E_CamType.CAM_3D_AIR;
             }

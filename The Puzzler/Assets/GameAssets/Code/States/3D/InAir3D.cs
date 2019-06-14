@@ -15,7 +15,7 @@ public class InAir3D : BasicState
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
 
         // sets the animator variables
-        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
+        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocity.y);
         m_data.m_anim.SetBool("Airborn", true);
     }
 
@@ -26,19 +26,19 @@ public class InAir3D : BasicState
 
     public override E_PLAYER_STATES Cycle(S_inputStruct inputs)
     {
-        ApplyGravity(m_gravity);
+        ApplyGravity();
 
         Standard3DMovment(m_speed, inputs);
 
         // stops the upward movment if the player lets go of the jump button
-        if (!GetInput(E_INPUTS.JUMP, inputs) & m_data.m_velocityY > 0.0f)
+        if (!GetInput(E_INPUTS.JUMP, inputs) & m_data.m_velocity.y > 0.0f)
         {
             Debug.Log("Short Jump");
-            m_data.m_velocityY = 0.0f;
+            m_data.m_velocity.y = 0.0f;
         }
 
         // updates the animator on the player current y velocity
-        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
+        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocity.y);
 
         return E_PLAYER_STATES.IN_AIR;
     }
@@ -55,7 +55,7 @@ public class InAir3D : BasicState
 
     public override E_PLAYER_STATES Colide(E_DIRECTIONS _dir, string _tag)
     {
-        if (_dir == E_DIRECTIONS.TOP && m_data.m_velocityY > 0.0f)
+        if (_dir == E_DIRECTIONS.TOP && m_data.m_velocity.y > 0.0f)
         {
             RaycastHit hit;
 

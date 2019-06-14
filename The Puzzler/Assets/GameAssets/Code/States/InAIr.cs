@@ -14,7 +14,7 @@ public class InAIr : BasicState
     {
         m_enableGroundCollisionCount = m_enableGroundCollisionFrames;
 
-        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
+        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocity.y);
         m_data.m_anim.SetBool("Airborn", true);
     }
 
@@ -27,17 +27,17 @@ public class InAIr : BasicState
     {
         Debug.DrawRay(transform.position + (transform.up * 1.5f), transform.up * 0.1f, Color.blue);
 
-        ApplyGravity(m_gravity);
+        ApplyGravity();
 
         MoveHorzontal(m_speed, inputs);
 
-        if (!GetInput(E_INPUTS.JUMP, inputs) & m_data.m_velocityY > 0.0f)
+        if (!GetInput(E_INPUTS.JUMP, inputs) & m_data.m_velocity.y > 0.0f)
         {
             Debug.Log("Short Jump");
-            m_data.m_velocityY = 0.0f;
+            m_data.m_velocity.y = 0.0f;
         }
 
-        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocityY);
+        m_data.m_anim.SetFloat("Vertical Velocity", m_data.m_velocity.y);
 
         return E_PLAYER_STATES.IN_AIR;
     }
@@ -54,7 +54,7 @@ public class InAIr : BasicState
 
     public override E_PLAYER_STATES Colide(E_DIRECTIONS _dir, string _tag)
     {
-        if (_dir == E_DIRECTIONS.TOP && m_data.m_velocityY > 0.0f)
+        if (_dir == E_DIRECTIONS.TOP && m_data.m_velocity.y > 0.0f)
         {
             RaycastHit hit;
 

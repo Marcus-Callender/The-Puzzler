@@ -12,9 +12,9 @@ public struct CharicterPosition
 
 public class PlayerData : MonoBehaviour
 {
-    public float m_velocityX = 0.0f;
-    public float m_velocityY = 0.0f;
-    public float m_velocityZ = 0.0f;
+    public Vector3 m_velocity;
+
+    public Vector3 m_gravity;
 
     // used to tell the camera to transition to a new state
     public bool m_moveingBox = false;
@@ -110,15 +110,15 @@ public class PlayerData : MonoBehaviour
     {
         if (!m_use3D)
         {
-            m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocityX) + (gameObject.transform.up * m_velocityY);
+            m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocity.x) + (gameObject.transform.up * m_velocity.y);
         }
         else
         {
-            m_rigb.velocity = (gameObject.transform.forward * m_velocityX) + (gameObject.transform.up * m_velocityY) + (gameObject.transform.right * m_velocityZ);
+            m_rigb.velocity = (gameObject.transform.forward * m_velocity.x) + (gameObject.transform.up * m_velocity.y) + (gameObject.transform.right * m_velocity.z);
         }
 
-        m_velocityX = 0.0f;
-        m_velocityZ = 0.0f;
+        m_velocity.x = 0.0f;
+        m_velocity.z = 0.0f;
     }
 
     public Vector3 GetCenterTransform()
@@ -170,11 +170,11 @@ public class PlayerData : MonoBehaviour
         if (!m_use3D && !m_left_right)
         {
             // used in excaptions where the box movment would be reversed
-            vel += (-m_velocityX * transform.forward) + (m_velocityY * transform.up) + (gameObject.transform.right * m_velocityZ);
+            vel += (-m_velocity.x * transform.forward) + (m_velocity.y * transform.up) + (gameObject.transform.right * m_velocity.z);
         }
         else
         {
-            vel += (m_velocityX * transform.forward) + (m_velocityY * transform.up) + (gameObject.transform.right * m_velocityZ);
+            vel += (m_velocity.x * transform.forward) + (m_velocity.y * transform.up) + (gameObject.transform.right * m_velocity.z);
         }
 
         return vel;

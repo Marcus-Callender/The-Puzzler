@@ -116,8 +116,8 @@ public class MoveingBox : BasicState
 
         if (m_data.m_use3D)
         {
-            m_data.m_velocityX += m_dragSpeed * inputs.m_movementVector.x;
-            m_data.m_velocityZ += m_dragSpeed * inputs.m_movementVector.y;
+            m_data.m_velocity.x += m_dragSpeed * inputs.m_movementVector.x;
+            m_data.m_velocity.z += m_dragSpeed * inputs.m_movementVector.y;
         }
         else
         {

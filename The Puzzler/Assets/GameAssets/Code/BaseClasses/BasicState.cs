@@ -99,8 +99,7 @@ public class BasicState : MonoBehaviour
             }
         }*/
 
-
-        m_data.m_velocityX += _speed * inputs.m_movementVector.x;
+        m_data.m_velocity.x += _speed * inputs.m_movementVector.x;
 
         if (inputs.m_movementVector.x != 0.0f)
         {
@@ -145,7 +144,7 @@ public class BasicState : MonoBehaviour
             m_data.m_anim.SetBool("Walking", true);
             transform.rotation = charicterRot;
             m_data.m_rotation = charicterRot;
-            m_data.m_velocityX += _speed;
+            m_data.m_velocity.x += _speed;
         }
         else
         {
@@ -153,9 +152,9 @@ public class BasicState : MonoBehaviour
         }
     }
 
-    protected void ApplyGravity(float _force)
+    protected void ApplyGravity()
     {
-        m_data.m_velocityY -= (_force * Time.deltaTime);
+        m_data.m_velocity += (m_data.m_gravity * Time.deltaTime);
     }
 
     public virtual bool GetInput(E_INPUTS input, S_inputStruct inputs)

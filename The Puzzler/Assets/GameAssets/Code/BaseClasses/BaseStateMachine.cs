@@ -86,18 +86,18 @@ public class BaseStateMachine : MonoBehaviour
 
             if (rigb)
             {
-                m_data.m_velocityY += rigb.velocity.y;
+                m_data.m_velocity.y += rigb.velocity.y;
 
                 if (m_data.m_use3D)
                 {
                     Vector3 platformVelToLocalVel = transform.InverseTransformDirection(rigb.velocity);
-                    m_data.m_velocityX += platformVelToLocalVel.z;
-                    m_data.m_velocityZ += platformVelToLocalVel.x;
+                    m_data.m_velocity.x += platformVelToLocalVel.z;
+                    m_data.m_velocity.z += platformVelToLocalVel.x;
                 }
                 else
                 {
-                    m_data.m_velocityX += rigb.velocity.x;
-                    m_data.m_velocityZ += rigb.velocity.z;
+                    m_data.m_velocity.x += rigb.velocity.x;
+                    m_data.m_velocity.z += rigb.velocity.z;
                 }
             }
         }

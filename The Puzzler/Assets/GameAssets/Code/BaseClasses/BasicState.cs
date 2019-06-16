@@ -6,7 +6,6 @@ public class BasicState : MonoBehaviour
 {
     protected PlayerData m_data;
     protected Rigidbody m_rigb;
-    //public char m_inputs;
 
     public bool m_useWallGravity = false;
 
@@ -75,39 +74,21 @@ public class BasicState : MonoBehaviour
 
     protected void MoveHorzontal(float _speed, S_inputStruct inputs)
     {
-        /*if (GetInput(E_INPUTS.LEFT, inputs))
-        {
-            m_data.m_velocityX += _speed;
-
-            if (!m_data.m_left_right)
-            {
-                m_data.m_left_right = true;
-                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-                m_data.m_rotation = gameObject.transform.rotation;
-            }
-        }
-
-        if (GetInput(E_INPUTS.RIGHT, inputs))
-        {
-            m_data.m_velocityX += -_speed;
-
-            if (m_data.m_left_right)
-            {
-                m_data.m_left_right = false;
-                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-                m_data.m_rotation = gameObject.transform.rotation;
-            }
-        }*/
-
-        m_data.m_velocity.x += _speed * inputs.m_movementVector.x;
+        m_data.m_velocity.x += _speed * Mathf.Abs(inputs.m_movementVector.x);
 
         if (inputs.m_movementVector.x != 0.0f)
         {
             if (inputs.m_movementVector.x > 0.0f == !m_data.m_left_right)
             {
-                m_data.m_left_right = !m_data.m_left_right;
-                gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-                m_data.m_rotation = gameObject.transform.rotation;
+                //m_data.m_left_right = !m_data.m_left_right;
+                //gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                //m_data.SetRotation(gameObject.transform.rotation);
+
+                transform.rotation *= Quaternion.Euler(Vector3.up * 180.0f);
+                
+                //transform.rotation = charicterRot;
+                //m_data.SetRotation(charicterRot);
+                //m_data.m_velocity.x += _speed;
             }
         }
     }
@@ -120,30 +101,20 @@ public class BasicState : MonoBehaviour
         {
             m_data.resetCameraDirection();
         }
-
-        /*if (GetInput(E_INPUTS.LEFT_2, inputs))
-        {
-            m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2, inputs, joystickMovement));
-        }
-        else if (GetInput(E_INPUTS.RIGHT_2, inputs))
-        {
-            m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * -GetJoystickMovment(E_JOYSTICK_INPUTS.HORIZONTAL_2, inputs, joystickMovement));
-        }*/
-
+        
         m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * inputs.m_cameraVector.x);
 
         Debug.DrawRay(transform.position, m_data.m_cameraRotation * Vector3.forward, Color.red);
 
         Quaternion charicterRot = m_data.m_cameraRotation;
-
-        //if (GetInput(E_INPUTS.UP, inputs) || GetInput(E_INPUTS.DOWN, inputs) || GetInput(E_INPUTS.LEFT, inputs) || GetInput(E_INPUTS.RIGHT, inputs))
+        
         if (inputs.m_movementVector.x != 0 || inputs.m_movementVector.y != 0)
         {
             charicterRot *= Quaternion.Euler(Vector3.up * (Mathf.Atan2(inputs.m_movementVector.x, inputs.m_movementVector.y) * Mathf.Rad2Deg));
 
             m_data.m_anim.SetBool("Walking", true);
             transform.rotation = charicterRot;
-            m_data.m_rotation = charicterRot;
+            m_data.SetRotation(charicterRot);
             m_data.m_velocity.x += _speed;
         }
         else
@@ -161,23 +132,7 @@ public class BasicState : MonoBehaviour
     {
         return (inputs.m_buttons & (char)InputToBit(input)) > 0;
     }
-
-    /*public virtual int GetJoystickMovment(E_JOYSTICK_INPUTS input, S_inputStruct inputs)
-    {
-        int magnitude = 0;
-
-        magnitude += (joystickMovement & (int)input) > 0 ? 1 : 0;
-        magnitude += (joystickMovement & (int)input * 2) > 0 ? 2 : 0;
-        magnitude += (joystickMovement & (int)input * 4) > 0 ? 4 : 0;
-
-        if (input == E_JOYSTICK_INPUTS.HORIZONTAL && GetInput(E_INPUTS.RIGHT, inputs) || input == E_JOYSTICK_INPUTS.VERTICAL && GetInput(E_INPUTS.DOWN, inputs))
-        {
-            magnitude *= -1;
-        }
-
-        return magnitude;
-    }*/
-
+    
     protected virtual int InputToBit(E_INPUTS input)
     {
         int bit = 1;

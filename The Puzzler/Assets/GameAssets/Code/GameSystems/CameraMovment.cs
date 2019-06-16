@@ -180,34 +180,7 @@ public class CameraMovment : MonoBehaviour
         pos += (transform.up * 2.0f) - (transform.up * m_offsetY);
         pos += (transform.right * m_offsetX);
         pos += transform.forward * -8.0f;
-
-        //float yPosLerp = Mathf.Lerp(gameObject.transform.position.y, data.playerPos.y + 3.0f, Time.deltaTime * 3.0f);
-        //
-        //Vector3 pos = data.playerPos;
-        //pos.y = yPosLerp;
-        //
-        //if (Mathf.Abs(data.playerPos.x - gameObject.transform.position.x) > 1.5f)
-        //{
-        //    if (data.playerPos.x > gameObject.transform.position.x)
-        //    {
-        //        pos += 14.0f * Time.deltaTime * gameObject.transform.right;
-        //    }
-        //    else
-        //    {
-        //        pos -= 14.0f * Time.deltaTime * gameObject.transform.right;
-        //    }
-        //}
-        //else if (data.playerPos.x > gameObject.transform.position.x + 1.0f)
-        //{
-        //    pos = (data.playerPos.x - 1.0f) * gameObject.transform.right;
-        //}
-        //else if (data.playerPos.x < gameObject.transform.position.x - 1.0f)
-        //{
-        //    pos = (data.playerPos.x + 1.0f) * gameObject.transform.right;
-        //}
-        //
-        //gameObject.transform.position = pos;
-
+        
         return pos;
     }
 

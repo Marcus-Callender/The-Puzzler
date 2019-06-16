@@ -13,10 +13,7 @@ public class GhostStateMachine : BaseStateMachine
     public int m_id;
 
     public const int m_recordingSize = 60 * 6;
-
-    //private char m_Inputs;
-    //private char[] m_recordedInputs = new char[m_recordingSize];
-    //private char[] m_recordedJoystickPositions = new char[m_recordingSize];
+    
     private S_inputStruct[] m_recordedInputs = new S_inputStruct[m_recordingSize];
     public int m_arrayPosition = 0;
     public bool m_recorded = false;
@@ -75,7 +72,7 @@ public class GhostStateMachine : BaseStateMachine
             gameObject.transform.position = posData.pos;
             gameObject.transform.rotation = posData.rot;
             m_data.m_cameraRotation = posData.rot;
-            m_data.m_rotation = posData.rot;
+            m_data.SetRotation(posData.rot);
             m_data.m_left_right = posData.left_right;
 
             m_data.m_use3D = posData.use3D;
@@ -173,7 +170,7 @@ public class GhostStateMachine : BaseStateMachine
                     gameObject.transform.rotation = m_startingRotation;
 
                     m_data.m_cameraRotation = m_startingRotation;
-                    m_data.m_rotation = m_startingRotation;
+                    m_data.SetRotation(m_startingRotation);
                 }
                 else if (m_arrayPosition < m_recordingSize)
                 {
@@ -208,7 +205,7 @@ public class GhostStateMachine : BaseStateMachine
                     gameObject.transform.rotation = m_startingRotation;
 
                     m_data.m_cameraRotation = m_startingRotation;
-                    m_data.m_rotation = m_startingRotation;
+                    m_data.SetRotation(m_startingRotation);
                 }
             }
             else if (m_playing)
@@ -237,7 +234,7 @@ public class GhostStateMachine : BaseStateMachine
                     gameObject.transform.rotation = m_startingRotation;
 
                     m_data.m_cameraRotation = m_startingRotation;
-                    m_data.m_rotation = m_startingRotation;
+                    m_data.SetRotation(m_startingRotation);
                 }
             }
         }
@@ -295,7 +292,7 @@ public class GhostStateMachine : BaseStateMachine
         gameObject.transform.rotation = m_startingRotation;
 
         m_data.m_cameraRotation = m_startingRotation;
-        m_data.m_rotation = m_startingRotation;
+        m_data.SetRotation(m_startingRotation);
     }
 
     public IEnumerator Play()
@@ -336,7 +333,7 @@ public class GhostStateMachine : BaseStateMachine
         gameObject.transform.rotation = m_startingRotation;
 
         m_data.m_cameraRotation = m_startingRotation;
-        m_data.m_rotation = m_startingRotation;
+        m_data.SetRotation(m_startingRotation);
     }
 
     protected override void CheckState()

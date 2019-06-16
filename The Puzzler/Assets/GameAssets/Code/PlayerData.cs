@@ -1,4 +1,4 @@
-﻿   using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,14 +46,14 @@ public class PlayerData : MonoBehaviour
     public bool m_use3D = false;
 
     // TODO see if this can be removed
-    public Quaternion m_rotation;
+    private Quaternion m_rotation;
 
     // used to prevent the player flipping while in 2D and moving crates 
     public bool m_stopRotation = false;
-    
+
     // used to prevent delta time indapendent actions such as ghost playbacks from running while the game is paused
     public bool m_pause = false;
-    
+
     public Quaternion m_cameraRotation;
 
     public List<S_inputStruct> m_preloadedInputs;
@@ -82,26 +82,6 @@ public class PlayerData : MonoBehaviour
     {
         if (!m_stopRotation)
         {
-        //    if (!m_use3D)
-        //    {
-        //        //if (m_left_right && m_velocityX < 0.0f)
-        //        //{
-        //        //    gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-        //        //
-        //        //    m_rotation = gameObject.transform.rotation;
-        //        //
-        //        //    //m_left_right = false;
-        //        //}
-        //        //else if (!m_left_right && m_velocityX > 0.0f)
-        //        //{
-        //        //    gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-        //        //
-        //        //    m_rotation = gameObject.transform.rotation;
-        //        //
-        //        //    //m_left_right = true;
-        //        //}
-        //    }
-        //
             gameObject.transform.rotation = m_rotation;
         }
     }
@@ -151,7 +131,7 @@ public class PlayerData : MonoBehaviour
     public void SetRotation(Quaternion rot)
     {
         // only run when the player is in 2d
-        if (!m_use3D)
+        /*if (!m_use3D)
         {
             Quaternion newRot = rot;
 
@@ -159,7 +139,7 @@ public class PlayerData : MonoBehaviour
             newRot *= Quaternion.Euler(0.0f, 90.0f, 0.0f);
 
             m_rotation = newRot;
-        }
+        }*/
     }
 
     // returns the vecolity the player will attempt to move this frame
@@ -196,5 +176,10 @@ public class PlayerData : MonoBehaviour
     {
         m_cameraRotation = transform.rotation;
         m_rotation = transform.rotation;
+    }
+
+    public Quaternion getCameraRot()
+    {
+        return m_cameraRotation;
     }
 }

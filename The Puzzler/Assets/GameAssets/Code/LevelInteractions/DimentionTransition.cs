@@ -48,17 +48,7 @@ public class DimentionTransition : MonoBehaviour
                 data.m_left_right = m_camera_left_right;
                 // alignes the player with the dimention transitions rotation so the player can't unintentionaly walk off a platrorm
                 data.SetRotation(gameObject.transform.rotation);
-
-                /*if (!m_camera_left_right)
-                {
-                    fillInputArray(InputToBit(E_INPUTS.RIGHT), 30, data);
-                }
-                else
-                {
-                    fillInputArray(InputToBit(E_INPUTS.LEFT), 30, data);
-                }*/
-
-
+                
                 for (int z = 0; z < 30; z++)
                 {
                     data.m_preloadedInputs.Add(new S_inputStruct(m_camera_left_right ? 1.0f: -1.0f, 0.0f));
@@ -68,8 +58,7 @@ public class DimentionTransition : MonoBehaviour
             {
                 // position or rotation adjustemts aren't needed for 2D to 3D transitions
                 data.m_use3D = true;
-                
-                //fillInputArray(InputToBit(E_INPUTS.UP), 30, data);
+
                 for (int z = 0; z < 30; z++)
                 {
                     data.m_preloadedInputs.Add(new S_inputStruct(0.0f, 1.0f));
@@ -77,15 +66,7 @@ public class DimentionTransition : MonoBehaviour
             }
         }
     }
-
-    /*private void fillInputArray(int fill, int ammount, PlayerData data)
-    {
-        for (int z = 0; z < ammount; z++)
-        {
-            data.m_preloadedInputs.Add((char)fill);
-        }
-    }*/
-
+    
     protected virtual int InputToBit(E_INPUTS input)
     {
         int bit = 1;

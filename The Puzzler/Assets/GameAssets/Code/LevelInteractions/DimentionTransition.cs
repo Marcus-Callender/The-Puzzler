@@ -47,7 +47,7 @@ public class DimentionTransition : MonoBehaviour
                 data.m_use3D = false;
                 data.m_left_right = m_camera_left_right;
                 // alignes the player with the dimention transitions rotation so the player can't unintentionaly walk off a platrorm
-                data.SetRotation(gameObject.transform.rotation);
+                data.SetRotation(gameObject.transform.rotation * Quaternion.Euler(Vector3.up * 90.0f));
                 
                 for (int z = 0; z < 30; z++)
                 {

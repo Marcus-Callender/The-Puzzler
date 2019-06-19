@@ -74,21 +74,22 @@ public class BasicState : MonoBehaviour
 
     protected void MoveHorzontal(float _speed, S_inputStruct inputs)
     {
-        m_data.m_velocity.x += _speed * Mathf.Abs(inputs.m_movementVector.x);
+        m_data.m_velocity.x += _speed * /*Mathf.Abs*/(inputs.m_movementVector.x);
 
         if (inputs.m_movementVector.x != 0.0f)
         {
             if (inputs.m_movementVector.x > 0.0f == !m_data.m_left_right)
             {
-                //m_data.m_left_right = !m_data.m_left_right;
-                //gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
-                //m_data.SetRotation(gameObject.transform.rotation);
+                m_data.m_left_right = !m_data.m_left_right;
+                ///gameObject.transform.Rotate(new Vector3(0.0f, 180.0f));
+                ///m_data.SetRotation(gameObject.transform.rotation);
 
-                transform.rotation *= Quaternion.Euler(Vector3.up * 180.0f);
-                
-                //transform.rotation = charicterRot;
-                //m_data.SetRotation(charicterRot);
-                //m_data.m_velocity.x += _speed;
+                //transform.rotation *= Quaternion.Euler(Vector3.up * 180.0f);
+                m_data.SetRotation(gameObject.transform.rotation * Quaternion.Euler(Vector3.up * 180.0f));
+
+                ///transform.rotation = charicterRot;
+                ///m_data.SetRotation(charicterRot);
+                ///m_data.m_velocity.x += _speed;
             }
         }
     }
@@ -113,7 +114,7 @@ public class BasicState : MonoBehaviour
             charicterRot *= Quaternion.Euler(Vector3.up * (Mathf.Atan2(inputs.m_movementVector.x, inputs.m_movementVector.y) * Mathf.Rad2Deg));
 
             m_data.m_anim.SetBool("Walking", true);
-            transform.rotation = charicterRot;
+            //transform.rotation = charicterRot;
             m_data.SetRotation(charicterRot);
             m_data.m_velocity.x += _speed;
         }

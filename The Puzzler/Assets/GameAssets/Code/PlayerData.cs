@@ -67,7 +67,7 @@ public class PlayerData : MonoBehaviour
 
         m_preloadedInputs = new List<S_inputStruct>();
 
-        m_rotation = gameObject.transform.rotation;
+        SetRotation(gameObject.transform.rotation);
 
         if (data)
         {
@@ -130,16 +130,7 @@ public class PlayerData : MonoBehaviour
 
     public void SetRotation(Quaternion rot)
     {
-        // only run when the player is in 2d
-        /*if (!m_use3D)
-        {
-            Quaternion newRot = rot;
-
-            // rotates the player 90 degrees sideways
-            newRot *= Quaternion.Euler(0.0f, 90.0f, 0.0f);
-
-            m_rotation = newRot;
-        }*/
+        m_rotation = rot;
     }
 
     // returns the vecolity the player will attempt to move this frame
@@ -175,7 +166,7 @@ public class PlayerData : MonoBehaviour
     public void resetCameraDirection()
     {
         m_cameraRotation = transform.rotation;
-        m_rotation = transform.rotation;
+        SetRotation(transform.rotation);
     }
 
     public Quaternion getCameraRot()

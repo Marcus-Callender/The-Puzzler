@@ -116,41 +116,12 @@ public class MoveingBox : BasicState
 
         if (m_data.m_use3D)
         {
-            //m_data.m_velocity.x += m_dragSpeed * inputs.m_movementVector.x;
-            //m_data.m_velocity.z += m_dragSpeed * inputs.m_movementVector.y;
-
-            //Vector3 newDir = new Vector3();
-            //
-            //newDir += m_dragSpeed * inputs.m_movementVector.x * transform.right;
-            //newDir += m_dragSpeed * inputs.m_movementVector.y * transform.forward;
-
-            //m_data.m_velocity += inputs.m_movementVector.x * m_dragSpeed * transform.right;
-            //m_data.m_velocity += inputs.m_movementVector.y * m_dragSpeed * transform.forward;
-
-            m_data.AddVelocity(inputs.m_movementVector.x * m_dragSpeed * transform.right);
-            m_data.AddVelocity(inputs.m_movementVector.y * m_dragSpeed * transform.forward);
-
-            //if (inputs.m_movementVector.magnitude > 0.0f)
+            m_data.AddVelocity(inputs.m_movementVector.y * m_dragSpeed, 0.0f, inputs.m_movementVector.x * m_dragSpeed);
+            
             if (inputs.m_movementVector.x != 0.0f || inputs.m_movementVector.y != 0.0f)
             {
                 Debug.Log("moving");
-                //inputs.m_movementVector.Normalize();
             }
-
-            //Vector3 DRPoint = transform.position;
-            //DRPoint.y += 1.0f;
-            //Debug.DrawRay(DRPoint, transform.forward, Color.blue);
-            //Debug.DrawRay(DRPoint, transform.right, Color.red);
-
-            Debug.Log("Transform, F: " + transform.forward + ", R: " + transform.right);
-            //Debug.Log("New Dir, X: " + newDir.x + ", Y: " + newDir.y);
-
-            ///Vector3 localDir = new Vector3(m_dragSpeed * inputs.m_movementVector.x, m_dragSpeed * inputs.m_movementVector.y);
-            ///
-            ///Vector3 worldDir = transform.TransformVector(localDir);
-            ///
-            ///m_data.m_velocity.x += worldDir.x;
-            ///m_data.m_velocity.z += worldDir.y;
         }
         else
         {

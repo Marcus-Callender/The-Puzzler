@@ -18,7 +18,7 @@ public class OnGround3D : BasicState
 
         //m_data.m_anim.SetFloat("Horizontal Velocity", m_data.m_velocityZ);
 
-        m_data.m_velocity.y = -9.81f;
+        m_data.SetYVelocity(-9.81f);
 
         if (GetInput(E_INPUTS.MOVE_BOX, inputs))
         {
@@ -27,7 +27,7 @@ public class OnGround3D : BasicState
 
         if (GetInput(E_INPUTS.JUMP, inputs))
         {
-            m_data.m_velocity.y = m_jumpSpeed;
+            m_data.SetYVelocity(m_jumpSpeed);
 
             return E_PLAYER_STATES.IN_AIR;
         }

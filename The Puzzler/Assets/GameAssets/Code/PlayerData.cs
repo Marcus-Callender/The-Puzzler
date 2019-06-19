@@ -12,7 +12,7 @@ public struct CharicterPosition
 
 public class PlayerData : MonoBehaviour
 {
-    public Vector3 m_velocity;
+    private Vector3 m_velocity;
 
     public Vector3 m_gravity;
 
@@ -172,5 +172,59 @@ public class PlayerData : MonoBehaviour
     public Quaternion getCameraRot()
     {
         return m_cameraRotation;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return m_velocity;
+    }
+
+    public void AddVelocity(Vector3 AddVel)
+    {
+        Debug.Log("Add velocity: " + AddVel);
+
+        m_velocity += AddVel;
+    }
+
+    public void AddVelocity(float x, float y, float z)
+    {
+        Debug.Log("Add velocity: x:" + x + ", y:" + y + ", z:" + z);
+
+        if (Mathf.Abs(z) > 6.5 || Mathf.Abs(z) > 6.5)
+        {
+            Debug.LogError("Movment error!");
+        }
+
+        m_velocity.x += x;
+        m_velocity.y += y;
+        m_velocity.z += z;
+    }
+
+    public void SetVelocity(float x, float y, float z)
+    {
+        m_velocity.x = x;
+        m_velocity.y = y;
+        m_velocity.z = z;
+    }
+
+    public void SetYVelocity(float y)
+    {
+        m_velocity.y = y;
+    }
+
+    public void SetVelocity(char c, float f)
+    {
+        if (c == 'x')
+        {
+            m_velocity.x = f;
+        }
+        if (c == 'y')
+        {
+            m_velocity.y = f;
+        }
+        if (c == 'z')
+        {
+            m_velocity.z = f;
+        }
     }
 }

@@ -84,20 +84,23 @@ public class BaseStateMachine : MonoBehaviour
                 rigb = gameObject.transform.parent.GetComponent<Rigidbody>();
             }
 
-            if (rigb)
+            if (rigb && Other.gameObject.tag != "Box")
             {
-                m_data.m_velocity.y += rigb.velocity.y;
+                //m_data.m_velocity.y += rigb.velocity.y;
+                m_data.AddVelocity(0.0f, rigb.velocity.y, 0.0f);
 
                 if (m_data.m_use3D)
                 {
                     Vector3 platformVelToLocalVel = transform.InverseTransformDirection(rigb.velocity);
-                    m_data.m_velocity.x += platformVelToLocalVel.z;
-                    m_data.m_velocity.z += platformVelToLocalVel.x;
+                    //m_data.m_velocity.x += platformVelToLocalVel.z;
+                    //m_data.m_velocity.z += platformVelToLocalVel.x;
+                    m_data.AddVelocity(platformVelToLocalVel.z, 0.0f, platformVelToLocalVel.x);
                 }
                 else
                 {
-                    m_data.m_velocity.x += rigb.velocity.x;
-                    m_data.m_velocity.z += rigb.velocity.z;
+                    //m_data.m_velocity.x += rigb.velocity.x;
+                    //m_data.m_velocity.z += rigb.velocity.z;
+                    m_data.AddVelocity(rigb.velocity.x, 0.0f, rigb.velocity.z);
                 }
             }
         }

@@ -20,11 +20,11 @@ public class ClimbingLadder : BasicState
     {
         MoveHorzontal(m_speed, inputs);
 
-        m_data.m_velocity.y = m_climbSpeed * inputs.m_movementVector.y;
+        m_data.SetYVelocity(m_climbSpeed * inputs.m_movementVector.y);
 
         if (GetInput(E_INPUTS.JUMP, inputs))
         {
-            m_data.m_velocity.y = m_jumpSpeed;
+            m_data.SetYVelocity(m_jumpSpeed);
 
             return E_PLAYER_STATES.IN_AIR;
         }

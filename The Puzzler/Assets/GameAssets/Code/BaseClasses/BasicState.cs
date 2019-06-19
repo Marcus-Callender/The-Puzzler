@@ -74,7 +74,8 @@ public class BasicState : MonoBehaviour
 
     protected void MoveHorzontal(float _speed, S_inputStruct inputs)
     {
-        m_data.m_velocity.x += _speed * /*Mathf.Abs*/(inputs.m_movementVector.x);
+        //m_data.m_velocity.x += _speed * /*Mathf.Abs*/(inputs.m_movementVector.x);
+        m_data.AddVelocity(0.0f, _speed * inputs.m_movementVector.x, 0.0f);
 
         if (inputs.m_movementVector.x != 0.0f)
         {
@@ -116,7 +117,8 @@ public class BasicState : MonoBehaviour
             m_data.m_anim.SetBool("Walking", true);
             //transform.rotation = charicterRot;
             m_data.SetRotation(charicterRot);
-            m_data.m_velocity.x += _speed;
+            //m_data.m_velocity.x += _speed;
+            m_data.AddVelocity(_speed, 0.0f, 0.0f);
         }
         else
         {
@@ -126,7 +128,8 @@ public class BasicState : MonoBehaviour
 
     protected void ApplyGravity()
     {
-        m_data.m_velocity += (m_data.m_gravity * Time.deltaTime);
+        //m_data.m_velocity += (m_data.m_gravity * Time.deltaTime);
+        m_data.AddVelocity(m_data.m_gravity * Time.deltaTime);
     }
 
     public virtual bool GetInput(E_INPUTS input, S_inputStruct inputs)

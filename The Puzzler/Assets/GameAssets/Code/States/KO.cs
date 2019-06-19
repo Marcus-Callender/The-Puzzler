@@ -24,9 +24,7 @@ public class KO : BasicState
 
     public override E_PLAYER_STATES Cycle(S_inputStruct inputs)
     {
-        m_data.m_velocity.x = 0.0f;
-        m_data.m_velocity.y = 0.0f;
-        m_data.m_velocity.z = 0.0f;
+        m_data.SetVelocity(0.0f, 0.0f, 0.0f);
 
         m_KOTime.Cycle();
 

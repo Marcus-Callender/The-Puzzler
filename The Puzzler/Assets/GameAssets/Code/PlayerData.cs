@@ -181,15 +181,11 @@ public class PlayerData : MonoBehaviour
 
     public void AddVelocity(Vector3 AddVel)
     {
-        Debug.Log("Add velocity: " + AddVel);
-
         m_velocity += AddVel;
     }
 
     public void AddVelocity(float x, float y, float z)
     {
-        Debug.Log("Add velocity: x:" + x + ", y:" + y + ", z:" + z);
-
         if (Mathf.Abs(z) > 6.5 || Mathf.Abs(z) > 6.5)
         {
             Debug.LogError("Movment error!");

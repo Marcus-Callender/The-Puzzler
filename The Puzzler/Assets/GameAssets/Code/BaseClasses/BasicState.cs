@@ -75,7 +75,7 @@ public class BasicState : MonoBehaviour
     protected void MoveHorzontal(float _speed, S_inputStruct inputs)
     {
         //m_data.m_velocity.x += _speed * /*Mathf.Abs*/(inputs.m_movementVector.x);
-        m_data.AddVelocity(0.0f, _speed * inputs.m_movementVector.x, 0.0f);
+        m_data.AddVelocity(_speed * inputs.m_movementVector.x, 0.0f, 0.0f);
 
         if (inputs.m_movementVector.x != 0.0f)
         {

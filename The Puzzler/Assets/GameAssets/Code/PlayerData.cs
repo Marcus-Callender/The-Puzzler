@@ -12,9 +12,12 @@ public struct CharicterPosition
 
 public class PlayerData : MonoBehaviour
 {
+    [SerializeField]
     private Vector3 m_velocity;
 
-    public Vector3 m_gravity;
+    public float m_gravity = 23.0f;
+
+    public Vector3 m_gravityDirection;
 
     // used to tell the camera to transition to a new state
     public bool m_moveingBox = false;
@@ -54,7 +57,8 @@ public class PlayerData : MonoBehaviour
     // used to prevent delta time indapendent actions such as ghost playbacks from running while the game is paused
     public bool m_pause = false;
 
-    public Quaternion m_cameraRotation;
+    //public Quaternion m_cameraRotation;
+    public float m_cameraRotation;
 
     public List<S_inputStruct> m_preloadedInputs;
 
@@ -68,14 +72,16 @@ public class PlayerData : MonoBehaviour
         m_preloadedInputs = new List<S_inputStruct>();
 
         SetRotation(gameObject.transform.rotation);
-
+        m_gravityDirection = new Vector3(0.0f, -1.0f, 0.0f);
+        
         if (data)
         {
             m_playerDoubleJump = data.m_playerDoubleJump;
             m_playerWallSlide = data.m_playerWallSlide;
         }
 
-        m_cameraRotation = transform.rotation;
+        //m_cameraRotation = transform.rotation;
+        m_cameraRotation = transform.eulerAngles.y;
     }
 
     void Update()
@@ -90,10 +96,14 @@ public class PlayerData : MonoBehaviour
     {
         if (!m_use3D)
         {
+            Debug.Log("Applying Velocity: " + m_rigb.velocity);
+
             m_rigb.velocity = ((gameObject.transform.forward * (m_left_right ? 1.0f : -1.0f)) * m_velocity.x) + (gameObject.transform.up * m_velocity.y);
         }
         else
         {
+            //Debug.Log("Applying Velocity: " + m_rigb.velocity);
+
             m_rigb.velocity = (gameObject.transform.forward * m_velocity.x) + (gameObject.transform.up * m_velocity.y) + (gameObject.transform.right * m_velocity.z);
         }
 
@@ -133,6 +143,16 @@ public class PlayerData : MonoBehaviour
         m_rotation = rot;
     }
 
+    public void Rotate(Quaternion rot)
+    {
+        m_rotation *= rot;
+    }
+
+    public void setGravityDirection(Vector3 rot)
+    {
+        m_gravityDirection = rot;
+    }
+
     // returns the vecolity the player will attempt to move this frame
     public Vector3 GetExpectedVelocity()
     {
@@ -165,11 +185,17 @@ public class PlayerData : MonoBehaviour
 
     public void resetCameraDirection()
     {
-        m_cameraRotation = transform.rotation;
+        //m_cameraRotation = transform.rotation;
+        m_cameraRotation = transform.eulerAngles.y;
         SetRotation(transform.rotation);
     }
 
-    public Quaternion getCameraRot()
+    //public Quaternion getCameraRot()
+    //{
+    //    return m_cameraRotation;
+    //}
+
+    public float getCameraRot()
     {
         return m_cameraRotation;
     }

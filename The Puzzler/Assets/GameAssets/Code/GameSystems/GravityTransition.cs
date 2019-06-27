@@ -41,9 +41,14 @@ public class GravityTransition : MonoBehaviour
             if (data)
             {
                 //data.m_gravity = m_newGravity;
-                Quaternion rot = data.gameObject.transform.rotation;
-                rot *= Quaternion.Euler(0, 90, 0);
-                data.SetRotation(rot);
+                ///Quaternion rot = data.gameObject.transform.rotation;
+                /////rot *= Quaternion.Euler(0, 0, 90);
+                ///rot *= (Quaternion.Inverse(transform.rotation) * Quaternion.Euler(0, 0, 90));
+                ///data.SetRotation(rot);
+                
+                data.SetRotation(transform.rotation);
+
+                data.setGravityDirection(new Vector3(0.0f, 0.0f, 1.0f));
                 //PauseMenu.m_instance.Pause(true, true);
 
                 m_timer.Play();
@@ -57,6 +62,22 @@ public class GravityTransition : MonoBehaviour
         {
             Debug.Log("staying");
         }
+
+        /*if (other.gameObject.name == "Player")
+        {
+            PlayerData data = other.gameObject.GetComponent<PlayerData>();
+
+            if (data)
+            {
+                //data.m_gravity = m_newGravity;
+                Quaternion rot = data.gameObject.transform.rotation;
+                rot *= Quaternion.Euler(0, 90, 0);
+                data.SetRotation(rot);
+                //PauseMenu.m_instance.Pause(true, true);
+
+                m_timer.Play();
+            }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)

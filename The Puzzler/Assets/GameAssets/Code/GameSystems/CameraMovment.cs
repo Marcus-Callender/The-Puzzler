@@ -22,7 +22,7 @@ public class CameraMovment : MonoBehaviour
     private E_CamType m_nextCam;
     private Timer m_transitionTimer;
 
-    private float m_verticalTilt = 0.0f;
+    //private float m_verticalTilt = 0.0f;
     public float m_maxVerticalTilt = 15.0f;
     public float m_minVerticalTilt = -30.0f;
 
@@ -63,14 +63,14 @@ public class CameraMovment : MonoBehaviour
     void LateUpdate()
     {
         // this is teh only player input that directly affects the camera system
-        if (Input.GetButtonDown("ResetCamera"))
-        {
-            m_verticalTilt = 0.0f;
-        }
-
-        m_verticalTilt += Input.GetAxis("Mouse Y") * Time.deltaTime * 60.0f;
-        m_verticalTilt += Input.GetAxis("Right Stick Y") * Time.deltaTime * 60.0f * 2.0f;
-        m_verticalTilt = Mathf.Clamp(m_verticalTilt, m_minVerticalTilt, m_maxVerticalTilt);
+        ///if (Input.GetButtonDown("ResetCamera"))
+        ///{
+        ///    m_verticalTilt = 0.0f;
+        ///}
+        ///
+        ///m_verticalTilt += Input.GetAxis("Mouse Y") * Time.deltaTime * 60.0f;
+        ///m_verticalTilt += Input.GetAxis("Right Stick Y") * Time.deltaTime * 60.0f * 2.0f;
+        ///m_verticalTilt = Mathf.Clamp(m_verticalTilt, m_minVerticalTilt, m_maxVerticalTilt);
 
         if (Time.deltaTime > 0.0f)
         {
@@ -145,10 +145,10 @@ public class CameraMovment : MonoBehaviour
         {
             m_transitionTimer.Stop();
 
-            if (m_currentCam == E_CamType.CAM_2D)
-            {
-                m_verticalTilt = 0.0f;
-            }
+            ///if (m_currentCam == E_CamType.CAM_2D)
+            ///{
+            ///    m_verticalTilt = 0.0f;
+            ///}
 
             gameObject.transform.rotation = getNewRot(m_currentCam, followData);
             gameObject.transform.position = getNewPos(m_currentCam, followData);
@@ -210,8 +210,22 @@ public class CameraMovment : MonoBehaviour
 
     private Quaternion Camera3DGroundRot(PlayerData data)
     {
-        Quaternion rot = data.m_cameraRotation;
-        rot *= Quaternion.Euler(Vector3.left * m_verticalTilt);
+        ///Quaternion rot = data.m_cameraRotation;
+        //Quaternion rot = data.transform.rotation;
+
+        //rot *= Quaternion.Euler(transform.up * data.m_cameraRotation.lo);
+
+        //var direction = (m_player.gameObject.transform.position - transform.position).normalized;
+        //transform.up = direction;
+
+        ///rot *= Quaternion.Euler(Vector3.left * m_verticalTilt);
+        //rot *= Quaternion.Euler(transform.right * m_verticalTilt);
+        //rot *= Quaternion.Euler(m_player.transform.right * m_verticalTilt);
+
+         
+
+        Quaternion rot = data.transform.rotation;
+        rot.eulerAngles = new Vector3(rot.eulerAngles.x, data.m_cameraRotation, rot.eulerAngles.z);
 
         return rot;
     }
@@ -233,8 +247,16 @@ public class CameraMovment : MonoBehaviour
 
     private Quaternion Camera3DAirRot(PlayerData data)
     {
-        Quaternion rot = data.m_cameraRotation;
-        rot *= Quaternion.Euler(30.0f, 0.0f, 0.0f);
+        //Quaternion rot = data.m_cameraRotation;
+        //rot *= Quaternion.Euler(30.0f, 0.0f, 0.0f);
+        //
+        //return rot;
+
+
+
+        Quaternion rot = data.transform.rotation;
+        rot.eulerAngles = new Vector3(rot.eulerAngles.x, data.m_cameraRotation, rot.eulerAngles.z);
+        //rot.eulerAngles += (transform.up * data.m_cameraRotation);
 
         return rot;
     }
@@ -291,7 +313,8 @@ public class CameraMovment : MonoBehaviour
         }
         else if (type == E_CamType.CAM_3D_GROUND)
         {
-            return Camera3DGroundRot(data);
+            //return Camera3DGroundRot(data);
+            return Camera3DAirRot(data);
         }
         else if (type == E_CamType.CAM_3D_MOVING_BOX)
         {

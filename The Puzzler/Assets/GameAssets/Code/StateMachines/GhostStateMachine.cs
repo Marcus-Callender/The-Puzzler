@@ -71,7 +71,8 @@ public class GhostStateMachine : BaseStateMachine
         {
             gameObject.transform.position = posData.pos;
             gameObject.transform.rotation = posData.rot;
-            m_data.m_cameraRotation = posData.rot;
+            //m_data.m_cameraRotation = posData.rot;
+            m_data.m_cameraRotation = posData.rot.eulerAngles.y;
             m_data.SetRotation(posData.rot);
             m_data.m_left_right = posData.left_right;
 
@@ -169,7 +170,7 @@ public class GhostStateMachine : BaseStateMachine
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
 
-                    m_data.m_cameraRotation = m_startingRotation;
+                    m_data.m_cameraRotation = m_startingRotation.eulerAngles.y;
                     m_data.SetRotation(m_startingRotation);
                 }
                 else if (m_arrayPosition < m_recordingSize)
@@ -204,7 +205,7 @@ public class GhostStateMachine : BaseStateMachine
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
 
-                    m_data.m_cameraRotation = m_startingRotation;
+                    m_data.m_cameraRotation = m_startingRotation.eulerAngles.y;
                     m_data.SetRotation(m_startingRotation);
                 }
             }
@@ -233,7 +234,7 @@ public class GhostStateMachine : BaseStateMachine
                     gameObject.transform.position = m_startingPosition;
                     gameObject.transform.rotation = m_startingRotation;
 
-                    m_data.m_cameraRotation = m_startingRotation;
+                    m_data.m_cameraRotation = m_startingRotation.eulerAngles.y;
                     m_data.SetRotation(m_startingRotation);
                 }
             }
@@ -291,7 +292,7 @@ public class GhostStateMachine : BaseStateMachine
         gameObject.transform.position = m_startingPosition;
         gameObject.transform.rotation = m_startingRotation;
 
-        m_data.m_cameraRotation = m_startingRotation;
+        m_data.m_cameraRotation = m_startingRotation.eulerAngles.y;
         m_data.SetRotation(m_startingRotation);
     }
 
@@ -332,7 +333,7 @@ public class GhostStateMachine : BaseStateMachine
         gameObject.transform.position = m_startingPosition;
         gameObject.transform.rotation = m_startingRotation;
 
-        m_data.m_cameraRotation = m_startingRotation;
+        m_data.m_cameraRotation = m_startingRotation.eulerAngles.y;
         m_data.SetRotation(m_startingRotation);
     }
 

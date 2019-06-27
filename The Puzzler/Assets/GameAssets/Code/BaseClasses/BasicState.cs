@@ -103,16 +103,24 @@ public class BasicState : MonoBehaviour
         {
             m_data.resetCameraDirection();
         }
-        
-        m_data.m_cameraRotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * 72.0f * inputs.m_cameraVector.x);
 
-        Debug.DrawRay(transform.position, m_data.m_cameraRotation * Vector3.forward, Color.red);
+        //m_data.m_cameraRotation *= Quaternion.Euler(transform.up * Time.deltaTime * 72.0f * inputs.m_cameraVector.x);
+        m_data.m_cameraRotation += Quaternion.Euler(transform.up * Time.deltaTime * 72.0f * inputs.m_cameraVector.x).y * 360.0f;
 
-        Quaternion charicterRot = m_data.m_cameraRotation;
-        
+        //Debug.DrawRay(transform.position, m_data.m_cameraRotation * Vector3.forward, Color.red);
+        Debug.DrawRay(transform.position + new Vector3(0.0f, 1.0f, 0.0f), transform.up, Color.green);
+        Debug.DrawRay(transform.position + new Vector3(0.0f, 1.0f, 0.0f), transform.right, Color.red);
+        Debug.DrawRay(transform.position + new Vector3(0.0f, 1.0f, 0.0f), transform.forward, Color.blue);
+
+        ///Quaternion charicterRot = transform.rotation;//transform.qua m_data.m_cameraRotation;
+        Vector3 eulerCharicterRot = new Vector3(transform.eulerAngles.x, m_data.m_cameraRotation, transform.eulerAngles.z);
+        Quaternion charicterRot = Quaternion.Euler(eulerCharicterRot);
+
         if (inputs.m_movementVector.x != 0 || inputs.m_movementVector.y != 0)
         {
             charicterRot *= Quaternion.Euler(Vector3.up * (Mathf.Atan2(inputs.m_movementVector.x, inputs.m_movementVector.y) * Mathf.Rad2Deg));
+
+            //Debug.Log("charicterRot: " + charicterRot);
 
             m_data.m_anim.SetBool("Walking", true);
             //transform.rotation = charicterRot;
@@ -129,7 +137,8 @@ public class BasicState : MonoBehaviour
     protected void ApplyGravity()
     {
         //m_data.m_velocity += (m_data.m_gravity * Time.deltaTime);
-        m_data.AddVelocity(m_data.m_gravity * Time.deltaTime);
+        //m_data.AddVelocity(m_data.m_gravity * m_data.m_gravityDirection * Time.deltaTime);
+        m_data.AddVelocity(transform.InverseTransformVector(m_data.m_gravity * m_data.m_gravityDirection * Time.deltaTime));
     }
 
     public virtual bool GetInput(E_INPUTS input, S_inputStruct inputs)

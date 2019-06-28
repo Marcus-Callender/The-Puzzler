@@ -108,12 +108,16 @@ public class BasicState : MonoBehaviour
         m_data.m_cameraRotation += Quaternion.Euler(transform.up * Time.deltaTime * 72.0f * inputs.m_cameraVector.x).y * 360.0f;
 
         //Debug.DrawRay(transform.position, m_data.m_cameraRotation * Vector3.forward, Color.red);
-        Debug.DrawRay(transform.position + new Vector3(0.0f, 1.0f, 0.0f), transform.up, Color.green);
-        Debug.DrawRay(transform.position + new Vector3(0.0f, 1.0f, 0.0f), transform.right, Color.red);
-        Debug.DrawRay(transform.position + new Vector3(0.0f, 1.0f, 0.0f), transform.forward, Color.blue);
+        Debug.DrawRay(transform.position + transform.up * 1.0f, transform.up, Color.green);
+        Debug.DrawRay(transform.position + transform.up * 1.0f, transform.right, Color.red);
+        Debug.DrawRay(transform.position + transform.up * 1.0f, transform.forward, Color.blue);
 
         ///Quaternion charicterRot = transform.rotation;//transform.qua m_data.m_cameraRotation;
-        Vector3 eulerCharicterRot = new Vector3(transform.eulerAngles.x, m_data.m_cameraRotation, transform.eulerAngles.z);
+        //Vector3 eulerCharicterRot = new Vector3(transform.eulerAngles.x, m_data.m_cameraRotation, transform.eulerAngles.z);
+        Vector3 eulerCharicterRot = transform.eulerAngles.x * transform.right;
+                eulerCharicterRot += m_data.m_cameraRotation * transform.up;
+                eulerCharicterRot += transform.eulerAngles.z * transform.forward;
+
         Quaternion charicterRot = Quaternion.Euler(eulerCharicterRot);
 
         if (inputs.m_movementVector.x != 0 || inputs.m_movementVector.y != 0)

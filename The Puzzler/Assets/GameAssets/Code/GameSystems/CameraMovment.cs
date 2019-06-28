@@ -255,8 +255,8 @@ public class CameraMovment : MonoBehaviour
 
 
         Quaternion rot = data.transform.rotation;
-        rot.eulerAngles = new Vector3(rot.eulerAngles.x, data.m_cameraRotation, rot.eulerAngles.z);
-        //rot.eulerAngles += (transform.up * data.m_cameraRotation);
+        //rot.eulerAngles = new Vector3(rot.eulerAngles.x, data.m_cameraRotation, rot.eulerAngles.z);
+        rot.eulerAngles = (transform.up * data.m_cameraRotation);
 
         return rot;
     }
